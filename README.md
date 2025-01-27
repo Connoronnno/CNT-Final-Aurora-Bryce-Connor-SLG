@@ -1,1 +1,1 @@
-# CMPE2965_Template
+# CMPE2965 - Project Silly Little Guy - Aurora, Bryce, Connor
