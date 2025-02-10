@@ -23,6 +23,7 @@ Revision History:
 #include "clock.h"
 #include "gpio.h"
 #include "uart.h"
+#include "spi.h"
 /*********************************************************************
   Local Prototypes
 *********************************************************************/
@@ -60,6 +61,7 @@ int main(void)
 
   UART_Init(USART2,115200, 0); //Init USART2 (VCOM) at 115,200 BR
 
+  SPI_Init(SPI_TypeDef *spi, SPIBusPrescaler div)
   /********************************************************************
     Infinite Loop
   ********************************************************************/
