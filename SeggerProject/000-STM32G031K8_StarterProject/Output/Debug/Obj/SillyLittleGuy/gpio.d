@@ -1,6 +1,6 @@
 Output/Debug/Obj/SillyLittleGuy/gpio.o: \
   C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\Lib\src\gpio.c \
-  C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\Lib\inc\gpio.h \
+  C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\Lib\src\..\inc\gpio.h \
   C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\SeggerProject\000-STM32G031K8_StarterProject\STM32G0xx\Device\Include\stm32g031xx.h \
   C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\SeggerProject\000-STM32G031K8_StarterProject\CMSIS_5\CMSIS\Core\Include\core_cm0plus.h \
   C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.10d\include\stdint.h \

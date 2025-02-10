@@ -45,6 +45,20 @@ int main(void)
   
   HAL_Init(); //this is needed when working at higher clock speeds (> 24MHz)
   //Clock_InitPll(PLL_40MHZ); //Enable Pll to 40MHz
+  printf("System Clock: %u Hz\n\r", SystemCoreClock); //print system clock result
+  Clock_EnableOutput(MCO_Sel_SYSCLK, MCO_Div4); //Enables clock output on PA8 and divides it by 1
+  GPIO_InitOutput(GPIOC, 6);
+  GPIO_InitOutput(GPIOB, 5);
+  SysTick_Config(SystemCoreClock / 1000); //Make SysTick to Tick at 1[ms]
+
+  //We need these GPIO settings to enable USAR2 PINs on PA2 and PA3 (Table 13 Datasheet, AF1)
+  GPIO_InitAlternateF(GPIOA, 2, 1);
+  GPIO_InitAlternateF(GPIOA, 3, 1);
+
+  GPIO_InitAlternateF(GPIOA, 1, 0);
+  GPIO_InitAlternateF(GPIOA, 7, 0);
+
+  UART_Init(USART2,115200, 0); //Init USART2 (VCOM) at 115,200 BR
 
   /********************************************************************
     Infinite Loop
@@ -91,4 +105,12 @@ void HAL_Init(void)
 */
 void SysTick_Handler(void)
 {
+  
+  GPIO_Toggle(GPIOB, 5);
+  if(++msCounter > 99)
+  {
+    GPIO_Toggle(GPIOC, 6);
+    msCounter = 0;
+    beacon = 1;   
+  }
 }

@@ -6,7 +6,7 @@
 // FILE: gpio.c
 //
 
-#include "gpio.h"
+#include "../inc/gpio.h"
 
 /*
   16-pin port
