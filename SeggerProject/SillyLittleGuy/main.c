@@ -61,7 +61,7 @@ int main(void)
 
   UART_Init(USART2,115200, 0); //Init USART2 (VCOM) at 115,200 BR
 
-  SPI_Init(SPI_TypeDef *spi, SPIBusPrescaler div)
+  SPI_Init(SPI1, 9600); //Select SPI1 and set baud rate to 9600
   /********************************************************************
     Infinite Loop
   ********************************************************************/
