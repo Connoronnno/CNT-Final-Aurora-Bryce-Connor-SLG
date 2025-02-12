@@ -25,11 +25,7 @@ typedef enum I2C_Speed_Typedef__
 void I2C_Init(I2C_TypeDef* i2c, I2C_Speed speed);
 void I2C_Reset(I2C_TypeDef* i2c);
 int I2C_IsBusy(I2C_TypeDef* i2c);
-void  I2C_ScanFirstAddr(I2C_TypeDef* i2c);
-int I2C_Transmit(I2C_TypeDef* i2c, uint8_t addr, uint8_t* pData, uint8_t size);
-int I2C_Writereg(I2C_TypeDef* i2c, uint8_t addr, uint8_t reg, uint8_t* pData, uint8_t size);
-
-
+int I2C_Transmit(I2C_TypeDef* i2c, uint16_t addr, uint8_t* pData, uint8_t size);
 
 
 

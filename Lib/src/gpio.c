@@ -6,7 +6,7 @@
 // FILE: gpio.c
 //
 
-#include "../inc/gpio.h"
+#include "gpio.h"
 
 /*
   16-pin port
@@ -31,40 +31,21 @@
 */
 void GPIO_InitInput(GPIO_TypeDef* port, uint16_t pin)
 {
-  port->MODER &= ~(0b11 << (pin<<1)); //Clear moder, configure as input 
+  port->MODER &= ~(0b11 << (2*pin)); //Clear moder, configure as input 
 }
 //------------------------------------------------------------------------------
 void GPIO_InitOutput(GPIO_TypeDef* port, uint16_t pin)
 {
 
-  port->MODER &= ~(0b11 << (pin<<1)); //Clear moder
-  port->MODER |= (0b01 << (pin<<1)); //Configure as output
+  port->MODER &= ~(0b11 <<(2*pin)); //Clear moder
+  port->MODER |= (0b01 << (2*pin)); //Configure as output
 }
 //------------------------------------------------------------------------------
-void GPIO_SetPullMode(GPIO_TypeDef* port, uint16_t pin, IO_PullMode pullMode)
+void GPIO_SetIO(GPIO_TypeDef* port, uint16_t pin, IO_Mode mode)
 {
-  port->PUPDR &= ~((uint16_t)PullMode_Mask << (pin<<1));
-  port->PUPDR |= (uint16_t)pullMode << (pin<<1);
+  port->PUPDR &= ~((uint16_t)IO_Mask << (pin<<1));
+  port->PUPDR |= (uint16_t)mode << (pin<<1);
 }
-//------------------------------------------------------------------------------
-void GPIO_SetType(GPIO_TypeDef* port, uint16_t pin, IO_Type type)
-{
-  port->OTYPER &= ~(1<<pin);
-  port->OTYPER = type? port->OTYPER |= 1<<pin : port->OTYPER; 
-}
-//------------------------------------------------------------------------------
-void GPIO_SetSpeed(GPIO_TypeDef* port, uint16_t pin, IO_Speed speed)
-{
-  port->OSPEEDR &= ~((uint16_t)Speed_VeryHigh << (pin<<1)); //Clear setting
-  port->OSPEEDR |= (uint16_t)speed << (pin<<1);//set speed
-}
-//------------------------------------------------------------------------------
-  void GPIO_I2C_Config(GPIO_TypeDef* port, uint16_t pin)
-  {
-    GPIO_SetPullMode(port, pin, PullMode_PullUp);
-    GPIO_SetType(port, pin, Type_OpenDrain);
-    GPIO_SetSpeed(port, pin, Speed_VeryHigh);
-  }  
 //------------------------------------------------------------------------------
   /*
     ALTERNATE FUNCTIONS (AF) see datasheet Tables 17 and 18
