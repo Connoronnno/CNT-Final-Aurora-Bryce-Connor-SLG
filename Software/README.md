@@ -1,3 +1,3 @@
 ---
-Add any soft related elements here.
+Add any software related elements here.
 ---
