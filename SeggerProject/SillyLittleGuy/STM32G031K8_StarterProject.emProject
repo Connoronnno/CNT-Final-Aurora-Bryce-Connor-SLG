@@ -72,7 +72,10 @@
       <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
       <file file_name="../../Lib/src/clock.c" />
       <file file_name="../../Lib/src/gpio.c" />
+      <file file_name="../../Lib/src/i2c.c" />
+      <file file_name="../../Lib/src/lcd.c" />
       <file file_name="main.c" />
+      <file file_name="../../Lib/src/spi.c" />
       <file file_name="../../Lib/src/switch.c" />
       <file file_name="../../Lib/src/uart.c" />
     </folder>
