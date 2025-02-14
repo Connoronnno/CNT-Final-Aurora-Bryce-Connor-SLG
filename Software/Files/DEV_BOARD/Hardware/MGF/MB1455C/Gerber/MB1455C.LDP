@@ -1,0 +1,3 @@
+Layer Pairs Export File for PCB: C:\Users\tguilhot\Documents\_SubVersion\HW_Boards\MB1455-STM32G0-Nucleo32\01-Design_Source\Altium_Designer\MB1455.PcbDoc
+LayersSetName=Top_Bot_Plated_Thru_Holes|DrillFile=mb1455c-roundholes-plated.txt|DrillLayers=gtl,g1,g2,gbl
+LayersSetName=Top_Bot_Plated_Slot_Holes|DrillFile=mb1455c-slotholes-plated.txt|DrillLayers=gtl,g1,g2,gbl
