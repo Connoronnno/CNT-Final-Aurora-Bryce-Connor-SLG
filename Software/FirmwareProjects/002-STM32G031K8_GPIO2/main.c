@@ -56,8 +56,12 @@ volatile uint16_t msCounter = 0;
 volatile uint16_t i = 0;
 volatile uint8_t beacon = 0;
 volatile uint16_t thi = 1000; 
-volatile struct minmea_sentence_gga aaa;
+struct minmea_sentence_rmc aaa;
+struct minmea_sentence_gsv bbb;
+struct minmea_sentence_gsa ccc;
 unsigned char buffer[128];
+volatile float lat;
+volatile float lon;
 
 /*********************************************************************
 
@@ -65,9 +69,7 @@ unsigned char buffer[128];
 
 *********************************************************************/
 
-int main(void)
- 
-{
+int main(void){
 
   /********************************************************************
 
@@ -147,16 +149,18 @@ int main(void)
       i++;
     }
     }
-    //printf(buffer);
-   if(minmea_parse_gsa(&aaa, buffer)){
+  printf(buffer);
+   if(minmea_parse_rmc(&aaa, buffer)){
     printf("FIX?:");
-    sprintf(buffer, "%d\n", aaa.fix_quality);
-    printf(buffer);
-    if(aaa.fix_quality!=0)
+    //lat= minmea_tocoord({aaa.latitude.value, aa.latitude.scale});
+    if(aaa.valid!=0)
     {printf("RMC:\n");
     sprintf(buffer, "%d", aaa.longitude.value);
     printf(buffer);
   }}
+  minmea_parse_rmc(&aaa, buffer);
+  minmea_parse_gsv(&bbb, buffer);
+  minmea_parse_gsa(&ccc, buffer);
   }
 
 }

@@ -1,0 +1,15 @@
+Output/Debug/Obj/GPIO/gpio.o: \
+  C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\Lib\src\gpio.c \
+  C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\Lib\src\..\inc\gpio.h \
+  C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\FirmwareProjects\002-STM32G031K8_GPIO2\STM32G0xx\Device\Include\stm32g031xx.h \
+  C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\FirmwareProjects\002-STM32G031K8_GPIO2\CMSIS_5\CMSIS\Core\Include\core_cm0plus.h \
+  C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.22a\include\stdint.h \
+  C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.22a\include\__SEGGER_RTL.h \
+  C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.22a\include\__SEGGER_RTL_ConfDefaults.h \
+  C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.22a\include\__SEGGER_RTL_Conf.h \
+  C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.22a\include\__SEGGER_RTL_Arm_Conf.h \
+  C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\FirmwareProjects\002-STM32G031K8_GPIO2\CMSIS_5\CMSIS\Core\Include\cmsis_version.h \
+  C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\FirmwareProjects\002-STM32G031K8_GPIO2\CMSIS_5\CMSIS\Core\Include\cmsis_compiler.h \
+  C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\FirmwareProjects\002-STM32G031K8_GPIO2\CMSIS_5\CMSIS\Core\Include\cmsis_gcc.h \
+  C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\FirmwareProjects\002-STM32G031K8_GPIO2\CMSIS_5\CMSIS\Core\Include\mpu_armv7.h \
+  C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\FirmwareProjects\002-STM32G031K8_GPIO2\STM32G0xx\Device\Include\system_stm32g0xx.h
