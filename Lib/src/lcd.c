@@ -3,12 +3,18 @@
 //MUCH INSPIRATION taken from: https://blog.embeddedexpert.io/?p=488
 #include "lcd.h"
 
+
 void static LCD_Init(void)
 {
 //Set PB3 as SPI_CLK
 GPIO_InitAlternateF(GPIOB, 3, 0);
-//Set PB5 as SPI_MOSI (data control)
+
+//Set PB4 as data/command control
+GPIO_InitOutput(GPIOB, 4);
+
+//Set PB5 as SPI_MOSI (output line)
 GPIO_InitAlternateF(GPIOB, 5, 0);
+
 //Set PB10 as output for LCD Reset
 GPIO_InitOutput(GPIOB, 10);
 }
