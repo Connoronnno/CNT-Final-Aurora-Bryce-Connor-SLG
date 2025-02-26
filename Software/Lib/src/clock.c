@@ -9,8 +9,8 @@
 
 //Max MCU Frequency: 32MHz
 
-#include "gpio.h"
-#include "clock.h"
+#include "../Lib/inc/gpio.h"
+#include "../Lib/inc/clock.h"
 
 /*
   The HSISYS is used as system clock source after startup from reset, with the division by 1 (producing HSI16 frequency).

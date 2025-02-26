@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspace>
+    <project>
+        <path>$WS_DIR$\..\000-STM32G031K8_StarterProject\EWARM\000-STM32G031K8_StarterProject.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\EWARM\002-STM32G031K8_GPIO2.ewp</path>
+    </project>
+    <batchBuild />
+</workspace>

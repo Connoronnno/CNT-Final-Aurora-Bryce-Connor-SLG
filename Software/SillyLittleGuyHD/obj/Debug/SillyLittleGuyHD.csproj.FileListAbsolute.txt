@@ -1,0 +1,10 @@
+C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\bin\Debug\SillyLittleGuyHD.exe.config
+C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\bin\Debug\SillyLittleGuyHD.exe
+C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\bin\Debug\SillyLittleGuyHD.pdb
+C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.csproj.AssemblyReference.cache
+C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.Properties.Resources.resources
+C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.csproj.GenerateResource.cache
+C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.csproj.CoreCompileInputs.cache
+C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.exe
+C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.pdb
+C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.Form1.resources

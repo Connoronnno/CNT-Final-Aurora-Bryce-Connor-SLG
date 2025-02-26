@@ -6,7 +6,7 @@
 // FILE: uart.c
 //
 
-#include "uart.h"
+#include "../Lib/inc/uart.h"
 
 void UART_Init(USART_TypeDef* uart, uint32_t br, char iEn)
 {
