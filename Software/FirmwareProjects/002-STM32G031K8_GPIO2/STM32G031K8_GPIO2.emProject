@@ -68,7 +68,11 @@
       <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
       <file file_name="../../Lib/src/clock.c" />
       <file file_name="../../Lib/src/gpio.c" />
-      <file file_name="main.c" />
+      <file file_name="main.c">
+        <configuration
+          Name="Debug"
+          asm_additional_options="-u _printf_float" />
+      </file>
       <file file_name="../../Lib/src/minmea.c" />
       <file file_name="../../Lib/src/uart.c" />
     </folder>

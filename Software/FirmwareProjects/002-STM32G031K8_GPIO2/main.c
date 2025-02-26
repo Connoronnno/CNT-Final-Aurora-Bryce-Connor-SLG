@@ -56,9 +56,7 @@ volatile uint16_t msCounter = 0;
 volatile uint16_t i = 0;
 volatile uint8_t beacon = 0;
 volatile uint16_t thi = 1000; 
-struct minmea_sentence_rmc aaa;
-struct minmea_sentence_gsv bbb;
-struct minmea_sentence_gsa ccc;
+struct minmea_sentence_rmc rmcStruct;
 unsigned char buffer[128];
 volatile float lat;
 volatile float lon;
@@ -93,7 +91,7 @@ int main(void){
   RED->PB4(CN3_15), YELLOW->PB5(CN3_14), GREEN->PB9(CN3_13)
 
   */
-
+  
   GPIO_InitOutput(GPIOB, 4);
 
   GPIO_InitOutput(GPIOB, 5);
@@ -141,6 +139,7 @@ int main(void){
   while(1)
 
   {
+    
     i=0;
     while(true){
     if(UART_RxByte(USART1, &buffer[i]))
@@ -149,18 +148,15 @@ int main(void){
       i++;
     }
     }
-  printf(buffer);
-   if(minmea_parse_rmc(&aaa, buffer)){
+  //printf(buffer);
+   if(minmea_parse_rmc(&rmcStruct, "$GPRMC,161229.487,A,3723.2475,N,12158.3416,W,0.13,309.62,120598,,*10")){
     printf("FIX?:");
-    //lat= minmea_tocoord({aaa.latitude.value, aa.latitude.scale});
-    if(aaa.valid!=0)
-    {printf("RMC:\n");
-    sprintf(buffer, "%d", aaa.longitude.value);
-    printf(buffer);
+    lat = minmea_tocoord(&rmcStruct.latitude);
+    lon = minmea_tocoord(&rmcStruct.longitude);
+    sprintf(buffer, "lat:%d, %d", (int)(lat*100), (int)(lon*100));
+    if(rmcStruct.valid!=0)
+    {printf(buffer);
   }}
-  minmea_parse_rmc(&aaa, buffer);
-  minmea_parse_gsv(&bbb, buffer);
-  minmea_parse_gsa(&ccc, buffer);
   }
 
 }
