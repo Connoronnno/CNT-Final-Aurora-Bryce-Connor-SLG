@@ -21,9 +21,11 @@ Revision History:
 #include <stdlib.h>
 #include "stm32g031xx.h"
 #include "clock.h"
+#include "timer.h"
 #include "gpio.h"
 #include "uart.h"
 #include "spi.h"
+#include "../inc/lcd.h"
 /*********************************************************************
   Local Prototypes
 *********************************************************************/
@@ -33,8 +35,6 @@ void HAL_Init(void);
   Global variables 
 *********************************************************************/
 
-volatile uint16_t msCounter = 0;
-volatile uint8_t beacon = 0;
 /*********************************************************************
   Main entry
 *********************************************************************/
@@ -48,31 +48,17 @@ int main(void)
   //Clock_InitPll(PLL_40MHZ); //Enable Pll to 40MHz
   printf("System Clock: %u Hz\n\r", SystemCoreClock); //print system clock result
   Clock_EnableOutput(MCO_Sel_SYSCLK, MCO_Div4); //Enables clock output on PA8 and divides it by 1
-  GPIO_InitOutput(GPIOC, 6);
-  GPIO_InitOutput(GPIOB, 5);
-  SysTick_Config(SystemCoreClock / 1000); //Make SysTick to Tick at 1[ms]
+  //SysTick_Config(SystemCoreClock / 1000); //Make SysTick to Tick at 1[ms]
 
-  //We need these GPIO settings to enable USAR2 PINs on PA2 and PA3 (Table 13 Datasheet, AF1)
-  GPIO_InitAlternateF(GPIOA, 2, 1);
-  GPIO_InitAlternateF(GPIOA, 3, 1);
-
-  GPIO_InitAlternateF(GPIOA, 1, 0);
-  GPIO_InitAlternateF(GPIOA, 7, 0);
-
-  UART_Init(USART2,115200, 0); //Init USART2 (VCOM) at 115,200 BR
-
-  SPI_Init(SPI1, 9600); //Select SPI1 and set baud rate to 9600
+  Timer_SetDelay_us(TIM17); //this is just to set the prescaler
+  SPI_Init(SPI1, 1);
+  LCD_Init();
   /********************************************************************
     Infinite Loop
   ********************************************************************/
   while(1)
   {
-    if(beacon)
-    {
-      beacon = 0;
-      UART_TxStr(USART2,"Hello Program...\n\r");
-      printf("Hello Console...\n\r");
-    }
+    //does nothing
   }
 }
 
@@ -108,11 +94,5 @@ void HAL_Init(void)
 void SysTick_Handler(void)
 {
   
-  GPIO_Toggle(GPIOB, 5);
-  if(++msCounter > 99)
-  {
-    GPIO_Toggle(GPIOC, 6);
-    msCounter = 0;
-    beacon = 1;   
-  }
+  //does nothing
 }

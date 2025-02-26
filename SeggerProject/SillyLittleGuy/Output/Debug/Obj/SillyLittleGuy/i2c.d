@@ -1,5 +1,5 @@
-Output/Debug/Obj/SillyLittleGuy/main.o: \
-  C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\main.c \
+Output/Debug/Obj/SillyLittleGuy/i2c.o: \
+  C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\Lib\src\i2c.c \
   C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.10d\include\stdio.h \
   C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.10d\include\__SEGGER_RTL.h \
   C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.10d\include\__SEGGER_RTL_ConfDefaults.h \
@@ -14,9 +14,4 @@ Output/Debug/Obj/SillyLittleGuy/main.o: \
   C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\CMSIS_5\CMSIS\Core\Include\cmsis_gcc.h \
   C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\CMSIS_5\CMSIS\Core\Include\mpu_armv7.h \
   C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\STM32G0xx\Device\Include\system_stm32g0xx.h \
-  C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\Lib\inc\clock.h \
-  C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\Lib\inc\timer.h \
-  C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\Lib\inc\gpio.h \
-  C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\Lib\inc\uart.h \
-  C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\Lib\inc\spi.h \
-  C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\Lib\inc\..\inc\lcd.h
+  C:\Users\afraser24\Desktop\Group-1---Aurora-Bryce-Connor\Lib\inc\i2c.h
