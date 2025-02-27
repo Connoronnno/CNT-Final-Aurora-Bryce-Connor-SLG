@@ -37,7 +37,7 @@ int main(void)
   //SysTick_Config(SystemCoreClock / 1000); //Make SysTick to Tick at 1[ms]
 
   Timer_SetDelay_us(TIM17); //this is just to set the prescaler
-  SPI_Init(SPI1, DIV_64);
+  SPI_Init(SPI1, DIV_2);
   LCD_Init();
   /********************************************************************
     Infinite Loop
