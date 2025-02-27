@@ -17,11 +17,19 @@ GPIO_InitAlternateF(GPIOA, 7, 0);
 //Set PA0 as output for LCD Reset
 GPIO_InitOutput(GPIOA, 0);
 
-LCD_RST_LOW;
+//1 as data and command control
+GPIO_InitOutput(GPIOA, 1);
+
+//Reset=0
+GPIO_Clear(GPIOA, 0);
 Timer_Delay_us(TIM17, 10000); //delay 10 ms
-LCD_RST_HIGH;
+//Reset=1
+GPIO_Set(GPIOA, 0);
 Timer_Delay_us(TIM17, 10000); //delay 10 ms
-LCD_CS_LOW;
+
+//CS=0
+GPIO_Clear(GPIOA, 4);
+//Start sending commands
 LCD_Cmd(0x11);
 Timer_Delay_us(TIM17, 10000); //delay 10 ms
 LCD_Cmd(0x3A);
@@ -33,21 +41,18 @@ LCD_Cmd(0x29);
 
 void LCD_Cmd(uint8_t command)
 {
-LCD_CS_LOW;
-LCD_DC_HIGH;
-LCD_Send(command);
-LCD_CS_HIGH;
+GPIO_Clear(GPIOA, 4);
+GPIO_Clear(GPIOA, 1);
+SPI_TxByte(SPI1, command);
+Timer_Delay_us(TIM17, 2);
+GPIO_Set(GPIOA, 4);
 }
 
 void LCD_Data(uint8_t data)
 {
-LCD_CS_LOW;
-LCD_DC_LOW;
-LCD_Send(data);
-LCD_CS_HIGH;
-}
-
-void LCD_Send(uint8_t sendme)
-{
-SPI_TxByte(SPI1, sendme);
+GPIO_Clear(GPIOA, 4);
+GPIO_Set(GPIOA, 1);                     
+SPI_TxByte(SPI1, data);
+Timer_Delay_us(TIM17, 2);
+GPIO_Set(GPIOA, 4);
 }

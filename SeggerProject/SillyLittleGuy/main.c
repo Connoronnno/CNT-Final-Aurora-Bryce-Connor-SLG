@@ -1,15 +1,3 @@
-/*********************************************************************
-
-File    : main.c
-Program : Template Project
-Author  : Carlos Estay
-Purpose : 
-Date    : Sept-24-2024
-
-Revision History:
-
-*/
-
 /********************************************************************
   Defines
 ********************************************************************/
@@ -43,15 +31,13 @@ int main(void)
   /********************************************************************
     One-time Initializations
   ********************************************************************/  
-  
   HAL_Init(); //this is needed when working at higher clock speeds (> 24MHz)
-  //Clock_InitPll(PLL_40MHZ); //Enable Pll to 40MHz
-  printf("System Clock: %u Hz\n\r", SystemCoreClock); //print system clock result
+  Clock_InitPll(PLL_40MHZ); //Enable Pll to 40MHz
   Clock_EnableOutput(MCO_Sel_SYSCLK, MCO_Div4); //Enables clock output on PA8 and divides it by 1
   //SysTick_Config(SystemCoreClock / 1000); //Make SysTick to Tick at 1[ms]
 
   Timer_SetDelay_us(TIM17); //this is just to set the prescaler
-  SPI_Init(SPI1, 1);
+  SPI_Init(SPI1, DIV_64);
   LCD_Init();
   /********************************************************************
     Infinite Loop
