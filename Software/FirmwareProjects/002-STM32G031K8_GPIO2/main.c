@@ -144,12 +144,12 @@ int main(void){
     while(true){
     if(UART_RxByte(USART1, &buffer[i]))
     {
-      if(i==128) break;
+      if(buffer[i]=='\n') break;
       i++;
     }
     }
-  //printf(buffer);
-   if(minmea_parse_rmc(&rmcStruct, "$GPRMC,161229.487,A,3723.2475,N,12158.3416,W,0.13,309.62,120598,,*10")){
+    printf(buffer);
+   if(minmea_parse_rmc(&rmcStruct, buffer)){
     printf("FIX?:");
     lat = minmea_tocoord(&rmcStruct.latitude);
     lon = minmea_tocoord(&rmcStruct.longitude);
@@ -157,6 +157,7 @@ int main(void){
     if(rmcStruct.valid!=0)
     {printf(buffer);
   }}
+  buffer[0] = '\0';
   }
 
 }
