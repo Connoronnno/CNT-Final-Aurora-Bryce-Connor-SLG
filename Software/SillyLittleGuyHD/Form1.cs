@@ -65,6 +65,8 @@ namespace SillyLittleGuyHD
                 }
                 UI_PetPicture_pbx.Image = SillyLittleGuys[curImage];
             }
+
+            UI_Map_pbx.Image = (Bitmap)Bitmap.FromFile(".\\map.jpg");
             
         }
 

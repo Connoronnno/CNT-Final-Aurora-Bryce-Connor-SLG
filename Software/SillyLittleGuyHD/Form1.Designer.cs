@@ -32,22 +32,22 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.UI_NextCycle_btn = new System.Windows.Forms.Button();
             this.UI_PrevCycle_btn = new System.Windows.Forms.Button();
             this.UI_PetStats_lbx = new System.Windows.Forms.ListBox();
             this.UI_PetPicture_pbx = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.UI_Map_pbx = new System.Windows.Forms.PictureBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UI_PetPicture_pbx)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UI_Map_pbx)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -78,6 +78,27 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Pet Menu";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.UI_NextCycle_btn);
+            this.groupBox1.Controls.Add(this.UI_PrevCycle_btn);
+            this.groupBox1.Location = new System.Drawing.Point(522, 293);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(236, 99);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(33, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(170, 23);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Image Selection";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // UI_NextCycle_btn
             // 
@@ -118,7 +139,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.pictureBox1);
+            this.tabPage2.Controls.Add(this.UI_Map_pbx);
             this.tabPage2.Controls.Add(this.listBox1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -128,14 +149,14 @@
             this.tabPage2.Text = "GPS Menu";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // UI_Map_pbx
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(285, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(489, 400);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
+            this.UI_Map_pbx.Location = new System.Drawing.Point(285, 6);
+            this.UI_Map_pbx.Name = "UI_Map_pbx";
+            this.UI_Map_pbx.Size = new System.Drawing.Size(489, 400);
+            this.UI_Map_pbx.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.UI_Map_pbx.TabIndex = 6;
+            this.UI_Map_pbx.TabStop = false;
             // 
             // listBox1
             // 
@@ -154,27 +175,6 @@
             this.tabPage3.Text = "Save Menu";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(33, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(170, 23);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Image Selection";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.UI_NextCycle_btn);
-            this.groupBox1.Controls.Add(this.UI_PrevCycle_btn);
-            this.groupBox1.Location = new System.Drawing.Point(522, 293);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(236, 99);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            // 
             // PetMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,10 +185,10 @@
             this.Text = "Pet Display";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.UI_PetPicture_pbx)).EndInit();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.UI_Map_pbx)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -201,7 +201,7 @@
         private System.Windows.Forms.PictureBox UI_PetPicture_pbx;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ListBox UI_PetStats_lbx;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox UI_Map_pbx;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button UI_NextCycle_btn;
         private System.Windows.Forms.Button UI_PrevCycle_btn;
