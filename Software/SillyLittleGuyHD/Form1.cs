@@ -45,7 +45,7 @@ namespace SillyLittleGuyHD
             }
             catch
             {
-                UI_PetStats_lbx.Items.Add("No Data Provided");
+                //UI_PetStats_lbx.Items.Add("No Data Provided");
             }
             port11.DataReceived += Port11_DataReceived;
 
@@ -107,8 +107,8 @@ namespace SillyLittleGuyHD
                     }
                     catch
                     {
-                        UI_PetStats_lbx.Items.Clear();
-                        UI_PetStats_lbx.Items.Add("No Data Provided");
+                        //UI_PetStats_lbx.Items.Clear();
+                        //UI_PetStats_lbx.Items.Add("No Data Provided");
                     }
                     CheckPortOpenSecond = 2;
                 }
@@ -116,10 +116,10 @@ namespace SillyLittleGuyHD
             }
             else
             {
-                UI_PetStats_lbx.Items.Clear();
+                //UI_PetStats_lbx.Items.Clear();
                 foreach (KeyValuePair<string, string> petData in parsed)
                 {
-                    UI_PetStats_lbx.Items.Add($"{petData.Key} : {petData.Value}");
+                    //UI_PetStats_lbx.Items.Add($"{petData.Key} : {petData.Value}");
                 }
             }
 
@@ -147,5 +147,6 @@ namespace SillyLittleGuyHD
 
             UI_PetPicture_pbx.Image = SillyLittleGuys[curImage];
         }
+
     }
 }
