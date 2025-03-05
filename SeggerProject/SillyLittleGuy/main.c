@@ -24,6 +24,8 @@ Revision History:
 #include "gpio.h"
 #include "uart.h"
 #include "spi.h"
+#include "ADXL343.h"
+#include "i2c.h"
 /*********************************************************************
   Local Prototypes
 *********************************************************************/
@@ -35,6 +37,14 @@ void HAL_Init(void);
 
 volatile uint16_t msCounter = 0;
 volatile uint8_t beacon = 0;
+
+char buffer[100];
+
+unsigned char addr;
+
+unsigned char accelX;
+unsigned char accelY;
+unsigned char accelZ;
 /*********************************************************************
   Main entry
 *********************************************************************/
@@ -61,7 +71,32 @@ int main(void)
 
   UART_Init(USART2,115200, 0); //Init USART2 (VCOM) at 115,200 BR
 
-  SPI_Init(SPI_TypeDef *spi, SPIBusPrescaler div)
+
+  _I2C1_Init(); // PB6:SCL , PB7:SDA
+  _ADXL343_Init();
+  _I2C1_BusScan(&addr); 
+  sprintf(buffer, "%x\n", addr);
+  printf(buffer);
+
+
+  ///*Init I2C Module*/
+  //I2C_Init(I2C1, I2C_Standard);
+
+
+  ////Pedometer Setup
+  _ADXL343_WriteReg8(0x19, 0x02);
+  ////wait
+  _ADXL343_WriteReg8(0x7C, 0x01);
+  _ADXL343_WriteReg8(0x1A, 0x38);
+  _ADXL343_WriteReg8(0x1B, 0x04);
+  _ADXL343_WriteReg8(0x1F, 0x80);
+  _ADXL343_WriteReg8(0x21, 0x80);
+
+  //  //Step Counter
+  _ADXL343_WriteReg8(0x18, 0x01); // enable walking mode
+  _ADXL343_WriteReg8(0x20, 0x01); // enable step interrupt
+  _ADXL343_WriteReg8(0x59, 0x01); // step ctr config
+
   /********************************************************************
     Infinite Loop
   ********************************************************************/
@@ -70,8 +105,15 @@ int main(void)
     if(beacon)
     {
       beacon = 0;
-      UART_TxStr(USART2,"Hello Program...\n\r");
-      printf("Hello Console...\n\r");
+      //UART_TxStr(USART2,"Hello Program...\n\r");
+      //printf("Hello Console...\n\r");
+
+      _ADXL343_ReadReg8(0x04, &accelX);
+      _ADXL343_ReadReg8(0x06, &accelY);
+      _ADXL343_ReadReg8(0x08, &accelZ);
+
+      sprintf(buffer, "X:%d - Y:%d - Z:%d \n", accelX, accelY, accelZ);
+      printf(buffer);
     }
   }
 }

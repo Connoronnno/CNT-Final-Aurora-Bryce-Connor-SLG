@@ -1,5 +1,6 @@
-Output/Debug/Obj/SillyLittleGuy/system_stm32g0xx.o: \
-  C:\Users\bryce\Github\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\STM32G0xx\Device\Source\system_stm32g0xx.c \
+Output/Debug/Obj/SillyLittleGuy/i2c.o: \
+  C:\Users\bryce\Github\Group-1---Aurora-Bryce-Connor\Lib\src\i2c.c \
+  C:\Users\bryce\Github\Group-1---Aurora-Bryce-Connor\Lib\inc\i2c.h \
   C:\Users\bryce\Github\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\STM32G0xx\Device\Include\stm32g0xx.h \
   C:\Users\bryce\Github\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\STM32G0xx\Device\Include\stm32g031xx.h \
   C:\Users\bryce\Github\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\CMSIS_5\CMSIS\Core\Include\core_cm0plus.h \
@@ -12,4 +13,6 @@ Output/Debug/Obj/SillyLittleGuy/system_stm32g0xx.o: \
   C:\Users\bryce\Github\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\CMSIS_5\CMSIS\Core\Include\cmsis_compiler.h \
   C:\Users\bryce\Github\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\CMSIS_5\CMSIS\Core\Include\cmsis_gcc.h \
   C:\Users\bryce\Github\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\CMSIS_5\CMSIS\Core\Include\mpu_armv7.h \
-  C:\Users\bryce\Github\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\STM32G0xx\Device\Include\system_stm32g0xx.h
+  C:\Users\bryce\Github\Group-1---Aurora-Bryce-Connor\SeggerProject\SillyLittleGuy\STM32G0xx\Device\Include\system_stm32g0xx.h \
+  C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.22a\include\stdio.h \
+  C:\Program\ Files\SEGGER\SEGGER\ Embedded\ Studio\ 8.22a\include\stdlib.h
