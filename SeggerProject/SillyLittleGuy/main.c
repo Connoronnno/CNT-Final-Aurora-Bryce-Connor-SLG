@@ -45,6 +45,7 @@ unsigned char addr;
 unsigned char accelX;
 unsigned char accelY;
 unsigned char accelZ;
+unsigned char steps;
 /*********************************************************************
   Main entry
 *********************************************************************/
@@ -72,30 +73,33 @@ int main(void)
   UART_Init(USART2,115200, 0); //Init USART2 (VCOM) at 115,200 BR
 
 
-  _I2C1_Init(); // PB6:SCL , PB7:SDA
+  _I2C1_Init(); // PB6:SCL , PB7:SDA; 
   _ADXL343_Init();
-  _I2C1_BusScan(&addr); 
-  sprintf(buffer, "%x\n", addr);
-  printf(buffer);
 
 
   ///*Init I2C Module*/
   //I2C_Init(I2C1, I2C_Standard);
 
+ printf("1");
 
   ////Pedometer Setup
   _ADXL343_WriteReg8(0x19, 0x02);
-  ////wait
+  ////wait 
+  printf("2");
   _ADXL343_WriteReg8(0x7C, 0x01);
   _ADXL343_WriteReg8(0x1A, 0x38);
   _ADXL343_WriteReg8(0x1B, 0x04);
   _ADXL343_WriteReg8(0x1F, 0x80);
   _ADXL343_WriteReg8(0x21, 0x80);
 
+
+
   //  //Step Counter
   _ADXL343_WriteReg8(0x18, 0x01); // enable walking mode
   _ADXL343_WriteReg8(0x20, 0x01); // enable step interrupt
   _ADXL343_WriteReg8(0x59, 0x01); // step ctr config
+
+  printf("3");
 
   /********************************************************************
     Infinite Loop
@@ -114,6 +118,12 @@ int main(void)
 
       sprintf(buffer, "X:%d - Y:%d - Z:%d \n", accelX, accelY, accelZ);
       printf(buffer);
+
+      _ADXL343_ReadReg8(0x15, &steps);
+
+      sprintf(buffer, "Steps: %d \n", steps);
+      printf(buffer);
+
     }
   }
 }

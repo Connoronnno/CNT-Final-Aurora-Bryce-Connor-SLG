@@ -11,10 +11,6 @@
 // 
 ///////////////////////////////////////////////////////////////////////
 
-#ifndef _ADXL343ADDR
-#define _ADXL343ADDR 0x53
-#endif
-
 int _ADXL343_Init (void);
 int _ADXL343_ReadRegAccData ( short * iX,  short * iY,  short * iZ);
 void _ADXL343_ActivityInterrupt (unsigned char Thresh_Act);

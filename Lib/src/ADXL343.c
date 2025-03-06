@@ -14,6 +14,10 @@
 #include "i2c.h"
 #include "ADXL343.h"
 
+#ifndef _ADXL343ADDR
+#define _ADXL343ADDR 0x14
+#endif
+
 // private helpers
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue)
 {
