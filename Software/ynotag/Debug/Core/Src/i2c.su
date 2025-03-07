@@ -1,0 +1,11 @@
+../Core/Src/i2c.c:16:6:I2C_Init	16	static
+../Core/Src/i2c.c:28:6:I2C_Reset	16	static
+../Core/Src/i2c.c:33:7:I2C_ScanFirstAddr	24	static
+../Core/Src/i2c.c:67:5:I2C_Transmit	32	static
+../Core/Src/i2c.c:104:5:I2C_Writereg	32	static
+../Core/Src/i2c.c:154:5:I2C_IsBusy	16	static
+../Core/Src/i2c.c:180:5:_I2C1_Init	24	static
+../Core/Src/i2c.c:262:5:_I2C1_IsBusy	8	static
+../Core/Src/i2c.c:267:5:_I2C1_StartRead	32	static
+../Core/Src/i2c.c:327:5:_I2C1_StartWrite	32	static
+../Core/Src/i2c.c:401:6:_I2C1_BusScan	40	static

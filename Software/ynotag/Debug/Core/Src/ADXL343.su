@@ -1,0 +1,7 @@
+../Core/Src/ADXL343.c:22:5:_ADXL343_ReadReg8	16	static
+../Core/Src/ADXL343.c:33:5:_ADXL343_WriteReg8	24	static
+../Core/Src/ADXL343.c:48:5:_ADXL343_ReadRegAccData	40	static
+../Core/Src/ADXL343.c:67:5:_ADXL343_Init	16	static
+../Core/Src/ADXL343.c:104:6:_ADXL343_ActivityInterrupt	16	static
+../Core/Src/ADXL343.c:118:6:_ADXL343_TapInterrupt	8	static
+../Core/Src/ADXL343.c:128:15:_ADXL343_ReadInterruptSource	16	static
