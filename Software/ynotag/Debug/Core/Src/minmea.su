@@ -1,0 +1,11 @@
+../Core/Src/minmea.c:18:12:hex2int	16	static
+../Core/Src/minmea.c:29:6:minmea_check	32	static
+../Core/Src/minmea.c:68:20:minmea_isfield	16	static
+../Core/Src/minmea.c:72:6:minmea_scan	172	static
+../Core/Src/minmea.c:308:6:minmea_talker_id	24	static
+../Core/Src/minmea.c:321:25:minmea_sentence_id	24	static
+../Core/Src/minmea.c:344:6:minmea_parse_rmc	104	static
+../Core/Src/minmea.c:374:6:minmea_parse_gga	128	static
+../Core/Src/minmea.c:402:6:minmea_parse_gsa	152	static
+../Core/Src/minmea.c:433:6:minmea_parse_gst	88	static
+../Core/Src/minmea.c:455:6:minmea_parse_gsv	168	static
