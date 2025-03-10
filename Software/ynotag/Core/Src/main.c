@@ -41,15 +41,16 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-//volatile uint16_t msCounter = 0;
-//volatile uint16_t i = 0;
-//volatile uint16_t ii = 0;
-//volatile uint8_t beacon = 0;
-//volatile uint16_t thi = 1000;
-//struct minmea_sentence_rmc rmcStruct;
-//unsigned char buffer[128];
-//volatile float lat;
-//volatile float lon;
+volatile uint16_t msCounter = 0;
+volatile uint16_t i = 0;
+
+volatile uint16_t ii = 0;
+volatile uint8_t beacon = 0;
+volatile uint16_t thi = 1000;
+struct minmea_sentence_rmc rmcStruct;
+char buffer[128];
+volatile float lat;
+volatile float lon;
 
 //Pedometer Variables
 char buffer2[100];
@@ -118,21 +119,21 @@ int main(void)
   //_ADXL343_Init();
 
     //Pedometer Setup
-    _ADXL343_WriteReg8(0x19, 0x02);
+    //_ADXL343_WriteReg8(0x19, 0x02);
     ////wait
 
-    _ADXL343_WriteReg8(0x7C, 0x01);
-    _ADXL343_WriteReg8(0x1A, 0x38);
-    _ADXL343_WriteReg8(0x1B, 0x04);
-    _ADXL343_WriteReg8(0x1F, 0x80);
-    _ADXL343_WriteReg8(0x21, 0x80);
+    //_ADXL343_WriteReg8(0x7C, 0x01);
+//    _ADXL343_WriteReg8(0x1A, 0x38);
+  //  _ADXL343_WriteReg8(0x1B, 0x04);
+  //  _ADXL343_WriteReg8(0x1F, 0x80);
+  //  _ADXL343_WriteReg8(0x21, 0x80);
 
 
 
     //  //Step Counter
-    _ADXL343_WriteReg8(0x18, 0x01); // enable walking mode
-    _ADXL343_WriteReg8(0x20, 0x01); // enable step interrupt
-    _ADXL343_WriteReg8(0x59, 0x01); // step ctr config
+//    _ADXL343_WriteReg8(0x18, 0x01); // enable walking mode
+  //  _ADXL343_WriteReg8(0x20, 0x01); // enable step interrupt
+    //_ADXL343_WriteReg8(0x59, 0x01); // step ctr config
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -146,15 +147,15 @@ int main(void)
   MX_GPIO_Init();
 
   MX_SPI1_Init();
-  //MX_TIM17_Init();
-  //MX_USART1_UART_Init();
+  MX_TIM17_Init();
+  MX_USART1_UART_Init();
   //MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   ST7735_Unselect();
   ST7735_Init(1);
   fillScreen(BLUE);
-  //buffer[0] = 'A';
-  //buffer[1] = 'B';
+  buffer[0] = 'A';
+  buffer[1] = 'B';
   //HAL_UART_Receive(&huart1, &buffer, 1, 0xFFFF);
 
   /* USER CODE END 2 */
@@ -163,30 +164,48 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  _ADXL343_ReadReg8(0x04, &accelX);
-	  	  _ADXL343_ReadReg8(0x06, &accelY);
-	  	  _ADXL343_ReadReg8(0x08, &accelZ);
+	 // _ADXL343_ReadReg8(0x04, &accelX);
+	  //	  _ADXL343_ReadReg8(0x06, &accelY);
+	  //	  _ADXL343_ReadReg8(0x08, &accelZ);
 
-	  	  sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
-	  	drawString(10, 10, buffer2, BLACK, GREEN, 1, 1);
+	  //	  sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
+	  //	drawString(10, 10, buffer2, BLACK, GREEN, 1, 1);
 
-	  	  _ADXL343_ReadReg8(0x15, &steps);
+	  //	  _ADXL343_ReadReg8(0x15, &steps);
 
-	  	  sprintf(buffer2, "Steps: %d ", steps);
-	  	drawString(20, 20, buffer2, BLACK, GREEN, 1, 1);
+	  //	  sprintf(buffer2, "Steps: %d ", steps);
+	  ////	drawString(20, 20, buffer2, BLACK, GREEN, 1, 1);
 
-	  /*while(true){
-		  ii++;
-		  if(ii>60000) break;
+	  //while(true){
+		 // ii++;
+		 // if(ii>60000) break;
 		  if(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
 		  	{
+			  printf("aaa");
+			  if(buffer[i]&&buffer[i]=='\n')
+				  {
 
-			  if(buffer[i]&&buffer[i]=='\n') break;
+
+				  if(minmea_parse_rmc(&rmcStruct, &(buffer[1]))){
+				      //printf("FIX?:");
+					  fillScreen(BLUE);
+				      lat = minmea_tocoord(&rmcStruct.latitude);
+				      lon = minmea_tocoord(&rmcStruct.longitude);
+				      sprintf(buffer, "lat:%d, %d", (int)(lat*100), (int)(lon*100));
+				      if(rmcStruct.valid!=0)
+				      {drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
+				    }
+				  }
+				  //buffer[0]='_';
+				  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
+				  for(ii=0;ii<=i;ii++) buffer[ii]=0;
+				 i=0;
+				  }
 			  	        i++;
 
 		  	}
-	      }
-	  drawString(70, 70, buffer, BLACK, GREEN, 1, 1);*/
+	     // }
+	  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
