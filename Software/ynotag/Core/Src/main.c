@@ -157,7 +157,7 @@ int main(void)
   buffer[0] = 'A';
   buffer[1] = 'B';
   //HAL_UART_Receive(&huart1, &buffer, 1, 0xFFFF);
-
+  testAll();
   /* USER CODE END 2 */
 
   /* Infinite loop */

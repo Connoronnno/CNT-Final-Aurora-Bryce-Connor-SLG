@@ -22,7 +22,7 @@ extern uint8_t _ystart;
 
 void drawPixel(int16_t x, int16_t y, uint16_t color)
 {
-	ST7735_DrawPixel(x, y, color);
+	ST7735_DrawPixel(y, x, color);
 }
 
 void fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color)
@@ -131,22 +131,22 @@ void drawChar(int16_t x, int16_t y, char c, int16_t textColor, int16_t bgColor, 
     return;
 
   for (i=0; i<6; i++ ) {
-    if (i == 5)
+    if ((5-i) == 5)
       line = 0x0;
     else
-      line = Font[(c*5)+i];
+      line = Font[(c*5)+(5-i)];
     for (j = 0; j<8; j++) {
       if (line & 0x1) {
         if (size == 1)
-          writePixel(x+i, y+j, textColor);
+          writePixel(x+(5-i), y+(7-j), textColor);
         else {
-          fillRect(x+(i*size), y+(j*size), size, size, textColor);
+          fillRect(x+((5-i)*size), y+((7-j)*size), size, size, textColor);
         }
       } else if (bgColor != textColor) {
         if (size == 1) // default size
-          writePixel(x+i, y+j, bgColor);
+          writePixel(x+(5-i), y+(7-j), bgColor);
         else {  // big size
-          fillRect(x+i*size, y+j*size, size, size, bgColor);
+          fillRect(x+(5-i)*size, y+(7-j)*size, size, size, bgColor);
         }
       }
       line >>= 1;
