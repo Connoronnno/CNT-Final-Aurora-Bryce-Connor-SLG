@@ -30,7 +30,6 @@
 
 //PEdometer
 #include "i2c.h"
-#include "ADXL343.h"
 
 /* USER CODE END Includes */
 
@@ -90,7 +89,8 @@ static void MX_TIM17_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
-
+int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size);
+int _ADXL343_WriteReg8 (unsigned char TargetRegister, unsigned char TargetValue);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -119,21 +119,21 @@ int main(void)
   //_ADXL343_Init();
 
     //Pedometer Setup
-    //_ADXL343_WriteReg8(0x19, 0x02);
+    _ADXL343_WriteReg8(0x19, 0x02);
     ////wait
 
-    //_ADXL343_WriteReg8(0x7C, 0x01);
-//    _ADXL343_WriteReg8(0x1A, 0x38);
-  //  _ADXL343_WriteReg8(0x1B, 0x04);
-  //  _ADXL343_WriteReg8(0x1F, 0x80);
-  //  _ADXL343_WriteReg8(0x21, 0x80);
+    _ADXL343_WriteReg8(0x7C, 0x01);
+     _ADXL343_WriteReg8(0x1A, 0x38);
+    _ADXL343_WriteReg8(0x1B, 0x04);
+    _ADXL343_WriteReg8(0x1F, 0x80);
+    _ADXL343_WriteReg8(0x21, 0x80);
 
 
 
     //  //Step Counter
-//    _ADXL343_WriteReg8(0x18, 0x01); // enable walking mode
-  //  _ADXL343_WriteReg8(0x20, 0x01); // enable step interrupt
-    //_ADXL343_WriteReg8(0x59, 0x01); // step ctr config
+    _ADXL343_WriteReg8(0x18, 0x01); // enable walking mode
+    _ADXL343_WriteReg8(0x20, 0x01); // enable step interrupt
+    _ADXL343_WriteReg8(0x59, 0x01); // step ctr config
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -164,22 +164,23 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	 // _ADXL343_ReadReg8(0x04, &accelX);
-	  //	  _ADXL343_ReadReg8(0x06, &accelY);
-	  //	  _ADXL343_ReadReg8(0x08, &accelZ);
+	  fillScreen(BLUE);
+	  _ADXL343_ReadReg8(0x04, &accelX, 1);
+	  _ADXL343_ReadReg8(0x06, &accelY, 1);
+	  _ADXL343_ReadReg8(0x08, &accelZ, 1);
+	  if(accelY!=0){
+	  sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
+	  drawString(10, 10, buffer2, BLACK, GREEN, 1, 1);
+	  }
+	  _ADXL343_ReadReg8(0x15, &steps, 1);
 
-	  //	  sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
-	  //	drawString(10, 10, buffer2, BLACK, GREEN, 1, 1);
-
-	  //	  _ADXL343_ReadReg8(0x15, &steps);
-
-	  //	  sprintf(buffer2, "Steps: %d ", steps);
-	  ////	drawString(20, 20, buffer2, BLACK, GREEN, 1, 1);
+	  sprintf(buffer2, "Steps: %d ", steps);
+	  drawString(20, 20, buffer2, BLACK, GREEN, 1, 1);
 
 	  //while(true){
 		 // ii++;
 		 // if(ii>60000) break;
-		  if(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
+		  while(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
 		  	{
 			  printf("aaa");
 			  if(buffer[i]&&buffer[i]=='\n')
@@ -188,12 +189,11 @@ int main(void)
 
 				  if(minmea_parse_rmc(&rmcStruct, &(buffer[1]))){
 				      //printf("FIX?:");
-					  fillScreen(BLUE);
 				      lat = minmea_tocoord(&rmcStruct.latitude);
 				      lon = minmea_tocoord(&rmcStruct.longitude);
 				      sprintf(buffer, "lat:%d, %d", (int)(lat*100), (int)(lon*100));
 				      if(rmcStruct.valid!=0)
-				      {drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
+				      {drawString(30, 30, buffer, BLACK, GREEN, 1, 1);
 				    }
 				  }
 				  //buffer[0]='_';
@@ -205,7 +205,7 @@ int main(void)
 
 		  	}
 	     // }
-	  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
+	  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);*/
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -537,7 +537,28 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size)
+{
+  if (!HAL_I2C_Master_Transmit(&hi2c1, 0x14<<1, TargetRegister, 1, 1000)==HAL_OK)
+      return -1;
 
+  if (!HAL_I2C_Master_Receive(&hi2c1, 0x14<<1, TargetValue, size, 1000)==HAL_OK)
+    return -2;
+
+  return 0;
+}
+
+int _ADXL343_WriteReg8 (unsigned char TargetRegister, unsigned char TargetValue)
+{
+  unsigned char buff [2];
+  buff[0] = TargetRegister;
+  buff[1] = TargetValue;
+
+  if (HAL_I2C_Master_Transmit(&hi2c1, 0x14<<1, buff, 2, 100))
+      return -1;
+
+  return 0;
+}
 /* USER CODE END 4 */
 
 /**

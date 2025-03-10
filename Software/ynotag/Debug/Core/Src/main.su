@@ -7,4 +7,6 @@
 ../Core/Src/main.c:418:13:MX_USART1_UART_Init	8	static
 ../Core/Src/main.c:466:13:MX_USART2_UART_Init	8	static
 ../Core/Src/main.c:515:13:MX_GPIO_Init	48	static
-../Core/Src/main.c:547:6:Error_Handler	8	static,ignoring_inline_asm
+../Core/Src/main.c:540:5:_ADXL343_ReadReg8	24	static
+../Core/Src/main.c:551:5:_ADXL343_WriteReg8	32	static
+../Core/Src/main.c:568:6:Error_Handler	8	static,ignoring_inline_asm
