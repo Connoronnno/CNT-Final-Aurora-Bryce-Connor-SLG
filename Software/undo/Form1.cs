@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GDIDrawer;
 
 namespace undo
 {
@@ -29,9 +30,11 @@ namespace undo
         {
             a = new List<string>();
             b = new List<string>();
-            char count = (char)0;
-            char found = (char)0;
-            char i = (char)0;
+            int count = 0;
+            int found = 0;
+            int palleteIndex = 0;
+
+            //Creating pallete with unique colours
             if (bm != null)
             {
                 for (int y = 0; y < bm.Height; y++)
@@ -41,23 +44,28 @@ namespace undo
                         if (!Pallette.Contains(bm.GetPixel(x, y))) Pallette.Add(bm.GetPixel(x, y));
                     }
                 }
+                //iterate htroguh bitmap
                 for (int y = 0; y < bm.Height; y++)
                 {
                     for (int x = 0; x < bm.Width; x++)
                     {
-                        
-                        i = (char)0;
+                        //get pallete index
+                        palleteIndex = 0;
                         foreach(Color c in Pallette) 
                         {
-                            if (c == bm.GetPixel(x, y)) break;
-                            i++;
+                            if (bm.GetPixel(x, y) == c) 
+                                break;
+                            palleteIndex++;
                         }
+
                         //b.Add($"{(int)i}, ");
-                        if (found != i)
+
+                        //
+                        if (found != palleteIndex)
                         {
-                            found = i;
-                            a.Add($"{{{(int)found}, {((int)count)+1}}}, ");
-                            count = (char)0;
+                            a.Add($"{{{found}, {count+1}}}, ");
+                            found = palleteIndex;
+                            count = 0;
                         }
                         else 
                         {
@@ -69,10 +77,12 @@ namespace undo
                 {
                     textBox1.AppendText(pixels);
                 }
-                foreach (Color pixels in Pallette)
-                {
-                    textBox1.AppendText(pixels);
-                }
+                //foreach (Color pixels in Pallette)
+                //{
+                //    textBox1.AppendText(pixels);
+                //}
+
+                OutputToImage(textBox1.Text);
             }
         }
 
@@ -93,6 +103,50 @@ namespace undo
 
             //assign and display bitmap
             bm = (Bitmap)Bitmap.FromFile(path);
+        }
+
+        private void OutputToImage(string data)
+        {
+            // Split into individual items
+            string[] groups = data.Split('{');
+            List<string> cleaned = new List<string>();
+            List<(int, int)> cleanedData = new List<(int, int)>();
+            foreach (string item in groups.Skip(1))
+            {
+                string trimmed = item.Remove(item.Length-3, 3);
+                cleaned.Add(trimmed);
+            }
+            foreach (string item in cleaned)
+            {
+                string[] values = item.Split(',');
+                int.TryParse(values[0].Trim(), out int key);
+                int.TryParse(values[1].Trim(), out int value);
+                cleanedData.Add((key, value));
+            }
+
+            CDrawer canvas = new CDrawer();
+            canvas.Scale = 100;
+            int xPos = 0;
+            int yPos = 0;
+            foreach(var i in cleanedData)
+            {
+                int timesDrawn = i.Item2;
+                int curTime = 0;
+                while(curTime < timesDrawn)
+                {
+                    if (xPos >= 64)
+                    {
+                        xPos = 0;
+                        yPos++;
+                    }
+                    canvas.SetBBPixel(xPos, yPos, Pallette[i.Item1]);
+                    xPos++;
+                    curTime++;
+                }
+                
+            }
+
+                
         }
     }
 }
