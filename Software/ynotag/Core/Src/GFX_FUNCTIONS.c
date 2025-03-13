@@ -417,7 +417,7 @@ for(i=0; i<c; i++)
 		bufffer[totalInd++] = palette[ind];
 	}
 }
-ST7735_DrawImage(x, y, w, h, bufffer);
+ST7735_DrawImage(y, x, w, h, bufffer);
 }
 
 

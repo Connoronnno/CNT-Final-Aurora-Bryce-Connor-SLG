@@ -42,10 +42,11 @@
 /* USER CODE BEGIN PD */
 volatile uint16_t msCounter = 0;
 volatile uint16_t i = 0;
-
+volatile char rmcCheck;
 volatile uint16_t ii = 0;
 volatile uint8_t beacon = 0;
 volatile uint16_t thi = 1000;
+volatile uint16_t petXPos;
 struct minmea_sentence_rmc rmcStruct;
 char buffer[128];
 uint16_t testImage [296][2] = {{0, 789}, {1, 4}, {0, 59}, {1, 1}, {3, 4}, {1, 1}, {0, 58}, {1, 1}, {3, 2}, {1, 1}, {3, 1}, {4, 1}, {1, 5}, {0, 52}, {1, 1}, {3, 5}, {4, 1}, {3, 5}, {1, 2}, {0, 50}, {1, 1}, {3, 5}, {4, 1}, {3, 7}, {1, 2}, {0, 48}, {1, 1}, {3, 15}, {1, 1}, {0, 47}, {1, 1}, {3, 5}, {1, 3}, {3, 7}, {1, 1}, {0, 39}, {1, 9}, {3, 4}, {1, 2}, {5, 2}, {1, 1}, {4, 1}, {3, 6}, {1, 1}, {0, 27}, {1, 2}, {0, 8}, {1, 1}, {3, 6}, {4, 2}, {1, 1}, {3, 4}, {1, 2}, {5, 2}, {1, 1}, {4, 1}, {3, 6}, {1, 1}, {0, 27}, {1, 1}, {4, 1}, {1, 1}, {0, 6}, {1, 1}, {3, 7}, {4, 2}, {1, 1}, {3, 4}, {6, 1}, {5, 1}, {1, 3}, {4, 1}, {3, 7}, {1, 1}, {0, 26}, {1, 1}, {4, 2}, {1, 6}, {3, 9}, {4, 1}, {1, 1}, {3, 5}, {6, 1}, {1, 2}, {4, 1}, {3, 8}, {1, 2}, {0, 25}, {1, 2}, {4, 6}, {1, 1}, {3, 10}, {1, 1}, {3, 17}, {1, 1}, {2, 1}, {1, 1}, {0, 24}, {1, 1}, {3, 1}, {1, 1}, {4, 4}, {1, 1}, {3, 11}, {1, 1}, {3, 17}, {1, 1}, {2, 2}, {1, 1}, {0, 23}, {1, 1}, {3, 2}, {1, 5}, {3, 11}, {1, 1}, {3, 17}, {1, 3}, {0, 24}, {1, 1}, {3, 19}, {1, 1}, {3, 15}, {1, 1}, {0, 27}, {1, 1}, {3, 15}, {1, 3}, {3, 1}, {1, 1}, {3, 15}, {1, 1}, {0, 27}, {1, 1}, {3, 14}, {1, 1}, {2, 2}, {1, 1}, {3, 2}, {1, 1}, {3, 13}, {1, 2}, {0, 27}, {1, 2}, {3, 12}, {1, 1}, {2, 4}, {1, 3}, {3, 13}, {1, 2}, {0, 28}, {1, 6}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 2}, {1, 2}, {3, 9}, {1, 2}, {2, 1}, {1, 1}, {0, 33}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 4}, {1, 2}, {3, 5}, {1, 2}, {2, 3}, {1, 1}, {0, 33}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 6}, {1, 5}, {2, 5}, {1, 1}, {0, 34}, {1, 1}, {3, 6}, {1, 1}, {2, 4}, {1, 1}, {0, 8}, {1, 1}, {2, 7}, {1, 1}, {0, 34}, {1, 1}, {3, 6}, {1, 1}, {2, 4}, {1, 1}, {0, 9}, {1, 1}, {2, 7}, {1, 1}, {0, 33}, {1, 1}, {3, 6}, {1, 1}, {2, 4}, {1, 1}, {0, 10}, {1, 2}, {2, 5}, {1, 1}, {0, 32}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 12}, {1, 6}, {0, 26}, {1, 2}, {0, 4}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 44}, {1, 1}, {3, 1}, {1, 1}, {0, 3}, {1, 1}, {3, 7}, {1, 1}, {2, 3}, {1, 1}, {0, 45}, {1, 1}, {3, 2}, {1, 3}, {3, 8}, {1, 1}, {2, 2}, {1, 2}, {0, 45}, {1, 1}, {3, 13}, {1, 1}, {2, 1}, {1, 2}, {0, 46}, {1, 1}, {3, 13}, {1, 2}, {3, 1}, {1, 1}, {0, 46}, {1, 1}, {3, 12}, {1, 2}, {3, 2}, {1, 1}, {0, 46}, {1, 1}, {3, 7}, {1, 5}, {3, 4}, {1, 1}, {0, 47}, {1, 7}, {0, 4}, {1, 1}, {3, 5}, {1, 1}, {0, 57}, {1, 1}, {3, 6}, {1, 1}, {0, 57}, {1, 1}, {3, 6}, {1, 1}, {0, 57}, {1, 1}, {3, 6}, {1, 2}, {0, 56}, {1, 2}, {3, 6}, {1, 1}, {0, 57}, {1, 7}, {0, 936}};
@@ -162,7 +163,7 @@ int main(void)
   HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
   ST7735_Unselect();
   ST7735_Init(1);
-  fillScreen(RED);
+  testAll();
   buffer[0] = 'A';
   buffer[1] = 'B';
   TIM17->CCR1 = 5;
@@ -175,32 +176,38 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET)
+		  petXPos-=5;
+	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12) == GPIO_PIN_SET)
+		  petXPos+=5;
+	  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_SET)
+		  fillScreen(WHITE);
+	  else
+		  fillScreen(BLACK);
+	  if(petXPos<3)petXPos=0;
+	  if(petXPos>60) petXPos=60;
 	  freq = freqs[(toneIndex++)%8];
 	  TIM17->ARR=(uint32_t)(987*(float)1000/(float)freq);
 	  //fillScreen(WHITE);
-	  drawImage(testImage, palette, 40, 40, 64, 64, 296);
+	  drawImage(testImage, palette, petXPos, 40, 64, 64, 296);
 	  //drawImage(testImage, palette, 10, 40, 64, 64);
 	  //drawImage(testImage, palette, 70, 40, 64, 64);
 	  //drawImage(testImage, palette, 100, 40, 64, 64);
-	  _ADXL343_ReadReg8(0x04, &accelX, 1);
-	  _ADXL343_ReadReg8(0x06, &accelY, 1);
-	  _ADXL343_ReadReg8(0x08, &accelZ, 1);
-	  if(accelY!=0){
-	  sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
-	  drawString(10, 10, buffer2, BLACK, GREEN, 1, 1);
-	  }
+	  //_ADXL343_ReadReg8(0x04, &accelX, 1);
+	  //_ADXL343_ReadReg8(0x06, &accelY, 1);
+	 // _ADXL343_ReadReg8(0x08, &accelZ, 1);
+	 // if(accelY!=0){
+	  //sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
+	  //drawString(10, 10, buffer2, BLACK, GREEN, 1, 1);
+	  //}
 	  _ADXL343_ReadReg8(0x15, &steps, 1);
 
 	  sprintf(buffer2, "Steps: %d ", steps);
-	  drawString(20, 20, buffer2, BLACK, GREEN, 1, 1);
+	  drawString(0, 20, buffer2, BLACK, GREEN, 1, 1);
 
-	  //while(true){
-		 // ii++;
-		 // if(ii>60000) break;
+	  	  //only run this code every few seconds
 		  while(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
 		  	{
-			  //printf("aaa");
 			  if(buffer[i]&&buffer[i]=='\n')
 				  {
 
@@ -211,7 +218,7 @@ int main(void)
 				      lon = minmea_tocoord(&rmcStruct.longitude);
 				      sprintf(buffer, "lat:%d, %d", (int)(lat*100), (int)(lon*100));
 				      if(rmcStruct.valid!=0)
-				      {drawString(30, 30, buffer, BLACK, GREEN, 1, 1);
+				      {drawString(0, 30, buffer, BLACK, GREEN, 1, 1);
 				    }
 				  }
 				  //buffer[0]='_';
@@ -402,6 +409,13 @@ static void MX_RTC_Init(void)
   sAlarm.AlarmDateWeekDay = 0x1;
   sAlarm.Alarm = RTC_ALARM_A;
   if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BCD) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Enable the WakeUp
+  */
+  if (HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 0x500B, RTC_WAKEUPCLOCK_RTCCLK_DIV16) != HAL_OK)
   {
     Error_Handler();
   }
@@ -623,17 +637,29 @@ static void MX_GPIO_Init(void)
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PC1 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PA3 PA4 PA5 */
   GPIO_InitStruct.Pin = GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA11 PA12 */
+  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */

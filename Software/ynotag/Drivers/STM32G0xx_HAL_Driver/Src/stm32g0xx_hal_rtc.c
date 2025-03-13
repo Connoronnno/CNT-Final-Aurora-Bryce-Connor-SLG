@@ -1316,7 +1316,7 @@ HAL_StatusTypeDef HAL_RTC_SetAlarm_IT(RTC_HandleTypeDef *hrtc, RTC_AlarmTypeDef 
   if(sAlarm->Alarm == RTC_ALARM_A)
   {
     /* Disable the Alarm A interrupt */
-    __HAL_RTC_ALARMA_ENABLE(hrtc);
+    __HAL_RTC_ALARMA_DISABLE(hrtc);
 
     /* Clear flag alarm A */
     __HAL_RTC_ALARM_CLEAR_FLAG(hrtc, RTC_FLAG_ALRAF);
