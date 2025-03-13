@@ -52,3 +52,15 @@ C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj
 C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.csproj.Up2Date
 C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.exe
 C:\Users\Connor\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.pdb
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\bin\Debug\undo.exe.config
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\bin\Debug\undo.exe
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\bin\Debug\undo.pdb
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\bin\Debug\GDIDrawer.dll
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.csproj.AssemblyReference.cache
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.Form1.resources
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.Properties.Resources.resources
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.csproj.GenerateResource.cache
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.csproj.CoreCompileInputs.cache
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.csproj.Up2Date
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.exe
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.pdb

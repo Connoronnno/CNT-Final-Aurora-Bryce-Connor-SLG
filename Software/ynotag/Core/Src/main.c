@@ -46,11 +46,12 @@ volatile char rmcCheck;
 volatile uint16_t ii = 0;
 volatile uint8_t beacon = 0;
 volatile uint16_t thi = 1000;
+volatile uint16_t whileI=0;
 volatile uint16_t petXPos;
 struct minmea_sentence_rmc rmcStruct;
 char buffer[128];
 uint16_t testImage [296][2] = {{0, 789}, {1, 4}, {0, 59}, {1, 1}, {3, 4}, {1, 1}, {0, 58}, {1, 1}, {3, 2}, {1, 1}, {3, 1}, {4, 1}, {1, 5}, {0, 52}, {1, 1}, {3, 5}, {4, 1}, {3, 5}, {1, 2}, {0, 50}, {1, 1}, {3, 5}, {4, 1}, {3, 7}, {1, 2}, {0, 48}, {1, 1}, {3, 15}, {1, 1}, {0, 47}, {1, 1}, {3, 5}, {1, 3}, {3, 7}, {1, 1}, {0, 39}, {1, 9}, {3, 4}, {1, 2}, {5, 2}, {1, 1}, {4, 1}, {3, 6}, {1, 1}, {0, 27}, {1, 2}, {0, 8}, {1, 1}, {3, 6}, {4, 2}, {1, 1}, {3, 4}, {1, 2}, {5, 2}, {1, 1}, {4, 1}, {3, 6}, {1, 1}, {0, 27}, {1, 1}, {4, 1}, {1, 1}, {0, 6}, {1, 1}, {3, 7}, {4, 2}, {1, 1}, {3, 4}, {6, 1}, {5, 1}, {1, 3}, {4, 1}, {3, 7}, {1, 1}, {0, 26}, {1, 1}, {4, 2}, {1, 6}, {3, 9}, {4, 1}, {1, 1}, {3, 5}, {6, 1}, {1, 2}, {4, 1}, {3, 8}, {1, 2}, {0, 25}, {1, 2}, {4, 6}, {1, 1}, {3, 10}, {1, 1}, {3, 17}, {1, 1}, {2, 1}, {1, 1}, {0, 24}, {1, 1}, {3, 1}, {1, 1}, {4, 4}, {1, 1}, {3, 11}, {1, 1}, {3, 17}, {1, 1}, {2, 2}, {1, 1}, {0, 23}, {1, 1}, {3, 2}, {1, 5}, {3, 11}, {1, 1}, {3, 17}, {1, 3}, {0, 24}, {1, 1}, {3, 19}, {1, 1}, {3, 15}, {1, 1}, {0, 27}, {1, 1}, {3, 15}, {1, 3}, {3, 1}, {1, 1}, {3, 15}, {1, 1}, {0, 27}, {1, 1}, {3, 14}, {1, 1}, {2, 2}, {1, 1}, {3, 2}, {1, 1}, {3, 13}, {1, 2}, {0, 27}, {1, 2}, {3, 12}, {1, 1}, {2, 4}, {1, 3}, {3, 13}, {1, 2}, {0, 28}, {1, 6}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 2}, {1, 2}, {3, 9}, {1, 2}, {2, 1}, {1, 1}, {0, 33}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 4}, {1, 2}, {3, 5}, {1, 2}, {2, 3}, {1, 1}, {0, 33}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 6}, {1, 5}, {2, 5}, {1, 1}, {0, 34}, {1, 1}, {3, 6}, {1, 1}, {2, 4}, {1, 1}, {0, 8}, {1, 1}, {2, 7}, {1, 1}, {0, 34}, {1, 1}, {3, 6}, {1, 1}, {2, 4}, {1, 1}, {0, 9}, {1, 1}, {2, 7}, {1, 1}, {0, 33}, {1, 1}, {3, 6}, {1, 1}, {2, 4}, {1, 1}, {0, 10}, {1, 2}, {2, 5}, {1, 1}, {0, 32}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 12}, {1, 6}, {0, 26}, {1, 2}, {0, 4}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 44}, {1, 1}, {3, 1}, {1, 1}, {0, 3}, {1, 1}, {3, 7}, {1, 1}, {2, 3}, {1, 1}, {0, 45}, {1, 1}, {3, 2}, {1, 3}, {3, 8}, {1, 1}, {2, 2}, {1, 2}, {0, 45}, {1, 1}, {3, 13}, {1, 1}, {2, 1}, {1, 2}, {0, 46}, {1, 1}, {3, 13}, {1, 2}, {3, 1}, {1, 1}, {0, 46}, {1, 1}, {3, 12}, {1, 2}, {3, 2}, {1, 1}, {0, 46}, {1, 1}, {3, 7}, {1, 5}, {3, 4}, {1, 1}, {0, 47}, {1, 7}, {0, 4}, {1, 1}, {3, 5}, {1, 1}, {0, 57}, {1, 1}, {3, 6}, {1, 1}, {0, 57}, {1, 1}, {3, 6}, {1, 1}, {0, 57}, {1, 1}, {3, 6}, {1, 2}, {0, 56}, {1, 2}, {3, 6}, {1, 1}, {0, 57}, {1, 7}, {0, 936}};
-volatile uint16_t palette[8] = {WHITE, BLACK, YELLOW, GREEN, BLUE, RED, MAGENTA, WHITE};
+volatile uint16_t palette[8] = {WHITE, BLACK, YELLOW, GREEN, BLUE, WHITE, MAGENTA, WHITE};
 volatile float lat;
 volatile float lon;
 volatile double freq;
@@ -123,25 +124,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  MX_I2C1_Init();
-  //_ADXL343_Init();
 
-    //Pedometer Setup
-    _ADXL343_WriteReg8(0x19, 0x02);
-    ////wait
-
-    _ADXL343_WriteReg8(0x7C, 0x01);
-     _ADXL343_WriteReg8(0x1A, 0x38);
-    _ADXL343_WriteReg8(0x1B, 0x04);
-    _ADXL343_WriteReg8(0x1F, 0x80);
-    _ADXL343_WriteReg8(0x21, 0x80);
-
-
-
-    //  //Step Counter
-    _ADXL343_WriteReg8(0x18, 0x01); // enable walking mode
-    _ADXL343_WriteReg8(0x20, 0x01); // enable step interrupt
-    _ADXL343_WriteReg8(0x59, 0x01); // step ctr config
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -163,27 +146,59 @@ int main(void)
   HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
   ST7735_Unselect();
   ST7735_Init(1);
-  testAll();
+  //testAll();
   buffer[0] = 'A';
   buffer[1] = 'B';
   TIM17->CCR1 = 5;
   TIM17->PSC=64;
+  uint8_t ret=0;
+    //_ADXL343_Init();
+
+      //Pedometer Setup
+      _ADXL343_WriteReg8(0x19, 0x02);
+      ////wait
+
+      _ADXL343_WriteReg8(0x7C, 0x01);
+       _ADXL343_WriteReg8(0x1A, 0x38);
+      _ADXL343_WriteReg8(0x1B, 0x04);
+      _ADXL343_WriteReg8(0x1F, 0x80);
+      _ADXL343_WriteReg8(0x21, 0x80);
+
+
+
+      //  //Step Counter
+      _ADXL343_WriteReg8(0x18, 0x01); // enable walking mode
+      _ADXL343_WriteReg8(0x20, 0x01); // enable step interrupt
+      _ADXL343_WriteReg8(0x59, 0x01); // step ctr config
   //HAL_UART_Receive(&huart1, &buffer, 1, 0xFFFF);
   //testAll();
+  for(i=1; i<128; i++)
+      {
+          ret = HAL_I2C_IsDeviceReady(&hi2c1, (uint16_t)(i<<1), 3, 5);
+          if (ret != HAL_OK) /* No ACK Received At That Address */
+          {
+              steps=0;
+          }
+          else if(ret == HAL_OK)
+          {
+              steps=i;
+          }
+      }
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  if((whileI++)%3==0)
+		  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_SET)
+		  		  fillScreen(WHITE);
+		  	  else
+		  		  fillScreen(BLACK);
 	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET)
 		  petXPos-=5;
 	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12) == GPIO_PIN_SET)
 		  petXPos+=5;
-	  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_SET)
-		  fillScreen(WHITE);
-	  else
-		  fillScreen(BLACK);
 	  if(petXPos<3)petXPos=0;
 	  if(petXPos>60) petXPos=60;
 	  freq = freqs[(toneIndex++)%8];
@@ -193,20 +208,20 @@ int main(void)
 	  //drawImage(testImage, palette, 10, 40, 64, 64);
 	  //drawImage(testImage, palette, 70, 40, 64, 64);
 	  //drawImage(testImage, palette, 100, 40, 64, 64);
-	  //_ADXL343_ReadReg8(0x04, &accelX, 1);
-	  //_ADXL343_ReadReg8(0x06, &accelY, 1);
-	 // _ADXL343_ReadReg8(0x08, &accelZ, 1);
-	 // if(accelY!=0){
-	  //sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
-	  //drawString(10, 10, buffer2, BLACK, GREEN, 1, 1);
-	  //}
-	  _ADXL343_ReadReg8(0x15, &steps, 1);
+	  _ADXL343_ReadReg8(0x04, &accelX, 1);
+	  _ADXL343_ReadReg8(0x06, &accelY, 1);
+	  _ADXL343_ReadReg8(0x08, &accelZ, 1);
+
+	  sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
+	  drawString(10, 10, buffer2, BLACK, GREEN, 1, 1);
+
+	  //_ADXL343_ReadReg8(0x15, &steps, 1);
 
 	  sprintf(buffer2, "Steps: %d ", steps);
 	  drawString(0, 20, buffer2, BLACK, GREEN, 1, 1);
 
 	  	  //only run this code every few seconds
-		  while(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
+		  /*while(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
 		  	{
 			  if(buffer[i]&&buffer[i]=='\n')
 				  {
@@ -229,7 +244,7 @@ int main(void)
 			  	        i++;
 
 		  	}
-	     // }
+	     // }*/
 	  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);*/
     /* USER CODE END WHILE */
 
