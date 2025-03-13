@@ -63,7 +63,7 @@ char buffer2[100];
 unsigned char accelX;
 unsigned char accelY;
 unsigned char accelZ;
-unsigned char steps;
+unsigned char steps=0;
 
 /* USER CODE END PD */
 
@@ -169,27 +169,16 @@ int main(void)
       //  //Step Counter
       _ADXL343_WriteReg8(0x18, 0x01); // enable walking mode
       _ADXL343_WriteReg8(0x20, 0x01); // enable step interrupt
-      _ADXL343_WriteReg8(0x59, 0x01); // step ctr config
+      //_ADXL343_WriteReg8(0x59, 0x01); // step ctr config
   //HAL_UART_Receive(&huart1, &buffer, 1, 0xFFFF);
   //testAll();
-  for(i=1; i<128; i++)
-      {
-          ret = HAL_I2C_IsDeviceReady(&hi2c1, (uint16_t)(i<<1), 3, 5);
-          if (ret != HAL_OK) /* No ACK Received At That Address */
-          {
-              steps=0;
-          }
-          else if(ret == HAL_OK)
-          {
-              steps=i;
-          }
-      }
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  steps=0;
 	  if((whileI++)%3==0)
 		  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_SET)
 		  		  fillScreen(WHITE);
@@ -209,15 +198,17 @@ int main(void)
 	  //drawImage(testImage, palette, 70, 40, 64, 64);
 	  //drawImage(testImage, palette, 100, 40, 64, 64);
 	  _ADXL343_ReadReg8(0x04, &accelX, 1);
-	  _ADXL343_ReadReg8(0x06, &accelY, 1);
-	  _ADXL343_ReadReg8(0x08, &accelZ, 1);
+	  _ADXL343_ReadReg8(0x05, &accelY, 1);
+	  _ADXL343_ReadReg8(0x06, &accelZ, 1);
+	  _ADXL343_ReadReg8(0x07, &accelX, 1);
+	  _ADXL343_ReadReg8(0x08, &accelY, 1);
+	  _ADXL343_ReadReg8(0x09, &accelZ, 1);
 
 	  sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
-	  drawString(10, 10, buffer2, BLACK, GREEN, 1, 1);
+	  drawString(0, 10, buffer2, BLACK, GREEN, 1, 1);
 
-	  //_ADXL343_ReadReg8(0x15, &steps, 1);
-
-	  sprintf(buffer2, "Steps: %d ", steps);
+	  _ADXL343_ReadReg8(0x15, &steps, 1);
+	  sprintf(buffer2, "Steps: %d ", (steps&0b00000011));
 	  drawString(0, 20, buffer2, BLACK, GREEN, 1, 1);
 
 	  	  //only run this code every few seconds
