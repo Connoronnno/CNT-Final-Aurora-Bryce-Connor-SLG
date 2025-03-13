@@ -8,7 +8,7 @@
 #ifndef INC_GFX_FUNCTIONS_H_
 #define INC_GFX_FUNCTIONS_H_
 
-void drawImage(uint16_t image[][2], uint16_t palette[], uint16_t x, uint16_t y, uint16_t w, uint16_t h);
+void drawImage(uint16_t image[][2], uint16_t palette[], uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t c);
 void drawPixel(int16_t x, int16_t y, uint16_t color);
 void writeLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color);
 void  drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);

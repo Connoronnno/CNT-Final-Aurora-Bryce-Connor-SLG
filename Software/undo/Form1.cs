@@ -44,16 +44,17 @@ namespace undo
                         if (!Pallette.Contains(bm.GetPixel(x, y))) Pallette.Add(bm.GetPixel(x, y));
                     }
                 }
-                //iterate htroguh bitmap
+                //iterate through bitmap
                 for (int y = 0; y < bm.Height; y++)
                 {
-                    for (int x = 0; x < bm.Width; x++)
+                    
+                    for (int x = bm.Width-1; x >=0; x--)
                     {
                         //get pallete index
                         palleteIndex = 0;
                         foreach(Color c in Pallette) 
                         {
-                            if (bm.GetPixel(x, y) == c) 
+                            if (bm.GetPixel(y, x) == c) 
                                 break;
                             palleteIndex++;
                         }
@@ -63,7 +64,9 @@ namespace undo
                         //
                         if (found != palleteIndex)
                         {
-                            a.Add($"{{{found}, {count+1}}}, ");
+                            if (a.Count == 0) a.Add($"{{{found}, {count}}}, ");
+                            else a.Add($"{{{found}, {count+1}}}, ");
+                            
                             found = palleteIndex;
                             count = 0;
                         }
@@ -73,6 +76,7 @@ namespace undo
                         }
                     }
                 }
+                a.Add($"{{{found}, {count+1}}}, ");
                 foreach (string pixels in a) 
                 {
                     textBox1.AppendText(pixels);
@@ -125,7 +129,7 @@ namespace undo
             }
 
             CDrawer canvas = new CDrawer();
-            canvas.Scale = 100;
+            canvas.Scale = 3;
             int xPos = 0;
             int yPos = 0;
             foreach(var i in cleanedData)
@@ -139,7 +143,7 @@ namespace undo
                         xPos = 0;
                         yPos++;
                     }
-                    canvas.SetBBPixel(xPos, yPos, Pallette[i.Item1]);
+                    canvas.SetBBScaledPixel(xPos, yPos, Pallette[i.Item1]);
                     xPos++;
                     curTime++;
                 }

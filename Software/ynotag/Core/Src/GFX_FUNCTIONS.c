@@ -22,7 +22,7 @@ extern uint8_t _ystart;
 
 void drawPixel(int16_t x, int16_t y, uint16_t color)
 {
-	ST7735_DrawPixel(x, y, color);
+	ST7735_DrawPixel(y,x, color);
 }
 
 void fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color)
@@ -131,22 +131,22 @@ void drawChar(int16_t x, int16_t y, char c, int16_t textColor, int16_t bgColor, 
     return;
 
   for (i=0; i<6; i++ ) {
-    if ((5-i) == 5)
+    if ((i) == 5)
       line = 0x0;
     else
-      line = Font[(c*5)+(5-i)];
+      line = Font[(c*5)+(i)];
     for (j = 0; j<8; j++) {
       if (line & 0x1) {
         if (size == 1)
-          writePixel(x+(5-i), y+(7-j), textColor);
+          writePixel(x+(i), y+(7-j), textColor);
         else {
-          fillRect(x+((5-i)*size), y+((7-j)*size), size, size, textColor);
+          fillRect(x+((i)*size), y+((7-j)*size), size, size, textColor);
         }
       } else if (bgColor != textColor) {
         if (size == 1) // default size
-          writePixel(x+(5-i), y+(7-j), bgColor);
+          writePixel(x+(i), y+(7-j), bgColor);
         else {  // big size
-          fillRect(x+(5-i)*size, y+(7-j)*size, size, size, bgColor);
+          fillRect(x+(i)*size, y+(7-j)*size, size, size, bgColor);
         }
       }
       line >>= 1;
@@ -391,27 +391,33 @@ void fillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, in
 }
 
 void fillScreen(uint16_t color) {
-    fillRect(0, 0, _width, _height, color);
+    uint16_t pallette[] = {color};
+    uint16_t pixels[_width*_height][2];
+
+    pixels[0][0] = 0;
+    pixels[0][1] = _width*_height;
+    drawImage(pixels, pallette, 0, 0, _width, _height, 1);
+	//fillRect(0, 0, _width, _height, color);
 }
 
-void drawImage(uint16_t image[][2], uint16_t palette[], uint16_t x, uint16_t y, uint16_t w, uint16_t h)
+void drawImage(uint16_t image[][2], uint16_t palette[], uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t c)
 {
 	uint16_t i;
 	uint16_t j;
 	uint16_t totalInd =0;
 	uint16_t ind;
 	uint16_t count;
-	uint16_t buffer[w*h];
-for(i=0; i<332; i++)
+	uint16_t bufffer[w*h];
+for(i=0; i<c; i++)
 {
 	ind = image[i][0];
 	count = image[i][1];
 	for(j=0; j<count; j++)
 	{
-		buffer[totalInd++] = palette[ind];
+		bufffer[totalInd++] = palette[ind];
 	}
 }
-ST7735_DrawImage(x, y, w, h, buffer);
+ST7735_DrawImage(x, y, w, h, bufffer);
 }
 
 
