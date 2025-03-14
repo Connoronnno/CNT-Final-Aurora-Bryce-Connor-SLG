@@ -208,11 +208,11 @@ int main(void)
 	  drawString(0, 10, buffer2, BLACK, GREEN, 1, 1);
 
 	  _ADXL343_ReadReg8(0x15, &steps, 1);
-	  sprintf(buffer2, "Steps: %d ", (steps&0b00000011));
+	  sprintf(buffer2, "Steps: %d ", steps);
 	  drawString(0, 20, buffer2, BLACK, GREEN, 1, 1);
 
 	  	  //only run this code every few seconds
-		  /*while(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
+		  while(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
 		  	{
 			  if(buffer[i]&&buffer[i]=='\n')
 				  {
@@ -231,11 +231,11 @@ int main(void)
 				  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
 				  for(ii=0;ii<=i;ii++) buffer[ii]=0;
 				 i=0;
+				 break;
 				  }
 			  	        i++;
 
 		  	}
-	     // }*/
 	  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);*/
     /* USER CODE END WHILE */
 
