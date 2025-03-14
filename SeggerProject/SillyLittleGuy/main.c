@@ -74,7 +74,7 @@ int main(void)
 
 
   _I2C1_Init(); // PB6:SCL , PB7:SDA; 
-  _ADXL343_Init();
+  //_ADXL343_Init();
 
 
   ///*Init I2C Module*/
@@ -97,7 +97,7 @@ int main(void)
   //  //Step Counter
   _ADXL343_WriteReg8(0x18, 0x01); // enable walking mode
   _ADXL343_WriteReg8(0x20, 0x01); // enable step interrupt
-  _ADXL343_WriteReg8(0x59, 0x01); // step ctr config
+  //_ADXL343_WriteReg8(0x59, 0x01); // step ctr config
 
   printf("3");
 
