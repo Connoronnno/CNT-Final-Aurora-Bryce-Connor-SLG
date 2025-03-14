@@ -141,7 +141,7 @@ int main(void)
   MX_TIM17_Init();
   MX_USART1_UART_Init();
   //MX_USART2_UART_Init();
-  MX_RTC_Init();
+  //MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
   ST7735_Unselect();
@@ -197,12 +197,12 @@ int main(void)
 	  //drawImage(testImage, palette, 10, 40, 64, 64);
 	  //drawImage(testImage, palette, 70, 40, 64, 64);
 	  //drawImage(testImage, palette, 100, 40, 64, 64);
-	  _ADXL343_ReadReg8(0x04, &accelX, 1);
-	  _ADXL343_ReadReg8(0x05, &accelY, 1);
-	  _ADXL343_ReadReg8(0x06, &accelZ, 1);
-	  _ADXL343_ReadReg8(0x07, &accelX, 1);
-	  _ADXL343_ReadReg8(0x08, &accelY, 1);
-	  _ADXL343_ReadReg8(0x09, &accelZ, 1);
+	  //_ADXL343_ReadReg8(0x04, &accelX, 1);
+	  //_ADXL343_ReadReg8(0x05, &accelY, 1);
+	  //_ADXL343_ReadReg8(0x06, &accelZ, 1);
+	  //_ADXL343_ReadReg8(0x07, &accelX, 1);
+	  //_ADXL343_ReadReg8(0x08, &accelY, 1);
+	  //_ADXL343_ReadReg8(0x09, &accelZ, 1);
 
 	  sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
 	  drawString(0, 10, buffer2, BLACK, GREEN, 1, 1);
@@ -675,7 +675,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size)
 {
-  if (!HAL_I2C_Master_Transmit(&hi2c1, 0x14<<1, TargetRegister, 1, 1000)==HAL_OK)
+  if (!HAL_I2C_Master_Transmit(&hi2c1, 0x14<<1, &TargetRegister, 1, 1000)==HAL_OK)
       return -1;
 
   if (!HAL_I2C_Master_Receive(&hi2c1, 0x14<<1, TargetValue, size, 1000)==HAL_OK)
