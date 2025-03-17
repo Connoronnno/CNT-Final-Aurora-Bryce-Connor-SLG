@@ -27,7 +27,14 @@ void drawPixel(int16_t x, int16_t y, uint16_t color)
 
 void fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color)
 {
-	ST7735_FillRectangle(x, y, w, h, color);
+	uint16_t pallette[] = {color};
+	    uint16_t pixels[w*h][2];
+
+	    pixels[0][0] = 0;
+	    pixels[0][1] = w*h;
+	    drawImage(pixels, pallette, x, y, w, h, 1);
+
+	//ST7735_FillRectangle(x, y, w, h, color);
 }
 
 

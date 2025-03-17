@@ -35,7 +35,12 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+typedef enum _menuState {
+	StatsDisplay,
+	Main,
+	MusicTest,
+	ConnorDemo
+}menuStates;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -64,6 +69,9 @@ unsigned char accelX;
 unsigned char accelY;
 unsigned char accelZ;
 unsigned char steps=0;
+
+menuStates currentMenu = Main;
+char canChange = 1;
 
 /* USER CODE END PD */
 
@@ -143,7 +151,7 @@ int main(void)
   //MX_USART2_UART_Init();
   //MX_RTC_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
+  //HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
   ST7735_Unselect();
   ST7735_Init(1);
   //testAll();
@@ -178,65 +186,130 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  steps=0;
-	  if((whileI++)%3==0)
-		  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_SET)
-		  		  fillScreen(WHITE);
-		  	  else
-		  		  fillScreen(BLACK);
-	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET)
-		  petXPos-=5;
-	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12) == GPIO_PIN_SET)
-		  petXPos+=5;
-	  if(petXPos<3)petXPos=0;
-	  if(petXPos>60) petXPos=60;
-	  freq = freqs[(toneIndex++)%8];
-	  TIM17->ARR=(uint32_t)(987*(float)1000/(float)freq);
-	  //fillScreen(WHITE);
-	  drawImage(testImage, palette, petXPos, 40, 64, 64, 296);
-	  //drawImage(testImage, palette, 10, 40, 64, 64);
-	  //drawImage(testImage, palette, 70, 40, 64, 64);
-	  //drawImage(testImage, palette, 100, 40, 64, 64);
-	  //_ADXL343_ReadReg8(0x04, &accelX, 1);
-	  //_ADXL343_ReadReg8(0x05, &accelY, 1);
-	  //_ADXL343_ReadReg8(0x06, &accelZ, 1);
-	  //_ADXL343_ReadReg8(0x07, &accelX, 1);
-	  //_ADXL343_ReadReg8(0x08, &accelY, 1);
-	  //_ADXL343_ReadReg8(0x09, &accelZ, 1);
 
-	  sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
-	  drawString(0, 10, buffer2, BLACK, GREEN, 1, 1);
+	  switch(currentMenu){
+	  case Main:
+		  //fillScreen(BLACK);
 
-	  _ADXL343_ReadReg8(0x15, &steps, 1);
-	  sprintf(buffer2, "Steps: %d ", steps);
-	  drawString(0, 20, buffer2, BLACK, GREEN, 1, 1);
+		  // Draw the Silly little guy centered
+		  drawImage(testImage, palette, 40, 40, 64, 64, 296);
+		  fillRect(40, 40, 64, 64, BLACK);
 
-	  	  //only run this code every few seconds
-		  while(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
-		  	{
-			  if(buffer[i]&&buffer[i]=='\n')
-				  {
+		  //Display the current Steps
+		  _ADXL343_ReadReg8(0x15, &steps, 1);
+		  sprintf(buffer2, "Steps: %d ", steps);
+		  drawString(0, 20, buffer2, BLACK, GREEN, 1, 1);
+
+		  //Change current Menu
+		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12) == GPIO_PIN_SET ) {
+			  HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
+			  currentMenu = MusicTest;
+			  canChange = 0;
+		  }
+		  else if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET ) {
+			  currentMenu = StatsDisplay;
+			  canChange = 0;
+		  }
+		  else
+			  canChange = 1;
 
 
-				  if(minmea_parse_rmc(&rmcStruct, &(buffer[1]))){
-				      //printf("FIX?:");
-				      lat = minmea_tocoord(&rmcStruct.latitude);
-				      lon = minmea_tocoord(&rmcStruct.longitude);
-				      sprintf(buffer, "lat:%d, %d", (int)(lat*100), (int)(lon*100));
-				      if(rmcStruct.valid!=0)
-				      {drawString(0, 30, buffer, BLACK, GREEN, 1, 1);
-				    }
-				  }
-				  //buffer[0]='_';
-				  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
-				  for(ii=0;ii<=i;ii++) buffer[ii]=0;
-				 i=0;
-				 break;
-				  }
-			  	        i++;
+		  break;
+	  case StatsDisplay:
+		  fillScreen(WHITE);
 
-		  	}
-	  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);*/
+	  	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12) == GPIO_PIN_SET ){
+	  		currentMenu = Main;
+	  		canChange = 0;
+	  	  }
+	  	  else
+	  	      canChange = 1;
+
+	  	  break;
+	  case MusicTest:
+		  fillScreen(BLUE);
+
+		  freq = freqs[(toneIndex++)%8];
+		  TIM17->ARR=(uint32_t)(987*(float)1000/(float)freq);
+
+		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET) {
+			  currentMenu = Main;
+			  canChange = 0;
+			  HAL_TIM_PWM_Stop(&htim17, TIM_CHANNEL_1);
+		  }
+		  else
+			  canChange = 1;
+
+		  break;
+	  case ConnorDemo:
+		  	  steps=0;
+
+		  	  if((whileI++)%3==0)
+		  		  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_SET)
+		  		  		  fillScreen(WHITE);
+		  		  	  else
+		  		  		  fillScreen(BLACK);
+		  	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET)
+		  		  petXPos-=5;
+		  	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12) == GPIO_PIN_SET)
+		  		  petXPos+=5;
+		  	  if(petXPos<3)petXPos=0;
+		  	  if(petXPos>60) petXPos=60;
+		  	  freq = freqs[(toneIndex++)%8];
+		  	  TIM17->ARR=(uint32_t)(987*(float)1000/(float)freq);
+		  	  //fillScreen(WHITE);
+		  	  drawImage(testImage, palette, petXPos, 40, 64, 64, 296);
+//		  	  drawImage(testImage, palette, 10, 40, 64, 64);
+//		  	  drawImage(testImage, palette, 70, 40, 64, 64);
+//		  	  drawImage(testImage, palette, 100, 40, 64, 64);
+//		  	  _ADXL343_ReadReg8(0x04, &accelX, 1);
+//		  	  _ADXL343_ReadReg8(0x05, &accelY, 1);
+//		  	  _ADXL343_ReadReg8(0x06, &accelZ, 1);
+//		  	  _ADXL343_ReadReg8(0x07, &accelX, 1);
+//		  	  _ADXL343_ReadReg8(0x08, &accelY, 1);
+//		  	  _ADXL343_ReadReg8(0x09, &accelZ, 1);
+
+		  	  sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
+		  	  drawString(0, 10, buffer2, BLACK, GREEN, 1, 1);
+
+		  	  _ADXL343_ReadReg8(0x15, &steps, 1);
+		  	  sprintf(buffer2, "Steps: %d ", steps);
+		  	  drawString(0, 20, buffer2, BLACK, GREEN, 1, 1);
+
+		  	  	  //only run this code every few seconds
+		  		  while(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
+		  		  	{
+		  			  if(buffer[i]&&buffer[i]=='\n')
+		  				  {
+
+
+		  				  if(minmea_parse_rmc(&rmcStruct, &(buffer[1]))){
+		  				      //printf("FIX?:");
+		  				      lat = minmea_tocoord(&rmcStruct.latitude);
+		  				      lon = minmea_tocoord(&rmcStruct.longitude);
+		  				      sprintf(buffer, "lat:%d, %d", (int)(lat*100), (int)(lon*100));
+		  				      if(rmcStruct.valid!=0)
+		  				      {drawString(0, 30, buffer, BLACK, GREEN, 1, 1);
+		  				    }
+		  				  }
+		  				  //buffer[0]='_';
+		  				  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
+		  				  for(ii=0;ii<=i;ii++) buffer[ii]=0;
+		  				 i=0;
+		  				 break;
+		  				  }
+		  			  	        i++;
+
+		  		  	}
+		  	  drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
+
+		  break;
+	  }
+
+
+
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
