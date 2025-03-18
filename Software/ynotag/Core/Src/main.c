@@ -41,6 +41,19 @@ typedef enum _menuState {
 	MusicTest,
 	ConnorDemo
 }menuStates;
+
+struct gameInfo
+{
+	unsigned char evo; //0=Egg, 1=Baby, 2=Adult
+	unsigned char mood; //Implement mood states here
+	unsigned int allSteps;
+	unsigned int numLocations; //number of locations
+
+	//need to implement:
+	//current time
+	//weekly steps
+	//steps today
+};
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -72,6 +85,8 @@ unsigned char steps=0;
 
 menuStates currentMenu = Main;
 char canChange = 1;
+
+unsigned int updateScreen = 0;
 
 /* USER CODE END PD */
 
@@ -192,8 +207,12 @@ int main(void)
 		  //fillScreen(BLACK);
 
 		  // Draw the Silly little guy centered
-		  drawImage(testImage, palette, 40, 40, 64, 64, 296);
-		  fillRect(40, 40, 64, 64, BLACK);
+		  if((++updateScreen)>=10000)
+		  {
+			  fillRect(40, 40, 64, 64, BLACK);
+			  drawImage(testImage, palette, 40, 40, 64, 64, 296);
+			  updateScreen = 0;
+		  }
 
 		  //Display the current Steps
 		  _ADXL343_ReadReg8(0x15, &steps, 1);
