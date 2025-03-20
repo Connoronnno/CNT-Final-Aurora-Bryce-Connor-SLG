@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace SillyLittleGuyHD
         public PetMenu()
         {
             InitializeComponent();
+
+            UI_SendData_btn.Click += UI_SendData_btn_Click;
 
             //set up serial port to match segger's settings
             port11.BaudRate = 115200;
@@ -68,6 +71,14 @@ namespace SillyLittleGuyHD
 
             UI_Map_pbx.Image = (Bitmap)Bitmap.FromFile(".\\map.jpg");
             
+        }
+
+        async private void UI_SendData_btn_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, string> vals = new Dictionary<string, string> { { "uid", "example_uid" } };
+            HttpClient client = new HttpClient();
+            var response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/select.php", new FormUrlEncodedContent(vals));
+            string data = await response.Content.ReadAsStringAsync();
         }
 
         private void Port11_DataReceived(object sender, SerialDataReceivedEventArgs e)
