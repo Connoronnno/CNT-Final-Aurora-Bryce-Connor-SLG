@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
@@ -32,7 +33,8 @@ namespace SillyLittleGuyHD
             InitializeComponent();
 
             UI_SendData_btn.Click += UI_SendData_btn_Click;
-
+            _usernameBox.TextChanged += _usernameBox_TextChanged;
+            _passBox.TextChanged += _usernameBox_TextChanged;
             //set up serial port to match segger's settings
             port11.BaudRate = 115200;
             port11.Parity = Parity.None;
@@ -75,11 +77,46 @@ namespace SillyLittleGuyHD
             
         }
 
+        private void _usernameBox_TextChanged(object sender, EventArgs e)
+        {
+            if (_uEnBox.Checked) 
+            {
+                SLGData.uid = _usernameBox.Text;
+
+            }
+            if (_pEnBox.Checked)
+            {
+                SLGData.password = _passBox.Text;
+
+            }
+        }
         async private void UI_SendData_btn_Click(object sender, EventArgs e)
         {
-            Dictionary<string, string> vals = new Dictionary<string, string> { { "uid", "example_uid" } };
+            /*microsoft copilot's dummy data
+             * var postData = new Dictionary<string, string>
+        {
+            { "uid", "22345" },
+            { "password", "dummyPassword" },
+            { "dailySteps", "5000" },
+            { "weeklySteps", "33000" },
+            { "lifeSteps", "1000000" },
+            { "friendship", "5" },
+            { "difficulty", "2" },
+            { "evolution", "1" }
+        };*/
+            
+            Dictionary<string, string> postData = new Dictionary<string, string> { 
+                {"uid", SLGData.uid},
+                {"password",SLGData.password}, 
+                {"dailySteps", SLGData.dailySteps.ToString()},
+                {"weeklySteps", SLGData.WeeklySteps.ToString()},
+                {"lifeSteps", SLGData.lifeSteps.ToString()},
+                {"friendship", SLGData.friendship.ToString() },
+                {"difficulty", SLGData.difficilty.ToString() },
+                {"evolution", SLGData.evolution.ToString()}
+            };
             HttpClient client = new HttpClient();
-            var response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/select.php", new FormUrlEncodedContent(vals));
+            var response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/insertmainSave.php", new FormUrlEncodedContent(postData));
             string data = await response.Content.ReadAsStringAsync();
         }
 
@@ -89,6 +126,28 @@ namespace SillyLittleGuyHD
             string data = sp.ReadLine();
 
             parsed = DataParsing(data);
+            int dSteps;
+            int wSteps;
+            int lSteps;
+            int friend;
+            int diff;
+            int evo;
+            
+            int.TryParse(parsed["dailySteps"], out dSteps);
+            int.TryParse(parsed["weeklySteps"], out wSteps);
+            int.TryParse(parsed["lifeSteps"], out lSteps);
+            int.TryParse(parsed["friendship"], out friend);
+            int.TryParse(parsed["difficulty"], out diff);
+            int.TryParse(parsed["evolution"], out evo);
+            try
+            {
+                SLGData = new SillyLittleData("default", "default", dSteps, wSteps, lSteps, friend, diff, evo);
+            }
+            catch(Exception ex)
+            {
+                //probably want a universal error box/message box
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         private Dictionary<string, string> DataParsing(string rawData)

@@ -8,3 +8,13 @@ C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\o
 C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.exe
 C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.pdb
 C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.PetMenu.resources
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\bin\Debug\SillyLittleGuyHD.exe.config
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\bin\Debug\SillyLittleGuyHD.exe
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\bin\Debug\SillyLittleGuyHD.pdb
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.csproj.AssemblyReference.cache
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.PetMenu.resources
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.Properties.Resources.resources
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.csproj.GenerateResource.cache
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.csproj.CoreCompileInputs.cache
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.exe
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLittleGuyHD.pdb

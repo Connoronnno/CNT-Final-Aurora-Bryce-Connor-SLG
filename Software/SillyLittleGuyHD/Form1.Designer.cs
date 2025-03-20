@@ -53,13 +53,18 @@
             this.UI_PrevCycle_btn = new System.Windows.Forms.Button();
             this.UI_PetPicture_pbx = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.UI_Map_pbx = new System.Windows.Forms.PictureBox();
             this.UI_Locations_lbx = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.UI_SendData_btn = new System.Windows.Forms.Button();
-            this.UI_GrabData_btn = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
+            this.UI_GrabData_btn = new System.Windows.Forms.Button();
+            this.UI_SendData_btn = new System.Windows.Forms.Button();
+            this.UI_SLG_btn = new System.Windows.Forms.Button();
+            this._passBox = new System.Windows.Forms.TextBox();
+            this._usernameBox = new System.Windows.Forms.TextBox();
+            this._uEnBox = new System.Windows.Forms.CheckBox();
+            this._pEnBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -336,6 +341,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "GPS Menu";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(93, 58);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 20);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Locations:";
+            // 
             // UI_Map_pbx
             // 
             this.UI_Map_pbx.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -369,6 +384,11 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage3.Controls.Add(this._pEnBox);
+            this.tabPage3.Controls.Add(this._uEnBox);
+            this.tabPage3.Controls.Add(this._usernameBox);
+            this.tabPage3.Controls.Add(this._passBox);
+            this.tabPage3.Controls.Add(this.UI_SLG_btn);
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.UI_GrabData_btn);
             this.tabPage3.Controls.Add(this.UI_SendData_btn);
@@ -377,34 +397,6 @@
             this.tabPage3.Size = new System.Drawing.Size(780, 412);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Save Menu";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(93, 58);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 20);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Locations:";
-            // 
-            // UI_SendData_btn
-            // 
-            this.UI_SendData_btn.Location = new System.Drawing.Point(299, 53);
-            this.UI_SendData_btn.Name = "UI_SendData_btn";
-            this.UI_SendData_btn.Size = new System.Drawing.Size(93, 42);
-            this.UI_SendData_btn.TabIndex = 0;
-            this.UI_SendData_btn.Text = "Send Save";
-            this.UI_SendData_btn.UseVisualStyleBackColor = true;
-            // 
-            // UI_GrabData_btn
-            // 
-            this.UI_GrabData_btn.Location = new System.Drawing.Point(398, 53);
-            this.UI_GrabData_btn.Name = "UI_GrabData_btn";
-            this.UI_GrabData_btn.Size = new System.Drawing.Size(93, 42);
-            this.UI_GrabData_btn.TabIndex = 1;
-            this.UI_GrabData_btn.Text = "Receive Data";
-            this.UI_GrabData_btn.UseVisualStyleBackColor = true;
             // 
             // label11
             // 
@@ -416,6 +408,67 @@
             this.label11.TabIndex = 2;
             this.label11.Text = "Send and Recieve database values";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // UI_GrabData_btn
+            // 
+            this.UI_GrabData_btn.Location = new System.Drawing.Point(398, 53);
+            this.UI_GrabData_btn.Name = "UI_GrabData_btn";
+            this.UI_GrabData_btn.Size = new System.Drawing.Size(93, 42);
+            this.UI_GrabData_btn.TabIndex = 1;
+            this.UI_GrabData_btn.Text = "Receive Data";
+            this.UI_GrabData_btn.UseVisualStyleBackColor = true;
+            // 
+            // UI_SendData_btn
+            // 
+            this.UI_SendData_btn.Location = new System.Drawing.Point(299, 53);
+            this.UI_SendData_btn.Name = "UI_SendData_btn";
+            this.UI_SendData_btn.Size = new System.Drawing.Size(93, 42);
+            this.UI_SendData_btn.TabIndex = 0;
+            this.UI_SendData_btn.Text = "Send Save";
+            this.UI_SendData_btn.UseVisualStyleBackColor = true;
+            // 
+            // UI_SLG_btn
+            // 
+            this.UI_SLG_btn.Location = new System.Drawing.Point(344, 185);
+            this.UI_SLG_btn.Name = "UI_SLG_btn";
+            this.UI_SLG_btn.Size = new System.Drawing.Size(93, 42);
+            this.UI_SLG_btn.TabIndex = 3;
+            this.UI_SLG_btn.Text = "Update SLG";
+            this.UI_SLG_btn.UseVisualStyleBackColor = true;
+            // 
+            // _passBox
+            // 
+            this._passBox.Location = new System.Drawing.Point(344, 127);
+            this._passBox.Name = "_passBox";
+            this._passBox.Size = new System.Drawing.Size(100, 20);
+            this._passBox.TabIndex = 4;
+            // 
+            // _usernameBox
+            // 
+            this._usernameBox.Location = new System.Drawing.Point(344, 101);
+            this._usernameBox.Name = "_usernameBox";
+            this._usernameBox.Size = new System.Drawing.Size(100, 20);
+            this._usernameBox.TabIndex = 5;
+            // 
+            // _uEnBox
+            // 
+            this._uEnBox.AutoSize = true;
+            this._uEnBox.Location = new System.Drawing.Point(450, 104);
+            this._uEnBox.Name = "_uEnBox";
+            this._uEnBox.Size = new System.Drawing.Size(108, 17);
+            this._uEnBox.TabIndex = 6;
+            this._uEnBox.Text = "update username";
+            this._uEnBox.UseVisualStyleBackColor = true;
+            // 
+            // _pEnBox
+            // 
+            this._pEnBox.AutoSize = true;
+            this._pEnBox.Location = new System.Drawing.Point(450, 130);
+            this._pEnBox.Name = "_pEnBox";
+            this._pEnBox.Size = new System.Drawing.Size(107, 17);
+            this._pEnBox.TabIndex = 7;
+            this._pEnBox.Text = "update password";
+            this._pEnBox.UseVisualStyleBackColor = true;
             // 
             // PetMenu
             // 
@@ -482,6 +535,11 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button UI_GrabData_btn;
         private System.Windows.Forms.Button UI_SendData_btn;
+        private System.Windows.Forms.Button UI_SLG_btn;
+        private System.Windows.Forms.TextBox _usernameBox;
+        private System.Windows.Forms.TextBox _passBox;
+        private System.Windows.Forms.CheckBox _pEnBox;
+        private System.Windows.Forms.CheckBox _uEnBox;
     }
 }
 
