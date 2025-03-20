@@ -16,6 +16,8 @@ namespace SillyLittleGuyHD
 {
     public partial class PetMenu : Form
     {
+        SillyLittleData SLGData = new SillyLittleData("default", "default", 0, 0, 0, 100, 1, 1);
+
         //Image Selection
         List<Bitmap> SillyLittleGuys = new List<Bitmap>();
         int curImage = 0;

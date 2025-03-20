@@ -8,6 +8,7 @@ namespace SillyLittleGuyHD
 {
     internal class SillyLittleData
     {
+        #region members
         private string _uid;
         public string uid
         {
@@ -112,11 +113,33 @@ namespace SillyLittleGuyHD
             }
         }
 
+        #endregion
 
-
-        public SillyLittleData()
+        public SillyLittleData(string id, string pass, int daily, int weekly, int lifetime, int friend, int diff, int evo)
         {
+            uid = id;
+            password = pass;
+            dailySteps = daily;
+            WeeklySteps = weekly;
+            lifeSteps = lifetime;
+            friendship = friend;
+            difficilty = diff;
+            evolution = evo;
+        }
 
+        public override string ToString()
+        {
+            return $"(uid:),(),()";
+        }
+
+        public Dictionary<string, string> GetDictionary()
+        {
+            return new Dictionary<string, string> { { "uid", uid }, { "password", password }, { "dailySteps", dailySteps.ToString() }, { "weeklySteps", WeeklySteps.ToString() }, { "lifeSteps", lifeSteps.ToString() }, { "friendship", friendship.ToString() }, { "difficulyty", difficilty.ToString() }, { "evolution", evolution.ToString() } };
+        }
+
+        public string GetId()
+        {
+            return $"uid='{uid}'";
         }
     }
 }
