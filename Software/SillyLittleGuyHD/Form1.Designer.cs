@@ -54,17 +54,17 @@
             this.UI_PetPicture_pbx = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
-            this.UI_Map_pbx = new System.Windows.Forms.PictureBox();
             this.UI_Locations_lbx = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this._pEnBox = new System.Windows.Forms.CheckBox();
+            this._uEnBox = new System.Windows.Forms.CheckBox();
+            this._usernameBox = new System.Windows.Forms.TextBox();
+            this._passBox = new System.Windows.Forms.TextBox();
+            this.UI_SLG_btn = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.UI_GrabData_btn = new System.Windows.Forms.Button();
             this.UI_SendData_btn = new System.Windows.Forms.Button();
-            this.UI_SLG_btn = new System.Windows.Forms.Button();
-            this._passBox = new System.Windows.Forms.TextBox();
-            this._usernameBox = new System.Windows.Forms.TextBox();
-            this._uEnBox = new System.Windows.Forms.CheckBox();
-            this._pEnBox = new System.Windows.Forms.CheckBox();
+            this.UI_Map_gmap = new GMap.NET.WindowsForms.GMapControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -75,7 +75,6 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UI_PetPicture_pbx)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UI_Map_pbx)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -331,8 +330,8 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage2.Controls.Add(this.UI_Map_gmap);
             this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.UI_Map_pbx);
             this.tabPage2.Controls.Add(this.UI_Locations_lbx);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -350,18 +349,6 @@
             this.label3.Size = new System.Drawing.Size(82, 20);
             this.label3.TabIndex = 8;
             this.label3.Text = "Locations:";
-            // 
-            // UI_Map_pbx
-            // 
-            this.UI_Map_pbx.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.UI_Map_pbx.Location = new System.Drawing.Point(285, 6);
-            this.UI_Map_pbx.Name = "UI_Map_pbx";
-            this.UI_Map_pbx.Size = new System.Drawing.Size(489, 400);
-            this.UI_Map_pbx.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.UI_Map_pbx.TabIndex = 6;
-            this.UI_Map_pbx.TabStop = false;
             // 
             // UI_Locations_lbx
             // 
@@ -398,6 +385,49 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Save Menu";
             // 
+            // _pEnBox
+            // 
+            this._pEnBox.AutoSize = true;
+            this._pEnBox.Location = new System.Drawing.Point(450, 130);
+            this._pEnBox.Name = "_pEnBox";
+            this._pEnBox.Size = new System.Drawing.Size(107, 17);
+            this._pEnBox.TabIndex = 7;
+            this._pEnBox.Text = "update password";
+            this._pEnBox.UseVisualStyleBackColor = true;
+            // 
+            // _uEnBox
+            // 
+            this._uEnBox.AutoSize = true;
+            this._uEnBox.Location = new System.Drawing.Point(450, 104);
+            this._uEnBox.Name = "_uEnBox";
+            this._uEnBox.Size = new System.Drawing.Size(108, 17);
+            this._uEnBox.TabIndex = 6;
+            this._uEnBox.Text = "update username";
+            this._uEnBox.UseVisualStyleBackColor = true;
+            // 
+            // _usernameBox
+            // 
+            this._usernameBox.Location = new System.Drawing.Point(344, 101);
+            this._usernameBox.Name = "_usernameBox";
+            this._usernameBox.Size = new System.Drawing.Size(100, 20);
+            this._usernameBox.TabIndex = 5;
+            // 
+            // _passBox
+            // 
+            this._passBox.Location = new System.Drawing.Point(344, 127);
+            this._passBox.Name = "_passBox";
+            this._passBox.Size = new System.Drawing.Size(100, 20);
+            this._passBox.TabIndex = 4;
+            // 
+            // UI_SLG_btn
+            // 
+            this.UI_SLG_btn.Location = new System.Drawing.Point(344, 185);
+            this.UI_SLG_btn.Name = "UI_SLG_btn";
+            this.UI_SLG_btn.Size = new System.Drawing.Size(93, 42);
+            this.UI_SLG_btn.TabIndex = 3;
+            this.UI_SLG_btn.Text = "Update SLG";
+            this.UI_SLG_btn.UseVisualStyleBackColor = true;
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -427,48 +457,32 @@
             this.UI_SendData_btn.Text = "Send Save";
             this.UI_SendData_btn.UseVisualStyleBackColor = true;
             // 
-            // UI_SLG_btn
+            // UI_Map_gmap
             // 
-            this.UI_SLG_btn.Location = new System.Drawing.Point(344, 185);
-            this.UI_SLG_btn.Name = "UI_SLG_btn";
-            this.UI_SLG_btn.Size = new System.Drawing.Size(93, 42);
-            this.UI_SLG_btn.TabIndex = 3;
-            this.UI_SLG_btn.Text = "Update SLG";
-            this.UI_SLG_btn.UseVisualStyleBackColor = true;
-            // 
-            // _passBox
-            // 
-            this._passBox.Location = new System.Drawing.Point(344, 127);
-            this._passBox.Name = "_passBox";
-            this._passBox.Size = new System.Drawing.Size(100, 20);
-            this._passBox.TabIndex = 4;
-            // 
-            // _usernameBox
-            // 
-            this._usernameBox.Location = new System.Drawing.Point(344, 101);
-            this._usernameBox.Name = "_usernameBox";
-            this._usernameBox.Size = new System.Drawing.Size(100, 20);
-            this._usernameBox.TabIndex = 5;
-            // 
-            // _uEnBox
-            // 
-            this._uEnBox.AutoSize = true;
-            this._uEnBox.Location = new System.Drawing.Point(450, 104);
-            this._uEnBox.Name = "_uEnBox";
-            this._uEnBox.Size = new System.Drawing.Size(108, 17);
-            this._uEnBox.TabIndex = 6;
-            this._uEnBox.Text = "update username";
-            this._uEnBox.UseVisualStyleBackColor = true;
-            // 
-            // _pEnBox
-            // 
-            this._pEnBox.AutoSize = true;
-            this._pEnBox.Location = new System.Drawing.Point(450, 130);
-            this._pEnBox.Name = "_pEnBox";
-            this._pEnBox.Size = new System.Drawing.Size(107, 17);
-            this._pEnBox.TabIndex = 7;
-            this._pEnBox.Text = "update password";
-            this._pEnBox.UseVisualStyleBackColor = true;
+            this.UI_Map_gmap.Bearing = 0F;
+            this.UI_Map_gmap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.UI_Map_gmap.CanDragMap = true;
+            this.UI_Map_gmap.EmptyTileColor = System.Drawing.Color.Navy;
+            this.UI_Map_gmap.GrayScaleMode = false;
+            this.UI_Map_gmap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.UI_Map_gmap.LevelsKeepInMemmory = 5;
+            this.UI_Map_gmap.Location = new System.Drawing.Point(261, 6);
+            this.UI_Map_gmap.MarkersEnabled = true;
+            this.UI_Map_gmap.MaxZoom = 2;
+            this.UI_Map_gmap.MinZoom = 2;
+            this.UI_Map_gmap.MouseWheelZoomEnabled = true;
+            this.UI_Map_gmap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.UI_Map_gmap.Name = "UI_Map_gmap";
+            this.UI_Map_gmap.NegativeMode = false;
+            this.UI_Map_gmap.PolygonsEnabled = true;
+            this.UI_Map_gmap.RetryLoadTile = 0;
+            this.UI_Map_gmap.RoutesEnabled = true;
+            this.UI_Map_gmap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.UI_Map_gmap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.UI_Map_gmap.ShowTileGridLines = false;
+            this.UI_Map_gmap.Size = new System.Drawing.Size(513, 403);
+            this.UI_Map_gmap.TabIndex = 9;
+            this.UI_Map_gmap.Zoom = 0D;
             // 
             // PetMenu
             // 
@@ -496,7 +510,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.UI_PetPicture_pbx)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UI_Map_pbx)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
@@ -510,7 +523,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.PictureBox UI_PetPicture_pbx;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.PictureBox UI_Map_pbx;
         private System.Windows.Forms.ListBox UI_Locations_lbx;
         private System.Windows.Forms.Button UI_NextCycle_btn;
         private System.Windows.Forms.Button UI_PrevCycle_btn;
@@ -540,6 +552,7 @@
         private System.Windows.Forms.TextBox _passBox;
         private System.Windows.Forms.CheckBox _pEnBox;
         private System.Windows.Forms.CheckBox _uEnBox;
+        private GMap.NET.WindowsForms.GMapControl UI_Map_gmap;
     }
 }
 

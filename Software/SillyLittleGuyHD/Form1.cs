@@ -12,6 +12,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GMap;
+using GMap.NET;
+using GMap.NET.WindowsForms;
 
 namespace SillyLittleGuyHD
 {
@@ -73,8 +76,14 @@ namespace SillyLittleGuyHD
                 UI_PetPicture_pbx.Image = SillyLittleGuys[curImage];
             }
 
-            UI_Map_pbx.Image = (Bitmap)Bitmap.FromFile(".\\map.jpg");
-            
+            //UI_Map_pbx.Image = (Bitmap)Bitmap.FromFile(".\\map.jpg");
+
+            //UI_Map_gmap.Dock = DockStyle.Fill;
+            UI_Map_gmap.Position = new PointLatLng(53.0000, -111.0000);
+            UI_Map_gmap.Zoom = 10;
+
+
+
         }
 
         private void _usernameBox_TextChanged(object sender, EventArgs e)
