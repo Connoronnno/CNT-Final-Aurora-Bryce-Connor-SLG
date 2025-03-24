@@ -64,7 +64,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.UI_GrabData_btn = new System.Windows.Forms.Button();
             this.UI_SendData_btn = new System.Windows.Forms.Button();
-            this.UI_Map_gmap = new GMap.NET.WindowsForms.GMapControl();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -76,6 +76,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.UI_PetPicture_pbx)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -330,7 +332,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tabPage2.Controls.Add(this.UI_Map_gmap);
+            this.tabPage2.Controls.Add(this.splitContainer1);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.UI_Locations_lbx);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -457,32 +459,14 @@
             this.UI_SendData_btn.Text = "Send Save";
             this.UI_SendData_btn.UseVisualStyleBackColor = true;
             // 
-            // UI_Map_gmap
+            // splitContainer1
             // 
-            this.UI_Map_gmap.Bearing = 0F;
-            this.UI_Map_gmap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.UI_Map_gmap.CanDragMap = true;
-            this.UI_Map_gmap.EmptyTileColor = System.Drawing.Color.Navy;
-            this.UI_Map_gmap.GrayScaleMode = false;
-            this.UI_Map_gmap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
-            this.UI_Map_gmap.LevelsKeepInMemmory = 5;
-            this.UI_Map_gmap.Location = new System.Drawing.Point(261, 6);
-            this.UI_Map_gmap.MarkersEnabled = true;
-            this.UI_Map_gmap.MaxZoom = 2;
-            this.UI_Map_gmap.MinZoom = 2;
-            this.UI_Map_gmap.MouseWheelZoomEnabled = true;
-            this.UI_Map_gmap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
-            this.UI_Map_gmap.Name = "UI_Map_gmap";
-            this.UI_Map_gmap.NegativeMode = false;
-            this.UI_Map_gmap.PolygonsEnabled = true;
-            this.UI_Map_gmap.RetryLoadTile = 0;
-            this.UI_Map_gmap.RoutesEnabled = true;
-            this.UI_Map_gmap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
-            this.UI_Map_gmap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
-            this.UI_Map_gmap.ShowTileGridLines = false;
-            this.UI_Map_gmap.Size = new System.Drawing.Size(513, 403);
-            this.UI_Map_gmap.TabIndex = 9;
-            this.UI_Map_gmap.Zoom = 0D;
+            this.splitContainer1.Location = new System.Drawing.Point(261, 6);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Panel1Collapsed = true;
+            this.splitContainer1.Size = new System.Drawing.Size(513, 400);
+            this.splitContainer1.SplitterDistance = 97;
+            this.splitContainer1.TabIndex = 10;
             // 
             // PetMenu
             // 
@@ -512,6 +496,8 @@
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -552,7 +538,7 @@
         private System.Windows.Forms.TextBox _passBox;
         private System.Windows.Forms.CheckBox _pEnBox;
         private System.Windows.Forms.CheckBox _uEnBox;
-        private GMap.NET.WindowsForms.GMapControl UI_Map_gmap;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
 

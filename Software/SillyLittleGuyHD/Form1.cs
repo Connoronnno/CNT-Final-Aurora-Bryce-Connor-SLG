@@ -1,4 +1,15 @@
-﻿using System;
+﻿//PROGRAMMERS BLOCK EVENTUALLY
+
+/*
+References:
+
+GMap.Net guide: https://www.youtube.com/watch?v=to16P4N-rqg&t=288s
+
+ 
+ */
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,6 +42,9 @@ namespace SillyLittleGuyHD
         public Dictionary<string, string> parsed = null;
 
         int CheckPortOpenSecond = 2;
+
+        // Map Object
+        GMap.NET.WindowsForms.GMapControl gMap;
         public PetMenu()
         {
             InitializeComponent();
@@ -78,12 +92,27 @@ namespace SillyLittleGuyHD
 
             //UI_Map_pbx.Image = (Bitmap)Bitmap.FromFile(".\\map.jpg");
 
-            //UI_Map_gmap.Dock = DockStyle.Fill;
-            UI_Map_gmap.Position = new PointLatLng(53.0000, -111.0000);
-            UI_Map_gmap.Zoom = 10;
+            // GMap setup options
+            gMap = new GMap.NET.WindowsForms.GMapControl();
+            gMap.MapProvider = GMap.NET.MapProviders.GMapProviders.GoogleSatelliteMap;
+            gMap.Dock = DockStyle.Fill;
+            gMap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
+            gMap.ShowCenter = false;
+            gMap.MinZoom = 1;
+            gMap.MaxZoom = 20;
 
+            gMap.Position = new PointLatLng(53.5684, -113.5019); // start location at nait
 
+            // Update UI to show map
+            splitContainer1.Panel2.Controls.Add(gMap);
+            gMap.Zoom = 15;
+            gMap.Update();
+            gMap.Refresh();
 
+            //Add Nait as a default location (Probably remove later?)
+            GMapAddPoint(53.5684, -113.5019, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red_pushpin, "NAIT_Default");
+            AddPointsToListbox();
         }
 
         private void _usernameBox_TextChanged(object sender, EventArgs e)
@@ -227,6 +256,59 @@ namespace SillyLittleGuyHD
             }
 
             UI_PetPicture_pbx.Image = SillyLittleGuys[curImage];
+        }
+
+        /// <summary>
+        /// Use the given lat and long to create a marker at that point on the GMap control
+        /// </summary>
+        /// <param name="latitude"> lat of the marker </param>
+        /// <param name="longitude"> long of the marker </param>
+        /// <param name="markerType"> how the marker will look </param>
+        /// <param name="markerName"> name of the marker overlay </param>
+        private void GMapAddPoint(double latitude, double longitude, GMap.NET.WindowsForms.Markers.GMarkerGoogleType markerType, string markerName="NewMarker")
+        {
+            // Create marker overlay to add marker
+            var markersOverlay = new GMap.NET.WindowsForms.GMapOverlay(markerName);
+
+            //create marker and add to the overlay
+            var marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(
+                new PointLatLng(latitude, longitude),
+                markerType);
+            markersOverlay.Markers.Add(marker);
+            gMap.Overlays.Add(markersOverlay);
+
+            // Update the UI
+            gMap.Update();
+            gMap.Refresh();
+        }
+
+        /// <summary>
+        /// return a list of every point currently stored on the map
+        /// </summary>
+        /// <returns></returns>
+        private List<PointLatLng> GMapGetPoints()
+        {
+            //grab all points on map
+            var overlays = gMap.Overlays;
+            List <PointLatLng> points = new List<PointLatLng>();
+
+            //iterate through points and add to the return object
+            foreach (var overlay in overlays)
+            {
+                points.Add(overlay.Markers[0].Position);
+            }
+            return points;
+        }
+        /// <summary>
+        /// add every point on the GMap to the list box next to it
+        /// </summary>
+        private void AddPointsToListbox()
+        {
+            UI_Locations_lbx.Items.Clear();
+            foreach (PointLatLng point in GMapGetPoints())
+            {
+                UI_Locations_lbx.Items.Add($"{point.Lat}, {point.Lng}");
+            }
         }
 
     }
