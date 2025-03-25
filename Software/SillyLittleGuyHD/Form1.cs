@@ -164,31 +164,44 @@ namespace SillyLittleGuyHD
         {
             SerialPort sp = (SerialPort)sender;
             string data = sp.ReadLine();
-
-            parsed = DataParsing(data);
-            int dSteps;
-            int wSteps;
-            int lSteps;
-            int friend;
-            int diff;
-            int evo;
             
-            int.TryParse(parsed["dailySteps"], out dSteps);
-            int.TryParse(parsed["weeklySteps"], out wSteps);
-            int.TryParse(parsed["lifeSteps"], out lSteps);
-            int.TryParse(parsed["friendship"], out friend);
-            int.TryParse(parsed["difficulty"], out diff);
-            int.TryParse(parsed["evolution"], out evo);
-            try
+            parsed = DataParsing(data);
+            if (parsed.ContainsKey("lat"))
             {
-                SLGData = new SillyLittleData("default", "default", dSteps, wSteps, lSteps, friend, diff, evo);
+                PointLatLng ltlng = new PointLatLng();
+                float temp;
+                float.TryParse(parsed["lat"], out temp);
+                ltlng.Lat = temp;
+                float.TryParse(parsed["lon"], out temp);
+                ltlng.Lat = temp;
+                SLGData.locations.Add(ltlng);
             }
-            catch(Exception ex)
+            else
             {
-                //probably want a universal error box/message box
-                Debug.WriteLine(ex.Message);
-            }
+                int dSteps;
+                int wSteps;
+                int lSteps;
+                int friend;
+                int diff;
+                int evo;
+
+                int.TryParse(parsed["dailySteps"], out dSteps);
+                int.TryParse(parsed["weeklySteps"], out wSteps);
+                int.TryParse(parsed["lifeSteps"], out lSteps);
+                int.TryParse(parsed["friendship"], out friend);
+                int.TryParse(parsed["difficulty"], out diff);
+                int.TryParse(parsed["evolution"], out evo);
+                try
+                {
+                    SLGData = new SillyLittleData("default", "default", dSteps, wSteps, lSteps, friend, diff, evo);
+                }
+                catch (Exception ex)
+                {
+                    //probably want a universal error box/message box
+                    Debug.WriteLine(ex.Message);
+                }
             DisplaySLGData();
+            }
         }
 
         private Dictionary<string, string> DataParsing(string rawData)
@@ -363,5 +376,15 @@ namespace SillyLittleGuyHD
 
         }
 
+        async private void UI_GrabData_btn_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, string> dataPost = new Dictionary<string, string>();
+            dataPost["uid"] = SLGData.uid;
+
+            HttpClient client = new HttpClient();
+            var response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/select.php", new FormUrlEncodedContent(dataPost));
+            string data = await response.Content.ReadAsStringAsync();
+
+        }
     }
 }

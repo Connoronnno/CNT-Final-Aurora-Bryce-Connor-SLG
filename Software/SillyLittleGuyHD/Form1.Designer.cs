@@ -458,6 +458,7 @@
             this.UI_GrabData_btn.TabIndex = 1;
             this.UI_GrabData_btn.Text = "Receive Data";
             this.UI_GrabData_btn.UseVisualStyleBackColor = true;
+            this.UI_GrabData_btn.Click += new System.EventHandler(this.UI_GrabData_btn_Click);
             // 
             // UI_SendData_btn
             // 
