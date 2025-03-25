@@ -33,19 +33,19 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.UI_Evolution_lbl = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.UI_Emotion_lbl = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.UI_DailySteps_lbl = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.UI_LocationAmount_lbl = new System.Windows.Forms.Label();
+            this.UI_WeeklySteps_lbl = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.UI_StepsGroup_gbx = new System.Windows.Forms.GroupBox();
-            this.UI_StepCount_lbl = new System.Windows.Forms.Label();
+            this.UI_LifeSteps_lbl = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,6 +53,7 @@
             this.UI_PrevCycle_btn = new System.Windows.Forms.Button();
             this.UI_PetPicture_pbx = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label3 = new System.Windows.Forms.Label();
             this.UI_Locations_lbx = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -64,7 +65,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.UI_GrabData_btn = new System.Windows.Forms.Button();
             this.UI_SendData_btn = new System.Windows.Forms.Button();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -75,9 +75,9 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UI_PetPicture_pbx)).BeginInit();
             this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -121,23 +121,23 @@
             // groupBox5
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.label9);
+            this.groupBox5.Controls.Add(this.UI_Evolution_lbl);
             this.groupBox5.Controls.Add(this.label10);
-            this.groupBox5.Location = new System.Drawing.Point(522, 242);
+            this.groupBox5.Location = new System.Drawing.Point(503, 242);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(237, 45);
+            this.groupBox5.Size = new System.Drawing.Size(271, 45);
             this.groupBox5.TabIndex = 11;
             this.groupBox5.TabStop = false;
             // 
-            // label9
+            // UI_Evolution_lbl
             // 
-            this.label9.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(137, 15);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(94, 18);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "N/A";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.UI_Evolution_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UI_Evolution_lbl.Location = new System.Drawing.Point(137, 15);
+            this.UI_Evolution_lbl.Name = "UI_Evolution_lbl";
+            this.UI_Evolution_lbl.Size = new System.Drawing.Size(128, 18);
+            this.UI_Evolution_lbl.TabIndex = 7;
+            this.UI_Evolution_lbl.Text = "N/A";
+            this.UI_Evolution_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label10
             // 
@@ -152,23 +152,23 @@
             // groupBox4
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.UI_Emotion_lbl);
             this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Location = new System.Drawing.Point(522, 183);
+            this.groupBox4.Location = new System.Drawing.Point(503, 183);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(237, 45);
+            this.groupBox4.Size = new System.Drawing.Size(271, 45);
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
             // 
-            // label7
+            // UI_Emotion_lbl
             // 
-            this.label7.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(137, 15);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(94, 18);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "N/A";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.UI_Emotion_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UI_Emotion_lbl.Location = new System.Drawing.Point(137, 15);
+            this.UI_Emotion_lbl.Name = "UI_Emotion_lbl";
+            this.UI_Emotion_lbl.Size = new System.Drawing.Size(128, 18);
+            this.UI_Emotion_lbl.TabIndex = 7;
+            this.UI_Emotion_lbl.Text = "N/A";
+            this.UI_Emotion_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label8
             // 
@@ -183,23 +183,23 @@
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.UI_DailySteps_lbl);
             this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Location = new System.Drawing.Point(522, 124);
+            this.groupBox3.Location = new System.Drawing.Point(503, 124);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(237, 45);
+            this.groupBox3.Size = new System.Drawing.Size(271, 45);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             // 
-            // label5
+            // UI_DailySteps_lbl
             // 
-            this.label5.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(137, 15);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 18);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "???";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.UI_DailySteps_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UI_DailySteps_lbl.Location = new System.Drawing.Point(137, 15);
+            this.UI_DailySteps_lbl.Name = "UI_DailySteps_lbl";
+            this.UI_DailySteps_lbl.Size = new System.Drawing.Size(128, 18);
+            this.UI_DailySteps_lbl.TabIndex = 7;
+            this.UI_DailySteps_lbl.Text = "???";
+            this.UI_DailySteps_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label6
             // 
@@ -207,30 +207,30 @@
             this.label6.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(17, 15);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(122, 20);
+            this.label6.Size = new System.Drawing.Size(107, 20);
             this.label6.TabIndex = 6;
-            this.label6.Text = "Something Else?:";
+            this.label6.Text = "Today\'s Steps:";
             // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.UI_LocationAmount_lbl);
+            this.groupBox2.Controls.Add(this.UI_WeeklySteps_lbl);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(522, 65);
+            this.groupBox2.Location = new System.Drawing.Point(503, 65);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(237, 45);
+            this.groupBox2.Size = new System.Drawing.Size(271, 45);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             // 
-            // UI_LocationAmount_lbl
+            // UI_WeeklySteps_lbl
             // 
-            this.UI_LocationAmount_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_LocationAmount_lbl.Location = new System.Drawing.Point(137, 15);
-            this.UI_LocationAmount_lbl.Name = "UI_LocationAmount_lbl";
-            this.UI_LocationAmount_lbl.Size = new System.Drawing.Size(94, 18);
-            this.UI_LocationAmount_lbl.TabIndex = 7;
-            this.UI_LocationAmount_lbl.Text = "N/A";
-            this.UI_LocationAmount_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.UI_WeeklySteps_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UI_WeeklySteps_lbl.Location = new System.Drawing.Point(137, 15);
+            this.UI_WeeklySteps_lbl.Name = "UI_WeeklySteps_lbl";
+            this.UI_WeeklySteps_lbl.Size = new System.Drawing.Size(128, 18);
+            this.UI_WeeklySteps_lbl.TabIndex = 7;
+            this.UI_WeeklySteps_lbl.Text = "N/A";
+            this.UI_WeeklySteps_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
             // 
@@ -238,30 +238,30 @@
             this.label4.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(17, 15);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(124, 20);
+            this.label4.Size = new System.Drawing.Size(99, 20);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Locations Visited:";
+            this.label4.Text = "Weekly Steps:";
             // 
             // UI_StepsGroup_gbx
             // 
             this.UI_StepsGroup_gbx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UI_StepsGroup_gbx.Controls.Add(this.UI_StepCount_lbl);
+            this.UI_StepsGroup_gbx.Controls.Add(this.UI_LifeSteps_lbl);
             this.UI_StepsGroup_gbx.Controls.Add(this.label2);
-            this.UI_StepsGroup_gbx.Location = new System.Drawing.Point(522, 6);
+            this.UI_StepsGroup_gbx.Location = new System.Drawing.Point(503, 6);
             this.UI_StepsGroup_gbx.Name = "UI_StepsGroup_gbx";
-            this.UI_StepsGroup_gbx.Size = new System.Drawing.Size(237, 45);
+            this.UI_StepsGroup_gbx.Size = new System.Drawing.Size(271, 45);
             this.UI_StepsGroup_gbx.TabIndex = 8;
             this.UI_StepsGroup_gbx.TabStop = false;
             // 
-            // UI_StepCount_lbl
+            // UI_LifeSteps_lbl
             // 
-            this.UI_StepCount_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_StepCount_lbl.Location = new System.Drawing.Point(137, 15);
-            this.UI_StepCount_lbl.Name = "UI_StepCount_lbl";
-            this.UI_StepCount_lbl.Size = new System.Drawing.Size(94, 18);
-            this.UI_StepCount_lbl.TabIndex = 7;
-            this.UI_StepCount_lbl.Text = "N/A";
-            this.UI_StepCount_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.UI_LifeSteps_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UI_LifeSteps_lbl.Location = new System.Drawing.Point(137, 15);
+            this.UI_LifeSteps_lbl.Name = "UI_LifeSteps_lbl";
+            this.UI_LifeSteps_lbl.Size = new System.Drawing.Size(128, 18);
+            this.UI_LifeSteps_lbl.TabIndex = 7;
+            this.UI_LifeSteps_lbl.Text = "N/A";
+            this.UI_LifeSteps_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -269,9 +269,9 @@
             this.label2.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(17, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 20);
+            this.label2.Size = new System.Drawing.Size(112, 20);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Steps Taken:";
+            this.label2.Text = "Lifetime Steps:";
             // 
             // groupBox1
             // 
@@ -279,16 +279,16 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.UI_NextCycle_btn);
             this.groupBox1.Controls.Add(this.UI_PrevCycle_btn);
-            this.groupBox1.Location = new System.Drawing.Point(522, 293);
+            this.groupBox1.Location = new System.Drawing.Point(503, 293);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(236, 99);
+            this.groupBox1.Size = new System.Drawing.Size(270, 99);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(33, 20);
+            this.label1.Location = new System.Drawing.Point(61, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(170, 23);
             this.label1.TabIndex = 4;
@@ -298,7 +298,7 @@
             // UI_NextCycle_btn
             // 
             this.UI_NextCycle_btn.Font = new System.Drawing.Font("Ink Free", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_NextCycle_btn.Location = new System.Drawing.Point(128, 57);
+            this.UI_NextCycle_btn.Location = new System.Drawing.Point(156, 60);
             this.UI_NextCycle_btn.Name = "UI_NextCycle_btn";
             this.UI_NextCycle_btn.Size = new System.Drawing.Size(75, 23);
             this.UI_NextCycle_btn.TabIndex = 3;
@@ -309,7 +309,7 @@
             // UI_PrevCycle_btn
             // 
             this.UI_PrevCycle_btn.Font = new System.Drawing.Font("Ink Free", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_PrevCycle_btn.Location = new System.Drawing.Point(33, 57);
+            this.UI_PrevCycle_btn.Location = new System.Drawing.Point(61, 60);
             this.UI_PrevCycle_btn.Name = "UI_PrevCycle_btn";
             this.UI_PrevCycle_btn.Size = new System.Drawing.Size(75, 23);
             this.UI_PrevCycle_btn.TabIndex = 2;
@@ -341,6 +341,15 @@
             this.tabPage2.Size = new System.Drawing.Size(780, 412);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "GPS Menu";
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Location = new System.Drawing.Point(261, 6);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Panel1Collapsed = true;
+            this.splitContainer1.Size = new System.Drawing.Size(513, 400);
+            this.splitContainer1.SplitterDistance = 97;
+            this.splitContainer1.TabIndex = 10;
             // 
             // label3
             // 
@@ -459,15 +468,6 @@
             this.UI_SendData_btn.Text = "Send Save";
             this.UI_SendData_btn.UseVisualStyleBackColor = true;
             // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Location = new System.Drawing.Point(261, 6);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Panel1Collapsed = true;
-            this.splitContainer1.Size = new System.Drawing.Size(513, 400);
-            this.splitContainer1.SplitterDistance = 97;
-            this.splitContainer1.TabIndex = 10;
-            // 
             // PetMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -494,10 +494,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.UI_PetPicture_pbx)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -514,20 +514,20 @@
         private System.Windows.Forms.Button UI_PrevCycle_btn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label UI_StepCount_lbl;
+        private System.Windows.Forms.Label UI_LifeSteps_lbl;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox UI_StepsGroup_gbx;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label UI_Evolution_lbl;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label UI_Emotion_lbl;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label UI_DailySteps_lbl;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label UI_LocationAmount_lbl;
+        private System.Windows.Forms.Label UI_WeeklySteps_lbl;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label11;

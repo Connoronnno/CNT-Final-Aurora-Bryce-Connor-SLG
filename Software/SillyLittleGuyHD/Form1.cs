@@ -113,6 +113,8 @@ namespace SillyLittleGuyHD
             //Add Nait as a default location (Probably remove later?)
             GMapAddPoint(53.5684, -113.5019, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red_pushpin, "NAIT_Default");
             AddPointsToListbox();
+
+            DisplaySLGData();
         }
 
         private void _usernameBox_TextChanged(object sender, EventArgs e)
@@ -186,6 +188,7 @@ namespace SillyLittleGuyHD
                 //probably want a universal error box/message box
                 Debug.WriteLine(ex.Message);
             }
+            DisplaySLGData();
         }
 
         private Dictionary<string, string> DataParsing(string rawData)
@@ -258,6 +261,9 @@ namespace SillyLittleGuyHD
             UI_PetPicture_pbx.Image = SillyLittleGuys[curImage];
         }
 
+
+        #region [REGION] GMap Functions
+
         /// <summary>
         /// Use the given lat and long to create a marker at that point on the GMap control
         /// </summary>
@@ -309,6 +315,52 @@ namespace SillyLittleGuyHD
             {
                 UI_Locations_lbx.Items.Add($"{point.Lat}, {point.Lng}");
             }
+        }
+
+        #endregion
+
+
+        private void DisplaySLGData()
+        {
+            if (SLGData == null)
+                return;
+
+            UI_LifeSteps_lbl.Text = SLGData.lifeSteps.ToString();
+            UI_WeeklySteps_lbl.Text = SLGData.WeeklySteps.ToString();
+            UI_DailySteps_lbl.Text = SLGData.dailySteps.ToString();
+
+            UI_Emotion_lbl.Text = SLGData.friendship.ToString();
+            if (SLGData.friendship < 90)
+            {
+                UI_Emotion_lbl.Text += " (Upset)";
+            }
+            else if (SLGData.friendship > 110)
+            {
+                UI_Emotion_lbl.Text += " (Happy)";
+            }
+            else
+            {
+                UI_Emotion_lbl.Text += " (Neutral)";
+            }
+
+            switch (SLGData.evolution)
+            {
+                case 1:
+                    UI_Evolution_lbl.Text = "Young";
+
+                    break;
+                case 2:
+                    UI_Evolution_lbl.Text = "Teen";
+
+                    break;
+                case 3:
+                    UI_Evolution_lbl.Text = "Adult";
+
+                    break;
+            }
+
+            
+
         }
 
     }
