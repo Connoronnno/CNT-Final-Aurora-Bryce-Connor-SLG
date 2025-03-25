@@ -86,7 +86,10 @@ volatile uint8_t beacon = 0;
 volatile uint16_t thi = 1000;
 volatile uint16_t whileI=0;
 volatile uint16_t petXPos;
+const uint16_t dayLength=24;
+const uint16_t weekLength=168;
 struct minmea_sentence_rmc rmcStruct;
+struct minmea_sentence_gga ggaStruct;
 char buffer[128];
 char sendBuffer[400];
 uint16_t testImage [296][2] = {{0, 789}, {1, 4}, {0, 59}, {1, 1}, {3, 4}, {1, 1}, {0, 58}, {1, 1}, {3, 2}, {1, 1}, {3, 1}, {4, 1}, {1, 5}, {0, 52}, {1, 1}, {3, 5}, {4, 1}, {3, 5}, {1, 2}, {0, 50}, {1, 1}, {3, 5}, {4, 1}, {3, 7}, {1, 2}, {0, 48}, {1, 1}, {3, 15}, {1, 1}, {0, 47}, {1, 1}, {3, 5}, {1, 3}, {3, 7}, {1, 1}, {0, 39}, {1, 9}, {3, 4}, {1, 2}, {5, 2}, {1, 1}, {4, 1}, {3, 6}, {1, 1}, {0, 27}, {1, 2}, {0, 8}, {1, 1}, {3, 6}, {4, 2}, {1, 1}, {3, 4}, {1, 2}, {5, 2}, {1, 1}, {4, 1}, {3, 6}, {1, 1}, {0, 27}, {1, 1}, {4, 1}, {1, 1}, {0, 6}, {1, 1}, {3, 7}, {4, 2}, {1, 1}, {3, 4}, {6, 1}, {5, 1}, {1, 3}, {4, 1}, {3, 7}, {1, 1}, {0, 26}, {1, 1}, {4, 2}, {1, 6}, {3, 9}, {4, 1}, {1, 1}, {3, 5}, {6, 1}, {1, 2}, {4, 1}, {3, 8}, {1, 2}, {0, 25}, {1, 2}, {4, 6}, {1, 1}, {3, 10}, {1, 1}, {3, 17}, {1, 1}, {2, 1}, {1, 1}, {0, 24}, {1, 1}, {3, 1}, {1, 1}, {4, 4}, {1, 1}, {3, 11}, {1, 1}, {3, 17}, {1, 1}, {2, 2}, {1, 1}, {0, 23}, {1, 1}, {3, 2}, {1, 5}, {3, 11}, {1, 1}, {3, 17}, {1, 3}, {0, 24}, {1, 1}, {3, 19}, {1, 1}, {3, 15}, {1, 1}, {0, 27}, {1, 1}, {3, 15}, {1, 3}, {3, 1}, {1, 1}, {3, 15}, {1, 1}, {0, 27}, {1, 1}, {3, 14}, {1, 1}, {2, 2}, {1, 1}, {3, 2}, {1, 1}, {3, 13}, {1, 2}, {0, 27}, {1, 2}, {3, 12}, {1, 1}, {2, 4}, {1, 3}, {3, 13}, {1, 2}, {0, 28}, {1, 6}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 2}, {1, 2}, {3, 9}, {1, 2}, {2, 1}, {1, 1}, {0, 33}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 4}, {1, 2}, {3, 5}, {1, 2}, {2, 3}, {1, 1}, {0, 33}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 6}, {1, 5}, {2, 5}, {1, 1}, {0, 34}, {1, 1}, {3, 6}, {1, 1}, {2, 4}, {1, 1}, {0, 8}, {1, 1}, {2, 7}, {1, 1}, {0, 34}, {1, 1}, {3, 6}, {1, 1}, {2, 4}, {1, 1}, {0, 9}, {1, 1}, {2, 7}, {1, 1}, {0, 33}, {1, 1}, {3, 6}, {1, 1}, {2, 4}, {1, 1}, {0, 10}, {1, 2}, {2, 5}, {1, 1}, {0, 32}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 12}, {1, 6}, {0, 26}, {1, 2}, {0, 4}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 44}, {1, 1}, {3, 1}, {1, 1}, {0, 3}, {1, 1}, {3, 7}, {1, 1}, {2, 3}, {1, 1}, {0, 45}, {1, 1}, {3, 2}, {1, 3}, {3, 8}, {1, 1}, {2, 2}, {1, 2}, {0, 45}, {1, 1}, {3, 13}, {1, 1}, {2, 1}, {1, 2}, {0, 46}, {1, 1}, {3, 13}, {1, 2}, {3, 1}, {1, 1}, {0, 46}, {1, 1}, {3, 12}, {1, 2}, {3, 2}, {1, 1}, {0, 46}, {1, 1}, {3, 7}, {1, 5}, {3, 4}, {1, 1}, {0, 47}, {1, 7}, {0, 4}, {1, 1}, {3, 5}, {1, 1}, {0, 57}, {1, 1}, {3, 6}, {1, 1}, {0, 57}, {1, 1}, {3, 6}, {1, 1}, {0, 57}, {1, 1}, {3, 6}, {1, 2}, {0, 56}, {1, 2}, {3, 6}, {1, 1}, {0, 57}, {1, 7}, {0, 936}};
@@ -149,7 +152,7 @@ static void MX_RTC_Init(void);
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size);
 int _ADXL343_WriteReg8 (unsigned char TargetRegister, unsigned char TargetValue);
 void SendData();
-void getLatLon();
+void GetLatLon();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -181,6 +184,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
+  steps=0;
   sitting0.Body = *imgSitting0;
   sitting0.Size = 307;
   sitting1.Body = *imgSitting1;
@@ -210,7 +214,7 @@ int main(void)
   MX_TIM17_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
-  MX_RTC_Init();
+  //MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   //HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
   ST7735_Unselect();
@@ -247,8 +251,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  GetLatLon();
+	  if((game.time.hours%dayLength)==0) game.stepsToday=0;
+	  if((game.time.hours%weekLength)==0) game.weeklySteps=0;
+	  game.stepsToday +=steps-game.allSteps;
+	  game.weeklySteps+=steps-game.allSteps;
 	  game.allSteps=steps;
-	  SendData();
+	  //SendData();
 	  //HAL_UART_Transmit(&huart2, "hello", 5, 100);
 	  switch(currentMenu){
 	  case Main:
@@ -833,7 +842,7 @@ void GetLatLon()
 			  			  if(buffer[i]&&buffer[i]=='\n')
 			  				  {
 
-
+			  				  //HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 200);
 			  				  if(minmea_parse_rmc(&rmcStruct, &(buffer[1]))){
 			  				      //printf("FIX?:");
 			  				      pos.lat = minmea_tocoord(&rmcStruct.latitude);
@@ -844,6 +853,16 @@ void GetLatLon()
 			  				      //{drawString(0, 30, buffer, BLACK, GREEN, 1, 1);
 			  				    //}
 			  				  }
+			  				if(minmea_parse_gga(&ggaStruct, &(buffer[2]))){
+			  							  				      //printf("FIX?:");
+			  							  				      pos.lat = minmea_tocoord(&ggaStruct.latitude);
+			  							  				      pos.lon = minmea_tocoord(&ggaStruct.longitude);
+			  							  				      game.time = ggaStruct.time;
+			  							  				      //sprintf(buffer, "lat:%d, %d", (int)(lat*100), (int)(lon*100));
+			  							  				      //if(rmcStruct.valid!=0)
+			  							  				      //{drawString(0, 30, buffer, BLACK, GREEN, 1, 1);
+			  							  				    //}
+			  							  				  }
 			  				  //buffer[0]='_';
 			  				  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
 			  				  for(ii=0;ii<=i;ii++) buffer[ii]=0;
