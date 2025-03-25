@@ -251,7 +251,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  GetLatLon();
+	  SendData();
 	  if((game.time.hours%dayLength)==0) game.stepsToday=0;
 	  if((game.time.hours%weekLength)==0) game.weeklySteps=0;
 	  game.stepsToday +=steps-game.allSteps;
@@ -824,15 +824,15 @@ void SendData()
 	sprintf(sendBuffer, "(lifeSteps:%d),(weeklySteps:%d),(dailySteps:%d),(uid:%s),(friendship:%d),(password:password)(difficulty:%d),(evolution:%d) \n\r", game.allSteps,game.weeklySteps,game.stepsToday, game.uid, game.mood, game.challengeGoal, game.evo);
 	HAL_UART_Transmit(&huart2, sendBuffer, strlen(sendBuffer), 200);
 
-	//HAL_UART_Transmit(&huart2, "#", 1, 200);
+	HAL_UART_Transmit(&huart2, "[", 1, 200);
 	for(posIndex=0; posIndex<game.numLocations; posIndex++)
 	{       HAL_Delay(5);
 		for(clrIndex=0;clrIndex<400;clrIndex++) sendBuffer[clrIndex]=0;
-		sprintf(sendBuffer, "(lat:%d.%d), (lon:%d.%d)", ((int)game.positions[posIndex].lat), ((int)((fmod((double)game.positions[posIndex].lat, (double)1))*10000)),((int)game.positions[posIndex].lon), ((int)((fmod((double)game.positions[posIndex].lon, (double)1))*10000)));
+		sprintf(sendBuffer, "(lat:%d.%d), (lon:%d.%d),", ((int)game.positions[posIndex].lat), ((int)((fmod((double)game.positions[posIndex].lat, (double)1))*10000)),((int)game.positions[posIndex].lon), ((int)((fmod((double)game.positions[posIndex].lon, (double)1))*10000)));
 		HAL_UART_Transmit(&huart2, sendBuffer, strlen(sendBuffer), 200);
 
 	}
-	//HAL_UART_Transmit(&huart2, "#", 1, 200);
+	HAL_UART_Transmit(&huart2, "]", 1, 200);
 }
 void GetLatLon()
 {
