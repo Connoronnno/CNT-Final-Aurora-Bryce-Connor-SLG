@@ -13,6 +13,9 @@
   * in the root directory of this software component.
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
+  * SOURCES(WIP):
+  * https://github.com/dekuNukem/STM32_tutorials/blob/master/lesson1_serial_helloworld/HAL_UART_Transmit_details.md
+  *
   ******************************************************************************
   */
 /* USER CODE END Header */
@@ -25,9 +28,9 @@
 #include "GFX_FUNCTIONS.h"
 #include "minmea.h"
 #include <stdio.h>
-
+#include <string.h>
 #include <stdlib.h>
-
+#include <math.h>
 //PEdometer
 #include "i2c.h"
 
@@ -41,10 +44,40 @@ typedef enum _menuState {
 	MusicTest,
 	ConnorDemo
 }menuStates;
+struct latLon
+{
+ float lat;
+ float lon;
+};
+struct gameInfo
+{
+	struct minmea_time time;
+	unsigned char evo; //0=Egg, 1=Baby, 2=Adult
+	unsigned char mood; //Implement mood states here
+	unsigned int allSteps;
+	unsigned int numLocations; //number of locations
+	struct latLon positions[32];
+    unsigned int weeklySteps;
+    unsigned int stepsToday;
+    unsigned int challengeGoal;
+    char uid[32];
+	//need to implement:
+	//current time
+	//weekly steps
+	//steps today
+};
+
+struct Img
+{
+	uint16_t* Body;
+	unsigned int Size;
+};
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+struct gameInfo game;
+struct latLon dummy;
 volatile uint16_t msCounter = 0;
 volatile uint16_t i = 0;
 volatile char rmcCheck;
@@ -55,7 +88,14 @@ volatile uint16_t whileI=0;
 volatile uint16_t petXPos;
 struct minmea_sentence_rmc rmcStruct;
 char buffer[128];
+char sendBuffer[400];
 uint16_t testImage [296][2] = {{0, 789}, {1, 4}, {0, 59}, {1, 1}, {3, 4}, {1, 1}, {0, 58}, {1, 1}, {3, 2}, {1, 1}, {3, 1}, {4, 1}, {1, 5}, {0, 52}, {1, 1}, {3, 5}, {4, 1}, {3, 5}, {1, 2}, {0, 50}, {1, 1}, {3, 5}, {4, 1}, {3, 7}, {1, 2}, {0, 48}, {1, 1}, {3, 15}, {1, 1}, {0, 47}, {1, 1}, {3, 5}, {1, 3}, {3, 7}, {1, 1}, {0, 39}, {1, 9}, {3, 4}, {1, 2}, {5, 2}, {1, 1}, {4, 1}, {3, 6}, {1, 1}, {0, 27}, {1, 2}, {0, 8}, {1, 1}, {3, 6}, {4, 2}, {1, 1}, {3, 4}, {1, 2}, {5, 2}, {1, 1}, {4, 1}, {3, 6}, {1, 1}, {0, 27}, {1, 1}, {4, 1}, {1, 1}, {0, 6}, {1, 1}, {3, 7}, {4, 2}, {1, 1}, {3, 4}, {6, 1}, {5, 1}, {1, 3}, {4, 1}, {3, 7}, {1, 1}, {0, 26}, {1, 1}, {4, 2}, {1, 6}, {3, 9}, {4, 1}, {1, 1}, {3, 5}, {6, 1}, {1, 2}, {4, 1}, {3, 8}, {1, 2}, {0, 25}, {1, 2}, {4, 6}, {1, 1}, {3, 10}, {1, 1}, {3, 17}, {1, 1}, {2, 1}, {1, 1}, {0, 24}, {1, 1}, {3, 1}, {1, 1}, {4, 4}, {1, 1}, {3, 11}, {1, 1}, {3, 17}, {1, 1}, {2, 2}, {1, 1}, {0, 23}, {1, 1}, {3, 2}, {1, 5}, {3, 11}, {1, 1}, {3, 17}, {1, 3}, {0, 24}, {1, 1}, {3, 19}, {1, 1}, {3, 15}, {1, 1}, {0, 27}, {1, 1}, {3, 15}, {1, 3}, {3, 1}, {1, 1}, {3, 15}, {1, 1}, {0, 27}, {1, 1}, {3, 14}, {1, 1}, {2, 2}, {1, 1}, {3, 2}, {1, 1}, {3, 13}, {1, 2}, {0, 27}, {1, 2}, {3, 12}, {1, 1}, {2, 4}, {1, 3}, {3, 13}, {1, 2}, {0, 28}, {1, 6}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 2}, {1, 2}, {3, 9}, {1, 2}, {2, 1}, {1, 1}, {0, 33}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 4}, {1, 2}, {3, 5}, {1, 2}, {2, 3}, {1, 1}, {0, 33}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 6}, {1, 5}, {2, 5}, {1, 1}, {0, 34}, {1, 1}, {3, 6}, {1, 1}, {2, 4}, {1, 1}, {0, 8}, {1, 1}, {2, 7}, {1, 1}, {0, 34}, {1, 1}, {3, 6}, {1, 1}, {2, 4}, {1, 1}, {0, 9}, {1, 1}, {2, 7}, {1, 1}, {0, 33}, {1, 1}, {3, 6}, {1, 1}, {2, 4}, {1, 1}, {0, 10}, {1, 2}, {2, 5}, {1, 1}, {0, 32}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 12}, {1, 6}, {0, 26}, {1, 2}, {0, 4}, {1, 1}, {3, 7}, {1, 1}, {2, 4}, {1, 1}, {0, 44}, {1, 1}, {3, 1}, {1, 1}, {0, 3}, {1, 1}, {3, 7}, {1, 1}, {2, 3}, {1, 1}, {0, 45}, {1, 1}, {3, 2}, {1, 3}, {3, 8}, {1, 1}, {2, 2}, {1, 2}, {0, 45}, {1, 1}, {3, 13}, {1, 1}, {2, 1}, {1, 2}, {0, 46}, {1, 1}, {3, 13}, {1, 2}, {3, 1}, {1, 1}, {0, 46}, {1, 1}, {3, 12}, {1, 2}, {3, 2}, {1, 1}, {0, 46}, {1, 1}, {3, 7}, {1, 5}, {3, 4}, {1, 1}, {0, 47}, {1, 7}, {0, 4}, {1, 1}, {3, 5}, {1, 1}, {0, 57}, {1, 1}, {3, 6}, {1, 1}, {0, 57}, {1, 1}, {3, 6}, {1, 1}, {0, 57}, {1, 1}, {3, 6}, {1, 2}, {0, 56}, {1, 2}, {3, 6}, {1, 1}, {0, 57}, {1, 7}, {0, 936}};
+uint16_t imgSitting0[307][2] = {{0, 1152}, {3, 2}, {0, 62}, {3, 1}, {4, 1}, {3, 1}, {0, 3}, {1, 7}, {0, 51}, {3, 1}, {4, 2}, {1, 4}, {2, 6}, {1, 1}, {0, 17}, {1, 7}, {0, 26}, {3, 1}, {4, 6}, {3, 1}, {2, 6}, {1, 1}, {0, 7}, {1, 9}, {2, 7}, {1, 2}, {0, 24}, {3, 1}, {4, 7}, {3, 1}, {2, 6}, {1, 1}, {0, 5}, {1, 1}, {4, 9}, {3, 1}, {2, 8}, {1, 1}, {0, 23}, {3, 1}, {4, 8}, {3, 3}, {2, 3}, {1, 1}, {0, 4}, {1, 1}, {4, 3}, {3, 1}, {1, 2}, {5, 1}, {4, 4}, {3, 1}, {2, 6}, {1, 1}, {0, 24}, {3, 3}, {4, 9}, {3, 3}, {1, 1}, {0, 3}, {1, 1}, {4, 3}, {3, 1}, {6, 1}, {1, 3}, {5, 1}, {4, 4}, {3, 1}, {2, 4}, {1, 1}, {0, 25}, {3, 1}, {4, 1}, {3, 1}, {4, 12}, {3, 1}, {0, 2}, {1, 1}, {4, 4}, {1, 2}, {6, 2}, {1, 1}, {5, 1}, {4, 5}, {3, 1}, {2, 1}, {1, 2}, {0, 26}, {3, 1}, {4, 1}, {3, 3}, {4, 11}, {3, 2}, {4, 5}, {1, 2}, {6, 2}, {1, 1}, {5, 1}, {4, 6}, {1, 1}, {0, 28}, {3, 1}, {4, 4}, {3, 3}, {4, 9}, {3, 1}, {4, 6}, {1, 3}, {4, 8}, {1, 1}, {0, 28}, {3, 1}, {4, 14}, {5, 1}, {3, 1}, {4, 2}, {3, 1}, {4, 1}, {5, 1}, {4, 13}, {1, 1}, {0, 28}, {3, 1}, {4, 13}, {5, 2}, {3, 1}, {4, 4}, {5, 2}, {4, 12}, {1, 1}, {0, 28}, {3, 6}, {4, 8}, {5, 2}, {3, 1}, {4, 4}, {5, 2}, {4, 12}, {1, 1}, {0, 28}, {3, 1}, {4, 13}, {5, 2}, {3, 1}, {4, 4}, {5, 2}, {4, 12}, {1, 1}, {0, 28}, {3, 1}, {4, 14}, {5, 1}, {3, 1}, {4, 2}, {3, 1}, {4, 1}, {5, 1}, {4, 13}, {1, 1}, {0, 28}, {3, 1}, {4, 4}, {3, 3}, {4, 9}, {3, 1}, {4, 6}, {1, 3}, {4, 8}, {1, 1}, {0, 28}, {3, 1}, {4, 1}, {3, 3}, {4, 11}, {3, 2}, {4, 5}, {1, 2}, {6, 2}, {1, 1}, {5, 1}, {4, 6}, {1, 1}, {0, 28}, {3, 1}, {4, 1}, {3, 1}, {4, 12}, {3, 1}, {0, 2}, {1, 1}, {4, 4}, {1, 2}, {6, 2}, {1, 1}, {5, 1}, {4, 5}, {3, 1}, {2, 1}, {1, 2}, {0, 26}, {3, 3}, {4, 9}, {3, 3}, {1, 1}, {0, 3}, {1, 1}, {4, 3}, {3, 1}, {6, 1}, {1, 3}, {5, 1}, {4, 4}, {3, 1}, {2, 4}, {1, 1}, {0, 25}, {3, 1}, {4, 8}, {3, 3}, {2, 3}, {1, 1}, {0, 4}, {1, 1}, {4, 3}, {3, 1}, {1, 2}, {5, 1}, {4, 4}, {3, 1}, {2, 6}, {1, 1}, {0, 24}, {3, 1}, {4, 7}, {3, 1}, {2, 6}, {1, 1}, {0, 5}, {1, 1}, {4, 9}, {3, 1}, {2, 8}, {1, 1}, {0, 23}, {3, 1}, {4, 6}, {3, 1}, {2, 6}, {1, 1}, {0, 7}, {1, 9}, {2, 7}, {1, 2}, {0, 24}, {3, 1}, {4, 2}, {1, 4}, {2, 6}, {1, 1}, {0, 17}, {1, 7}, {0, 26}, {3, 1}, {4, 1}, {3, 1}, {1, 1}, {0, 2}, {1, 7}, {0, 51}, {3, 2}, {4, 1}, {1, 1}, {0, 60}, {1, 1}, {4, 3}, {1, 1}, {0, 59}, {1, 1}, {4, 3}, {1, 1}, {0, 59}, {1, 1}, {4, 3}, {1, 1}, {0, 59}, {1, 1}, {4, 2}, {1, 1}, {0, 60}, {1, 1}, {4, 2}, {1, 1}, {0, 60}, {1, 1}, {4, 2}, {1, 1}, {0, 60}, {1, 1}, {4, 2}, {1, 1}, {0, 60}, {1, 1}, {4, 1}, {1, 1}, {0, 61}, {1, 2}, {0, 830}};
+uint16_t imgSitting1[305][2] = {{0, 1152}, {3, 2}, {0, 62}, {3, 1}, {4, 1}, {3, 1}, {0, 3}, {1, 8}, {0, 50}, {3, 1}, {4, 2}, {1, 4}, {2, 7}, {1, 1}, {0, 16}, {1, 7}, {0, 26}, {3, 1}, {4, 6}, {3, 1}, {2, 7}, {1, 1}, {0, 6}, {1, 9}, {2, 7}, {1, 2}, {0, 24}, {3, 1}, {4, 7}, {3, 1}, {2, 7}, {1, 1}, {0, 4}, {1, 1}, {4, 9}, {3, 1}, {2, 8}, {1, 1}, {0, 23}, {3, 1}, {4, 8}, {3, 3}, {2, 4}, {1, 1}, {0, 3}, {1, 1}, {4, 3}, {3, 1}, {1, 2}, {5, 1}, {4, 4}, {3, 1}, {2, 6}, {1, 1}, {0, 24}, {3, 3}, {4, 9}, {3, 3}, {2, 1}, {1, 1}, {0, 2}, {1, 1}, {4, 3}, {3, 1}, {6, 1}, {1, 3}, {5, 1}, {4, 4}, {3, 1}, {2, 4}, {1, 1}, {0, 25}, {3, 1}, {4, 1}, {3, 1}, {4, 12}, {3, 1}, {0, 2}, {1, 1}, {4, 4}, {1, 2}, {6, 2}, {1, 1}, {5, 1}, {4, 5}, {3, 1}, {2, 1}, {1, 2}, {0, 26}, {3, 1}, {4, 1}, {3, 3}, {4, 11}, {3, 2}, {4, 5}, {1, 2}, {6, 2}, {1, 1}, {5, 1}, {4, 6}, {1, 1}, {0, 28}, {3, 1}, {4, 4}, {3, 3}, {4, 9}, {3, 1}, {4, 6}, {1, 3}, {4, 8}, {1, 1}, {0, 28}, {3, 1}, {4, 14}, {5, 1}, {3, 1}, {4, 2}, {3, 1}, {4, 1}, {5, 1}, {4, 13}, {1, 1}, {0, 28}, {3, 1}, {4, 13}, {5, 2}, {3, 1}, {4, 4}, {5, 2}, {4, 12}, {1, 1}, {0, 28}, {3, 6}, {4, 8}, {5, 2}, {3, 1}, {4, 4}, {5, 2}, {4, 12}, {1, 1}, {0, 28}, {3, 1}, {4, 13}, {5, 2}, {3, 1}, {4, 4}, {5, 2}, {4, 12}, {1, 1}, {0, 28}, {3, 1}, {4, 14}, {5, 1}, {3, 1}, {4, 2}, {3, 1}, {4, 1}, {5, 1}, {4, 13}, {1, 1}, {0, 28}, {3, 1}, {4, 4}, {3, 3}, {4, 9}, {3, 1}, {4, 6}, {1, 3}, {4, 8}, {1, 1}, {0, 28}, {3, 1}, {4, 1}, {3, 3}, {4, 11}, {3, 2}, {4, 5}, {1, 2}, {6, 2}, {1, 1}, {5, 1}, {4, 6}, {1, 1}, {0, 28}, {3, 1}, {4, 1}, {3, 1}, {4, 12}, {3, 1}, {0, 2}, {1, 1}, {4, 4}, {1, 2}, {6, 2}, {1, 1}, {5, 1}, {4, 5}, {3, 1}, {2, 1}, {1, 2}, {0, 26}, {3, 3}, {4, 9}, {3, 3}, {2, 1}, {1, 1}, {0, 2}, {1, 1}, {4, 3}, {3, 1}, {6, 1}, {1, 3}, {5, 1}, {4, 4}, {3, 1}, {2, 4}, {1, 1}, {0, 25}, {3, 1}, {4, 8}, {3, 3}, {2, 4}, {1, 1}, {0, 3}, {1, 1}, {4, 3}, {3, 1}, {1, 2}, {5, 1}, {4, 4}, {3, 1}, {2, 6}, {1, 1}, {0, 24}, {3, 1}, {4, 7}, {3, 1}, {2, 7}, {1, 1}, {0, 4}, {1, 1}, {4, 9}, {3, 1}, {2, 8}, {1, 1}, {0, 23}, {3, 1}, {4, 6}, {3, 1}, {2, 7}, {1, 1}, {0, 6}, {1, 9}, {2, 7}, {1, 2}, {0, 24}, {3, 1}, {4, 2}, {1, 4}, {2, 7}, {1, 1}, {0, 16}, {1, 7}, {0, 26}, {3, 1}, {4, 1}, {3, 1}, {1, 1}, {0, 2}, {1, 8}, {0, 50}, {3, 2}, {4, 1}, {1, 1}, {0, 60}, {1, 1}, {4, 2}, {1, 1}, {0, 60}, {1, 1}, {4, 2}, {1, 1}, {0, 60}, {1, 1}, {4, 2}, {1, 1}, {0, 60}, {1, 1}, {4, 3}, {1, 1}, {0, 59}, {1, 1}, {4, 3}, {1, 2}, {0, 58}, {1, 1}, {4, 4}, {1, 2}, {0, 58}, {1, 1}, {4, 4}, {1, 1}, {0, 59}, {1, 5}, {0, 889}};
+struct Img sitting0;
+struct Img sitting1;
+struct Img animSitting[2];
+unsigned int currentFrame = 0;
 volatile uint16_t palette[8] = {WHITE, BLACK, YELLOW, GREEN, BLUE, WHITE, MAGENTA, WHITE};
 volatile float lat;
 volatile float lon;
@@ -108,6 +148,8 @@ static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size);
 int _ADXL343_WriteReg8 (unsigned char TargetRegister, unsigned char TargetValue);
+void SendData();
+void getLatLon();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -139,7 +181,26 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  sitting0.Body = *imgSitting0;
+  sitting0.Size = 307;
+  sitting1.Body = *imgSitting1;
+  sitting1.Size = 305;
+  animSitting[0] = sitting0;
+  animSitting[1] = sitting1;
+  game.evo=0;
+  game.uid[0]='h';
+  game.uid[1]='i';
+  game.allSteps=0;
+  game.mood=100;
+  game.numLocations=3;
+  game.stepsToday=0;
+  game.weeklySteps=0;
+  game.challengeGoal=20000;
+  dummy.lat=12.34567;
+  dummy.lon=-89.10111;
+  game.positions[0]=dummy;
+  game.positions[1]=dummy;
+  game.positions[2]=dummy;
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -186,7 +247,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_UART_Transmit(&huart2, "hello", 5, 100);
+	  game.allSteps=steps;
+	  SendData();
+	  //HAL_UART_Transmit(&huart2, "hello", 5, 100);
 	  switch(currentMenu){
 	  case Main:
 		  //fillScreen(BLACK);
@@ -277,30 +340,7 @@ int main(void)
 		  	  drawString(0, 20, buffer2, BLACK, GREEN, 1, 1);
 
 		  	  	  //only run this code every few seconds
-		  		  while(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
-		  		  	{
-		  			  if(buffer[i]&&buffer[i]=='\n')
-		  				  {
 
-
-		  				  if(minmea_parse_rmc(&rmcStruct, &(buffer[1]))){
-		  				      //printf("FIX?:");
-		  				      lat = minmea_tocoord(&rmcStruct.latitude);
-		  				      lon = minmea_tocoord(&rmcStruct.longitude);
-		  				      sprintf(buffer, "lat:%d, %d", (int)(lat*100), (int)(lon*100));
-		  				      if(rmcStruct.valid!=0)
-		  				      {drawString(0, 30, buffer, BLACK, GREEN, 1, 1);
-		  				    }
-		  				  }
-		  				  //buffer[0]='_';
-		  				  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
-		  				  for(ii=0;ii<=i;ii++) buffer[ii]=0;
-		  				 i=0;
-		  				 break;
-		  				  }
-		  			  	        i++;
-
-		  		  	}
 		  	  drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
 
 		  break;
@@ -768,7 +808,55 @@ int _ADXL343_WriteReg8 (unsigned char TargetRegister, unsigned char TargetValue)
 
   return 0;
 }
+void SendData()
+{
+	unsigned int posIndex;
+	unsigned int clrIndex;
+	sprintf(sendBuffer, "(lifeSteps:%d),(weeklySteps:%d),(dailySteps:%d),(uid:%s),(friendship:%d),(password:password)(difficulty:%d),(evolution:%d) \n\r", game.allSteps,game.weeklySteps,game.stepsToday, game.uid, game.mood, game.challengeGoal, game.evo);
+	HAL_UART_Transmit(&huart2, sendBuffer, strlen(sendBuffer), 200);
 
+	HAL_UART_Transmit(&huart2, "#", 1, 200);
+	for(posIndex=0; posIndex<game.numLocations; posIndex++)
+	{
+		for(clrIndex=0;clrIndex<400;clrIndex++) sendBuffer[clrIndex]=0;
+		sprintf(sendBuffer, "(lat:%d.%d), (lon:%d.%d)", ((int)game.positions[posIndex].lat), ((int)((fmod((double)game.positions[posIndex].lat, (double)1))*10000)),((int)game.positions[posIndex].lon), ((int)((fmod((double)game.positions[posIndex].lon, (double)1))*10000)));
+		HAL_UART_Transmit(&huart2, sendBuffer, strlen(sendBuffer), 200);
+
+	}
+	HAL_UART_Transmit(&huart2, "#", 1, 200);
+}
+void GetLatLon()
+{
+	struct latLon pos;
+	while(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
+			  		  	{
+			  			  if(buffer[i]&&buffer[i]=='\n')
+			  				  {
+
+
+			  				  if(minmea_parse_rmc(&rmcStruct, &(buffer[1]))){
+			  				      //printf("FIX?:");
+			  				      pos.lat = minmea_tocoord(&rmcStruct.latitude);
+			  				      pos.lon = minmea_tocoord(&rmcStruct.longitude);
+			  				      game.time = rmcStruct.time;
+			  				      //sprintf(buffer, "lat:%d, %d", (int)(lat*100), (int)(lon*100));
+			  				      //if(rmcStruct.valid!=0)
+			  				      //{drawString(0, 30, buffer, BLACK, GREEN, 1, 1);
+			  				    //}
+			  				  }
+			  				  //buffer[0]='_';
+			  				  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
+			  				  for(ii=0;ii<=i;ii++) buffer[ii]=0;
+			  				 i=0;
+			  				 break;
+			  				  }
+			  			  	        i++;
+
+			  		  	}
+
+	game.positions[game.numLocations] = pos;
+	game.numLocations++;
+}
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc) {
   RTC_AlarmTypeDef sAlarm;
   HAL_RTC_GetAlarm(hrtc,&sAlarm,RTC_ALARM_A,FORMAT_BIN);
