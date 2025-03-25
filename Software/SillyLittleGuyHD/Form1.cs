@@ -38,7 +38,7 @@ namespace SillyLittleGuyHD
         int curImage = 0;
 
         //Serial Data Control
-        public SerialPort port11 = new SerialPort("COM11"); // initilize the serial port class
+        public SerialPort port = new SerialPort("COM9"); // initilize the serial port class
         public Dictionary<string, string> parsed = null;
 
         int CheckPortOpenSecond = 2;
@@ -53,11 +53,11 @@ namespace SillyLittleGuyHD
             _usernameBox.TextChanged += _usernameBox_TextChanged;
             _passBox.TextChanged += _usernameBox_TextChanged;
             //set up serial port to match segger's settings
-            port11.BaudRate = 115200;
-            port11.Parity = Parity.None;
-            port11.StopBits = StopBits.One;
-            port11.DataBits = 8;
-            port11.Handshake = Handshake.None;
+            port.BaudRate = 115200;
+            port.Parity = Parity.None;
+            port.StopBits = StopBits.One;
+            port.DataBits = 8;
+            port.Handshake = Handshake.None;
 
             //port11.ReadTimeout = 499;
             //port11.WriteTimeout = 499;
@@ -65,13 +65,13 @@ namespace SillyLittleGuyHD
             //open the serial port and wait for data to be recieved
             try
             {
-                port11.Open();
+                port.Open();
             }
             catch
             {
                 //UI_PetStats_lbx.Items.Add("No Data Provided");
             }
-            port11.DataReceived += Port11_DataReceived;
+            port.DataReceived += Port11_DataReceived;
 
             timer1.Start();
 
@@ -207,15 +207,22 @@ namespace SillyLittleGuyHD
         private Dictionary<string, string> DataParsing(string rawData)
         {
             Dictionary<string, string> parsed = new Dictionary<string, string>();
+            List<string> locs = new List<string>();
 
             string[] seperations = rawData.Split(',');
 
             foreach(string dataLine in seperations)
             {
-                string cleanedData = dataLine.Replace('(', ' ').Replace(')', ' ').Trim();
-                string[] values = cleanedData.Split(':');
+                if(!dataLine.Contains("loc") || !dataLine.Contains("lat"))
+                {
+                    string cleanedData = dataLine.Replace('(', ' ').Replace(')', ' ').Trim();
+                    string[] values = cleanedData.Split(':');
 
-                parsed.Add(values[0], values[1]);
+                    parsed.Add(values[0], values[1]);
+                }
+
+
+                
             }
 
             return parsed;
@@ -223,13 +230,13 @@ namespace SillyLittleGuyHD
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(!port11.IsOpen)
+            if(!port.IsOpen)
             {
                 if (--CheckPortOpenSecond <= 0)
                 {
                     try
                     {
-                        port11.Open();
+                        port.Open();
                     }
                     catch
                     {
