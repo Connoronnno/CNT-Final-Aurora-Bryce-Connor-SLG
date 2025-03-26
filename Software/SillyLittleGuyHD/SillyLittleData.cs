@@ -129,6 +129,7 @@ namespace SillyLittleGuyHD
             friendship = friend;
             difficilty = diff;
             evolution = evo;
+            locations = new List<PointLatLng>();
         }
 
         public override string ToString()

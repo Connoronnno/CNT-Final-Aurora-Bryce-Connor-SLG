@@ -193,7 +193,14 @@ namespace SillyLittleGuyHD
                 int.TryParse(parsed["evolution"], out evo);
                 try
                 {
-                    SLGData = new SillyLittleData("default", "default", dSteps, wSteps, lSteps, friend, diff, evo);
+                    SLGData.uid = parsed["uid"];
+                    SLGData.password = parsed["password"];
+                    SLGData.lifeSteps = lSteps;
+                    SLGData.WeeklySteps = wSteps;
+                    SLGData.dailySteps = dSteps;
+                    SLGData.friendship = friend;
+                    SLGData.difficilty = diff;
+                    SLGData.evolution = evo;
                 }
                 catch (Exception ex)
                 {
@@ -207,20 +214,45 @@ namespace SillyLittleGuyHD
         private Dictionary<string, string> DataParsing(string rawData)
         {
             Dictionary<string, string> parsed = new Dictionary<string, string>();
-            List<string> locs = new List<string>();
-
+            
+            PointLatLng loc = new PointLatLng();
+            float temp;
             string[] seperations = rawData.Split(',');
-
-            foreach(string dataLine in seperations)
+            loc.Lat = 200000;
+            loc.Lng = 200000;
+            foreach (string dataLine in seperations)
             {
-                if(!dataLine.Contains("loc") || !dataLine.Contains("lat"))
+                if (!dataLine.Contains("lon") && !dataLine.Contains("lat"))
                 {
                     string cleanedData = dataLine.Replace('(', ' ').Replace(')', ' ').Trim();
                     string[] values = cleanedData.Split(':');
 
                     parsed.Add(values[0], values[1]);
                 }
-
+                else 
+                {
+                    if (dataLine.Contains("lat")) 
+                    {
+                        string cleanedData = dataLine.Replace('(', ' ').Replace(')', ' ').Trim();
+                        string[] values = cleanedData.Split(':');
+                        float.TryParse(values[1], out temp);
+                        loc.Lat = temp;
+                    }
+                    if (dataLine.Contains("lon")) 
+                    {
+                        string cleanedData = dataLine.Replace('(', ' ').Replace(')', ' ').Trim();
+                        string[] values = cleanedData.Split(':');
+                        float.TryParse(values[1], out temp);
+                        loc.Lng = temp;
+                    }
+                    if (loc.Lat !=200000 && loc.Lng != 200000) 
+                    {   
+                        SLGData.locations.Add(loc);
+                        loc.Lat = 200000;
+                        loc.Lng = 200000;
+                        
+                    }
+                }
 
                 
             }
@@ -230,6 +262,7 @@ namespace SillyLittleGuyHD
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //DataParsing("(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34)");
             if(!port.IsOpen)
             {
                 if (--CheckPortOpenSecond <= 0)
