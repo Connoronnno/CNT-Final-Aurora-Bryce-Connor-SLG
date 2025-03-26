@@ -823,16 +823,13 @@ void SendData()
 	unsigned int clrIndex;
 	sprintf(sendBuffer, "(lifeSteps:%d),(weeklySteps:%d),(dailySteps:%d),(uid:%s),(friendship:%d),(password:password)(difficulty:%d),(evolution:%d) \n\r", game.allSteps,game.weeklySteps,game.stepsToday, game.uid, game.mood, game.challengeGoal, game.evo);
 	HAL_UART_Transmit(&huart2, sendBuffer, strlen(sendBuffer), 200);
-
-	HAL_UART_Transmit(&huart2, "[", 1, 200);
 	for(posIndex=0; posIndex<game.numLocations; posIndex++)
 	{       HAL_Delay(5);
 		for(clrIndex=0;clrIndex<400;clrIndex++) sendBuffer[clrIndex]=0;
-		sprintf(sendBuffer, "(lat:%d.%d), (lon:%d.%d),", ((int)game.positions[posIndex].lat), ((int)((fmod((double)game.positions[posIndex].lat, (double)1))*10000)),((int)game.positions[posIndex].lon), ((int)((fmod((double)game.positions[posIndex].lon, (double)1))*10000)));
+		sprintf(sendBuffer, "[(lat:%d.%d), (lon:%d.%d)],", ((int)game.positions[posIndex].lat), abs((int)((fmod((double)game.positions[posIndex].lat, (double)1))*10000)),((int)game.positions[posIndex].lon), abs((int)((fmod((double)game.positions[posIndex].lon, (double)1))*10000)));
 		HAL_UART_Transmit(&huart2, sendBuffer, strlen(sendBuffer), 200);
 
 	}
-	HAL_UART_Transmit(&huart2, "]", 1, 200);
 }
 void GetLatLon()
 {
@@ -841,30 +838,16 @@ void GetLatLon()
 			  		  	{
 			  			  if(buffer[i]&&buffer[i]=='\n')
 			  				  {
-
-			  				  //HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 200);
 			  				  if(minmea_parse_rmc(&rmcStruct, &(buffer[1]))){
-			  				      //printf("FIX?:");
 			  				      pos.lat = minmea_tocoord(&rmcStruct.latitude);
 			  				      pos.lon = minmea_tocoord(&rmcStruct.longitude);
 			  				      game.time = rmcStruct.time;
-			  				      //sprintf(buffer, "lat:%d, %d", (int)(lat*100), (int)(lon*100));
-			  				      //if(rmcStruct.valid!=0)
-			  				      //{drawString(0, 30, buffer, BLACK, GREEN, 1, 1);
-			  				    //}
 			  				  }
 			  				if(minmea_parse_gga(&ggaStruct, &(buffer[2]))){
-			  							  				      //printf("FIX?:");
 			  							  				      pos.lat = minmea_tocoord(&ggaStruct.latitude);
 			  							  				      pos.lon = minmea_tocoord(&ggaStruct.longitude);
 			  							  				      game.time = ggaStruct.time;
-			  							  				      //sprintf(buffer, "lat:%d, %d", (int)(lat*100), (int)(lon*100));
-			  							  				      //if(rmcStruct.valid!=0)
-			  							  				      //{drawString(0, 30, buffer, BLACK, GREEN, 1, 1);
-			  							  				    //}
 			  							  				  }
-			  				  //buffer[0]='_';
-			  				  //drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
 			  				  for(ii=0;ii<=i;ii++) buffer[ii]=0;
 			  				 i=0;
 			  				 break;
