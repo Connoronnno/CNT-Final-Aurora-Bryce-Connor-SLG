@@ -14,7 +14,7 @@ namespace undo
     public partial class Form1 : Form
     {
         Bitmap bm;
-        List<Color> Pallette = new List<Color>();
+        List<Color> Palette = new List<Color>();
         List<string> a = new List<string>();
         List<string> b = new List<string>();
         public Form1()
@@ -24,6 +24,11 @@ namespace undo
             DragEnter += Form1_DragEnter;
             DragDrop += Form1_DragDrop;
             _process.Click += _process_Click;
+        }
+
+        private void MakePalette()
+        { 
+
         }
 
         private void _process_Click(object sender, EventArgs e)
@@ -41,7 +46,7 @@ namespace undo
                 {
                     for (int x = 0; x < bm.Width; x++)
                     {
-                        if (!Pallette.Contains(bm.GetPixel(x, y))) Pallette.Add(bm.GetPixel(x, y));
+                        if (!Palette.Contains(bm.GetPixel(x, y))) Palette.Add(bm.GetPixel(x, y));
                     }
                 }
                 //iterate through bitmap
@@ -52,7 +57,7 @@ namespace undo
                     {
                         //get pallete index
                         palleteIndex = 0;
-                        foreach(Color c in Pallette) 
+                        foreach(Color c in Palette) 
                         {
                             if (bm.GetPixel(y, x) == c) 
                                 break;
@@ -143,7 +148,7 @@ namespace undo
                         xPos = 0;
                         yPos++;
                     }
-                    canvas.SetBBScaledPixel(xPos, yPos, Pallette[i.Item1]);
+                    canvas.SetBBScaledPixel(xPos, yPos, Palette[i.Item1]);
                     xPos++;
                     curTime++;
                 }
