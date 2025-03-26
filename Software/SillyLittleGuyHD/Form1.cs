@@ -45,10 +45,18 @@ namespace SillyLittleGuyHD
 
         // Map Object
         GMap.NET.WindowsForms.GMapControl gMap;
+
+        bool work=false;
         public PetMenu()
         {
             InitializeComponent();
+            Shown += PetMenu_Shown;
+            
+        }
 
+        private void PetMenu_Shown(object sender, EventArgs e)
+        {
+            work = true;
             UI_SendData_btn.Click += UI_SendData_btn_Click;
             _usernameBox.TextChanged += _usernameBox_TextChanged;
             _passBox.TextChanged += _usernameBox_TextChanged;
@@ -61,6 +69,7 @@ namespace SillyLittleGuyHD
 
             //port11.ReadTimeout = 499;
             //port11.WriteTimeout = 499;
+            port.DataReceived += Port11_DataReceived;
 
             //open the serial port and wait for data to be recieved
             try
@@ -71,7 +80,7 @@ namespace SillyLittleGuyHD
             {
                 //UI_PetStats_lbx.Items.Add("No Data Provided");
             }
-            port.DataReceived += Port11_DataReceived;
+
 
             timer1.Start();
 
@@ -144,7 +153,7 @@ namespace SillyLittleGuyHD
             { "difficulty", "2" },
             { "evolution", "1" }
         };*/
-            
+            DataParsing("(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34)");
             Dictionary<string, string> postData = new Dictionary<string, string> { 
                 {"uid", SLGData.uid},
                 {"password",SLGData.password}, 
@@ -158,56 +167,73 @@ namespace SillyLittleGuyHD
             HttpClient client = new HttpClient();
             var response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/insertmainSave.php", new FormUrlEncodedContent(postData));
             string data = await response.Content.ReadAsStringAsync();
+            response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/clearPositions.php", new FormUrlEncodedContent(postData));
+            data = await response.Content.ReadAsStringAsync();
+            foreach(PointLatLng p in SLGData.locations) 
+            {
+                postData = new Dictionary<string, string> { {"uid", SLGData.uid}, { "lat", p.Lat.ToString() }, { "lon", p.Lng.ToString() } };
+                response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/insertpositions.php", new FormUrlEncodedContent(postData));
+                data = await response.Content.ReadAsStringAsync();
+            }
         }
 
         private void Port11_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            SerialPort sp = (SerialPort)sender;
-            string data = sp.ReadLine();
-            
-            parsed = DataParsing(data);
-            if (parsed.ContainsKey("lat"))
+            if (work)
             {
-                PointLatLng ltlng = new PointLatLng();
-                float temp;
-                float.TryParse(parsed["lat"], out temp);
-                ltlng.Lat = temp;
-                float.TryParse(parsed["lon"], out temp);
-                ltlng.Lat = temp;
-                SLGData.locations.Add(ltlng);
-            }
-            else
-            {
-                int dSteps;
-                int wSteps;
-                int lSteps;
-                int friend;
-                int diff;
-                int evo;
-
-                int.TryParse(parsed["dailySteps"], out dSteps);
-                int.TryParse(parsed["weeklySteps"], out wSteps);
-                int.TryParse(parsed["lifeSteps"], out lSteps);
-                int.TryParse(parsed["friendship"], out friend);
-                int.TryParse(parsed["difficulty"], out diff);
-                int.TryParse(parsed["evolution"], out evo);
                 try
                 {
-                    SLGData.uid = parsed["uid"];
-                    SLGData.password = parsed["password"];
-                    SLGData.lifeSteps = lSteps;
-                    SLGData.WeeklySteps = wSteps;
-                    SLGData.dailySteps = dSteps;
-                    SLGData.friendship = friend;
-                    SLGData.difficilty = diff;
-                    SLGData.evolution = evo;
+                    SerialPort sp = (SerialPort)sender;
+                    string data = sp.ReadLine();
+
+                    parsed = DataParsing(data);
+                    /*if (parsed.ContainsKey("lat"))
+                    {
+                        PointLatLng ltlng = new PointLatLng();
+                        float temp;
+                        float.TryParse(parsed["lat"], out temp);
+                        ltlng.Lat = temp;
+                        float.TryParse(parsed["lon"], out temp);
+                        ltlng.Lat = temp;
+                        SLGData.locations.Add(ltlng);
+                    }*/
+                    int dSteps;
+                    int wSteps;
+                    int lSteps;
+                    int friend;
+                    int diff;
+                    int evo;
+
+                    int.TryParse(parsed["dailySteps"], out dSteps);
+                    int.TryParse(parsed["weeklySteps"], out wSteps);
+                    int.TryParse(parsed["lifeSteps"], out lSteps);
+                    int.TryParse(parsed["friendship"], out friend);
+                    int.TryParse(parsed["difficulty"], out diff);
+                    int.TryParse(parsed["evolution"], out evo);
+                    try
+                    {
+                        SLGData.uid = parsed["uid"];
+                        SLGData.password = parsed["password"];
+                        SLGData.lifeSteps = lSteps;
+                        SLGData.WeeklySteps = wSteps;
+                        SLGData.dailySteps = dSteps;
+                        SLGData.friendship = friend;
+                        SLGData.difficilty = diff;
+                        SLGData.evolution = evo;
+                    }
+                    catch (Exception ex)
+                    {
+                        //probably want a universal error box/message box
+                        Debug.WriteLine(ex.Message);
+                    }
+                    DisplaySLGData();
+                    GMapAddPoint(SLGData.locations[0].Lat, SLGData.locations[0].Lng, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.blue, "ha");
+
                 }
-                catch (Exception ex)
+                catch 
                 {
-                    //probably want a universal error box/message box
-                    Debug.WriteLine(ex.Message);
+                
                 }
-            DisplaySLGData();
             }
         }
 
@@ -220,6 +246,7 @@ namespace SillyLittleGuyHD
             string[] seperations = rawData.Split(',');
             loc.Lat = 200000;
             loc.Lng = 200000;
+            SLGData.locations.Clear();
             foreach (string dataLine in seperations)
             {
                 if (!dataLine.Contains("lon") && !dataLine.Contains("lat"))
@@ -262,7 +289,7 @@ namespace SillyLittleGuyHD
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //DataParsing("(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34)");
+            
             if(!port.IsOpen)
             {
                 if (--CheckPortOpenSecond <= 0)
@@ -280,14 +307,7 @@ namespace SillyLittleGuyHD
                 }
                     
             }
-            else
-            {
-                //UI_PetStats_lbx.Items.Clear();
-                foreach (KeyValuePair<string, string> petData in parsed)
-                {
-                    //UI_PetStats_lbx.Items.Add($"{petData.Key} : {petData.Value}");
-                }
-            }
+           
 
 
 
