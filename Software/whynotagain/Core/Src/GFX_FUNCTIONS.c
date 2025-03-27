@@ -131,11 +131,11 @@ void drawString(int16_t x, int16_t y, char* c, int16_t textColor, int16_t bgColo
 void drawChar(int16_t x, int16_t y, char c, int16_t textColor, int16_t bgColor, uint8_t size){
   uint8_t line;
   int32_t i, j;
-  if((x >= _width)            ||
-     (y >= _height)           ||
-     ((x + 5 * size - 1) < 0) ||
-     ((y + 8 * size - 1) < 0))
-    return;
+  //if((x >= _width)            ||
+     //(y >= _height))           //||
+     //((x + 5 * size - 1) < 0) ||
+     //((y + 8 * size - 1) < 0))
+   // return;
 
   for (i=0; i<6; i++ ) {
     if ((i) == 5)

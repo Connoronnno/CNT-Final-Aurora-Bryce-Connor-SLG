@@ -302,13 +302,13 @@ int main(void)
 		  {
 			  //fillScreen(BLACK);
 
-			  drawString(0, 120, "STEPS", WHITE, BLACK, 1, 1);
+			  drawString(0, 150, "STEPS", WHITE, BLACK, 1, 1);
 			  sprintf(buffer2, "Today: %d ", game.stepsToday);
-			  drawString(0, 110, buffer2, WHITE, BLACK, 1, 1);
+			  drawString(0, 140, buffer2, WHITE, BLACK, 1, 1);
 			  sprintf(buffer2, "This week: %d ", game.weeklySteps);
-			  drawString(0, 100, buffer2, WHITE, BLACK, 1, 1);
+			  drawString(0, 130, buffer2, WHITE, BLACK, 1, 1);
 			  sprintf(buffer2, "All time: %d ", game.allSteps);
-			  drawString(0, 90, buffer2, WHITE, BLACK, 1, 1);
+			  drawString(0, 120, buffer2, WHITE, BLACK, 1, 1);
 
 			  //drawString(0, 70, "PET", WHITE, BLACK, 1, 1);
 			  updateScreen = 0;

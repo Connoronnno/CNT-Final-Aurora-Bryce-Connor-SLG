@@ -6,7 +6,7 @@
 ../Core/Src/GFX_FUNCTIONS.c:103:7:drawFastHLine	1
 ../Core/Src/GFX_FUNCTIONS.c:108:6:drawLine	5
 ../Core/Src/GFX_FUNCTIONS.c:120:6:drawString	2
-../Core/Src/GFX_FUNCTIONS.c:131:6:drawChar	12
+../Core/Src/GFX_FUNCTIONS.c:131:6:drawChar	8
 ../Core/Src/GFX_FUNCTIONS.c:163:6:drawCircle	3
 ../Core/Src/GFX_FUNCTIONS.c:197:6:drawCircleHelper	7
 ../Core/Src/GFX_FUNCTIONS.c:233:6:fillCircleHelper	9
