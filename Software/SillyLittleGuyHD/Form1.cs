@@ -153,7 +153,7 @@ namespace SillyLittleGuyHD
             { "difficulty", "2" },
             { "evolution", "1" }
         };*/
-            //DataParsing("(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34)");
+            DataParsing("(lat:12.34),(lon:12.34),(lat:12.35),(lon:12.35),(lat:12.36),(lon:12.36),(lat:12.36),(lon:12.36)");
             Dictionary<string, string> postData = new Dictionary<string, string> { 
                 {"uid", SLGData.uid},
                 {"password",SLGData.password}, 
