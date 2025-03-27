@@ -862,7 +862,7 @@ void SendData()
 	for(posIndex=0; posIndex<game.numLocations; posIndex++)
 	{       HAL_Delay(5);
 		for(clrIndex=0;clrIndex<400;clrIndex++) sendBuffer[clrIndex]=0;
-		sprintf(sendBuffer, "[(lat:%d.%d), (lon:%d.%d)],", ((int)game.positions[posIndex].lat), abs((int)((fmod((double)game.positions[posIndex].lat, (double)1))*10000)),((int)game.positions[posIndex].lon), abs((int)((fmod((double)game.positions[posIndex].lon, (double)1))*10000)));
+		sprintf(sendBuffer, "(lat:%d.%d),(lon:%d.%d),", ((int)game.positions[posIndex].lat), abs((int)((fmod((double)game.positions[posIndex].lat, (double)1))*10000)),((int)game.positions[posIndex].lon), abs((int)((fmod((double)game.positions[posIndex].lon, (double)1))*10000)));
 		HAL_UART_Transmit(&huart2, sendBuffer, strlen(sendBuffer), 200);
 
 	}
