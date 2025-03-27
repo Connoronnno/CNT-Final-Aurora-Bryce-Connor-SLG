@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GMap.NET;
 
 namespace SillyLittleGuyHD
 {
     internal class SillyLittleData
     {
         #region members
+
+        public List<PointLatLng> locations { get; set; }
+        
         private string _uid;
         public string uid
         {
@@ -125,6 +129,7 @@ namespace SillyLittleGuyHD
             friendship = friend;
             difficilty = diff;
             evolution = evo;
+            locations = new List<PointLatLng>();
         }
 
         public override string ToString()

@@ -21,3 +21,6 @@ C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLi
 C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\bin\Debug\GMap.NET.Core.dll
 C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\bin\Debug\GMap.NET.WindowsForms.dll
 C:\Users\bfrey4\Github\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLit.FF84FB67.Up2Date
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\bin\Debug\GMap.NET.Core.dll
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\bin\Debug\GMap.NET.WindowsForms.dll
+C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\SillyLittleGuyHD\obj\Debug\SillyLit.FF84FB67.Up2Date
