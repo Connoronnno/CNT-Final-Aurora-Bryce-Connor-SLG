@@ -153,7 +153,7 @@ namespace SillyLittleGuyHD
             { "difficulty", "2" },
             { "evolution", "1" }
         };*/
-            DataParsing("(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34)");
+            //DataParsing("(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34),(lat:12.34),(lon:12.34)");
             Dictionary<string, string> postData = new Dictionary<string, string> { 
                 {"uid", SLGData.uid},
                 {"password",SLGData.password}, 
@@ -230,7 +230,7 @@ namespace SillyLittleGuyHD
                     GMapAddPoint(SLGData.locations[0].Lat, SLGData.locations[0].Lng, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.blue, "ha");
 
                 }
-                catch 
+                catch (Exception ex)
                 {
                 
                 }

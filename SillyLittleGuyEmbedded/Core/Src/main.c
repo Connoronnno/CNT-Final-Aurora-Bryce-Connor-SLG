@@ -857,7 +857,7 @@ void SendData()
 {
 	unsigned int posIndex;
 	unsigned int clrIndex;
-	sprintf(sendBuffer, "(lifeSteps:%d),(weeklySteps:%d),(dailySteps:%d),(uid:%s),(friendship:%d),(password:password)(difficulty:%d),(evolution:%d) \n\r", game.allSteps,game.weeklySteps,game.stepsToday, game.uid, game.mood, game.challengeGoal, game.evo);
+	sprintf(sendBuffer, "(lifeSteps:%d),(weeklySteps:%d),(dailySteps:%d),(uid:%s),(friendship:%d),(password:password),(difficulty:%d),(evolution:%d) \n\r", game.allSteps,game.weeklySteps,game.stepsToday, game.uid, game.mood, game.challengeGoal, game.evo);
 	HAL_UART_Transmit(&huart2, sendBuffer, strlen(sendBuffer), 200);
 	for(posIndex=0; posIndex<game.numLocations; posIndex++)
 	{       HAL_Delay(5);

@@ -39,13 +39,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_line   0001dc18  00000000  00000000  0004b681  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000c9fa7  00000000  00000000  00069299  2**0
+ 18 .debug_str    000c9fb2  00000000  00000000  00069299  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  00133240  2**0
+ 19 .comment      00000043  00000000  00000000  0013324b  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000060cc  00000000  00000000  00133284  2**2
+ 20 .debug_frame  000060cc  00000000  00000000  00133290  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000007a  00000000  00000000  00139350  2**0
+ 21 .debug_line_str 00000085  00000000  00000000  0013935c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -7691,7 +7691,7 @@ void SendData()
  8003740:	af06      	add	r7, sp, #24
 	unsigned int posIndex;
 	unsigned int clrIndex;
-	sprintf(sendBuffer, "(lifeSteps:%d),(weeklySteps:%d),(dailySteps:%d),(uid:%s),(friendship:%d),(password:password)(difficulty:%d),(evolution:%d) \n\r", game.allSteps,game.weeklySteps,game.stepsToday, game.uid, game.mood, game.challengeGoal, game.evo);
+	sprintf(sendBuffer, "(lifeSteps:%d),(weeklySteps:%d),(dailySteps:%d),(uid:%s),(friendship:%d),(password:password),(difficulty:%d),(evolution:%d) \n\r", game.allSteps,game.weeklySteps,game.stepsToday, game.uid, game.mood, game.challengeGoal, game.evo);
  8003742:	4a59      	ldr	r2, [pc, #356]	@ (80038a8 <SendData+0x170>)
  8003744:	238c      	movs	r3, #140	@ 0x8c
  8003746:	005b      	lsls	r3, r3, #1
