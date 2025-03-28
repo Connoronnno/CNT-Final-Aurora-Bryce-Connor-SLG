@@ -60,19 +60,10 @@ namespace SillyLittleGuyHD
             UI_SendData_btn.Click += UI_SendData_btn_Click;
             _usernameBox.TextChanged += _usernameBox_TextChanged;
             _passBox.TextChanged += _usernameBox_TextChanged;
-            
+
+            UI_ComPort_cbx.DataSource = null;
             UI_ComPort_cbx.DataSource = SerialPort.GetPortNames();
-
-            //open the serial port and wait for data to be recieved
-            try
-            {
-                port?.Open();
-            }
-            catch
-            {
-                //UI_PetStats_lbx.Items.Add("No Data Provided");
-            }
-
+            //port.DataReceived += Port11_DataReceived;
 
             timer1.Start();
 
@@ -300,8 +291,6 @@ namespace SillyLittleGuyHD
 
             //}
 
-            UI_ComPort_cbx.DataSource = null;
-            UI_ComPort_cbx.DataSource = SerialPort.GetPortNames();
 
             if (port!=null)
                 UI_ComStatus_lbl.Text = "Status: Connected!";
@@ -449,7 +438,7 @@ namespace SillyLittleGuyHD
         {
             if (port!=null)
             {
-                port.DataReceived -= Port11_DataReceived;
+                port.Close();
                 port.Dispose();
                 port = null;
                 UI_ComConnect_btn.Text = "Connect";
@@ -471,6 +460,7 @@ namespace SillyLittleGuyHD
                     //port11.ReadTimeout = 499;
                     //port11.WriteTimeout = 499;
                     port.DataReceived += Port11_DataReceived;
+                    port.Open();
 
                     UI_ComConnect_btn.Text = "Disconnect";
                 }
@@ -481,6 +471,13 @@ namespace SillyLittleGuyHD
                 
 
             }
+        }
+
+        private void UI_ComPort_cbx_DropDown(object sender, EventArgs e)
+        {
+
+            UI_ComPort_cbx.DataSource = null;
+            UI_ComPort_cbx.DataSource = SerialPort.GetPortNames();
         }
     }
 }
