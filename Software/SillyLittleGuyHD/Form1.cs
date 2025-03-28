@@ -26,6 +26,7 @@ using System.Windows.Forms;
 using GMap;
 using GMap.NET;
 using GMap.NET.WindowsForms;
+using Newtonsoft.Json;
 
 namespace SillyLittleGuyHD
 {
@@ -46,7 +47,9 @@ namespace SillyLittleGuyHD
         // Map Object
         GMap.NET.WindowsForms.GMapControl gMap;
 
+        //stuff with data
         bool work=false;
+        string toSend = null;
         public PetMenu()
         {
             InitializeComponent();
@@ -136,15 +139,15 @@ namespace SillyLittleGuyHD
             { "difficulty", "2" },
             { "evolution", "1" }
         };*/
-            DataParsing("(lat:12.34),(lon:12.34),(lat:12.35),(lon:12.35),(lat:12.36),(lon:12.36),(lat:12.36),(lon:12.36)");
+            //DataParsing("(lat:12.34),(lon:12.34),(lat:12.35),(lon:12.35),(lat:12.36),(lon:12.36),(lat:12.36),(lon:12.36)");
             Dictionary<string, string> postData = new Dictionary<string, string> { 
                 {"uid", SLGData.uid},
                 {"password",SLGData.password}, 
                 {"dailySteps", SLGData.dailySteps.ToString()},
-                {"weeklySteps", SLGData.WeeklySteps.ToString()},
+                {"weeklySteps", SLGData.weeklySteps.ToString()},
                 {"lifeSteps", SLGData.lifeSteps.ToString()},
                 {"friendship", SLGData.friendship.ToString() },
-                {"difficulty", SLGData.difficilty.ToString() },
+                {"difficulty", SLGData.difficulty.ToString() },
                 {"evolution", SLGData.evolution.ToString()}
             };
             HttpClient client = new HttpClient();
@@ -198,10 +201,10 @@ namespace SillyLittleGuyHD
                         SLGData.uid = parsed["uid"];
                         SLGData.password = parsed["password"];
                         SLGData.lifeSteps = lSteps;
-                        SLGData.WeeklySteps = wSteps;
+                        SLGData.weeklySteps = wSteps;
                         SLGData.dailySteps = dSteps;
                         SLGData.friendship = friend;
-                        SLGData.difficilty = diff;
+                        SLGData.difficulty = diff;
                         SLGData.evolution = evo;
                     }
                     catch (Exception ex)
@@ -386,7 +389,7 @@ namespace SillyLittleGuyHD
                 return;
 
             UI_LifeSteps_lbl.Text = SLGData.lifeSteps.ToString();
-            UI_WeeklySteps_lbl.Text = SLGData.WeeklySteps.ToString();
+            UI_WeeklySteps_lbl.Text = SLGData.weeklySteps.ToString();
             UI_DailySteps_lbl.Text = SLGData.dailySteps.ToString();
 
             UI_Emotion_lbl.Text = SLGData.friendship.ToString();
@@ -431,7 +434,9 @@ namespace SillyLittleGuyHD
             HttpClient client = new HttpClient();
             var response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/select.php", new FormUrlEncodedContent(dataPost));
             string data = await response.Content.ReadAsStringAsync();
-
+           // data.Prepend('{');
+            //data.Append('}');
+            SLGData = JsonConvert.DeserializeObject<SillyLittleData>(data);
         }
 
         private void ConnectComPort(object sender, EventArgs e)
@@ -478,6 +483,14 @@ namespace SillyLittleGuyHD
 
             UI_ComPort_cbx.DataSource = null;
             UI_ComPort_cbx.DataSource = SerialPort.GetPortNames();
+        }
+
+        private void UI_SLG_btn_Click(object sender, EventArgs e)
+        {
+            if (port.IsOpen&&((!(toSend==null))!=false)?true:false)
+            {
+                port.Write(toSend);
+            }
         }
     }
 }

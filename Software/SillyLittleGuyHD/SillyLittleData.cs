@@ -53,7 +53,7 @@ namespace SillyLittleGuyHD
         }
 
         private int _weeklysteps;
-        public int WeeklySteps
+        public int weeklySteps
         {
             get
             {
@@ -92,7 +92,7 @@ namespace SillyLittleGuyHD
         }
 
         private int _difficulty;
-        public int difficilty
+        public int difficulty
         {
             get
             {
@@ -124,10 +124,10 @@ namespace SillyLittleGuyHD
             uid = id;
             password = pass;
             dailySteps = daily;
-            WeeklySteps = weekly;
+            weeklySteps = weekly;
             lifeSteps = lifetime;
             friendship = friend;
-            difficilty = diff;
+            difficulty = diff;
             evolution = evo;
             locations = new List<PointLatLng>();
         }
@@ -139,7 +139,7 @@ namespace SillyLittleGuyHD
 
         public Dictionary<string, string> GetDictionary()
         {
-            return new Dictionary<string, string> { { "uid", uid }, { "password", password }, { "dailySteps", dailySteps.ToString() }, { "weeklySteps", WeeklySteps.ToString() }, { "lifeSteps", lifeSteps.ToString() }, { "friendship", friendship.ToString() }, { "difficulyty", difficilty.ToString() }, { "evolution", evolution.ToString() } };
+            return new Dictionary<string, string> { { "uid", uid }, { "password", password }, { "dailySteps", dailySteps.ToString() }, { "weeklySteps", weeklySteps.ToString() }, { "lifeSteps", lifeSteps.ToString() }, { "friendship", friendship.ToString() }, { "difficulyty", difficulty.ToString() }, { "evolution", evolution.ToString() } };
         }
 
         public string GetId()

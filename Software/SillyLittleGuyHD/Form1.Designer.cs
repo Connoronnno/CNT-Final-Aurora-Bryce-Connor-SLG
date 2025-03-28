@@ -483,6 +483,7 @@
             this.UI_SLG_btn.TabIndex = 3;
             this.UI_SLG_btn.Text = "Update SLG";
             this.UI_SLG_btn.UseVisualStyleBackColor = true;
+            this.UI_SLG_btn.Click += new System.EventHandler(this.UI_SLG_btn_Click);
             // 
             // label11
             // 
