@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\bfrey4\\Github\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAJQAAAAAAAAAAAAqwK8AAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAMcBAAAAAAAAAAAIwNoBAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-26T19:31:23.553Z",
               "EditorCaption": ""
@@ -47,10 +47,11 @@
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\bfrey4\\Github\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs [Design]",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs [Design]",
+              "ToolTip": "C:\\Users\\bfrey4\\Github\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T19:31:15.401Z"
+              "WhenOpened": "2025-02-26T19:31:15.401Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -74,7 +75,8 @@
               "RelativeToolTip": "Form1.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-28T19:27:52.336Z"
+              "WhenOpened": "2025-02-28T19:27:52.336Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -65,6 +65,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.UI_GrabData_btn = new System.Windows.Forms.Button();
             this.UI_SendData_btn = new System.Windows.Forms.Button();
+            this.UI_ComPort_cbx = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.UI_ComStatus_lbl = new System.Windows.Forms.Label();
+            this.UI_ComConnect_btn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -382,6 +386,10 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage3.Controls.Add(this.UI_ComConnect_btn);
+            this.tabPage3.Controls.Add(this.UI_ComStatus_lbl);
+            this.tabPage3.Controls.Add(this.label5);
+            this.tabPage3.Controls.Add(this.UI_ComPort_cbx);
             this.tabPage3.Controls.Add(this._pEnBox);
             this.tabPage3.Controls.Add(this._uEnBox);
             this.tabPage3.Controls.Add(this._usernameBox);
@@ -469,6 +477,42 @@
             this.UI_SendData_btn.Text = "Send Save";
             this.UI_SendData_btn.UseVisualStyleBackColor = true;
             // 
+            // UI_ComPort_cbx
+            // 
+            this.UI_ComPort_cbx.FormattingEnabled = true;
+            this.UI_ComPort_cbx.Location = new System.Drawing.Point(319, 289);
+            this.UI_ComPort_cbx.Name = "UI_ComPort_cbx";
+            this.UI_ComPort_cbx.Size = new System.Drawing.Size(61, 21);
+            this.UI_ComPort_cbx.TabIndex = 8;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(346, 273);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(97, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Com Port Selection";
+            // 
+            // UI_ComStatus_lbl
+            // 
+            this.UI_ComStatus_lbl.AutoSize = true;
+            this.UI_ComStatus_lbl.Location = new System.Drawing.Point(340, 313);
+            this.UI_ComStatus_lbl.Name = "UI_ComStatus_lbl";
+            this.UI_ComStatus_lbl.Size = new System.Drawing.Size(109, 13);
+            this.UI_ComStatus_lbl.TabIndex = 10;
+            this.UI_ComStatus_lbl.Text = "Status: Disconnected";
+            // 
+            // UI_ComConnect_btn
+            // 
+            this.UI_ComConnect_btn.Location = new System.Drawing.Point(380, 288);
+            this.UI_ComConnect_btn.Name = "UI_ComConnect_btn";
+            this.UI_ComConnect_btn.Size = new System.Drawing.Size(86, 23);
+            this.UI_ComConnect_btn.TabIndex = 11;
+            this.UI_ComConnect_btn.Text = "Connect";
+            this.UI_ComConnect_btn.UseVisualStyleBackColor = true;
+            this.UI_ComConnect_btn.Click += new System.EventHandler(this.ConnectComPort);
+            // 
             // PetMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -540,6 +584,10 @@
         private System.Windows.Forms.CheckBox _pEnBox;
         private System.Windows.Forms.CheckBox _uEnBox;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox UI_ComPort_cbx;
+        private System.Windows.Forms.Button UI_ComConnect_btn;
+        private System.Windows.Forms.Label UI_ComStatus_lbl;
     }
 }
 

@@ -38,7 +38,7 @@ namespace SillyLittleGuyHD
         int curImage = 0;
 
         //Serial Data Control
-        public SerialPort port = new SerialPort("COM9"); // initilize the serial port class
+        public SerialPort port = null;
         public Dictionary<string, string> parsed = null;
 
         int CheckPortOpenSecond = 2;
@@ -60,21 +60,13 @@ namespace SillyLittleGuyHD
             UI_SendData_btn.Click += UI_SendData_btn_Click;
             _usernameBox.TextChanged += _usernameBox_TextChanged;
             _passBox.TextChanged += _usernameBox_TextChanged;
-            //set up serial port to match segger's settings
-            port.BaudRate = 115200;
-            port.Parity = Parity.None;
-            port.StopBits = StopBits.One;
-            port.DataBits = 8;
-            port.Handshake = Handshake.None;
-
-            //port11.ReadTimeout = 499;
-            //port11.WriteTimeout = 499;
-            port.DataReceived += Port11_DataReceived;
+            
+            UI_ComPort_cbx.DataSource = SerialPort.GetPortNames();
 
             //open the serial port and wait for data to be recieved
             try
             {
-                port.Open();
+                port?.Open();
             }
             catch
             {
@@ -289,26 +281,32 @@ namespace SillyLittleGuyHD
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
-            if(!port.IsOpen)
-            {
-                if (--CheckPortOpenSecond <= 0)
-                {
-                    try
-                    {
-                        port.Open();
-                    }
-                    catch
-                    {
-                        //UI_PetStats_lbx.Items.Clear();
-                        //UI_PetStats_lbx.Items.Add("No Data Provided");
-                    }
-                    CheckPortOpenSecond = 2;
-                }
-                    
-            }
-           
 
+            //if(!port.IsOpen)
+            //{
+            //    if (--CheckPortOpenSecond <= 0)
+            //    {
+            //        try
+            //        {
+            //            port.Open();
+            //        }
+            //        catch
+            //        {
+            //            //UI_PetStats_lbx.Items.Clear();
+            //            //UI_PetStats_lbx.Items.Add("No Data Provided");
+            //        }
+            //        CheckPortOpenSecond = 2;
+            //    }
+
+            //}
+
+            UI_ComPort_cbx.DataSource = null;
+            UI_ComPort_cbx.DataSource = SerialPort.GetPortNames();
+
+            if (port!=null)
+                UI_ComStatus_lbl.Text = "Status: Connected!";
+            else
+                UI_ComStatus_lbl.Text = "Status: Disconnected";
 
 
         }
@@ -445,6 +443,44 @@ namespace SillyLittleGuyHD
             var response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/select.php", new FormUrlEncodedContent(dataPost));
             string data = await response.Content.ReadAsStringAsync();
 
+        }
+
+        private void ConnectComPort(object sender, EventArgs e)
+        {
+            if (port!=null)
+            {
+                port.DataReceived -= Port11_DataReceived;
+                port.Dispose();
+                port = null;
+                UI_ComConnect_btn.Text = "Connect";
+            }
+            else
+            {
+                try
+                {
+                    string portNum = (string)UI_ComPort_cbx.SelectedValue;
+                    port = new SerialPort(portNum);
+
+                    //set up serial port to match segger's settings
+                    port.BaudRate = 115200;
+                    port.Parity = Parity.None;
+                    port.StopBits = StopBits.One;
+                    port.DataBits = 8;
+                    port.Handshake = Handshake.None;
+
+                    //port11.ReadTimeout = 499;
+                    //port11.WriteTimeout = 499;
+                    port.DataReceived += Port11_DataReceived;
+
+                    UI_ComConnect_btn.Text = "Disconnect";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("ComPort Error: "+ ex.Message);
+                }
+                
+
+            }
         }
     }
 }
