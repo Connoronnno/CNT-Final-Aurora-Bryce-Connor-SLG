@@ -434,6 +434,7 @@ namespace SillyLittleGuyHD
             HttpClient client = new HttpClient();
             var response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/select.php", new FormUrlEncodedContent(dataPost));
             string data = await response.Content.ReadAsStringAsync();
+            toSend = data;
            // data.Prepend('{');
             //data.Append('}');
             SLGData = JsonConvert.DeserializeObject<SillyLittleData>(data);
@@ -487,9 +488,10 @@ namespace SillyLittleGuyHD
 
         private void UI_SLG_btn_Click(object sender, EventArgs e)
         {
-            if (port.IsOpen&&((!(toSend==null))!=false)?true:false)
+            if (port!=null&&port.IsOpen&&toSend!=null)
             {
-                port.Write(toSend);
+                port.Write(toSend+'\r');
+                toSend = null;
             }
         }
     }
