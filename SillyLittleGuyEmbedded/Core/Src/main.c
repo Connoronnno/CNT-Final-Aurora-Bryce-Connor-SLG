@@ -153,7 +153,7 @@ static void MX_SPI1_Init(void);
 static void MX_TIM17_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
-static void MX_RTC_Init(void);
+//static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
 void Animate (struct Img* animation, unsigned int size);
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size);
@@ -222,7 +222,7 @@ int main(void)
   MX_TIM17_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
-  //MX_RTC_Init();
+  MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   //HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
   ST7735_Unselect();
@@ -265,8 +265,8 @@ int main(void)
 	  if((totalFrames++)%600==0) GetLatLon();
 	  //SendData();
 	  //ReceiveData();
-	  if((game.time.hours%dayLength)==0&&game.time.hours>0) game.stepsToday=0;
-	  if((game.time.hours%weekLength)==0&&game.time.hours>0) game.weeklySteps=0;
+	  if(((game.time.hours%dayLength)==0) && game.time.hours>0) game.stepsToday=0;
+	  if(((game.time.hours%weekLength)==0) && game.time.hours>0) game.weeklySteps=0;
 	  if(steps!=0){
 	  game.stepsToday +=steps*game.numLocations;
 	  game.weeklySteps+=steps*game.numLocations;
@@ -293,7 +293,7 @@ int main(void)
 
 
 		  //Change current Menu
-		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12) == GPIO_PIN_SET ) {
+		  if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2) == GPIO_PIN_SET ) {
 			  HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
 			  currentMenu = MusicTest;
 			  canChange = 0;
@@ -326,7 +326,7 @@ int main(void)
 			  //drawString(0, 70, "PET", WHITE, BLACK, 1, 1);
 			  updateScreen = 0;
 		  }
-	  	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12) == GPIO_PIN_SET ){
+	  	  if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2) == GPIO_PIN_SET ){
 	  		currentMenu = Main;
 	  		canChange = 0;
 	  		fillScreen(BLACK);
@@ -361,7 +361,7 @@ int main(void)
 		  		  		  fillScreen(BLACK);
 		  	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET)
 		  		  petXPos-=5;
-		  	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12) == GPIO_PIN_SET)
+		  	  if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2) == GPIO_PIN_SET)
 		  		  petXPos+=5;
 		  	  if(petXPos<3)petXPos=0;
 		  	  if(petXPos>60) petXPos=60;
@@ -804,6 +804,7 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
@@ -822,8 +823,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA11 PA12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
+  /*Configure GPIO pin : PB2 */
+  GPIO_InitStruct.Pin = GPIO_PIN_2;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA11 */
+  GPIO_InitStruct.Pin = GPIO_PIN_11;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -962,11 +969,12 @@ void GetLatLon()
 			  				    	  checkW = abs(tempPos.lat-pos.lat);
 			  				    	  checkH = abs(tempPos.lon-pos.lon);
 			  				    	  if(sqrt((checkW*checkW)+(checkH*checkH))<gpsThreshold) return;
-			  				    	  }
+			  				    	game.positions[game.numLocations] = pos;
+			  				    									  game.numLocations++;
+			  				    	}
 			  				    	  else return;
 			  				      }
-			  				      game.positions[game.numLocations] = pos;
-								  game.numLocations++;
+
 			  				      break;
 			  				  }
 			  				if(minmea_parse_gga(&ggaStruct, &(buffer))){
@@ -982,11 +990,11 @@ void GetLatLon()
 			  							  				  			  				    	  checkW = abs(tempPos.lat-pos.lat);
 			  							  				  			  				    	  checkH = abs(tempPos.lon-pos.lon);
 			  							  				  			  				    	  if(sqrt((checkW*checkW)+(checkH*checkH))<gpsThreshold) return;
+			  							  				  			  				  game.positions[game.numLocations] = pos;
+			  							  				  			  				  								  game.numLocations++;
 			  							  				  			  				    	  }
 			  							  				  			  				    	  else return;
 			  							  				  			  				      }
-			  							  				      game.positions[game.numLocations] = pos;
-															  game.numLocations++;
 			  							  				      break;
 			  							  				  }
 
