@@ -41,9 +41,15 @@
 typedef enum _menuState {
 	StatsDisplay,
 	Main,
+	Settings,
 	MusicTest,
 	ConnorDemo
 }menuStates;
+typedef enum _settingState{
+	Difficulty = 0,
+	Upload = 1
+}
+settingState;
 struct latLon
 {
  float lat;
@@ -106,16 +112,14 @@ volatile float lon;
 volatile double freq;
 volatile double freqs[] = {440*2, 332*2, 365*2, 274*2, 292*2, 220*2, 290*2, 322*2,};
 volatile uint16_t toneIndex=0;
-//Pedometer Variables
 char buffer2[100];
 
-unsigned char accelX;
-unsigned char accelY;
-unsigned char accelZ;
 unsigned char steps=0;
 
 menuStates currentMenu = Main;
 char canChange = 1;
+unsigned int currentSetting = 0;
+unsigned int editSetting = 0;
 
 /* USER CODE END PD */
 
@@ -201,7 +205,7 @@ int main(void)
   game.numLocations=3;
   game.stepsToday=0;
   game.weeklySteps=0;
-  game.challengeGoal=20000;
+  game.challengeGoal=2000;
   dummy.lat=12.34567;
   dummy.lon=-89.10111;
   game.positions[0]=dummy;
@@ -282,7 +286,7 @@ int main(void)
 		  //Change current Menu
 		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12) == GPIO_PIN_SET ) {
 			  HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
-			  currentMenu = MusicTest;
+			  currentMenu = Settings;
 			  canChange = 0;
 			  fillScreen(BLACK);
 		  }
@@ -302,7 +306,7 @@ int main(void)
 		  {
 			  //fillScreen(BLACK);
 
-			  drawString(0, 150, "STEPS", WHITE, BLACK, 1, 1);
+			  drawString(0, 150, "- STEPS -", WHITE, BLACK, 1, 1);
 			  sprintf(buffer2, "Today: %d ", game.stepsToday);
 			  drawString(0, 140, buffer2, WHITE, BLACK, 1, 1);
 			  sprintf(buffer2, "This week: %d ", game.weeklySteps);
@@ -310,7 +314,7 @@ int main(void)
 			  sprintf(buffer2, "All time: %d ", game.allSteps);
 			  drawString(0, 120, buffer2, WHITE, BLACK, 1, 1);
 
-			  //drawString(0, 70, "PET", WHITE, BLACK, 1, 1);
+			  //drawString(0, 70, "- PET -", WHITE, BLACK, 1, 1);
 			  updateScreen = 0;
 		  }
 	  	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12) == GPIO_PIN_SET ){
@@ -320,24 +324,91 @@ int main(void)
 	  	  }
 	  	  else
 	  	      canChange = 1;
-
 	  	  break;
-	  case MusicTest:
+	  case Settings:
+		  ++updateScreen;
+		  HAL_TIM_PWM_Stop(&htim17, TIM_CHANNEL_1);
+		  drawString(0, 150, "- OPTIONS -", WHITE, BLACK, 1, 1);
+		  sprintf(buffer2, "DIFFICULTY: %d ", game.challengeGoal);
+		  drawString(0, 130, buffer2, WHITE, BLACK, 1, 1); //Display the current difficulty
+		  drawString(0,110,"UPLOAD DATA",WHITE,BLACK,1,1);
+		  if(editSetting)
+		  {
+				  drawLine(0,125,128,125,WHITE);
+				  //GET OUT when the center button is pressed!
+				  if(updateScreen>=15)
+				  {
+					  updateScreen = 0;
+				  if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_6))
+				  {
+					  editSetting = 0;
+					  drawLine(0,125,128,125,BLACK);
+				  }
+				  //Right increments the goal
+				  else if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12))
+				  {
+					  game.challengeGoal += 100;
+				  }
+				  else if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12))
+				  {
+					  game.challengeGoal -= 100;
+				  }
+				  sprintf(buffer2, "DIFFICULTY: %d ", game.challengeGoal);
+			  }
+			  break;
+		  }
+		  if(currentSetting==Difficulty)
+		  {
+			  //Try to underline the option being selected
+			  drawLine(0,125,20,125,WHITE);
+			  //Then erase the highlight under the other option not being selected
+			  drawLine(0,105,20,105,BLACK);
+		  }
+		  else if(currentSetting==Upload)
+		  {
+			  drawLine(0,105,20,105,WHITE);
+			  drawLine(0,125,20,125,BLACK);
+		  }
+		  //IF RIGHT BUTTON IS PRESSED, INCREMENT THE SETTINGS MENU
+		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12) == GPIO_PIN_SET)
+		  {
+			  currentSetting++;
+			  if(currentSetting>1)
+			  {
+				  currentSetting=0;
+			  }
+
+		  }
+		  //PD6=Center button
+		  else if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) && currentSetting==Difficulty)
+		  {
+			  editSetting=1;
+		  }
+		  //The left button will return to the main menu
+		  else if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET) {
+		  	  	currentMenu = Main;
+		  	  	 canChange = 0;
+		  	  	fillScreen(BLACK);
+		  	  	}
+		  	  	 else
+		  			 canChange = 1;
+		  break;
+	  //case MusicTest:
 		  //fillScreen(BLUE);
 
-		  freq = freqs[(toneIndex++)%8];
-		  TIM17->ARR=(uint32_t)(987*(float)1000/(float)freq);
+	  	//freq = freqs[(toneIndex++)%8];
+	  	//TIM17->ARR=(uint32_t)(987*(float)1000/(float)freq);
 
-		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET) {
-			  currentMenu = Main;
-			  canChange = 0;
-			  HAL_TIM_PWM_Stop(&htim17, TIM_CHANNEL_1);
-			  fillScreen(BLACK);
-		  }
-		  else
-			  canChange = 1;
+	  	//if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET) {
+	  	//currentMenu = Main;
+	  	// canChange = 0;
+	  	//HAL_TIM_PWM_Stop(&htim17, TIM_CHANNEL_1);
+	  	//fillScreen(BLACK);
+	  	//}
+	  	// else
+			 //canChange = 1;
 
-		  break;
+			 //break;
 	  case ConnorDemo:
 		  	  steps=0;
 
@@ -355,7 +426,7 @@ int main(void)
 		  	  freq = freqs[(toneIndex++)%8];
 		  	  TIM17->ARR=(uint32_t)(987*(float)1000/(float)freq);
 		  	  //fillScreen(WHITE);
-		  	  drawImage(testImage, palette, petXPos, 40, 64, 64, 296);
+		  	  //drawImage(testImage, palette, petXPos, 40, 64, 64, 296);
 //		  	  drawImage(testImage, palette, 10, 40, 64, 64);
 //		  	  drawImage(testImage, palette, 70, 40, 64, 64);
 //		  	  drawImage(testImage, palette, 100, 40, 64, 64);
@@ -366,7 +437,7 @@ int main(void)
 //		  	  _ADXL343_ReadReg8(0x08, &accelY, 1);
 //		  	  _ADXL343_ReadReg8(0x09, &accelZ, 1);
 
-		  	  sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
+		  	  //sprintf(buffer2, "X:%d - Y:%d - Z:%d ", accelX, accelY, accelZ);
 		  	  drawString(0, 10, buffer2, BLACK, GREEN, 1, 1);
 
 		  	  _ADXL343_ReadReg8(0x15, &steps, 1);
