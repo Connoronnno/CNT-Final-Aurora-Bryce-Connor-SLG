@@ -91,6 +91,8 @@ const uint16_t dayLength=24;
 const uint16_t weekLength=168;
 struct minmea_sentence_rmc rmcStruct;
 struct minmea_sentence_gga ggaStruct;
+uint16_t totalFrames=0;
+char frameGot = 0;
 char buffer[128];
 char sendBuffer[400];
 char syncBuffer[3000];
@@ -102,6 +104,7 @@ struct Img sitting0;
 struct Img sitting1;
 struct Img animSitting[2];
 unsigned int currentFrame = 0;
+float gpsThreshold;
 volatile uint16_t palette[8] = {BLACK, BLACK, YELLOW, BLUE, GREEN, BLUE, WHITE, WHITE};
 volatile float lat;
 volatile float lon;
@@ -258,13 +261,19 @@ int main(void)
       fillScreen(BLACK);
   while (1)
   {
+
+	  if((totalFrames++)%600==0) GetLatLon();
 	  //SendData();
-	  ReceiveData();
-	  if((game.time.hours%dayLength)==0) game.stepsToday=0;
-	  if((game.time.hours%weekLength)==0) game.weeklySteps=0;
-	  game.stepsToday +=steps-game.allSteps;
-	  game.weeklySteps+=steps-game.allSteps;
-	  game.allSteps=steps;
+	  //ReceiveData();
+	  if((game.time.hours%dayLength)==0&&game.time.hours>0) game.stepsToday=0;
+	  if((game.time.hours%weekLength)==0&&game.time.hours>0) game.weeklySteps=0;
+	  if(steps!=0){
+	  game.stepsToday +=steps*game.numLocations;
+	  game.weeklySteps+=steps*game.numLocations;
+	  game.allSteps+=steps*game.numLocations;
+	  steps=0;
+	  _ADXL343_WriteReg8(0x7E, 0xB1);
+	  }
 	  //SendData();
 	  //HAL_UART_Transmit(&huart2, "hello", 5, 100);
 	  switch(currentMenu){
@@ -923,32 +932,72 @@ while(HAL_UART_Receive(&huart2, &(syncBuffer[rI]), 1, 1000)==HAL_OK)
 }
 void GetLatLon()
 {
+	int gpsI=0;
 	struct latLon pos;
+	struct latLon tempPos;
+	float checkW;
+	float checkH;
+
 	//HAL_UART_Recieve();
-	while(HAL_UART_Receive(&huart1, &(buffer[i]), 1, 0xFFFF)==HAL_OK)
+	while(HAL_UART_Receive(&huart1, &(buffer[gpsI]), 1, 1000)==HAL_OK||1)
 			  		  	{
-			  			  if(buffer[i]&&buffer[i]=='\n')
+							if(buffer[gpsI]=='$')
+							{
+								for(ii=0;ii<=127;ii++) buffer[ii]=0;
+								buffer[0]='$';
+								gpsI=0;
+							}//HAL_UART_Transmit(&huart2, buffer[i], 1, 1000);
+			  			  if(buffer[gpsI]=='\n')
 			  				  {
-			  				  if(minmea_parse_rmc(&rmcStruct, &(buffer[1]))){
+			  				  if(minmea_parse_rmc(&rmcStruct, &(buffer))){
 			  				      pos.lat = minmea_tocoord(&rmcStruct.latitude);
 			  				      pos.lon = minmea_tocoord(&rmcStruct.longitude);
 			  				      game.time = rmcStruct.time;
+			  				      frameGot=1;
+			  				      for(int posCheckI=0;posCheckI<game.numLocations;posCheckI++)
+			  				      {
+
+			  				    	  tempPos = game.positions[posCheckI];
+			  				    	if(tempPos.lat&&pos.lat){
+			  				    	  checkW = abs(tempPos.lat-pos.lat);
+			  				    	  checkH = abs(tempPos.lon-pos.lon);
+			  				    	  if(sqrt((checkW*checkW)+(checkH*checkH))<gpsThreshold) return;
+			  				    	  }
+			  				    	  else return;
+			  				      }
+			  				      game.positions[game.numLocations] = pos;
+								  game.numLocations++;
+			  				      break;
 			  				  }
-			  				if(minmea_parse_gga(&ggaStruct, &(buffer[2]))){
+			  				if(minmea_parse_gga(&ggaStruct, &(buffer))){
 			  							  				      pos.lat = minmea_tocoord(&ggaStruct.latitude);
 			  							  				      pos.lon = minmea_tocoord(&ggaStruct.longitude);
 			  							  				      game.time = ggaStruct.time;
+			  							  				      frameGot=1;
+			  							  				  for(int posCheckI=0;posCheckI<game.numLocations;posCheckI++)
+			  							  				  			  				      {
+
+			  							  				  			  				    	  tempPos = game.positions[posCheckI];
+			  							  				  			  				    	  if(tempPos.lat&&pos.lat){
+			  							  				  			  				    	  checkW = abs(tempPos.lat-pos.lat);
+			  							  				  			  				    	  checkH = abs(tempPos.lon-pos.lon);
+			  							  				  			  				    	  if(sqrt((checkW*checkW)+(checkH*checkH))<gpsThreshold) return;
+			  							  				  			  				    	  }
+			  							  				  			  				    	  else return;
+			  							  				  			  				      }
+			  							  				      game.positions[game.numLocations] = pos;
+															  game.numLocations++;
+			  							  				      break;
 			  							  				  }
-			  				  for(ii=0;ii<=i;ii++) buffer[ii]=0;
-			  				 i=0;
-			  				 break;
+
+			  				for(ii=0;ii<=127;ii++) buffer[ii]=0;
 			  				  }
-			  			  	        i++;
+			  			  gpsI++;
+
 
 			  		  	}
 
-	game.positions[game.numLocations] = pos;
-	game.numLocations++;
+
 }
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc) {
   RTC_AlarmTypeDef sAlarm;
