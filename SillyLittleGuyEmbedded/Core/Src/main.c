@@ -153,7 +153,7 @@ static void MX_SPI1_Init(void);
 static void MX_TIM17_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
-//static void MX_RTC_Init(void);
+static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
 void Animate (struct Img* animation, unsigned int size);
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size);
@@ -222,7 +222,7 @@ int main(void)
   MX_TIM17_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
-  MX_RTC_Init();
+  //MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   //HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
   ST7735_Unselect();
@@ -262,7 +262,7 @@ int main(void)
   while (1)
   {
 
-	  if((totalFrames++)%600==0) GetLatLon();
+	  //if((totalFrames++)%600==0) GetLatLon();
 	  //SendData();
 	  //ReceiveData();
 	  if(((game.time.hours%dayLength)==0) && game.time.hours>0) game.stepsToday=0;
@@ -337,7 +337,7 @@ int main(void)
 	  	  break;
 	  case MusicTest:
 		  //fillScreen(BLUE);
-
+		  HAL_Delay(500);
 		  freq = freqs[(toneIndex++)%8];
 		  TIM17->ARR=(uint32_t)(987*(float)1000/(float)freq);
 
@@ -351,7 +351,7 @@ int main(void)
 			  canChange = 1;
 
 		  break;
-	  case ConnorDemo:
+	 /* case ConnorDemo:
 		  	  steps=0;
 
 		  	  if((whileI++)%3==0)
@@ -390,7 +390,7 @@ int main(void)
 
 		  	  drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
 
-		  break;
+		  break;*/
 	  }
 
 
@@ -957,15 +957,15 @@ void GetLatLon()
 			  			  if(buffer[gpsI]=='\n')
 			  				  {
 			  				  if(minmea_parse_rmc(&rmcStruct, &(buffer))){
-			  				      pos.lat = minmea_tocoord(&rmcStruct.latitude);
-			  				      pos.lon = minmea_tocoord(&rmcStruct.longitude);
+			  				     // pos.lat = minmea_tocoord(&rmcStruct.latitude);
+			  				    //  pos.lon = minmea_tocoord(&rmcStruct.longitude);
 			  				      game.time = rmcStruct.time;
 			  				      frameGot=1;
 			  				      for(int posCheckI=0;posCheckI<game.numLocations;posCheckI++)
 			  				      {
 
 			  				    	  tempPos = game.positions[posCheckI];
-			  				    	if(tempPos.lat&&pos.lat){
+			  				    	if(tempPos.lat!=0&&pos.lat!=0){
 			  				    	  checkW = abs(tempPos.lat-pos.lat);
 			  				    	  checkH = abs(tempPos.lon-pos.lon);
 			  				    	  if(sqrt((checkW*checkW)+(checkH*checkH))<gpsThreshold) return;
@@ -978,15 +978,15 @@ void GetLatLon()
 			  				      break;
 			  				  }
 			  				if(minmea_parse_gga(&ggaStruct, &(buffer))){
-			  							  				      pos.lat = minmea_tocoord(&ggaStruct.latitude);
-			  							  				      pos.lon = minmea_tocoord(&ggaStruct.longitude);
+			  							  		//		      pos.lat = minmea_tocoord(&ggaStruct.latitude);
+			  							  		//		      pos.lon = minmea_tocoord(&ggaStruct.longitude);
 			  							  				      game.time = ggaStruct.time;
 			  							  				      frameGot=1;
 			  							  				  for(int posCheckI=0;posCheckI<game.numLocations;posCheckI++)
 			  							  				  			  				      {
 
 			  							  				  			  				    	  tempPos = game.positions[posCheckI];
-			  							  				  			  				    	  if(tempPos.lat&&pos.lat){
+			  							  				  			  				    	  if(tempPos.lat!=0&&pos.lat!=0){
 			  							  				  			  				    	  checkW = abs(tempPos.lat-pos.lat);
 			  							  				  			  				    	  checkH = abs(tempPos.lon-pos.lon);
 			  							  				  			  				    	  if(sqrt((checkW*checkW)+(checkH*checkH))<gpsThreshold) return;
