@@ -43,12 +43,23 @@ typedef enum _menuState {
 	StatsDisplay,
 	Main,
 	MusicTest,
-	ConnorDemo
+	ConnorDemo,
+	Settings
 }menuStates;
 struct latLon
 {
  float lat;
  float lon;
+};
+enum Scale
+{
+    A = 440,
+    B = 494,
+    C = 523,
+    D = 587,
+    E = 659,
+    F = 698,
+    G = 784
 };
 struct gameInfo
 {
@@ -104,6 +115,7 @@ struct Img sitting0;
 struct Img sitting1;
 struct Img animSitting[2];
 unsigned int currentFrame = 0;
+volatile enum Scale scale[] = {A, B, C, D, E, F, G, F, E, D, C, B, A};
 float gpsThreshold;
 volatile uint16_t palette[8] = {BLACK, BLACK, YELLOW, BLUE, GREEN, BLUE, WHITE, WHITE};
 volatile float lat;
@@ -155,6 +167,7 @@ static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
+void ChangeNote(enum Scale freq);
 void Animate (struct Img* animation, unsigned int size);
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size);
 int _ADXL343_WriteReg8 (unsigned char TargetRegister, unsigned char TargetValue);
@@ -213,6 +226,7 @@ int main(void)
   game.positions[0]=dummy;
   game.positions[1]=dummy;
   game.positions[2]=dummy;
+  gpsThreshold = .00001;
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -265,6 +279,7 @@ int main(void)
 	  //if((totalFrames++)%600==0) GetLatLon();
 	  //SendData();
 	  //ReceiveData();
+	  _ADXL343_ReadReg8(0x00, &steps, 1);
 	  if(((game.time.hours%dayLength)==0) && game.time.hours>0) game.stepsToday=0;
 	  if(((game.time.hours%weekLength)==0) && game.time.hours>0) game.weeklySteps=0;
 	  if(steps!=0){
@@ -295,7 +310,7 @@ int main(void)
 		  //Change current Menu
 		  if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2) == GPIO_PIN_SET ) {
 			  HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
-			  currentMenu = MusicTest;
+			  currentMenu = Settings;
 			  canChange = 0;
 			  fillScreen(BLACK);
 		  }
@@ -337,10 +352,12 @@ int main(void)
 	  	  break;
 	  case MusicTest:
 		  //fillScreen(BLUE);
-		  HAL_Delay(500);
-		  freq = freqs[(toneIndex++)%8];
-		  TIM17->ARR=(uint32_t)(987*(float)1000/(float)freq);
+		  if((totalFrames++)%1000000==0){
+			  freq = scale[toneIndex++%13];
+			  ChangeNote(freq);
+		  }
 
+	  case Settings:
 		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET) {
 			  currentMenu = Main;
 			  canChange = 0;
@@ -942,8 +959,8 @@ void GetLatLon()
 	int gpsI=0;
 	struct latLon pos;
 	struct latLon tempPos;
-	float checkW;
-	float checkH;
+	double checkW;
+	double checkH;
 
 	//HAL_UART_Recieve();
 	while(HAL_UART_Receive(&huart1, &(buffer[gpsI]), 1, 1000)==HAL_OK||1)
@@ -966,8 +983,8 @@ void GetLatLon()
 
 			  				    	  tempPos = game.positions[posCheckI];
 			  				    	if(tempPos.lat!=0&&pos.lat!=0){
-			  				    	  checkW = abs(tempPos.lat-pos.lat);
-			  				    	  checkH = abs(tempPos.lon-pos.lon);
+			  				    	  checkW = (double)fabs(tempPos.lat-pos.lat);
+			  				    	  checkH = (double)fabs(tempPos.lon-pos.lon);
 			  				    	  if(sqrt((checkW*checkW)+(checkH*checkH))<gpsThreshold) return;
 			  				    	game.positions[game.numLocations] = pos;
 			  				    									  game.numLocations++;
@@ -986,7 +1003,7 @@ void GetLatLon()
 			  							  				  			  				      {
 
 			  							  				  			  				    	  tempPos = game.positions[posCheckI];
-			  							  				  			  				    	  if(tempPos.lat!=0&&pos.lat!=0){
+			  							  				  			  				    	  if((tempPos.lat>.000001f||tempPos.lat<-.000001f)&&(tempPos.lon>.000001f||tempPos.lon<-.000001f)&&(pos.lat>.000001f||pos.lat<-.000001f)&&(pos.lat>.000001f||pos.lat<-.000001f)){
 			  							  				  			  				    	  checkW = abs(tempPos.lat-pos.lat);
 			  							  				  			  				    	  checkH = abs(tempPos.lon-pos.lon);
 			  							  				  			  				    	  if(sqrt((checkW*checkW)+(checkH*checkH))<gpsThreshold) return;
@@ -1019,7 +1036,10 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc) {
   	  drawString(30, 30, "testTime", BLACK, GREEN, 1, 1);
 }
 
-
+void ChangeNote(enum Scale freq)
+{
+    TIM17->ARR=(uint32_t)(987*(float)1000/(float)freq);
+}
 /* USER CODE END 4 */
 
 /**
