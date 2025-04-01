@@ -275,11 +275,11 @@ int main(void)
       fillScreen(BLACK);
   while (1)
   {
+	  _ADXL343_ReadReg8(0x00, &steps, 1);
 
-	  //if((totalFrames++)%600==0) GetLatLon();
 	  //SendData();
 	  //ReceiveData();
-	  _ADXL343_ReadReg8(0x00, &steps, 1);
+	  //_ADXL343_ReadReg8(0x00, &steps, 1);
 	  if(((game.time.hours%dayLength)==0) && game.time.hours>0) game.stepsToday=0;
 	  if(((game.time.hours%weekLength)==0) && game.time.hours>0) game.weeklySteps=0;
 	  if(steps!=0){
@@ -294,14 +294,13 @@ int main(void)
 	  switch(currentMenu){
 	  case Main:
 
-
+		  if((totalFrames)%600==0) GetLatLon();
 		  if((++updateScreen)>=5)
 		  {
 			  //Animate character
 			  Animate(animSitting,1);
 			  updateScreen = 0;
 			  //Update steps
-			  _ADXL343_ReadReg8(0x15, &steps, 1);
 			  sprintf(buffer2, "Steps today: %d ", steps);
 			  drawString(0, 20, buffer2, WHITE, BLACK, 1, 1);
 		  }
@@ -408,7 +407,9 @@ int main(void)
 		  	  drawString(70, 70, buffer, BLACK, GREEN, 1, 1);
 
 		  break;*/
+
 	  }
+	  totalFrames++;
 
 
 
@@ -870,10 +871,10 @@ void Animate (struct Img* animation, unsigned int size)
 }
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size)
 {
-  if (!HAL_I2C_Master_Transmit(&hi2c1, 0x14<<1, &TargetRegister, 1, 1000)==HAL_OK)
+  if (!HAL_I2C_Master_Transmit(&hi2c1, 0x38<<1, &TargetRegister, 1, 1000)==HAL_OK)
       return -1;
 
-  if (!HAL_I2C_Master_Receive(&hi2c1, 0x14<<1, TargetValue, size, 1000)==HAL_OK)
+  if (!HAL_I2C_Master_Receive(&hi2c1, 0x38<<1, TargetValue, size, 1000)==HAL_OK)
     return -2;
 
   return 0;
@@ -885,7 +886,7 @@ int _ADXL343_WriteReg8 (unsigned char TargetRegister, unsigned char TargetValue)
   buff[0] = TargetRegister;
   buff[1] = TargetValue;
 
-  if (HAL_I2C_Master_Transmit(&hi2c1, 0x14<<1, buff, 2, 100))
+  if (HAL_I2C_Master_Transmit(&hi2c1, 0x38<<1, buff, 2, 100))
       return -1;
 
   return 0;
@@ -973,7 +974,7 @@ void GetLatLon()
 							}//HAL_UART_Transmit(&huart2, buffer[i], 1, 1000);
 			  			  if(buffer[gpsI]=='\n')
 			  				  {
-			  				  if(minmea_parse_rmc(&rmcStruct, &(buffer))){
+			  				 /* if(minmea_parse_rmc(&rmcStruct, &(buffer))){
 			  				     // pos.lat = minmea_tocoord(&rmcStruct.latitude);
 			  				    //  pos.lon = minmea_tocoord(&rmcStruct.longitude);
 			  				      game.time = rmcStruct.time;
@@ -993,7 +994,7 @@ void GetLatLon()
 			  				      }
 
 			  				      break;
-			  				  }
+			  				  }*/
 			  				if(minmea_parse_gga(&ggaStruct, &(buffer))){
 			  							  		//		      pos.lat = minmea_tocoord(&ggaStruct.latitude);
 			  							  		//		      pos.lon = minmea_tocoord(&ggaStruct.longitude);
