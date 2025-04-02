@@ -117,6 +117,12 @@ namespace SillyLittleGuyHD
             if (_uEnBox.Checked) 
             {
                 SLGData.uid = _usernameBox.Text;
+                toSend = JsonConvert.SerializeObject(SLGData);
+                if (port != null && port.IsOpen && toSend != null)
+                {
+                    port.Write(toSend + '\r');
+                    toSend = null;
+                }
 
             }
             if (_pEnBox.Checked)
@@ -212,9 +218,19 @@ namespace SillyLittleGuyHD
                         //probably want a universal error box/message box
                         Debug.WriteLine(ex.Message);
                     }
-                    DisplaySLGData();
-                    GMapAddPoint(SLGData.locations[0].Lat, SLGData.locations[0].Lng, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.blue, "ha");
-
+                    
+                        Invoke(new Action(() =>
+                        {try
+                            {
+                                DisplaySLGData();
+                                gMap.Overlays.Clear();
+                                foreach(PointLatLng tloc in SLGData.locations)
+                                GMapAddPoint(tloc.Lat, tloc.Lng, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.blue, "ha");
+                                AddPointsToListbox();
+                            }
+                            catch { }
+                        }));
+                    
                 }
                 catch (Exception ex)
                 {

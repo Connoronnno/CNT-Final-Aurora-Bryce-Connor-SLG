@@ -88,6 +88,7 @@ struct Img
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+uint16_t checkTime=1;
 struct gameInfo game;
 struct latLon dummy;
 volatile uint16_t msCounter = 0;
@@ -98,8 +99,8 @@ volatile uint8_t beacon = 0;
 volatile uint16_t thi = 1000;
 volatile uint16_t whileI=0;
 volatile uint16_t petXPos;
-const uint16_t dayLength=24;
-const uint16_t weekLength=168;
+uint16_t dayLength=24;
+uint16_t weekLength=168;
 struct minmea_sentence_rmc rmcStruct;
 struct minmea_sentence_gga ggaStruct;
 uint16_t totalFrames=0;
@@ -173,6 +174,7 @@ int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue
 int _ADXL343_WriteReg8 (unsigned char TargetRegister, unsigned char TargetValue);
 void SendData();
 void GetLatLon();
+struct latLon GetJustLatLon();
 void ReceiveData();
 /* USER CODE END PFP */
 
@@ -226,7 +228,8 @@ int main(void)
   game.positions[0]=dummy;
   game.positions[1]=dummy;
   game.positions[2]=dummy;
-  gpsThreshold = .00001;
+  game.time.hours=0;
+  gpsThreshold = .0001;
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -280,8 +283,18 @@ int main(void)
 	  //SendData();
 	  //ReceiveData();
 	  //_ADXL343_ReadReg8(0x00, &steps, 1);
-	  if(((game.time.hours%dayLength)==0) && game.time.hours>0) game.stepsToday=0;
-	  if(((game.time.hours%weekLength)==0) && game.time.hours>0) game.weeklySteps=0;
+	  if(checkTime){
+	  if(((game.time.minutes%dayLength)==0) && game.time.seconds>0){
+		  game.stepsToday=0;
+		  checkTime=0;
+	  }
+
+	  if(((game.time.minutes%weekLength)==0) && game.time.seconds>0){
+		  game.weeklySteps=0;
+		  checkTime=0;
+	  }
+	  }
+	  if((game.time.minutes%dayLength)==1) checkTime=1;
 	  if(steps!=0){
 	  game.stepsToday +=steps*game.numLocations;
 	  game.weeklySteps+=steps*game.numLocations;
@@ -336,6 +349,19 @@ int main(void)
 			  drawString(0, 130, buffer2, WHITE, BLACK, 1, 1);
 			  sprintf(buffer2, "All time: %d ", game.allSteps);
 			  drawString(0, 120, buffer2, WHITE, BLACK, 1, 1);
+			  drawString(0, 110, "POSITIONS", WHITE, BLACK, 1,1);
+			  sprintf(buffer2, "Count/Mult: %d", game.numLocations);
+			  drawString(0, 100, buffer2, WHITE, BLACK, 1, 1);
+			  sprintf(buffer2, "Old Lat: %d.%d", (int)(game.positions[game.numLocations-1].lat), abs((int)(((game.positions[game.numLocations-1].lat)*10000))%10000));
+			  drawString(0, 90, buffer2, WHITE, BLACK, 1, 1);
+			  sprintf(buffer2, "Old Lon: %d.%d", (int)(game.positions[game.numLocations-1].lon), abs((int)(((game.positions[game.numLocations-1].lon)*10000))%10000));
+			  drawString(0, 80, buffer2, WHITE, BLACK, 1, 1);
+			  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1)==GPIO_PIN_SET){
+			  sprintf(buffer2, "Lat: %d.%d", (int)(GetJustLatLon().lat), abs(((int)((GetJustLatLon().lat)*10000))%10000));
+			  drawString(0, 70, buffer2, WHITE, BLACK, 1, 1);
+			  sprintf(buffer2, "Lon: %d.%d", (int)(GetJustLatLon().lon), abs((int)(((GetJustLatLon().lon)*10000))%10000));
+			  drawString(0, 60, buffer2, WHITE, BLACK, 1, 1);
+			  }
 
 			  //drawString(0, 70, "PET", WHITE, BLACK, 1, 1);
 			  updateScreen = 0;
@@ -357,6 +383,11 @@ int main(void)
 		  }
 
 	  case Settings:
+		  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1)==GPIO_PIN_SET)
+		  {
+			  SendData();
+			  ReceiveData();
+		  }
 		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET) {
 			  currentMenu = Main;
 			  canChange = 0;
@@ -871,10 +902,10 @@ void Animate (struct Img* animation, unsigned int size)
 }
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size)
 {
-  if (!HAL_I2C_Master_Transmit(&hi2c1, 0x38<<1, &TargetRegister, 1, 1000)==HAL_OK)
+  if (!HAL_I2C_Master_Transmit(&hi2c1, 0x14<<1, &TargetRegister, 1, 1000)==HAL_OK)
       return -1;
 
-  if (!HAL_I2C_Master_Receive(&hi2c1, 0x38<<1, TargetValue, size, 1000)==HAL_OK)
+  if (!HAL_I2C_Master_Receive(&hi2c1, 0x14<<1, TargetValue, size, 1000)==HAL_OK)
     return -2;
 
   return 0;
@@ -886,7 +917,7 @@ int _ADXL343_WriteReg8 (unsigned char TargetRegister, unsigned char TargetValue)
   buff[0] = TargetRegister;
   buff[1] = TargetValue;
 
-  if (HAL_I2C_Master_Transmit(&hi2c1, 0x38<<1, buff, 2, 100))
+  if (HAL_I2C_Master_Transmit(&hi2c1, 0x14<<1, buff, 2, 1000)==HAL_OK)
       return -1;
 
   return 0;
@@ -934,6 +965,12 @@ while(HAL_UART_Receive(&huart2, &(syncBuffer[rI]), 1, 1000)==HAL_OK)
 		{
 			 tempLoc.lat = (float)json_getReal(json_getProperty(location, "lat"));
 			 tempLoc.lon = (float)json_getReal(json_getProperty(location, "lng"));
+			 if(fabs(tempLoc.lat)<.00001)
+			 {
+
+				 tempLoc.lat = (float)json_getReal(json_getProperty(location, "Lat"));
+				 			 tempLoc.lon = (float)json_getReal(json_getProperty(location, "Lng"));
+			 }
 			 game.positions[locI] = tempLoc;
 			 locI++;
 		}
@@ -962,7 +999,7 @@ void GetLatLon()
 	struct latLon tempPos;
 	double checkW;
 	double checkH;
-
+	int posCheckI=0;
 	//HAL_UART_Recieve();
 	while(HAL_UART_Receive(&huart1, &(buffer[gpsI]), 1, 1000)==HAL_OK||1)
 			  		  	{
@@ -996,23 +1033,83 @@ void GetLatLon()
 			  				      break;
 			  				  }*/
 			  				if(minmea_parse_gga(&ggaStruct, &(buffer))){
-			  							  		//		      pos.lat = minmea_tocoord(&ggaStruct.latitude);
-			  							  		//		      pos.lon = minmea_tocoord(&ggaStruct.longitude);
+			  							  				      pos.lat = minmea_tocoord(&ggaStruct.latitude);
+			  							  				      pos.lon = minmea_tocoord(&ggaStruct.longitude);
 			  							  				      game.time = ggaStruct.time;
 			  							  				      frameGot=1;
-			  							  				  for(int posCheckI=0;posCheckI<game.numLocations;posCheckI++)
+			  							  				  posCheckI=0;
+			  							  				  for(posCheckI=0;posCheckI<game.numLocations;posCheckI++)
 			  							  				  			  				      {
 
 			  							  				  			  				    	  tempPos = game.positions[posCheckI];
 			  							  				  			  				    	  if((tempPos.lat>.000001f||tempPos.lat<-.000001f)&&(tempPos.lon>.000001f||tempPos.lon<-.000001f)&&(pos.lat>.000001f||pos.lat<-.000001f)&&(pos.lat>.000001f||pos.lat<-.000001f)){
-			  							  				  			  				    	  checkW = abs(tempPos.lat-pos.lat);
-			  							  				  			  				    	  checkH = abs(tempPos.lon-pos.lon);
+			  							  				  			  				    	  checkW = fabs(tempPos.lat-pos.lat);
+			  							  				  			  				    	  checkH = fabs(tempPos.lon-pos.lon);
 			  							  				  			  				    	  if(sqrt((checkW*checkW)+(checkH*checkH))<gpsThreshold) return;
-			  							  				  			  				  game.positions[game.numLocations] = pos;
-			  							  				  			  				  								  game.numLocations++;
+
 			  							  				  			  				    	  }
 			  							  				  			  				    	  else return;
+
 			  							  				  			  				      }
+			  							  				game.positions[game.numLocations] = pos;
+			  							  				game.numLocations++;
+			  							  				if(game.numLocations>31)game.numLocations=0;
+			  							  				      break;
+			  							  				  }
+
+			  				for(ii=0;ii<=127;ii++) buffer[ii]=0;
+			  				  }
+			  			  gpsI++;
+
+
+			  		  	}
+
+
+}
+struct latLon GetJustLatLon()
+{
+	int gpsI=0;
+	struct latLon pos;
+	struct latLon tempPos;
+	double checkW;
+	double checkH;
+	int posCheckI=0;
+	//HAL_UART_Recieve();
+	while(HAL_UART_Receive(&huart1, &(buffer[gpsI]), 1, 1000)==HAL_OK||1)
+			  		  	{
+							if(buffer[gpsI]=='$')
+							{
+								for(ii=0;ii<=127;ii++) buffer[ii]=0;
+								buffer[0]='$';
+								gpsI=0;
+							}//HAL_UART_Transmit(&huart2, buffer[i], 1, 1000);
+			  			  if(buffer[gpsI]=='\n')
+			  				  {
+			  				 /* if(minmea_parse_rmc(&rmcStruct, &(buffer))){
+			  				     // pos.lat = minmea_tocoord(&rmcStruct.latitude);
+			  				    //  pos.lon = minmea_tocoord(&rmcStruct.longitude);
+			  				      game.time = rmcStruct.time;
+			  				      frameGot=1;
+			  				      for(int posCheckI=0;posCheckI<game.numLocations;posCheckI++)
+			  				      {
+
+			  				    	  tempPos = game.positions[posCheckI];
+			  				    	if(tempPos.lat!=0&&pos.lat!=0){
+			  				    	  checkW = (double)fabs(tempPos.lat-pos.lat);
+			  				    	  checkH = (double)fabs(tempPos.lon-pos.lon);
+			  				    	  if(sqrt((checkW*checkW)+(checkH*checkH))<gpsThreshold) return;
+			  				    	game.positions[game.numLocations] = pos;
+			  				    									  game.numLocations++;
+			  				    	}
+			  				    	  else return;
+			  				      }
+
+			  				      break;
+			  				  }*/
+			  				if(minmea_parse_gga(&ggaStruct, &(buffer))){
+			  							  				      pos.lat = minmea_tocoord(&ggaStruct.latitude);
+			  							  				      pos.lon = minmea_tocoord(&ggaStruct.longitude);
+			  							  				      return pos;
 			  							  				      break;
 			  							  				  }
 
