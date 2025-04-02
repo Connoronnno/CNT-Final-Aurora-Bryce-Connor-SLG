@@ -151,6 +151,9 @@ unsigned char steps=0;
 menuStates currentMenu = Main;
 char canChange = 1;
 
+unsigned int currentSetting = 0;
+unsigned int editSetting = 0;
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -319,11 +322,11 @@ int main(void)
 	  steps=0;
 	  _ADXL343_WriteReg8(0x7E, 0xB1);
 	  }
+	  ++updateScreen;
 	  //SendData();
 	  //HAL_UART_Transmit(&huart2, "hello", 5, 100);
 	  switch(currentMenu){
 	  case Main:
-
 		  if((totalFrames)%600==0) GetLatLon();
 		  if((++updateScreen)>=5)
 		  {
@@ -416,12 +419,72 @@ int main(void)
 		  break;
 
 	  case Settings:
-		  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1)==GPIO_PIN_SET)
+		  //Just commenting this out really quick so I can test my settings menu x)
+		  //if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1)==GPIO_PIN_SET)
+		  //{
+			  //SendData();
+			  //ReceiveData();
+		  //}
+		  if(updateScreen>=5)
 		  {
-			  SendData();
-			  ReceiveData();
+			  updateScreen = 0;
+			  drawString(0, 150, "- OPTIONS -", WHITE, BLACK, 1, 1);
+			  sprintf(buffer2, "DIFFICULTY: %d ", game.challengeGoal);
+			  drawString(0, 130, buffer2, WHITE, BLACK, 1, 1); //Display the current difficulty
+			  drawString(0,110,"UPLOAD DATA",WHITE,BLACK,1,1);
+			  if(editSetting)
+			  {
+				  drawLine(0,125,128,125,WHITE);
+				  //GET OUT when the center button is pressed!
+				  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1))
+				  {
+					  editSetting = 0;
+					  drawLine(0,125,128,125,BLACK);
+				  }
+				  //Right increments the goal
+				  else if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2))
+				  {
+					  game.challengeGoal += 100;
+				  }
+				  //Left decrements the goal
+				  else if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11))
+				  {
+					  game.challengeGoal -= 100;
+				  }
+				  sprintf(buffer2, "DIFFICULTY: %d ", game.challengeGoal);
+
+			  }
+			  else{
+			  //Difficulty
+			  if(currentSetting==0)
+			  {
+				  //Try to underline the option being selected
+				  drawLine(0,125,20,125,WHITE);
+				  //Then erase the highlight under the other option not being selected
+				  drawLine(0,105,20,105,BLACK);
+			  }
+			  //Upload
+			  else if(currentSetting==1)
+			  {
+				  drawLine(0,105,20,105,WHITE);
+				  drawLine(0,125,20,125,BLACK);
+			  }
+			  //IF RIGHT BUTTON IS PRESSED, INCREMENT THE SETTINGS MENU
+			  if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2) == GPIO_PIN_SET)
+			  {
+				  ++currentSetting;
+				  if(currentSetting>1)
+					  currentSetting=0;
+			  }
+			  //PD6=Center button
+			  else if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) && currentSetting==0)
+			  {
+				  editSetting=1;
+			  }
 		  }
-		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET) {
+		  }
+
+		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET && !editSetting) {
 			  effect = MenuBeep;
 			  PlayEffect(effect);
 
@@ -431,8 +494,8 @@ int main(void)
 		  }
 		  else
 			  canChange = 1;
-
 		  break;
+
 	 /* case ConnorDemo:
 		  	  steps=0;
 
