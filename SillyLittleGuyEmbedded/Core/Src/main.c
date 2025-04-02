@@ -61,6 +61,22 @@ enum Scale
     F = 698,
     G = 784
 };
+enum Scale curNote;
+
+enum SoundEffects {
+    MenuBeep,
+    EggNoise,
+    YoungNoiseHappy,
+	YoungNoiseSad,
+    AdultNoiseHappy,
+	AdultNoiseSad,
+	Evolution
+};
+enum SoundEffects effect;
+
+
+
+
 struct gameInfo
 {
 	struct minmea_time time;
@@ -169,6 +185,7 @@ static void MX_USART2_UART_Init(void);
 static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
 void ChangeNote(enum Scale freq);
+void PlayEffect(enum SoundEffects effect);
 void Animate (struct Img* animation, unsigned int size);
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size);
 int _ADXL343_WriteReg8 (unsigned char TargetRegister, unsigned char TargetValue);
@@ -278,7 +295,7 @@ int main(void)
       fillScreen(BLACK);
   while (1)
   {
-	  _ADXL343_ReadReg8(0x00, &steps, 1);
+	  _ADXL343_ReadReg8(0x15, &steps, 1);
 
 	  //SendData();
 	  //ReceiveData();
@@ -318,15 +335,27 @@ int main(void)
 			  drawString(0, 20, buffer2, WHITE, BLACK, 1, 1);
 		  }
 
+		  //Interact with the SLG
+		  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1)==GPIO_PIN_SET)
+		  {
+			  effect = Evolution;
+			  PlayEffect(effect);
+		  }
+
 
 		  //Change current Menu
 		  if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2) == GPIO_PIN_SET ) {
-			  HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
+			  effect = MenuBeep;
+			  PlayEffect(effect);
+
 			  currentMenu = Settings;
 			  canChange = 0;
 			  fillScreen(BLACK);
 		  }
 		  else if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET ) {
+			  effect = MenuBeep;
+			  PlayEffect(effect);
+
 			  currentMenu = StatsDisplay;
 			  canChange = 0;
 			  fillScreen(BLACK);
@@ -367,6 +396,9 @@ int main(void)
 			  updateScreen = 0;
 		  }
 	  	  if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2) == GPIO_PIN_SET ){
+	  		effect = MenuBeep;
+	  		PlayEffect(effect);
+
 	  		currentMenu = Main;
 	  		canChange = 0;
 	  		fillScreen(BLACK);
@@ -381,6 +413,7 @@ int main(void)
 			  freq = scale[toneIndex++%13];
 			  ChangeNote(freq);
 		  }
+		  break;
 
 	  case Settings:
 		  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1)==GPIO_PIN_SET)
@@ -389,9 +422,11 @@ int main(void)
 			  ReceiveData();
 		  }
 		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET) {
+			  effect = MenuBeep;
+			  PlayEffect(effect);
+
 			  currentMenu = Main;
 			  canChange = 0;
-			  HAL_TIM_PWM_Stop(&htim17, TIM_CHANNEL_1);
 			  fillScreen(BLACK);
 		  }
 		  else
@@ -889,6 +924,139 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void ChangeNote(enum Scale freq)
+{
+    TIM17->ARR=(uint32_t)(987*(float)1000/(float)freq);
+}
+void PlayEffect(enum SoundEffects effect) {
+	HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
+	HAL_Delay(5);
+    switch(effect){
+        case MenuBeep:
+
+        	curNote = G*3;
+        	ChangeNote(curNote);
+        	HAL_Delay(25);
+
+        	curNote = G*2;
+        	ChangeNote(curNote);
+        	HAL_Delay(25);
+
+            break;
+        case EggNoise:
+
+        	curNote = A;
+        	ChangeNote(curNote);
+        	HAL_Delay(20);
+
+        	curNote = C;
+        	ChangeNote(curNote);
+        	HAL_Delay(20);
+
+        	curNote = A;
+        	ChangeNote(curNote);
+        	HAL_Delay(20);
+
+        	curNote = C;
+        	ChangeNote(curNote);
+        	HAL_Delay(20);
+
+            break;
+        case YoungNoiseHappy:
+
+        	curNote = F*4;
+        	ChangeNote(curNote);
+        	HAL_Delay(35);
+
+        	curNote = B*4;
+        	ChangeNote(curNote);
+        	HAL_Delay(15);
+
+            break;
+        case YoungNoiseSad:
+
+        	curNote = B*4;
+        	ChangeNote(curNote);
+        	HAL_Delay(35);
+
+        	curNote = B*3;
+        	ChangeNote(curNote);
+        	HAL_Delay(15);
+
+            break;
+        case AdultNoiseHappy:
+
+        	curNote = F/4;
+        	ChangeNote(curNote);
+        	HAL_Delay(35);
+
+        	curNote = B/4;
+        	ChangeNote(curNote);
+        	HAL_Delay(15);
+
+            break;
+        case AdultNoiseSad:
+
+        	curNote = C/4;
+        	ChangeNote(curNote);
+        	HAL_Delay(35);
+
+        	curNote = A/4;
+        	ChangeNote(curNote);
+        	HAL_Delay(15);
+
+        	break;
+        case Evolution:
+
+        	curNote = A*2;
+        	ChangeNote(curNote);
+        	HAL_Delay(50);
+
+        	curNote = B*2;
+        	ChangeNote(curNote);
+        	HAL_Delay(50);
+
+        	curNote = C*2;
+        	ChangeNote(curNote);
+        	HAL_Delay(50);
+
+        	curNote = A*2;
+        	ChangeNote(curNote);
+        	HAL_Delay(50);
+
+        	curNote = C*2;
+        	ChangeNote(curNote);
+        	HAL_Delay(50);
+
+        	curNote = D*2;
+        	ChangeNote(curNote);
+        	HAL_Delay(50);
+
+        	curNote = B*2;
+        	ChangeNote(curNote);
+        	HAL_Delay(50);
+
+        	curNote = D*2;
+        	ChangeNote(curNote);
+        	HAL_Delay(50);
+
+        	curNote = E*2;
+        	ChangeNote(curNote);
+        	HAL_Delay(50);
+
+        	curNote = G*2;
+        	ChangeNote(curNote);
+        	HAL_Delay(50);
+
+        	curNote = G*2;
+        	ChangeNote(curNote);
+        	HAL_Delay(50);
+
+        	break;
+    }
+    HAL_TIM_PWM_Stop(&htim17, TIM_CHANNEL_1);
+}
+
 //AURORA: Put custom functions here!
 void Animate (struct Img* animation, unsigned int size)
 {
@@ -1134,10 +1302,7 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc) {
   	  drawString(30, 30, "testTime", BLACK, GREEN, 1, 1);
 }
 
-void ChangeNote(enum Scale freq)
-{
-    TIM17->ARR=(uint32_t)(987*(float)1000/(float)freq);
-}
+
 /* USER CODE END 4 */
 
 /**
