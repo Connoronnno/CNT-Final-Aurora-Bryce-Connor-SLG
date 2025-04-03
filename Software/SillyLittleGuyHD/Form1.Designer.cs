@@ -57,6 +57,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.UI_Locations_lbx = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this._userbutton = new System.Windows.Forms.Button();
             this.UI_ComConnect_btn = new System.Windows.Forms.Button();
             this.UI_ComStatus_lbl = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -66,7 +67,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.UI_GrabData_btn = new System.Windows.Forms.Button();
             this.UI_SendData_btn = new System.Windows.Forms.Button();
-            this._userbutton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -400,6 +400,16 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Save Menu";
             // 
+            // _userbutton
+            // 
+            this._userbutton.Location = new System.Drawing.Point(337, 127);
+            this._userbutton.Name = "_userbutton";
+            this._userbutton.Size = new System.Drawing.Size(112, 20);
+            this._userbutton.TabIndex = 12;
+            this._userbutton.Text = "Update Username";
+            this._userbutton.UseVisualStyleBackColor = true;
+            this._userbutton.Click += new System.EventHandler(this._userbutton_Click);
+            // 
             // UI_ComConnect_btn
             // 
             this.UI_ComConnect_btn.Location = new System.Drawing.Point(380, 288);
@@ -483,15 +493,6 @@
             this.UI_SendData_btn.TabIndex = 0;
             this.UI_SendData_btn.Text = "Send Save";
             this.UI_SendData_btn.UseVisualStyleBackColor = true;
-            // 
-            // _userbutton
-            // 
-            this._userbutton.Location = new System.Drawing.Point(337, 127);
-            this._userbutton.Name = "_userbutton";
-            this._userbutton.Size = new System.Drawing.Size(112, 20);
-            this._userbutton.TabIndex = 12;
-            this._userbutton.Text = "Update Username";
-            this._userbutton.UseVisualStyleBackColor = true;
             // 
             // PetMenu
             // 

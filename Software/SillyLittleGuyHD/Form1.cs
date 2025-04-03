@@ -61,7 +61,6 @@ namespace SillyLittleGuyHD
         {
             work = true;
             UI_SendData_btn.Click += UI_SendData_btn_Click;
-            _usernameBox.TextChanged += _usernameBox_TextChanged;
 
             UI_ComPort_cbx.DataSource = null;
             UI_ComPort_cbx.DataSource = SerialPort.GetPortNames();
@@ -111,20 +110,6 @@ namespace SillyLittleGuyHD
             DisplaySLGData();
         }
 
-        private void _usernameBox_TextChanged(object sender, EventArgs e)
-        {
-            if (_uEnBox.Checked) 
-            {
-                SLGData.uid = _usernameBox.Text;
-                toSend = JsonConvert.SerializeObject(SLGData);
-                if (port != null && port.IsOpen && toSend != null)
-                {
-                    port.Write(toSend + '\r');
-                    toSend = null;
-                }
-
-            }
-        }
         async private void UI_SendData_btn_Click(object sender, EventArgs e)
         {
             /*microsoft copilot's dummy data
@@ -501,6 +486,17 @@ namespace SillyLittleGuyHD
             if (port!=null&&port.IsOpen&&toSend!=null)
             {
                 port.Write(toSend+'\r');
+                toSend = null;
+            }
+        }
+
+        private void _userbutton_Click(object sender, EventArgs e)
+        {
+            SLGData.uid = _usernameBox.Text;
+            toSend = JsonConvert.SerializeObject(SLGData);
+            if (port != null && port.IsOpen && toSend != null)
+            {
+                port.Write(toSend + '\r');
                 toSend = null;
             }
         }
