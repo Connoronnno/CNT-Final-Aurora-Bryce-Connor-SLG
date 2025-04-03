@@ -56,19 +56,17 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label3 = new System.Windows.Forms.Label();
             this.UI_Locations_lbx = new System.Windows.Forms.ListBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.UI_ComConnect_btn = new System.Windows.Forms.Button();
-            this.UI_ComStatus_lbl = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.UI_ComPort_cbx = new System.Windows.Forms.ComboBox();
-            this._pEnBox = new System.Windows.Forms.CheckBox();
-            this._uEnBox = new System.Windows.Forms.CheckBox();
-            this._usernameBox = new System.Windows.Forms.TextBox();
-            this._passBox = new System.Windows.Forms.TextBox();
-            this.UI_SLG_btn = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.UI_GrabData_btn = new System.Windows.Forms.Button();
             this.UI_SendData_btn = new System.Windows.Forms.Button();
+            this.UI_GrabData_btn = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.UI_SLG_btn = new System.Windows.Forms.Button();
+            this._usernameBox = new System.Windows.Forms.TextBox();
+            this._uEnBox = new System.Windows.Forms.CheckBox();
+            this.UI_ComPort_cbx = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.UI_ComStatus_lbl = new System.Windows.Forms.Label();
+            this.UI_ComConnect_btn = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -383,107 +381,24 @@
             this.UI_Locations_lbx.Size = new System.Drawing.Size(236, 251);
             this.UI_Locations_lbx.TabIndex = 7;
             // 
-            // tabPage3
+            // UI_SendData_btn
             // 
-            this.tabPage3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tabPage3.Controls.Add(this.UI_ComConnect_btn);
-            this.tabPage3.Controls.Add(this.UI_ComStatus_lbl);
-            this.tabPage3.Controls.Add(this.label5);
-            this.tabPage3.Controls.Add(this.UI_ComPort_cbx);
-            this.tabPage3.Controls.Add(this._pEnBox);
-            this.tabPage3.Controls.Add(this._uEnBox);
-            this.tabPage3.Controls.Add(this._usernameBox);
-            this.tabPage3.Controls.Add(this._passBox);
-            this.tabPage3.Controls.Add(this.UI_SLG_btn);
-            this.tabPage3.Controls.Add(this.label11);
-            this.tabPage3.Controls.Add(this.UI_GrabData_btn);
-            this.tabPage3.Controls.Add(this.UI_SendData_btn);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(780, 412);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Save Menu";
+            this.UI_SendData_btn.Location = new System.Drawing.Point(299, 53);
+            this.UI_SendData_btn.Name = "UI_SendData_btn";
+            this.UI_SendData_btn.Size = new System.Drawing.Size(93, 42);
+            this.UI_SendData_btn.TabIndex = 0;
+            this.UI_SendData_btn.Text = "Send Save";
+            this.UI_SendData_btn.UseVisualStyleBackColor = true;
             // 
-            // UI_ComConnect_btn
+            // UI_GrabData_btn
             // 
-            this.UI_ComConnect_btn.Location = new System.Drawing.Point(380, 288);
-            this.UI_ComConnect_btn.Name = "UI_ComConnect_btn";
-            this.UI_ComConnect_btn.Size = new System.Drawing.Size(86, 23);
-            this.UI_ComConnect_btn.TabIndex = 11;
-            this.UI_ComConnect_btn.Text = "Connect";
-            this.UI_ComConnect_btn.UseVisualStyleBackColor = true;
-            this.UI_ComConnect_btn.Click += new System.EventHandler(this.ConnectComPort);
-            // 
-            // UI_ComStatus_lbl
-            // 
-            this.UI_ComStatus_lbl.AutoSize = true;
-            this.UI_ComStatus_lbl.Location = new System.Drawing.Point(340, 313);
-            this.UI_ComStatus_lbl.Name = "UI_ComStatus_lbl";
-            this.UI_ComStatus_lbl.Size = new System.Drawing.Size(109, 13);
-            this.UI_ComStatus_lbl.TabIndex = 10;
-            this.UI_ComStatus_lbl.Text = "Status: Disconnected";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(346, 273);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Com Port Selection";
-            // 
-            // UI_ComPort_cbx
-            // 
-            this.UI_ComPort_cbx.FormattingEnabled = true;
-            this.UI_ComPort_cbx.Location = new System.Drawing.Point(319, 289);
-            this.UI_ComPort_cbx.Name = "UI_ComPort_cbx";
-            this.UI_ComPort_cbx.Size = new System.Drawing.Size(61, 21);
-            this.UI_ComPort_cbx.TabIndex = 8;
-            this.UI_ComPort_cbx.DropDown += new System.EventHandler(this.UI_ComPort_cbx_DropDown);
-            // 
-            // _pEnBox
-            // 
-            this._pEnBox.AutoSize = true;
-            this._pEnBox.Location = new System.Drawing.Point(450, 130);
-            this._pEnBox.Name = "_pEnBox";
-            this._pEnBox.Size = new System.Drawing.Size(107, 17);
-            this._pEnBox.TabIndex = 7;
-            this._pEnBox.Text = "update password";
-            this._pEnBox.UseVisualStyleBackColor = true;
-            // 
-            // _uEnBox
-            // 
-            this._uEnBox.AutoSize = true;
-            this._uEnBox.Location = new System.Drawing.Point(450, 104);
-            this._uEnBox.Name = "_uEnBox";
-            this._uEnBox.Size = new System.Drawing.Size(108, 17);
-            this._uEnBox.TabIndex = 6;
-            this._uEnBox.Text = "update username";
-            this._uEnBox.UseVisualStyleBackColor = true;
-            // 
-            // _usernameBox
-            // 
-            this._usernameBox.Location = new System.Drawing.Point(344, 101);
-            this._usernameBox.Name = "_usernameBox";
-            this._usernameBox.Size = new System.Drawing.Size(100, 20);
-            this._usernameBox.TabIndex = 5;
-            // 
-            // _passBox
-            // 
-            this._passBox.Location = new System.Drawing.Point(344, 127);
-            this._passBox.Name = "_passBox";
-            this._passBox.Size = new System.Drawing.Size(100, 20);
-            this._passBox.TabIndex = 4;
-            // 
-            // UI_SLG_btn
-            // 
-            this.UI_SLG_btn.Location = new System.Drawing.Point(344, 185);
-            this.UI_SLG_btn.Name = "UI_SLG_btn";
-            this.UI_SLG_btn.Size = new System.Drawing.Size(93, 42);
-            this.UI_SLG_btn.TabIndex = 3;
-            this.UI_SLG_btn.Text = "Update SLG";
-            this.UI_SLG_btn.UseVisualStyleBackColor = true;
-            this.UI_SLG_btn.Click += new System.EventHandler(this.UI_SLG_btn_Click);
+            this.UI_GrabData_btn.Location = new System.Drawing.Point(398, 53);
+            this.UI_GrabData_btn.Name = "UI_GrabData_btn";
+            this.UI_GrabData_btn.Size = new System.Drawing.Size(93, 42);
+            this.UI_GrabData_btn.TabIndex = 1;
+            this.UI_GrabData_btn.Text = "Receive Data";
+            this.UI_GrabData_btn.UseVisualStyleBackColor = true;
+            this.UI_GrabData_btn.Click += new System.EventHandler(this.UI_GrabData_btn_Click);
             // 
             // label11
             // 
@@ -496,24 +411,88 @@
             this.label11.Text = "Send and Recieve database values";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // UI_GrabData_btn
+            // UI_SLG_btn
             // 
-            this.UI_GrabData_btn.Location = new System.Drawing.Point(398, 53);
-            this.UI_GrabData_btn.Name = "UI_GrabData_btn";
-            this.UI_GrabData_btn.Size = new System.Drawing.Size(93, 42);
-            this.UI_GrabData_btn.TabIndex = 1;
-            this.UI_GrabData_btn.Text = "Receive Data";
-            this.UI_GrabData_btn.UseVisualStyleBackColor = true;
-            this.UI_GrabData_btn.Click += new System.EventHandler(this.UI_GrabData_btn_Click);
+            this.UI_SLG_btn.Location = new System.Drawing.Point(344, 185);
+            this.UI_SLG_btn.Name = "UI_SLG_btn";
+            this.UI_SLG_btn.Size = new System.Drawing.Size(93, 42);
+            this.UI_SLG_btn.TabIndex = 3;
+            this.UI_SLG_btn.Text = "Update SLG";
+            this.UI_SLG_btn.UseVisualStyleBackColor = true;
+            this.UI_SLG_btn.Click += new System.EventHandler(this.UI_SLG_btn_Click);
             // 
-            // UI_SendData_btn
+            // _usernameBox
             // 
-            this.UI_SendData_btn.Location = new System.Drawing.Point(299, 53);
-            this.UI_SendData_btn.Name = "UI_SendData_btn";
-            this.UI_SendData_btn.Size = new System.Drawing.Size(93, 42);
-            this.UI_SendData_btn.TabIndex = 0;
-            this.UI_SendData_btn.Text = "Send Save";
-            this.UI_SendData_btn.UseVisualStyleBackColor = true;
+            this._usernameBox.Location = new System.Drawing.Point(344, 101);
+            this._usernameBox.Name = "_usernameBox";
+            this._usernameBox.Size = new System.Drawing.Size(100, 20);
+            this._usernameBox.TabIndex = 5;
+            // 
+            // _uEnBox
+            // 
+            this._uEnBox.AutoSize = true;
+            this._uEnBox.Location = new System.Drawing.Point(450, 104);
+            this._uEnBox.Name = "_uEnBox";
+            this._uEnBox.Size = new System.Drawing.Size(108, 17);
+            this._uEnBox.TabIndex = 6;
+            this._uEnBox.Text = "update username";
+            this._uEnBox.UseVisualStyleBackColor = true;
+            // 
+            // UI_ComPort_cbx
+            // 
+            this.UI_ComPort_cbx.FormattingEnabled = true;
+            this.UI_ComPort_cbx.Location = new System.Drawing.Point(319, 289);
+            this.UI_ComPort_cbx.Name = "UI_ComPort_cbx";
+            this.UI_ComPort_cbx.Size = new System.Drawing.Size(61, 21);
+            this.UI_ComPort_cbx.TabIndex = 8;
+            this.UI_ComPort_cbx.DropDown += new System.EventHandler(this.UI_ComPort_cbx_DropDown);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(346, 273);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(97, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Com Port Selection";
+            // 
+            // UI_ComStatus_lbl
+            // 
+            this.UI_ComStatus_lbl.AutoSize = true;
+            this.UI_ComStatus_lbl.Location = new System.Drawing.Point(340, 313);
+            this.UI_ComStatus_lbl.Name = "UI_ComStatus_lbl";
+            this.UI_ComStatus_lbl.Size = new System.Drawing.Size(109, 13);
+            this.UI_ComStatus_lbl.TabIndex = 10;
+            this.UI_ComStatus_lbl.Text = "Status: Disconnected";
+            // 
+            // UI_ComConnect_btn
+            // 
+            this.UI_ComConnect_btn.Location = new System.Drawing.Point(380, 288);
+            this.UI_ComConnect_btn.Name = "UI_ComConnect_btn";
+            this.UI_ComConnect_btn.Size = new System.Drawing.Size(86, 23);
+            this.UI_ComConnect_btn.TabIndex = 11;
+            this.UI_ComConnect_btn.Text = "Connect";
+            this.UI_ComConnect_btn.UseVisualStyleBackColor = true;
+            this.UI_ComConnect_btn.Click += new System.EventHandler(this.ConnectComPort);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage3.Controls.Add(this.UI_ComConnect_btn);
+            this.tabPage3.Controls.Add(this.UI_ComStatus_lbl);
+            this.tabPage3.Controls.Add(this.label5);
+            this.tabPage3.Controls.Add(this.UI_ComPort_cbx);
+            this.tabPage3.Controls.Add(this._uEnBox);
+            this.tabPage3.Controls.Add(this._usernameBox);
+            this.tabPage3.Controls.Add(this.UI_SLG_btn);
+            this.tabPage3.Controls.Add(this.label11);
+            this.tabPage3.Controls.Add(this.UI_GrabData_btn);
+            this.tabPage3.Controls.Add(this.UI_SendData_btn);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(780, 412);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Save Menu";
             // 
             // PetMenu
             // 
@@ -555,7 +534,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.PictureBox UI_PetPicture_pbx;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ListBox UI_Locations_lbx;
         private System.Windows.Forms.Button UI_NextCycle_btn;
         private System.Windows.Forms.Button UI_PrevCycle_btn;
@@ -577,19 +555,18 @@
         private System.Windows.Forms.Label UI_WeeklySteps_lbl;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button UI_ComConnect_btn;
+        private System.Windows.Forms.Label UI_ComStatus_lbl;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox UI_ComPort_cbx;
+        private System.Windows.Forms.CheckBox _uEnBox;
+        private System.Windows.Forms.TextBox _usernameBox;
+        private System.Windows.Forms.Button UI_SLG_btn;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button UI_GrabData_btn;
         private System.Windows.Forms.Button UI_SendData_btn;
-        private System.Windows.Forms.Button UI_SLG_btn;
-        private System.Windows.Forms.TextBox _usernameBox;
-        private System.Windows.Forms.TextBox _passBox;
-        private System.Windows.Forms.CheckBox _pEnBox;
-        private System.Windows.Forms.CheckBox _uEnBox;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox UI_ComPort_cbx;
-        private System.Windows.Forms.Button UI_ComConnect_btn;
-        private System.Windows.Forms.Label UI_ComStatus_lbl;
     }
 }
 

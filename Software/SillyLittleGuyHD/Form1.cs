@@ -62,7 +62,6 @@ namespace SillyLittleGuyHD
             work = true;
             UI_SendData_btn.Click += UI_SendData_btn_Click;
             _usernameBox.TextChanged += _usernameBox_TextChanged;
-            _passBox.TextChanged += _usernameBox_TextChanged;
 
             UI_ComPort_cbx.DataSource = null;
             UI_ComPort_cbx.DataSource = SerialPort.GetPortNames();
@@ -123,11 +122,6 @@ namespace SillyLittleGuyHD
                     port.Write(toSend + '\r');
                     toSend = null;
                 }
-
-            }
-            if (_pEnBox.Checked)
-            {
-                SLGData.password = _passBox.Text;
 
             }
         }
