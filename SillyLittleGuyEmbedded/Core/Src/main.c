@@ -87,6 +87,7 @@ struct gameInfo
 	unsigned int allSteps;
     unsigned int weeklySteps;
     unsigned int stepsToday;
+    unsigned int XP; //This is the amount of XP (steps*positions) the user has
     unsigned int challengeGoal;
     char uid[32];
 	//need to implement:
@@ -152,8 +153,8 @@ menuStates currentMenu = Main;
 char canChange = 1;
 
 unsigned int currentSetting = 0;
-unsigned int editSetting = 0;
-
+unsigned int editDifficulty = 0;
+unsigned int userUpload = 0;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -328,14 +329,15 @@ int main(void)
 	  switch(currentMenu){
 	  case Main:
 		  if((totalFrames)%600==0) GetLatLon();
-		  if((++updateScreen)>=5)
+		  if(updateScreen>=5)
 		  {
 			  //Animate character
 			  Animate(animSitting,1);
 			  updateScreen = 0;
 			  //Update steps
-			  sprintf(buffer2, "Steps today: %d ", steps);
-			  drawString(0, 20, buffer2, WHITE, BLACK, 1, 1);
+			  drawString(0,150,"-SILLY LITTLE GUY-",WHITE,BLACK,1,1);
+			  sprintf(buffer2, "Steps: %d ", game.stepsToday);
+			  drawString(0, 10, buffer2, WHITE, BLACK, 1, 1);
 		  }
 
 		  //Interact with the SLG
@@ -370,7 +372,7 @@ int main(void)
 		  break;
 	  case StatsDisplay:
 
-		  if((++updateScreen)>=5)
+		  if(updateScreen>=5)
 		  {
 			  //fillScreen(BLACK);
 
@@ -394,8 +396,6 @@ int main(void)
 			  sprintf(buffer2, "Lon: %d.%d", (int)(GetJustLatLon().lon), abs((int)(((GetJustLatLon().lon)*10000))%10000));
 			  drawString(0, 60, buffer2, WHITE, BLACK, 1, 1);
 			  }
-
-			  //drawString(0, 70, "PET", WHITE, BLACK, 1, 1);
 			  updateScreen = 0;
 		  }
 	  	  if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2) == GPIO_PIN_SET ){
@@ -425,31 +425,42 @@ int main(void)
 			  //SendData();
 			  //ReceiveData();
 		  //}
-		  if(updateScreen>=5)
+
+		  if(updateScreen>=2)
 		  {
 			  updateScreen = 0;
-			  drawString(0, 150, "- OPTIONS -", WHITE, BLACK, 1, 1);
-			  sprintf(buffer2, "DIFFICULTY: %d ", game.challengeGoal);
+			  drawString(0, 150, "-OPTIONS-", WHITE, BLACK, 1, 1);
+			  sprintf(buffer2, "GOAL: %d ", game.challengeGoal);
 			  drawString(0, 130, buffer2, WHITE, BLACK, 1, 1); //Display the current difficulty
 			  drawString(0,110,"UPLOAD DATA",WHITE,BLACK,1,1);
-			  if(editSetting)
+			  if(editDifficulty)
 			  {
+				  //Editing difficulty
 				  drawLine(0,125,128,125,WHITE);
 				  //GET OUT when the center button is pressed!
 				  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1))
 				  {
-					  editSetting = 0;
+					  editDifficulty = 0;
 					  drawLine(0,125,128,125,BLACK);
 				  }
 				  //Right increments the goal
 				  else if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2))
 				  {
-					  game.challengeGoal += 100;
+					  game.challengeGoal += 1000;
 				  }
 				  //Left decrements the goal
 				  else if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11))
 				  {
-					  game.challengeGoal -= 100;
+					  game.challengeGoal -= 1000;
+				  }
+
+				  if(game.challengeGoal>=999000)
+				  {
+					  game.challengeGoal = 0;
+				  }
+				  else if (game.challengeGoal<=0)
+				  {
+					  game.challengeGoal=999000;
 				  }
 				  sprintf(buffer2, "DIFFICULTY: %d ", game.challengeGoal);
 
@@ -479,12 +490,16 @@ int main(void)
 			  //PD6=Center button
 			  else if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) && currentSetting==0)
 			  {
-				  editSetting=1;
+				  editDifficulty=1;
+			  }
+			  else if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) && currentSetting==1)
+			  {
+				  userUpload=1;
 			  }
 		  }
 		  }
 
-		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET && !editSetting) {
+		  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == GPIO_PIN_SET && !editDifficulty) {
 			  effect = MenuBeep;
 			  PlayEffect(effect);
 
@@ -1128,7 +1143,7 @@ void Animate (struct Img* animation, unsigned int size)
 	{
 		currentFrame = 0;
 	}
-	drawImage(animation[currentFrame].Body, palette, 40, 40, 64, 64, animation[currentFrame].Size);
+	drawImage(animation[currentFrame].Body, palette, 30, 40, 64, 64, animation[currentFrame].Size);
 	return;
 }
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size)
