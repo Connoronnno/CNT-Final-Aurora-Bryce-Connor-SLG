@@ -32,6 +32,12 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.UI_nameLabel = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.UI_LifeSteps_lbl = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.UI_Evolution_lbl = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -44,9 +50,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.UI_WeeklySteps_lbl = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.UI_StepsGroup_gbx = new System.Windows.Forms.GroupBox();
-            this.UI_LifeSteps_lbl = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.UI_NextCycle_btn = new System.Windows.Forms.Button();
@@ -69,11 +72,12 @@
             this.UI_SendData_btn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.UI_StepsGroup_gbx.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UI_PetPicture_pbx)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -105,11 +109,12 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage1.Controls.Add(this.groupBox7);
+            this.tabPage1.Controls.Add(this.groupBox6);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.UI_StepsGroup_gbx);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.UI_PetPicture_pbx);
             this.tabPage1.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -120,12 +125,74 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Pet Menu";
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox7.Controls.Add(this.UI_nameLabel);
+            this.groupBox7.Controls.Add(this.label12);
+            this.groupBox7.Location = new System.Drawing.Point(503, 6);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(271, 54);
+            this.groupBox7.TabIndex = 10;
+            this.groupBox7.TabStop = false;
+            // 
+            // UI_nameLabel
+            // 
+            this.UI_nameLabel.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UI_nameLabel.Location = new System.Drawing.Point(137, 15);
+            this.UI_nameLabel.Name = "UI_nameLabel";
+            this.UI_nameLabel.Size = new System.Drawing.Size(128, 18);
+            this.UI_nameLabel.TabIndex = 7;
+            this.UI_nameLabel.Text = "N/A";
+            this.UI_nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(17, 15);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(86, 20);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "User Name:";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Controls.Add(this.UI_LifeSteps_lbl);
+            this.groupBox6.Controls.Add(this.label9);
+            this.groupBox6.Location = new System.Drawing.Point(503, 55);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(271, 54);
+            this.groupBox6.TabIndex = 9;
+            this.groupBox6.TabStop = false;
+            // 
+            // UI_LifeSteps_lbl
+            // 
+            this.UI_LifeSteps_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UI_LifeSteps_lbl.Location = new System.Drawing.Point(137, 15);
+            this.UI_LifeSteps_lbl.Name = "UI_LifeSteps_lbl";
+            this.UI_LifeSteps_lbl.Size = new System.Drawing.Size(128, 18);
+            this.UI_LifeSteps_lbl.TabIndex = 7;
+            this.UI_LifeSteps_lbl.Text = "N/A";
+            this.UI_LifeSteps_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(17, 15);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(112, 20);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Lifetime Steps:";
+            // 
             // groupBox5
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.UI_Evolution_lbl);
             this.groupBox5.Controls.Add(this.label10);
-            this.groupBox5.Location = new System.Drawing.Point(503, 242);
+            this.groupBox5.Location = new System.Drawing.Point(503, 268);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(271, 45);
             this.groupBox5.TabIndex = 11;
@@ -156,7 +223,7 @@
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.UI_Emotion_lbl);
             this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Location = new System.Drawing.Point(503, 183);
+            this.groupBox4.Location = new System.Drawing.Point(503, 217);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(271, 45);
             this.groupBox4.TabIndex = 9;
@@ -187,7 +254,7 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.UI_DailySteps_lbl);
             this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Location = new System.Drawing.Point(503, 124);
+            this.groupBox3.Location = new System.Drawing.Point(504, 166);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(271, 45);
             this.groupBox3.TabIndex = 10;
@@ -218,9 +285,9 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.UI_WeeklySteps_lbl);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(503, 65);
+            this.groupBox2.Location = new System.Drawing.Point(503, 115);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(271, 45);
+            this.groupBox2.Size = new System.Drawing.Size(271, 49);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             // 
@@ -244,44 +311,13 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Weekly Steps:";
             // 
-            // UI_StepsGroup_gbx
-            // 
-            this.UI_StepsGroup_gbx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UI_StepsGroup_gbx.Controls.Add(this.UI_LifeSteps_lbl);
-            this.UI_StepsGroup_gbx.Controls.Add(this.label2);
-            this.UI_StepsGroup_gbx.Location = new System.Drawing.Point(503, 6);
-            this.UI_StepsGroup_gbx.Name = "UI_StepsGroup_gbx";
-            this.UI_StepsGroup_gbx.Size = new System.Drawing.Size(271, 45);
-            this.UI_StepsGroup_gbx.TabIndex = 8;
-            this.UI_StepsGroup_gbx.TabStop = false;
-            // 
-            // UI_LifeSteps_lbl
-            // 
-            this.UI_LifeSteps_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_LifeSteps_lbl.Location = new System.Drawing.Point(137, 15);
-            this.UI_LifeSteps_lbl.Name = "UI_LifeSteps_lbl";
-            this.UI_LifeSteps_lbl.Size = new System.Drawing.Size(128, 18);
-            this.UI_LifeSteps_lbl.TabIndex = 7;
-            this.UI_LifeSteps_lbl.Text = "N/A";
-            this.UI_LifeSteps_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(17, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 20);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Lifetime Steps:";
-            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.UI_NextCycle_btn);
             this.groupBox1.Controls.Add(this.UI_PrevCycle_btn);
-            this.groupBox1.Location = new System.Drawing.Point(503, 293);
+            this.groupBox1.Location = new System.Drawing.Point(504, 306);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(270, 99);
             this.groupBox1.TabIndex = 5;
@@ -506,6 +542,10 @@
             this.Text = "Pet Display";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -514,8 +554,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.UI_StepsGroup_gbx.ResumeLayout(false);
-            this.UI_StepsGroup_gbx.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.UI_PetPicture_pbx)).EndInit();
             this.tabPage2.ResumeLayout(false);
@@ -539,9 +577,6 @@
         private System.Windows.Forms.Button UI_PrevCycle_btn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label UI_LifeSteps_lbl;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox UI_StepsGroup_gbx;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label UI_Evolution_lbl;
         private System.Windows.Forms.Label label10;
@@ -567,6 +602,12 @@
         private System.Windows.Forms.Button UI_GrabData_btn;
         private System.Windows.Forms.Button UI_SendData_btn;
         private System.Windows.Forms.Button _userbutton;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label UI_LifeSteps_lbl;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label UI_nameLabel;
+        private System.Windows.Forms.Label label12;
     }
 }
 

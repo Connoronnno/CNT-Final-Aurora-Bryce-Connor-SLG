@@ -107,7 +107,7 @@ namespace SillyLittleGuyHD
             GMapAddPoint(53.5684, -113.5019, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red_pushpin, "NAIT_Default");
             AddPointsToListbox();
 
-            DisplaySLGData();
+            //DisplaySLGData();
         }
 
         async private void UI_SendData_btn_Click(object sender, EventArgs e)
@@ -382,7 +382,7 @@ namespace SillyLittleGuyHD
         {
             if (SLGData == null)
                 return;
-
+            UI_nameLabel.Text = SLGData.uid;
             UI_LifeSteps_lbl.Text = SLGData.lifeSteps.ToString();
             UI_WeeklySteps_lbl.Text = SLGData.weeklySteps.ToString();
             UI_DailySteps_lbl.Text = SLGData.dailySteps.ToString();
@@ -433,6 +433,7 @@ namespace SillyLittleGuyHD
            // data.Prepend('{');
             //data.Append('}');
             SLGData = JsonConvert.DeserializeObject<SillyLittleData>(data);
+            DisplaySLGData();
         }
 
         private void ConnectComPort(object sender, EventArgs e)
@@ -500,5 +501,6 @@ namespace SillyLittleGuyHD
                 toSend = null;
             }
         }
+
     }
 }
