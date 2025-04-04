@@ -478,6 +478,12 @@ int main(void)
 				  sprintf(buffer2, "DIFFICULTY: %d ", game.dailyGoal);
 
 			  }
+			  else if(userUpload)
+			  {
+				  userUpload=0;
+				  SendData();
+				  ReceiveData();
+			  }
 			  else{
 			  //Difficulty
 			  if(currentSetting==0)
@@ -1160,7 +1166,7 @@ void PlayEffect(enum SoundEffects effect) {
 //INTERRUPTS ARE CALLED BACK HERE
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
 {
-	//Center=2
+	/*//Center=2
 	if(GPIO_PIN==2)
 	{
 
@@ -1174,7 +1180,7 @@ void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
 	else if(GPIO_PIN==2048)
 	{
 
-	}
+	}*/
 }
 
 

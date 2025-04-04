@@ -424,16 +424,27 @@ namespace SillyLittleGuyHD
         async private void UI_GrabData_btn_Click(object sender, EventArgs e)
         {
             Dictionary<string, string> dataPost = new Dictionary<string, string>();
-            dataPost["uid"] = SLGData.uid;
+            dataPost["uid"] = _usernameBox.Text;
 
             HttpClient client = new HttpClient();
-            var response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/select.php", new FormUrlEncodedContent(dataPost));
-            string data = await response.Content.ReadAsStringAsync();
-            toSend = data;
-           // data.Prepend('{');
-            //data.Append('}');
-            SLGData = JsonConvert.DeserializeObject<SillyLittleData>(data);
-            DisplaySLGData();
+            try
+            {
+                var response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/select.php", new FormUrlEncodedContent(dataPost));
+                string data = await response.Content.ReadAsStringAsync();
+                toSend = data;
+                // data.Prepend('{');
+                //data.Append('}');
+                SLGData = JsonConvert.DeserializeObject<SillyLittleData>(data);
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+               
+                DisplaySLGData();
+            }
         }
 
         private void ConnectComPort(object sender, EventArgs e)
