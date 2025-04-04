@@ -74,8 +74,17 @@ enum SoundEffects {
 };
 enum SoundEffects effect;
 
+enum Buttons{
+	Left=0,
+	Center=1,
+	Rght=2
+};
 
-
+enum ButtonState
+{
+	LOW = 0,
+	HIGH = 1
+};
 
 struct gameInfo
 {
@@ -88,7 +97,8 @@ struct gameInfo
     unsigned int weeklySteps;
     unsigned int stepsToday;
     unsigned int XP; //This is the amount of XP (steps*positions) the user has
-    unsigned int challengeGoal;
+    unsigned int dailyGoal;
+    unsigned int weeklyGoal;
     char uid[32];
 	//need to implement:
 	//current time
@@ -155,6 +165,8 @@ char canChange = 1;
 unsigned int currentSetting = 0;
 unsigned int editDifficulty = 0;
 unsigned int userUpload = 0;
+
+char buttonStates[] = {0,0,0};
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -190,6 +202,7 @@ static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
 void ChangeNote(enum Scale freq);
 void PlayEffect(enum SoundEffects effect);
+void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin);
 void Animate (struct Img* animation, unsigned int size);
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size);
 int _ADXL343_WriteReg8 (unsigned char TargetRegister, unsigned char TargetValue);
@@ -243,7 +256,7 @@ int main(void)
   game.numLocations=3;
   game.stepsToday=0;
   game.weeklySteps=0;
-  game.challengeGoal=20000;
+  game.dailyGoal=2000;
   dummy.lat=12.34567;
   dummy.lon=-89.10111;
   game.positions[0]=dummy;
@@ -260,7 +273,7 @@ int main(void)
   MX_TIM17_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
-  //MX_RTC_Init();
+  MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   //HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
   ST7735_Unselect();
@@ -341,7 +354,7 @@ int main(void)
 		  }
 
 		  //Interact with the SLG
-		  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1)==GPIO_PIN_SET)
+		  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_SET )
 		  {
 			  effect = Evolution;
 			  PlayEffect(effect);
@@ -430,7 +443,7 @@ int main(void)
 		  {
 			  updateScreen = 0;
 			  drawString(0, 150, "-OPTIONS-", WHITE, BLACK, 1, 1);
-			  sprintf(buffer2, "GOAL: %d ", game.challengeGoal);
+			  sprintf(buffer2, "GOAL: %d ", game.dailyGoal);
 			  drawString(0, 130, buffer2, WHITE, BLACK, 1, 1); //Display the current difficulty
 			  drawString(0,110,"UPLOAD DATA",WHITE,BLACK,1,1);
 			  if(editDifficulty)
@@ -446,23 +459,23 @@ int main(void)
 				  //Right increments the goal
 				  else if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2))
 				  {
-					  game.challengeGoal += 1000;
+					  game.dailyGoal += 1000;
 				  }
 				  //Left decrements the goal
 				  else if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11))
 				  {
-					  game.challengeGoal -= 1000;
+					  game.dailyGoal -= 1000;
 				  }
 
-				  if(game.challengeGoal>=999000)
+				  if(game.dailyGoal>=999000)
 				  {
-					  game.challengeGoal = 0;
+					  game.dailyGoal = 0;
 				  }
-				  else if (game.challengeGoal<=0)
+				  else if (game.dailyGoal<=0)
 				  {
-					  game.challengeGoal=999000;
+					  game.dailyGoal=999000;
 				  }
-				  sprintf(buffer2, "DIFFICULTY: %d ", game.challengeGoal);
+				  sprintf(buffer2, "DIFFICULTY: %d ", game.dailyGoal);
 
 			  }
 			  else{
@@ -974,7 +987,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : PC1 */
   GPIO_InitStruct.Pin = GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
@@ -987,15 +1000,25 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : PB2 */
   GPIO_InitStruct.Pin = GPIO_PIN_2;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PA11 */
   GPIO_InitStruct.Pin = GPIO_PIN_11;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_1_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI2_3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI2_3_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI4_15_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI4_15_IRQn);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
   /* USER CODE END MX_GPIO_Init_2 */
@@ -1134,6 +1157,26 @@ void PlayEffect(enum SoundEffects effect) {
     }
     HAL_TIM_PWM_Stop(&htim17, TIM_CHANNEL_1);
 }
+//INTERRUPTS ARE CALLED BACK HERE
+void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
+{
+	//Center=2
+	if(GPIO_PIN==2)
+	{
+
+	}
+	//Right=4
+	else if(GPIO_PIN==4)
+	{
+
+	}
+	//Left=2048
+	else if(GPIO_PIN==2048)
+	{
+
+	}
+}
+
 
 //AURORA: Put custom functions here!
 void Animate (struct Img* animation, unsigned int size)
@@ -1172,7 +1215,7 @@ void SendData()
 {
 	unsigned int posIndex;
 	unsigned int clrIndex;
-	sprintf(sendBuffer, "(lifeSteps:%d),(weeklySteps:%d),(dailySteps:%d),(uid:%s),(friendship:%d),(password:password),(difficulty:%d),(evolution:%d) \n\r", game.allSteps,game.weeklySteps,game.stepsToday, game.uid, game.mood, game.challengeGoal, game.evo);
+	sprintf(sendBuffer, "(lifeSteps:%d),(weeklySteps:%d),(dailySteps:%d),(uid:%s),(friendship:%d),(password:password),(difficulty:%d),(evolution:%d) \n\r", game.allSteps,game.weeklySteps,game.stepsToday, game.uid, game.mood, game.dailyGoal, game.evo);
 	HAL_UART_Transmit(&huart2, sendBuffer, strlen(sendBuffer), 200);
 	for(posIndex=0; posIndex<game.numLocations; posIndex++)
 	{       HAL_Delay(5);
@@ -1200,7 +1243,7 @@ while(HAL_UART_Receive(&huart2, &(syncBuffer[rI]), 1, 1000)==HAL_OK)
 		 //HAL_UART_Transmit(&huart2, json_getPropertyValue(parent, "uid"), strlen(json_getPropertyValue(parent, "uid")), 1000);
 		 for(int strI =0; strI<strlen(uidRxStr); strI++) game.uid[strI]=uidRxStr[strI];
 		 game.allSteps = (unsigned int)json_getInteger(json_getProperty(parent, "lifeSteps"));
-		 game.challengeGoal = (unsigned int)json_getInteger(json_getProperty(parent, "difficulty"));
+		 game.dailyGoal = (unsigned int)json_getInteger(json_getProperty(parent, "difficulty"));
 		 game.evo = (unsigned int)json_getInteger(json_getProperty(parent, "evolution"));
 		 game.mood = (unsigned int)json_getInteger(json_getProperty(parent, "friendship"));
 		 game.stepsToday = (unsigned int)json_getInteger(json_getProperty(parent, "dailySteps"));
