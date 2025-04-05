@@ -114,6 +114,17 @@ struct Img
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+//changeable expressions
+const float expDivisor = 4.0f;
+const uint16_t dayLength=24;
+const uint16_t weekLength=168;
+const float gpsThreshold = .0001;
+const int moodIncrementUp=1;
+const int moodIncrementDown=1;
+const int mehMood=1;
+const int happyMood=2;
+const int sadMood = 0;
 uint16_t checkTime=1;
 struct gameInfo game;
 struct latLon dummy;
@@ -125,8 +136,9 @@ volatile uint8_t beacon = 0;
 volatile uint16_t thi = 1000;
 volatile uint16_t whileI=0;
 volatile uint16_t petXPos;
-uint16_t dayLength=24;
-uint16_t weekLength=168;
+volatile enum Scale scale[] = {A, B, C, D, E, F, G, F, E, D, C, B, A};
+
+
 struct minmea_sentence_rmc rmcStruct;
 struct minmea_sentence_gga ggaStruct;
 uint16_t totalFrames=0;
@@ -142,8 +154,8 @@ struct Img sitting0;
 struct Img sitting1;
 struct Img animSitting[2];
 unsigned int currentFrame = 0;
-volatile enum Scale scale[] = {A, B, C, D, E, F, G, F, E, D, C, B, A};
-float gpsThreshold;
+
+
 volatile uint16_t palette[8] = {BLACK, BLACK, YELLOW, BLUE, GREEN, BLUE, WHITE, WHITE};
 volatile float lat;
 volatile float lon;
@@ -211,6 +223,7 @@ void SendData();
 void GetLatLon();
 struct latLon GetJustLatLon();
 void ReceiveData();
+int CheckExp(int threshold, int comparer);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -271,9 +284,17 @@ int main(void)
 	  //SendData();
 	  //ReceiveData();
 	  //_ADXL343_ReadReg8(0x00, &steps, 1);
+	  if(CheckExp(game.dailyGoal, game.stepsToday)==1)
+	  {
+		  game.mood+=moodIncrementUp;
+		  game.stepsToday=0;
+	  }
 	  if(checkTime){
 	  if(((game.time.minutes%dayLength)==0) && game.time.seconds>0){
+		  if(CheckExp(game.dailyGoal, game.stepsToday)==-1)game.mood-=moodIncrementDown;
 		  game.stepsToday=0;
+		  memset(&game.positions, 0, sizeof(game.positions));
+		  game.numLocations=0;
 		  checkTime=0;
 	  }
 
@@ -284,9 +305,9 @@ int main(void)
 	  }
 	  if((game.time.minutes%dayLength)==1) checkTime=1;
 	  if(steps!=0){
-	  game.stepsToday +=steps*game.numLocations;
-	  game.weeklySteps+=steps*game.numLocations;
-	  game.allSteps+=steps*game.numLocations;
+	  game.stepsToday +=steps;
+	  game.weeklySteps+=steps;
+	  game.allSteps+=steps;
 	  steps=0;
 	  _ADXL343_WriteReg8(0x7E, 0xB1);
 	  }
@@ -296,6 +317,8 @@ int main(void)
 	  switch(currentMenu){
 	  case Main:
 		  if((totalFrames)%600==0) GetLatLon();
+
+
 		  if(updateScreen>=5)
 		  {
 			  updateScreen = 0;
@@ -318,6 +341,7 @@ int main(void)
 			  drawString(0,150,"-SILLY LITTLE GUY-",WHITE,BLACK,1,1);
 			  sprintf(buffer2, "Steps: %d ", game.stepsToday);
 			  drawString(0, 10, buffer2, WHITE, BLACK, 1, 1);
+			  Emote();
 		  }
 
 		  //Interact with the SLG
@@ -325,6 +349,7 @@ int main(void)
 		  {
 			  effect = Evolution;
 			  PlayEffect(effect);
+			  game.stepsToday = game.dailyGoal;
 		  }
 
 
@@ -1191,7 +1216,7 @@ void StructInit(void)
 	  game.uid[0]='h';
 	  game.uid[1]='i';
 	  game.allSteps=0;
-	  game.mood=100;
+	  game.mood=1;
 	  game.numLocations=3;
 	  game.stepsToday=0;
 	  game.weeklySteps=0;
@@ -1202,7 +1227,7 @@ void StructInit(void)
 	  game.positions[1]=dummy;
 	  game.positions[2]=dummy;
 	  game.time.hours=0;
-	  gpsThreshold = .0001;
+
 }
 //Method for displaying the evolution animation
 void Evolve()
@@ -1318,6 +1343,13 @@ while(HAL_UART_Receive(&huart2, &(syncBuffer[rI]), 1, 1000)==HAL_OK)
 }
 
 }
+int CheckExp(int threshold, int comparer)
+{
+	int value = (int)((float)comparer*(1.0f+((float)game.numLocations)/expDivisor));
+	if(value<(threshold/4)) return -1;
+	if(value<threshold) return 0;
+	if(value>=threshold) return 1;
+}
 void GetLatLon()
 {
 	int gpsI=0;
@@ -1391,6 +1423,62 @@ void GetLatLon()
 			  		  	}
 
 
+}
+void Emote()
+{
+	 switch(game.evo)
+				  {
+				  case 0:
+					  if(game.time.seconds%5==0)
+					  {
+						  effect = EggNoise;
+						  PlayEffect(effect);
+					  }
+					  break;
+				  case 1:
+					  if(game.time.seconds%3==0)
+					  					  {
+						  if(game.mood>sadMood){
+					  			effect = YoungNoiseHappy;
+					  			PlayEffect(effect);
+					  		}
+						  else
+						  {
+							  effect = YoungNoiseSad;
+							 PlayEffect(effect);
+
+						  }
+					  	}
+					  break;
+				  case 2:
+					  if(game.time.seconds%5==0)
+					  					  					  {
+					  						  if(game.mood>sadMood){
+					  					  			effect = AdultNoiseHappy;
+					  					  			PlayEffect(effect);
+					  					  		}
+					  						  else
+					  						  {
+					  							  effect = AdultNoiseSad;
+					  							 PlayEffect(effect);
+
+					  						  }
+					  					  	}
+					  //Animate as the adult
+					  break;
+				  }
+	if(game.mood<=sadMood)
+	{
+		drawString(0, 140, "Emotional State :(", WHITE, BLACK, 1, 1);
+	}
+	else if(game.mood<=mehMood)
+	{
+		drawString(0, 140, "Emotional State :|", WHITE, BLACK, 1, 1);
+	}
+	else if(game.mood>=happyMood)
+	{
+		drawString(0, 140, "Emotional State :)", WHITE, BLACK, 1, 1);
+	}
 }
 struct latLon GetJustLatLon()
 {
