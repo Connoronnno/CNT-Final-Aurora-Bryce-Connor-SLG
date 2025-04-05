@@ -1153,7 +1153,7 @@ void PeripheralInit(void)
 	buffer[1] = 'B';
 	TIM17->CCR1 = 5;
 	TIM17->PSC=64;
-	uint8_t ret=0;
+	//uint8_t ret=0;
 	//_ADXL343_Init();
 
 	//Pedometer Setup
@@ -1176,12 +1176,17 @@ void PeripheralInit(void)
 void StructInit(void)
 {
 	  steps=0;
+	  //ANIMATIONS FOR EGG
+	  //egg0.Body = ;
+	  //ANIMATIONS FOR BABY DRAGON
 	  sitting0.Body = *imgSitting0;
 	  sitting0.Size = 307;
 	  sitting1.Body = *imgSitting1;
 	  sitting1.Size = 305;
 	  animSitting[0] = sitting0;
 	  animSitting[1] = sitting1;
+
+
 	  game.evo=1;
 	  game.uid[0]='h';
 	  game.uid[1]='i';
@@ -1199,12 +1204,16 @@ void StructInit(void)
 	  game.time.hours=0;
 	  gpsThreshold = .0001;
 }
+//Method for displaying the evolution animation
 void Evolve()
 {
-	if(game.evo < 2)
+	if(game.evo<2)
 	{
-		//drawString();
+		fillScreen(WHITE);
+		fillScreen(BLACK);
+		game.evo +=1;
 	}
+
 }
 void Animate (struct Img* animation, unsigned int frameCount, unsigned int xPos, unsigned int yPos, unsigned int xSize, unsigned int ySize)
 {
