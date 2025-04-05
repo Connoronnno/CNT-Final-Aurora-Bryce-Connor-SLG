@@ -96,7 +96,6 @@ struct gameInfo
 	unsigned int allSteps;
     unsigned int weeklySteps;
     unsigned int stepsToday;
-    unsigned int XP; //This is the amount of XP (steps*positions) the user has
     unsigned int dailyGoal;
     unsigned int weeklyGoal;
     char uid[32];
@@ -203,7 +202,9 @@ static void MX_RTC_Init(void);
 void ChangeNote(enum Scale freq);
 void PlayEffect(enum SoundEffects effect);
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin);
-void Animate (struct Img* animation, unsigned int size);
+void PeripheralInit(void);
+void StructInit(void);
+void Animate (struct Img* animation, unsigned int frameCount, unsigned int xPos, unsigned int yPos, unsigned int xSize, unsigned int ySize);
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size);
 int _ADXL343_WriteReg8 (unsigned char TargetRegister, unsigned char TargetValue);
 void SendData();
@@ -241,29 +242,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-  steps=0;
-  sitting0.Body = *imgSitting0;
-  sitting0.Size = 307;
-  sitting1.Body = *imgSitting1;
-  sitting1.Size = 305;
-  animSitting[0] = sitting0;
-  animSitting[1] = sitting1;
-  game.evo=0;
-  game.uid[0]='h';
-  game.uid[1]='i';
-  game.allSteps=0;
-  game.mood=100;
-  game.numLocations=3;
-  game.stepsToday=0;
-  game.weeklySteps=0;
-  game.dailyGoal=2000;
-  dummy.lat=12.34567;
-  dummy.lon=-89.10111;
-  game.positions[0]=dummy;
-  game.positions[1]=dummy;
-  game.positions[2]=dummy;
-  game.time.hours=0;
-  gpsThreshold = .0001;
+  StructInit();
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -275,34 +254,9 @@ int main(void)
   MX_USART2_UART_Init();
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
+  PeripheralInit();
   //HAL_TIM_PWM_Start(&htim17, TIM_CHANNEL_1);
-  ST7735_Unselect();
-  ST7735_Init(1);
-  //testAll();
-  buffer[0] = 'A';
-  buffer[1] = 'B';
-  TIM17->CCR1 = 5;
-  TIM17->PSC=64;
-  uint8_t ret=0;
-    //_ADXL343_Init();
 
-      //Pedometer Setup
-      _ADXL343_WriteReg8(0x19, 0x02);
-      ////wait
-
-      _ADXL343_WriteReg8(0x7C, 0x01);
-       _ADXL343_WriteReg8(0x1A, 0x38);
-      _ADXL343_WriteReg8(0x1B, 0x04);
-      _ADXL343_WriteReg8(0x1F, 0x80);
-      _ADXL343_WriteReg8(0x21, 0x80);
-
-
-
-      //  //Step Counter
-      _ADXL343_WriteReg8(0x18, 0x01); // enable walking mode
-      _ADXL343_WriteReg8(0x20, 0x01); // enable step interrupt
-      //_ADXL343_WriteReg8(0x59, 0x01); // step ctr config
-  //HAL_UART_Receive(&huart1, &buffer, 1, 0xFFFF);
   //testAll();
   /* USER CODE END 2 */
 
@@ -344,9 +298,22 @@ int main(void)
 		  if((totalFrames)%600==0) GetLatLon();
 		  if(updateScreen>=5)
 		  {
-			  //Animate character
-			  Animate(animSitting,1);
 			  updateScreen = 0;
+			  //Animate character
+			  switch(game.evo)
+			  {
+			  case 0:
+				  //Animate as the egg
+				  break;
+			  case 1:
+				  //Animate as the baby
+				  Animate(animSitting,1,30,30,64,64);
+				  break;
+			  case 2:
+				  //Animate as the adult
+				  break;
+			  }
+
 			  //Update steps
 			  drawString(0,150,"-SILLY LITTLE GUY-",WHITE,BLACK,1,1);
 			  sprintf(buffer2, "Steps: %d ", game.stepsToday);
@@ -423,13 +390,6 @@ int main(void)
 	  	      canChange = 1;
 
 	  	  break;
-	  case MusicTest:
-		  //fillScreen(BLUE);
-		  if((totalFrames++)%1000000==0){
-			  freq = scale[toneIndex++%13];
-			  ChangeNote(freq);
-		  }
-		  break;
 
 	  case Settings:
 		  //Just commenting this out really quick so I can test my settings menu x)
@@ -1185,16 +1145,78 @@ void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
 
 
 //AURORA: Put custom functions here!
-void Animate (struct Img* animation, unsigned int size)
+void PeripheralInit(void)
+{
+	ST7735_Unselect();
+	ST7735_Init(1);
+	buffer[0] = 'A';
+	buffer[1] = 'B';
+	TIM17->CCR1 = 5;
+	TIM17->PSC=64;
+	uint8_t ret=0;
+	//_ADXL343_Init();
+
+	//Pedometer Setup
+	_ADXL343_WriteReg8(0x19, 0x02);
+	////wait
+
+	_ADXL343_WriteReg8(0x7C, 0x01);
+	 _ADXL343_WriteReg8(0x1A, 0x38);
+	_ADXL343_WriteReg8(0x1B, 0x04);
+	_ADXL343_WriteReg8(0x1F, 0x80);
+	_ADXL343_WriteReg8(0x21, 0x80);
+
+
+
+	//  //Step Counter
+	_ADXL343_WriteReg8(0x18, 0x01); // enable walking mode
+	_ADXL343_WriteReg8(0x20, 0x01); // enable step interrupt
+}
+//INITIALIZE GAME VALUES
+void StructInit(void)
+{
+	  steps=0;
+	  sitting0.Body = *imgSitting0;
+	  sitting0.Size = 307;
+	  sitting1.Body = *imgSitting1;
+	  sitting1.Size = 305;
+	  animSitting[0] = sitting0;
+	  animSitting[1] = sitting1;
+	  game.evo=1;
+	  game.uid[0]='h';
+	  game.uid[1]='i';
+	  game.allSteps=0;
+	  game.mood=100;
+	  game.numLocations=3;
+	  game.stepsToday=0;
+	  game.weeklySteps=0;
+	  game.dailyGoal=2000;
+	  dummy.lat=12.34567;
+	  dummy.lon=-89.10111;
+	  game.positions[0]=dummy;
+	  game.positions[1]=dummy;
+	  game.positions[2]=dummy;
+	  game.time.hours=0;
+	  gpsThreshold = .0001;
+}
+void Evolve()
+{
+	if(game.evo < 2)
+	{
+		//drawString();
+	}
+}
+void Animate (struct Img* animation, unsigned int frameCount, unsigned int xPos, unsigned int yPos, unsigned int xSize, unsigned int ySize)
 {
 	++currentFrame;
-	if(currentFrame > size)
+	if(currentFrame > frameCount)
 	{
 		currentFrame = 0;
 	}
-	drawImage(animation[currentFrame].Body, palette, 30, 40, 64, 64, animation[currentFrame].Size);
+	drawImage(animation[currentFrame].Body, palette, xPos, yPos, xSize, ySize, animation[currentFrame].Size);
 	return;
 }
+
 int _ADXL343_ReadReg8 (unsigned char TargetRegister, unsigned char * TargetValue, uint8_t size)
 {
   if (!HAL_I2C_Master_Transmit(&hi2c1, 0x14<<1, &TargetRegister, 1, 1000)==HAL_OK)
@@ -1425,8 +1447,8 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc) {
   }else{
     sAlarm.AlarmTime.Seconds=sAlarm.AlarmTime.Seconds+1;
   }
-    while(HAL_RTC_SetAlarm_IT(hrtc, &sAlarm, FORMAT_BIN)!=HAL_OK){}
-  	  drawString(30, 30, "testTime", BLACK, GREEN, 1, 1);
+    //while(HAL_RTC_SetAlarm_IT(hrtc, &sAlarm, FORMAT_BIN)!=HAL_OK){}
+  	 // drawString(30, 30, "testTime", BLACK, GREEN, 1, 1);
 }
 
 
