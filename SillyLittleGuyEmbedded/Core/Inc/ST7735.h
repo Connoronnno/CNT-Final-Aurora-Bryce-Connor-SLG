@@ -13,7 +13,7 @@ extern SPI_HandleTypeDef hspi1;
 #define CS_PORT GPIOA
 #define CS_PIN  GPIO_PIN_5
 #define DC_PORT GPIOA
-#define DC_PIN  GPIO_PIN_4
+#define DC_PIN  GPIO_PIN_0
 #define RST_PORT GPIOA
 #define RST_PIN  GPIO_PIN_15
 

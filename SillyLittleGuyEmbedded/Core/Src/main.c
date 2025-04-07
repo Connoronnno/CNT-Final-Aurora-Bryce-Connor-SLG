@@ -350,6 +350,7 @@ int main(void)
 			  effect = Evolution;
 			  PlayEffect(effect);
 			  game.stepsToday = game.dailyGoal;
+			  FlashWrite();
 		  }
 
 
@@ -974,7 +975,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_15, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_15, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : PC1 */
   GPIO_InitStruct.Pin = GPIO_PIN_1;
@@ -982,8 +983,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA4 PA5 PA15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_15;
+  /*Configure GPIO pins : PA0 PA4 PA5 PA15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -1174,6 +1175,8 @@ void PeripheralInit(void)
 {
 	ST7735_Unselect();
 	ST7735_Init(1);
+
+	fillScreen(BLACK);
 	buffer[0] = 'A';
 	buffer[1] = 'B';
 	TIM17->CCR1 = 5;
@@ -1239,6 +1242,55 @@ void Evolve()
 		game.evo +=1;
 	}
 
+}
+void FlashWrite()
+{
+	uint32_t Address =  0x0803F800;
+	uint8_t flashBuffer[496] = "I am the very model of a modern major general.";
+	uint64_t flashTestBuffer[496];
+	uint64_t xyz=0;
+	int chunkI=8;
+
+	FLASH_EraseInitTypeDef tryit;
+	tryit.Banks = FLASH_BANK_1;
+	tryit.NbPages = 1;
+	tryit.Page = 127;
+	tryit.TypeErase =FLASH_TYPEERASE_PAGES;
+	uint32_t pgerror;
+	HAL_FLASH_Unlock();
+	HAL_FLASHEx_Erase(&tryit, &pgerror);
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.allSteps);
+	Address+=8;
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.stepsToday);
+	Address+=8;
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.weeklySteps);
+	Address+=8;
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.weeklySteps);
+	Address+=8;
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.dailyGoal);
+	Address+=8;
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.weeklyGoal);
+	Address+=8;
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.evo);
+	Address+=8;
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.mood);
+	Address+=8;
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.numLocations);
+	Address+=8;
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.weeklyGoal);
+	Address+=8;
+	for(int flashI=0; flashI<32; flashI++){
+	xyz+=(flashBuffer[flashI])<<((8-(chunkI))*8);
+	if(--chunkI==0){
+		HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, xyz);
+		chunkI=8;
+		xyz=0;
+		Address+=8;
+	}
+	}
+	Address =  0x0803F800;
+	xyz= *(__IO uint64_t*) (Address);
+	HAL_FLASH_Lock();
 }
 void Animate (struct Img* animation, unsigned int frameCount, unsigned int xPos, unsigned int yPos, unsigned int xSize, unsigned int ySize)
 {
@@ -1432,7 +1484,7 @@ void Emote()
 					  if(game.time.seconds%5==0)
 					  {
 						  effect = EggNoise;
-						  PlayEffect(effect);
+						  //PlayEffect(effect);
 					  }
 					  break;
 				  case 1:
@@ -1440,12 +1492,12 @@ void Emote()
 					  					  {
 						  if(game.mood>sadMood){
 					  			effect = YoungNoiseHappy;
-					  			PlayEffect(effect);
+					  			//PlayEffect(effect);
 					  		}
 						  else
 						  {
 							  effect = YoungNoiseSad;
-							 PlayEffect(effect);
+							 //PlayEffect(effect);
 
 						  }
 					  	}
