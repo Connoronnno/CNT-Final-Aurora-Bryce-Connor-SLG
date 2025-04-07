@@ -351,6 +351,7 @@ int main(void)
 			  PlayEffect(effect);
 			  game.stepsToday = game.dailyGoal;
 			  FlashWrite();
+			  StructInit();
 		  }
 
 
@@ -1204,6 +1205,7 @@ void PeripheralInit(void)
 void StructInit(void)
 {
 	  steps=0;
+	  uint32_t Address =  0x0803F800;
 	  //ANIMATIONS FOR EGG
 	  //egg0.Body = ;
 	  //ANIMATIONS FOR BABY DRAGON
@@ -1214,7 +1216,38 @@ void StructInit(void)
 	  animSitting[0] = sitting0;
 	  animSitting[1] = sitting1;
 
-
+	  if((*(__IO uint64_t*) (Address))==(uint64_t)0x12345678)
+	  {
+		  Address+=8;
+		  game.allSteps= (unsigned int)(*(__IO uint64_t*) (Address));
+		  Address+=8;
+		  game.stepsToday= (unsigned int)(*(__IO uint64_t*) (Address));
+		  Address+=8;
+		  game.weeklySteps= (unsigned int)(*(__IO uint64_t*) (Address));
+		  Address+=8;
+		  game.dailyGoal= (unsigned int)(*(__IO uint64_t*) (Address));
+		  Address+=8;
+		  game.weeklyGoal= (unsigned int)(*(__IO uint64_t*) (Address));
+		  Address+=8;
+		  game.evo = (unsigned char)(*(__IO uint64_t*) (Address));
+		  Address+=8;
+		  game.mood = (unsigned char)(*(__IO uint64_t*) (Address));
+		  Address+=8;
+		  game.numLocations = (unsigned int)(*(__IO uint64_t*) (Address));
+		  for(int flashI=0; flashI<32; flashI++)
+		  {
+			  Address+=1;
+			  game.uid[flashI] = (char)(*(__IO uint8_t*) (Address));
+		  }
+		  for(int flashI=0; flashI<32; flashI++)
+		  {
+			  Address+=8;
+			  game.positions[flashI].lat = ((float)(*(__IO uint8_t*) (Address)))/100000;
+			  Address+=8;
+			  game.positions[flashI].lon = ((float)(*(__IO uint8_t*) (Address)))/100000;
+		  }
+	  }
+	  else{
 	  game.evo=1;
 	  game.uid[0]='h';
 	  game.uid[1]='i';
@@ -1230,7 +1263,7 @@ void StructInit(void)
 	  game.positions[1]=dummy;
 	  game.positions[2]=dummy;
 	  game.time.hours=0;
-
+	  }
 }
 //Method for displaying the evolution animation
 void Evolve()
@@ -1259,11 +1292,11 @@ void FlashWrite()
 	uint32_t pgerror;
 	HAL_FLASH_Unlock();
 	HAL_FLASHEx_Erase(&tryit, &pgerror);
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)0x12345678);
+	Address+=8;
 	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.allSteps);
 	Address+=8;
 	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.stepsToday);
-	Address+=8;
-	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.weeklySteps);
 	Address+=8;
 	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.weeklySteps);
 	Address+=8;
@@ -1277,10 +1310,8 @@ void FlashWrite()
 	Address+=8;
 	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.numLocations);
 	Address+=8;
-	HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)game.weeklyGoal);
-	Address+=8;
 	for(int flashI=0; flashI<32; flashI++){
-	xyz+=(flashBuffer[flashI])<<((8-(chunkI))*8);
+	xyz+=(game.uid[flashI])<<((8-(chunkI))*8);
 	if(--chunkI==0){
 		HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, xyz);
 		chunkI=8;
@@ -1288,7 +1319,13 @@ void FlashWrite()
 		Address+=8;
 	}
 	}
-	Address =  0x0803F800;
+	for(int flashI=0; flashI<32; flashI++){
+		HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)(game.positions[flashI].lat*100000));
+		Address+=8;
+		HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, (uint64_t)(game.positions[flashI].lon*100000));
+		Address+=8;
+	}
+	Address =  0x0803F808;
 	xyz= *(__IO uint64_t*) (Address);
 	HAL_FLASH_Lock();
 }
