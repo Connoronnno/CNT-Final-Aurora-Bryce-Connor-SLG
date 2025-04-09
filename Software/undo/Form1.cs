@@ -14,7 +14,7 @@ namespace undo
     public partial class Form1 : Form
     {
         Bitmap bm;
-        List<Color> Pallette = new List<Color>();
+        List<Color> Palette = new List<Color>();
         List<string> a = new List<string>();
         List<string> b = new List<string>();
         public Form1()
@@ -24,26 +24,33 @@ namespace undo
             DragEnter += Form1_DragEnter;
             DragDrop += Form1_DragDrop;
             _process.Click += _process_Click;
+            Palette = GetPalette(new Bitmap("../../palette.png"));
         }
+        private List<Color> GetPalette(Bitmap pic)
+        { 
+            HashSet<Color> palette = new HashSet<Color>();
+            for (int x = 0; x < pic.Width; x++)
+            {
+                for (int y = 0; y < pic.Height; y++)
+                {
+                    palette.Add(pic.GetPixel(x, y));
+                }
 
+            }
+            Console.WriteLine(String.Join("\n", palette));
+            return palette.ToList();
+        }
         private void _process_Click(object sender, EventArgs e)
         {
             a = new List<string>();
             b = new List<string>();
             int count = 0;
             int found = 0;
-            int palleteIndex = 0;
-
+            int paletteIndex = 0;
+            bm.RotateFlip(RotateFlipType.Rotate90FlipX);
             //Creating pallete with unique colours
             if (bm != null)
             {
-                for (int y = 0; y < bm.Height; y++)
-                {
-                    for (int x = 0; x < bm.Width; x++)
-                    {
-                        if (!Pallette.Contains(bm.GetPixel(x, y))) Pallette.Add(bm.GetPixel(x, y));
-                    }
-                }
                 //iterate through bitmap
                 for (int y = 0; y < bm.Height; y++)
                 {
@@ -51,23 +58,21 @@ namespace undo
                     for (int x = bm.Width-1; x >=0; x--)
                     {
                         //get pallete index
-                        palleteIndex = 0;
-                        foreach(Color c in Pallette) 
-                        {
-                            if (bm.GetPixel(y, x) == c) 
-                                break;
-                            palleteIndex++;
+                        paletteIndex = 0;
+                        if (Palette.Contains(bm.GetPixel(x, y)))
+                        { 
+                            paletteIndex = Palette.IndexOf(bm.GetPixel(x, y));
                         }
 
                         //b.Add($"{(int)i}, ");
 
                         //
-                        if (found != palleteIndex)
+                        if (found != paletteIndex)
                         {
                             if (a.Count == 0) a.Add($"{{{found}, {count}}}, ");
                             else a.Add($"{{{found}, {count+1}}}, ");
                             
-                            found = palleteIndex;
+                            found = paletteIndex;
                             count = 0;
                         }
                         else 
@@ -138,12 +143,12 @@ namespace undo
                 int curTime = 0;
                 while(curTime < timesDrawn)
                 {
-                    if (xPos >= 64)
+                    if (xPos >= bm.Width)
                     {
                         xPos = 0;
                         yPos++;
                     }
-                    canvas.SetBBScaledPixel(xPos, yPos, Pallette[i.Item1]);
+                    canvas.SetBBScaledPixel(xPos, yPos, Palette[i.Item1]);
                     xPos++;
                     curTime++;
                 }
