@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 C:\Users\cmarsh7\source\repos\undo\bin\Debug\undo.exe.config
 C:\Users\cmarsh7\source\repos\undo\bin\Debug\undo.exe
 C:\Users\cmarsh7\source\repos\undo\bin\Debug\undo.pdb
@@ -64,6 +65,8 @@ C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\ob
 C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.csproj.Up2Date
 C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.exe
 C:\Users\cmarsh7\Documents\GitHub\Group-1---Aurora-Bryce-Connor\Software\undo\obj\Debug\undo.pdb
+=======
+>>>>>>> Stashed changes
 C:\Users\June\Desktop\school\2965\Group-1---Aurora-Bryce-Connor\Software\undo\bin\Debug\undo.exe.config
 C:\Users\June\Desktop\school\2965\Group-1---Aurora-Bryce-Connor\Software\undo\bin\Debug\undo.exe
 C:\Users\June\Desktop\school\2965\Group-1---Aurora-Bryce-Connor\Software\undo\bin\Debug\undo.pdb

@@ -171,18 +171,18 @@ void ST7735_Init(uint8_t rotation)
     _colstart = 24;
     _rowstart = 0;
  /*****  IF Doesn't work, remove the code below (before #elif) *****/
-    uint8_t data = 0xC0;
-    ST7735_Select();
-    ST7735_WriteCommand(ST7735_MADCTL);
-    ST7735_WriteData(&data,1);
-    ST7735_Unselect();
+   // uint8_t data = 0xC8;
+   // ST7735_Select();
+   // ST7735_WriteCommand(ST7735_MADCTL);
+   // ST7735_WriteData(&data,1);
+   // ST7735_Unselect();
 
 #elif ST7735_IS_128X128
-    _colstart = 2;
-    _rowstart = 3;
+   // _colstart = 2;
+    //rowstart = 3;
 #else
-    _colstart = 0;
-    _rowstart = 0;
+    //_colstart = 0;
+    //rowstart = 0;
 #endif
     ST7735_SetRotation (rotation);
     ST7735_Unselect();
@@ -222,7 +222,7 @@ void ST7735_SetRotation(uint8_t m)
     break;
   case 2:
 #if ST7735_IS_160X80
-	  madctl = ST7735_MADCTL_BGR;
+	  madctl = ST7735_MADCTL_RGB;
 #else
       madctl = ST7735_MADCTL_RGB;
       _height = ST7735_HEIGHT;
@@ -338,9 +338,16 @@ void ST7735_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint
     ST7735_Unselect();
 }
 
-void ST7735_InvertColors(bool invert) {
+void ST7735_InvertColors(unsigned int invert) {
     ST7735_Select();
-    ST7735_WriteCommand(invert ? ST7735_INVON : ST7735_INVOFF);
+    if(invert==0)
+    {
+    	ST7735_WriteCommand(0x20);
+    }
+    else
+    {
+    	ST7735_WriteCommand(0x21);
+    }
     ST7735_Unselect();
 }
 

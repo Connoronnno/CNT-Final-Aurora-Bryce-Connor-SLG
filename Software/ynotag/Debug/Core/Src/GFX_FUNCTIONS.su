@@ -24,9 +24,9 @@
 ../Core/Src/GFX_FUNCTIONS.c:498:6:testFilledRects	56	static
 ../Core/Src/GFX_FUNCTIONS.c:515:6:testFilledCircles	40	static
 ../Core/Src/GFX_FUNCTIONS.c:528:6:testCircles	40	static
-../Core/Src/GFX_FUNCTIONS.c:544:6:testTriangles	56	static
+../Core/Src/GFX_FUNCTIONS.c:544:6:testTriangles	64	static
 ../Core/Src/GFX_FUNCTIONS.c:561:6:testFilledTriangles	64	static
-../Core/Src/GFX_FUNCTIONS.c:574:6:testRoundRects	56	static
-../Core/Src/GFX_FUNCTIONS.c:591:6:testFilledRoundRects	56	static
+../Core/Src/GFX_FUNCTIONS.c:574:6:testRoundRects	72	static
+../Core/Src/GFX_FUNCTIONS.c:591:6:testFilledRoundRects	64	static
 ../Core/Src/GFX_FUNCTIONS.c:606:6:testFillScreen	8	static
 ../Core/Src/GFX_FUNCTIONS.c:615:6:testAll	8	static

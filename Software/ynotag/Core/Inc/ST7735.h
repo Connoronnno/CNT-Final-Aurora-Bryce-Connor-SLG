@@ -340,14 +340,20 @@ static const uint8_t Font[] = {
 
 // Color definitions
 #define	BLACK   0x0000
+#define OUTLINE 0x41a9
+#define LIGHTOUTLINE 0x7b91
+#define	GREEN   RGB565(145,219,105)
+#define GREENBLUE 0x248c
+#define DARKGREENBLUE 0x1ac9
+#define GREYGREEN 0x53ec
+#define GREY    0x9d56
+#define YELLOW  0xd6e9
+#define WHITE   0xFFFF
 #define	BLUE    0x1F00
 #define	RED     0x00F8
-#define	GREEN   0xE007
 #define CYAN    0xFF07
 #define MAGENTA 0x1FF8
-#define YELLOW  0xE0FF
-#define WHITE   0xFFFF
-#define color565(r, g, b) (((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3))
+#define RGB565(r,g,b) ((((r>>3)<<11) | ((g>>2)<<5) | (b>>3)))
 
 // call before initializing any SPI devices
 void ST7735_Unselect();
@@ -359,7 +365,7 @@ void ST7735_WriteString(uint16_t x, uint16_t y, const char* str, FontDef font, u
 void ST7735_FillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
 void ST7735_FillScreen(uint16_t color);
 void ST7735_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint16_t* data);
-void ST7735_InvertColors(bool invert);
+void ST7735_InvertColors(unsigned int invert);
 
 
 
