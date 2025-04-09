@@ -471,7 +471,7 @@ int main(void) {
 				effect = Evolution;
 				PlayEffect(effect);
 				game.stepsToday = game.dailyGoal;
-				FlashWrite();
+				//FlashWrite();
 				//StructInit();
 			}
 
@@ -1297,7 +1297,7 @@ void StructInit(void) {
 	sitting1.Size = 305;
 	animSitting[0] = sitting0;
 	animSitting[1] = sitting1;
-
+		/*
 	if ((*(__IO uint64_t*) (Address)) == (uint64_t) 0x12345678) {
 		Address += 8;
 		game.allSteps = (unsigned int) (*(__IO uint64_t*) (Address));
@@ -1328,7 +1328,7 @@ void StructInit(void) {
 					((float) ((int) (*(__IO uint64_t*) (Address)))) / 100000;
 		}
 		FlashErase();
-	} else {
+	} else { */
 		game.evo = 1;
 		game.uid[0] = 'h';
 		game.uid[1] = 'i';
@@ -1344,7 +1344,7 @@ void StructInit(void) {
 		game.positions[1] = dummy;
 		game.positions[2] = dummy;
 		game.time.hours = 0;
-	}
+	//}
 }
 //Method for displaying the evolution animation
 void Evolve() {

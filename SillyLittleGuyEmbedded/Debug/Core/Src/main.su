@@ -16,7 +16,7 @@
 ../Core/Src/main.c:1113:6:PlayEffect	16	static
 ../Core/Src/main.c:1242:6:HAL_GPIO_EXTI_Rising_Callback	16	static
 ../Core/Src/main.c:1261:6:PeripheralInit	8	static
-../Core/Src/main.c:1288:6:StructInit	24	static
+../Core/Src/main.c:1288:6:StructInit	16	static
 ../Core/Src/main.c:1350:6:Evolve	8	static
 ../Core/Src/main.c:1358:6:FlashErase	40	static
 ../Core/Src/main.c:1369:6:FlashWrite	4608	static
