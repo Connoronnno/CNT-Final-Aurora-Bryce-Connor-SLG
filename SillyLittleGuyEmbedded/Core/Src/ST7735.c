@@ -46,19 +46,30 @@ uint8_t _ystart;
     ST7735_INVOFF , 0      ,  // 13: Don't invert display, no args, no delay
     ST7735_COLMOD , 1      ,  // 15: set color mode, 1 arg, no delay:
       0x05 },                 //     16-bit color
+#ifdef ST7735_IS_180x128
 
-#if (defined(ST7735_IS_128X128) || defined(ST7735_IS_160X128))
-  init_cmds2[] = {            // Init for 7735R, part 2 (1.44" display)
-    2,                        //  2 commands in list:
-    ST7735_CASET  , 4      ,  //  1: Column addr set, 4 args, no delay:
-      0x00, 0x00,             //     XSTART = 0
-      0x00, 0x7F,             //     XEND = 127
-    ST7735_RASET  , 4      ,  //  2: Row addr set, 4 args, no delay:
-      0x00, 0x00,             //     XSTART = 0
-      0x00, 0x7F },           //     XEND = 127
-#endif // ST7735_IS_128X128
+		init_cmds2[] = {
+		2,                        //  2 commands in list:
+		ST7735_CASET  , 4      ,  //  1: Column addr set, 4 args, no delay:
+		  0x00, 0x00,             //     XSTART = 0
+		  0x00, 0xB3,             //     XEND = 179
+		ST7735_RASET  , 4      ,  //  2: Row addr set, 4 args, no delay:
+		  0x00, 0x00,             //     XSTART = 0
+		  0x00, 0x7F },           //     XEND = 127
 
-#ifdef ST7735_IS_160X80
+#endif
+//#if (defined(ST7735_IS_128X128) || defined(ST7735_IS_160X128))
+  //init_cmds2[] = {            // Init for 7735R, part 2 (1.44" display)
+  //  2,                        //  2 commands in list:
+  //  ST7735_CASET  , 4      ,  //  1: Column addr set, 4 args, no delay:
+  //   0x00, 0x00,             //     XSTART = 0
+   //   0x00, 0x7F,             //     XEND = 127
+   // ST7735_RASET  , 4      ,  //  2: Row addr set, 4 args, no delay:
+   //   0x00, 0x00,             //     XSTART = 0
+  //    0x00, 0x7F },           //     XEND = 127
+//#endif // ST7735_IS_128X128
+
+/*#ifdef ST7735_IS_160X80
   init_cmds2[] = {            // Init for 7735S, part 2 (160x80 display)
     3,                        //  3 commands in list:
     ST7735_CASET  , 4      ,  //  1: Column addr set, 4 args, no delay:
@@ -68,7 +79,7 @@ uint8_t _ystart;
       0x00, 0x00,             //     XSTART = 0
       0x00, 0x9F ,            //     XEND = 159
     ST7735_INVON, 0 },        //  3: Invert colors
-#endif
+#endif*/
 
   init_cmds3[] = {            // Init for 7735R, part 3 (red or green tab)
     4,                        //  4 commands in list:
@@ -167,7 +178,7 @@ void ST7735_Init(uint8_t rotation)
     DisplayInit(init_cmds1);
     DisplayInit(init_cmds2);
     DisplayInit(init_cmds3);
-#if ST7735_IS_160X80
+#if ST7735_IS_180X128
     _colstart = 24;
     _rowstart = 0;
  /*****  IF Doesn't work, remove the code below (before #elif) *****/
@@ -176,10 +187,6 @@ void ST7735_Init(uint8_t rotation)
     ST7735_WriteCommand(ST7735_MADCTL);
     ST7735_WriteData(&data,1);
     ST7735_Unselect();
-
-#elif ST7735_IS_128X128
-    _colstart = 2;
-    _rowstart = 3;
 #else
     _colstart = 0;
     _rowstart = 0;
@@ -199,8 +206,8 @@ void ST7735_SetRotation(uint8_t m)
   switch (rotation)
   {
   case 0:
-#if ST7735_IS_160X80
-	  madctl = ST7735_MADCTL_MX | ST7735_MADCTL_MY | ST7735_MADCTL_BGR;
+#ifdef ST7735_IS_180X128
+	  madctl = ST7735_MADCTL_MX | ST7735_MADCTL_MY | ST7735_MADCTL_RGB;
 #else
       madctl = ST7735_MADCTL_MX | ST7735_MADCTL_MY | ST7735_MADCTL_RGB;
       _height = ST7735_HEIGHT;
@@ -210,8 +217,8 @@ void ST7735_SetRotation(uint8_t m)
 #endif
     break;
   case 1:
-#if ST7735_IS_160X80
-	  madctl = ST7735_MADCTL_MY | ST7735_MADCTL_MV | ST7735_MADCTL_BGR;
+#if ST7735_IS_180X128
+	  madctl = ST7735_MADCTL_MY | ST7735_MADCTL_MV | ST7735_MADCTL_RGB;
 #else
       madctl = ST7735_MADCTL_MY | ST7735_MADCTL_MV | ST7735_MADCTL_RGB;
       _width = ST7735_HEIGHT;
@@ -221,8 +228,8 @@ void ST7735_SetRotation(uint8_t m)
 #endif
     break;
   case 2:
-#if ST7735_IS_160X80
-	  madctl = ST7735_MADCTL_BGR;
+#if ST7735_IS_180X128
+	  madctl = ST7735_MADCTL_RGB;
 #else
       madctl = ST7735_MADCTL_RGB;
       _height = ST7735_HEIGHT;
@@ -232,8 +239,8 @@ void ST7735_SetRotation(uint8_t m)
 #endif
     break;
   case 3:
-#if ST7735_IS_160X80
-	  madctl = ST7735_MADCTL_MX | ST7735_MADCTL_MV | ST7735_MADCTL_BGR;
+#if ST7735_IS_180X128
+	  madctl = ST7735_MADCTL_MX | ST7735_MADCTL_MV | ST7735_MADCTL_RGB;
 #else
       madctl = ST7735_MADCTL_MX | ST7735_MADCTL_MV | ST7735_MADCTL_RGB;
       _width = ST7735_HEIGHT;

@@ -18,6 +18,7 @@ extern SPI_HandleTypeDef hspi1;
 #define RST_PIN  GPIO_PIN_15
 
 /****** TFT DEFINES ******/
+#define ST7735_IS_180x128 1
 //#define ST7735_IS_160X80 1
 //#define ST7735_IS_128X128 1
 static const uint8_t Font[] = {

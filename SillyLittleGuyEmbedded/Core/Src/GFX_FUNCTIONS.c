@@ -421,7 +421,8 @@ for(i=0; i<c; i++)
 	count = image[i][1];
 	for(j=0; j<count; j++)
 	{
-		bufffer[totalInd++] = palette[ind];
+
+		bufffer[totalInd++] = palette[ind] >> 8;
 	}
 }
 ST7735_DrawImage(y, x, w, h, bufffer);

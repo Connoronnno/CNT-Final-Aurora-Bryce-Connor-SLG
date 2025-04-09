@@ -463,7 +463,7 @@ int main(void)
 				//Update steps
 				drawString(0, 150, "-SILLY LITTLE GUY-", WHITE, BLACK, 1, 1);
 				sprintf(buffer2, "Steps: %d ", game.stepsToday);
-				drawString(0, 10, buffer2, WHITE, BLACK, 1, 1);
+				drawString(0, 10, buffer2, WHITE, GREEN, 1, 1);
 				Emote();
 			}
 
