@@ -6707,7 +6707,7 @@ LOAD C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 .rel.dyn        0x08012ad0        0x0
  .rel.iplt      0x08012ad0        0x0 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
 
-.data           0x20000000     0x16e8 load address 0x08012ad0
+.data           0x20000000     0x1710 load address 0x08012ad0
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -6724,191 +6724,191 @@ LOAD C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x20000868      0x4c4 ./Core/Src/main.o
                 0x20000868                imgSitting1
  .data.imgAdultSitting0
-                0x20000d2c      0x75c ./Core/Src/main.o
+                0x20000d2c      0x784 ./Core/Src/main.o
                 0x20000d2c                imgAdultSitting0
  .data.checkTime
-                0x20001488        0x2 ./Core/Src/main.o
-                0x20001488                checkTime
+                0x200014b0        0x2 ./Core/Src/main.o
+                0x200014b0                checkTime
  .data.currentMenu
-                0x2000148a        0x1 ./Core/Src/main.o
-                0x2000148a                currentMenu
+                0x200014b2        0x1 ./Core/Src/main.o
+                0x200014b2                currentMenu
  .data.canChange
-                0x2000148b        0x1 ./Core/Src/main.o
-                0x2000148b                canChange
+                0x200014b3        0x1 ./Core/Src/main.o
+                0x200014b3                canChange
  .data.SystemCoreClock
-                0x2000148c        0x4 ./Core/Src/system_stm32g0xx.o
-                0x2000148c                SystemCoreClock
+                0x200014b4        0x4 ./Core/Src/system_stm32g0xx.o
+                0x200014b4                SystemCoreClock
  .data.uwTickPrio
-                0x20001490        0x4 ./Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal.o
-                0x20001490                uwTickPrio
+                0x200014b8        0x4 ./Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal.o
+                0x200014b8                uwTickPrio
  .data.uwTickFreq
-                0x20001494        0x1 ./Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal.o
-                0x20001494                uwTickFreq
- *fill*         0x20001495        0x3 
- .data.__sglue  0x20001498        0xc C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-findfp.o)
-                0x20001498                __sglue
+                0x200014bc        0x1 ./Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal.o
+                0x200014bc                uwTickFreq
+ *fill*         0x200014bd        0x3 
+ .data.__sglue  0x200014c0        0xc C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-findfp.o)
+                0x200014c0                __sglue
  .data.__global_locale
-                0x200014a4      0x16c C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-locale.o)
-                0x200014a4                __global_locale
+                0x200014cc      0x16c C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-locale.o)
+                0x200014cc                __global_locale
  .data._impure_ptr
-                0x20001610        0x4 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-impure.o)
-                0x20001610                _impure_ptr
+                0x20001638        0x4 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-impure.o)
+                0x20001638                _impure_ptr
  .data._impure_data
-                0x20001614       0x4c C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-impure.o)
-                0x20001614                _impure_data
+                0x2000163c       0x4c C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-impure.o)
+                0x2000163c                _impure_data
  *(.RamFunc)
- .RamFunc       0x20001660       0x88 ./Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_flash.o
+ .RamFunc       0x20001688       0x88 ./Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_flash.o
  *(.RamFunc*)
-                0x200016e8                        . = ALIGN (0x4)
-                0x200016e8                        _edata = .
+                0x20001710                        . = ALIGN (0x4)
+                0x20001710                        _edata = .
 
-.igot.plt       0x200016e8        0x0 load address 0x080141b8
- .igot.plt      0x200016e8        0x0 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
-                0x200016e8                        . = ALIGN (0x4)
+.igot.plt       0x20001710        0x0 load address 0x080141e0
+ .igot.plt      0x20001710        0x0 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
+                0x20001710                        . = ALIGN (0x4)
 
-.bss            0x200016e8     0x1430 load address 0x080141b8
-                0x200016e8                        _sbss = .
-                0x200016e8                        __bss_start__ = _sbss
+.bss            0x20001710     0x1430 load address 0x080141e0
+                0x20001710                        _sbss = .
+                0x20001710                        __bss_start__ = _sbss
  *(.bss)
- .bss           0x200016e8       0x1c C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
+ .bss           0x20001710       0x1c C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
  *(.bss*)
- .bss._width    0x20001704        0x2 ./Core/Src/ST7735.o
-                0x20001704                _width
- .bss._height   0x20001706        0x2 ./Core/Src/ST7735.o
-                0x20001706                _height
- .bss.rotation  0x20001708        0x1 ./Core/Src/ST7735.o
-                0x20001708                rotation
+ .bss._width    0x2000172c        0x2 ./Core/Src/ST7735.o
+                0x2000172c                _width
+ .bss._height   0x2000172e        0x2 ./Core/Src/ST7735.o
+                0x2000172e                _height
+ .bss.rotation  0x20001730        0x1 ./Core/Src/ST7735.o
+                0x20001730                rotation
  .bss._colstart
-                0x20001709        0x1 ./Core/Src/ST7735.o
-                0x20001709                _colstart
+                0x20001731        0x1 ./Core/Src/ST7735.o
+                0x20001731                _colstart
  .bss._rowstart
-                0x2000170a        0x1 ./Core/Src/ST7735.o
-                0x2000170a                _rowstart
- .bss._xstart   0x2000170b        0x1 ./Core/Src/ST7735.o
-                0x2000170b                _xstart
- .bss._ystart   0x2000170c        0x1 ./Core/Src/ST7735.o
-                0x2000170c                _ystart
- *fill*         0x2000170d        0x1 
- .bss.curNote   0x2000170e        0x2 ./Core/Src/main.o
-                0x2000170e                curNote
- .bss.effect    0x20001710        0x1 ./Core/Src/main.o
-                0x20001710                effect
- *fill*         0x20001711        0x3 
+                0x20001732        0x1 ./Core/Src/ST7735.o
+                0x20001732                _rowstart
+ .bss._xstart   0x20001733        0x1 ./Core/Src/ST7735.o
+                0x20001733                _xstart
+ .bss._ystart   0x20001734        0x1 ./Core/Src/ST7735.o
+                0x20001734                _ystart
+ *fill*         0x20001735        0x1 
+ .bss.curNote   0x20001736        0x2 ./Core/Src/main.o
+                0x20001736                curNote
+ .bss.effect    0x20001738        0x1 ./Core/Src/main.o
+                0x20001738                effect
+ *fill*         0x20001739        0x3 
  .bss.updateScreen
-                0x20001714        0x4 ./Core/Src/main.o
-                0x20001714                updateScreen
+                0x2000173c        0x4 ./Core/Src/main.o
+                0x2000173c                updateScreen
  .bss.eggSitting0
-                0x20001718        0x8 ./Core/Src/main.o
-                0x20001718                eggSitting0
+                0x20001740        0x8 ./Core/Src/main.o
+                0x20001740                eggSitting0
  .bss.animEggSitting
-                0x20001720       0x10 ./Core/Src/main.o
-                0x20001720                animEggSitting
- .bss.sitting0  0x20001730        0x8 ./Core/Src/main.o
-                0x20001730                sitting0
- .bss.sitting1  0x20001738        0x8 ./Core/Src/main.o
-                0x20001738                sitting1
+                0x20001748       0x10 ./Core/Src/main.o
+                0x20001748                animEggSitting
+ .bss.sitting0  0x20001758        0x8 ./Core/Src/main.o
+                0x20001758                sitting0
+ .bss.sitting1  0x20001760        0x8 ./Core/Src/main.o
+                0x20001760                sitting1
  .bss.animSitting
-                0x20001740       0x10 ./Core/Src/main.o
-                0x20001740                animSitting
+                0x20001768       0x10 ./Core/Src/main.o
+                0x20001768                animSitting
  .bss.adultSitting0
-                0x20001750        0x8 ./Core/Src/main.o
-                0x20001750                adultSitting0
+                0x20001778        0x8 ./Core/Src/main.o
+                0x20001778                adultSitting0
  .bss.animAdultSitting
-                0x20001758       0x10 ./Core/Src/main.o
-                0x20001758                animAdultSitting
+                0x20001780       0x10 ./Core/Src/main.o
+                0x20001780                animAdultSitting
  .bss.currentFrame
-                0x20001768        0x4 ./Core/Src/main.o
-                0x20001768                currentFrame
- .bss.game      0x2000176c      0x14c ./Core/Src/main.o
-                0x2000176c                game
- .bss.dummy     0x200018b8        0x8 ./Core/Src/main.o
-                0x200018b8                dummy
- .bss.ii        0x200018c0        0x2 ./Core/Src/main.o
-                0x200018c0                ii
- *fill*         0x200018c2        0x2 
+                0x20001790        0x4 ./Core/Src/main.o
+                0x20001790                currentFrame
+ .bss.game      0x20001794      0x14c ./Core/Src/main.o
+                0x20001794                game
+ .bss.dummy     0x200018e0        0x8 ./Core/Src/main.o
+                0x200018e0                dummy
+ .bss.ii        0x200018e8        0x2 ./Core/Src/main.o
+                0x200018e8                ii
+ *fill*         0x200018ea        0x2 
  .bss.ggaStruct
-                0x200018c4       0x4c ./Core/Src/main.o
-                0x200018c4                ggaStruct
+                0x200018ec       0x4c ./Core/Src/main.o
+                0x200018ec                ggaStruct
  .bss.totalFrames
-                0x20001910        0x2 ./Core/Src/main.o
-                0x20001910                totalFrames
- .bss.frameGot  0x20001912        0x1 ./Core/Src/main.o
-                0x20001912                frameGot
- *fill*         0x20001913        0x1 
- .bss.buffer    0x20001914       0x80 ./Core/Src/main.o
-                0x20001914                buffer
+                0x20001938        0x2 ./Core/Src/main.o
+                0x20001938                totalFrames
+ .bss.frameGot  0x2000193a        0x1 ./Core/Src/main.o
+                0x2000193a                frameGot
+ *fill*         0x2000193b        0x1 
+ .bss.buffer    0x2000193c       0x80 ./Core/Src/main.o
+                0x2000193c                buffer
  .bss.sendBuffer
-                0x20001994      0x190 ./Core/Src/main.o
-                0x20001994                sendBuffer
+                0x200019bc      0x190 ./Core/Src/main.o
+                0x200019bc                sendBuffer
  .bss.syncBuffer
-                0x20001b24      0xbb8 ./Core/Src/main.o
-                0x20001b24                syncBuffer
- .bss.buffer2   0x200026dc       0x64 ./Core/Src/main.o
-                0x200026dc                buffer2
- .bss.steps     0x20002740        0x4 ./Core/Src/main.o
-                0x20002740                steps
+                0x20001b4c      0xbb8 ./Core/Src/main.o
+                0x20001b4c                syncBuffer
+ .bss.buffer2   0x20002704       0x64 ./Core/Src/main.o
+                0x20002704                buffer2
+ .bss.steps     0x20002768        0x4 ./Core/Src/main.o
+                0x20002768                steps
  .bss.currentSetting
-                0x20002744        0x4 ./Core/Src/main.o
-                0x20002744                currentSetting
+                0x2000276c        0x4 ./Core/Src/main.o
+                0x2000276c                currentSetting
  .bss.editDifficulty
-                0x20002748        0x4 ./Core/Src/main.o
-                0x20002748                editDifficulty
+                0x20002770        0x4 ./Core/Src/main.o
+                0x20002770                editDifficulty
  .bss.userUpload
-                0x2000274c        0x4 ./Core/Src/main.o
-                0x2000274c                userUpload
- .bss.hi2c1     0x20002750       0x54 ./Core/Src/main.o
-                0x20002750                hi2c1
- .bss.hrtc      0x200027a4       0x2c ./Core/Src/main.o
-                0x200027a4                hrtc
- .bss.hspi1     0x200027d0       0x64 ./Core/Src/main.o
-                0x200027d0                hspi1
- .bss.htim17    0x20002834       0x4c ./Core/Src/main.o
-                0x20002834                htim17
- .bss.huart1    0x20002880       0x94 ./Core/Src/main.o
-                0x20002880                huart1
- .bss.huart2    0x20002914       0x94 ./Core/Src/main.o
-                0x20002914                huart2
+                0x20002774        0x4 ./Core/Src/main.o
+                0x20002774                userUpload
+ .bss.hi2c1     0x20002778       0x54 ./Core/Src/main.o
+                0x20002778                hi2c1
+ .bss.hrtc      0x200027cc       0x2c ./Core/Src/main.o
+                0x200027cc                hrtc
+ .bss.hspi1     0x200027f8       0x64 ./Core/Src/main.o
+                0x200027f8                hspi1
+ .bss.htim17    0x2000285c       0x4c ./Core/Src/main.o
+                0x2000285c                htim17
+ .bss.huart1    0x200028a8       0x94 ./Core/Src/main.o
+                0x200028a8                huart1
+ .bss.huart2    0x2000293c       0x94 ./Core/Src/main.o
+                0x2000293c                huart2
  .bss.__sbrk_heap_end
-                0x200029a8        0x4 ./Core/Src/sysmem.o
- .bss.uwTick    0x200029ac        0x4 ./Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal.o
-                0x200029ac                uwTick
- .bss.pFlash    0x200029b0       0x1c ./Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_flash.o
-                0x200029b0                pFlash
- .bss.__sf      0x200029cc      0x138 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-findfp.o)
-                0x200029cc                __sf
+                0x200029d0        0x4 ./Core/Src/sysmem.o
+ .bss.uwTick    0x200029d4        0x4 ./Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal.o
+                0x200029d4                uwTick
+ .bss.pFlash    0x200029d8       0x1c ./Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_flash.o
+                0x200029d8                pFlash
+ .bss.__sf      0x200029f4      0x138 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-findfp.o)
+                0x200029f4                __sf
  .bss.__stdio_exit_handler
-                0x20002b04        0x4 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-findfp.o)
-                0x20002b04                __stdio_exit_handler
- .bss.errno     0x20002b08        0x4 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-reent.o)
-                0x20002b08                errno
+                0x20002b2c        0x4 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-findfp.o)
+                0x20002b2c                __stdio_exit_handler
+ .bss.errno     0x20002b30        0x4 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-reent.o)
+                0x20002b30                errno
  .bss.__lock___malloc_recursive_mutex
-                0x20002b0c        0x1 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-lock.o)
-                0x20002b0c                __lock___malloc_recursive_mutex
+                0x20002b34        0x1 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-lock.o)
+                0x20002b34                __lock___malloc_recursive_mutex
  .bss.__lock___sfp_recursive_mutex
-                0x20002b0d        0x1 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-lock.o)
-                0x20002b0d                __lock___sfp_recursive_mutex
- *fill*         0x20002b0e        0x2 
+                0x20002b35        0x1 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-lock.o)
+                0x20002b35                __lock___sfp_recursive_mutex
+ *fill*         0x20002b36        0x2 
  .bss.__malloc_sbrk_start
-                0x20002b10        0x4 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-mallocr.o)
-                0x20002b10                __malloc_sbrk_start
+                0x20002b38        0x4 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-mallocr.o)
+                0x20002b38                __malloc_sbrk_start
  .bss.__malloc_free_list
-                0x20002b14        0x4 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-mallocr.o)
-                0x20002b14                __malloc_free_list
+                0x20002b3c        0x4 C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-mallocr.o)
+                0x20002b3c                __malloc_free_list
  *(COMMON)
-                0x20002b18                        . = ALIGN (0x4)
-                0x20002b18                        _ebss = .
-                0x20002b18                        __bss_end__ = _ebss
+                0x20002b40                        . = ALIGN (0x4)
+                0x20002b40                        _ebss = .
+                0x20002b40                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20002b18      0x600 load address 0x080141b8
-                0x20002b18                        . = ALIGN (0x8)
+                0x20002b40      0x600 load address 0x080141e0
+                0x20002b40                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
-                0x20002b18                        PROVIDE (_end = .)
-                0x20002d18                        . = (. + _Min_Heap_Size)
- *fill*         0x20002b18      0x200 
-                0x20003118                        . = (. + _Min_Stack_Size)
- *fill*         0x20002d18      0x400 
-                0x20003118                        . = ALIGN (0x8)
+                0x20002b40                        PROVIDE (_end = .)
+                0x20002d40                        . = (. + _Min_Heap_Size)
+ *fill*         0x20002b40      0x200 
+                0x20003140                        . = (. + _Min_Stack_Size)
+ *fill*         0x20002d40      0x400 
+                0x20003140                        . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)

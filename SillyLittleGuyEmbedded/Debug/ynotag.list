@@ -9,43 +9,43 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .rodata       00000f68  08011b58  08011b58  00012b58  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08012ac0  08012ac0  000156e8  2**0
+  3 .ARM.extab    00000000  08012ac0  08012ac0  00015710  2**0
                   CONTENTS, READONLY
   4 .ARM          00000008  08012ac0  08012ac0  00013ac0  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  08012ac8  08012ac8  000156e8  2**0
+  5 .preinit_array 00000000  08012ac8  08012ac8  00015710  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   6 .init_array   00000004  08012ac8  08012ac8  00013ac8  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   7 .fini_array   00000004  08012acc  08012acc  00013acc  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         000016e8  20000000  08012ad0  00014000  2**2
+  8 .data         00001710  20000000  08012ad0  00014000  2**2
                   CONTENTS, ALLOC, LOAD, CODE
-  9 .bss          00001430  200016e8  080141b8  000156e8  2**2
+  9 .bss          00001430  20001710  080141e0  00015710  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20002b18  080141b8  00015b18  2**0
+ 10 ._user_heap_stack 00000600  20002b40  080141e0  00015b40  2**0
                   ALLOC
- 11 .ARM.attributes 00000028  00000000  00000000  000156e8  2**0
+ 11 .ARM.attributes 00000028  00000000  00000000  00015710  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0001df99  00000000  00000000  00015710  2**0
+ 12 .debug_info   0001df99  00000000  00000000  00015738  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00003f66  00000000  00000000  000336a9  2**0
+ 13 .debug_abbrev 00003f66  00000000  00000000  000336d1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00001bf0  00000000  00000000  00037610  2**3
+ 14 .debug_aranges 00001bf0  00000000  00000000  00037638  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00001697  00000000  00000000  00039200  2**0
+ 15 .debug_rnglists 00001697  00000000  00000000  00039228  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  000207c9  00000000  00000000  0003a897  2**0
+ 16 .debug_macro  000207c9  00000000  00000000  0003a8bf  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00021f63  00000000  00000000  0005b060  2**0
+ 17 .debug_line   00021f63  00000000  00000000  0005b088  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000cc4ac  00000000  00000000  0007cfc3  2**0
+ 18 .debug_str    000cc4ac  00000000  00000000  0007cfeb  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  0014946f  2**0
+ 19 .comment      00000043  00000000  00000000  00149497  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00007f28  00000000  00000000  001494b4  2**2
+ 20 .debug_frame  00007f28  00000000  00000000  001494dc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000085  00000000  00000000  001513dc  2**0
+ 21 .debug_line_str 00000085  00000000  00000000  00151404  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -65,7 +65,7 @@ Disassembly of section .text:
  80000d6:	2301      	movs	r3, #1
  80000d8:	7023      	strb	r3, [r4, #0]
  80000da:	bd10      	pop	{r4, pc}
- 80000dc:	200016e8 	.word	0x200016e8
+ 80000dc:	20001710 	.word	0x20001710
  80000e0:	00000000 	.word	0x00000000
  80000e4:	08011b30 	.word	0x08011b30
 
@@ -81,7 +81,7 @@ Disassembly of section .text:
  80000f8:	bd10      	pop	{r4, pc}
  80000fa:	46c0      	nop			@ (mov r8, r8)
  80000fc:	00000000 	.word	0x00000000
- 8000100:	200016ec 	.word	0x200016ec
+ 8000100:	20001714 	.word	0x20001714
  8000104:	08011b30 	.word	0x08011b30
 
 08000108 <strcmp>:
@@ -8633,8 +8633,8 @@ void fillScreen(uint16_t color) {
  80042ee:	b00d      	add	sp, #52	@ 0x34
  80042f0:	bdf0      	pop	{r4, r5, r6, r7, pc}
  80042f2:	46c0      	nop			@ (mov r8, r8)
- 80042f4:	20001704 	.word	0x20001704
- 80042f8:	20001706 	.word	0x20001706
+ 80042f4:	2000172c 	.word	0x2000172c
+ 80042f8:	2000172e 	.word	0x2000172e
 
 080042fc <drawImage>:
 
@@ -8975,7 +8975,7 @@ void ST7735_Reset()
  8004536:	46bd      	mov	sp, r7
  8004538:	b002      	add	sp, #8
  800453a:	bd80      	pop	{r7, pc}
- 800453c:	200027d0 	.word	0x200027d0
+ 800453c:	200027f8 	.word	0x200027f8
 
 08004540 <ST7735_WriteData>:
 
@@ -9006,7 +9006,7 @@ void ST7735_WriteData(uint8_t* buff, size_t buff_size)
  800456a:	46bd      	mov	sp, r7
  800456c:	b002      	add	sp, #8
  800456e:	bd80      	pop	{r7, pc}
- 8004570:	200027d0 	.word	0x200027d0
+ 8004570:	200027f8 	.word	0x200027f8
 
 08004574 <DisplayInit>:
 
@@ -9232,8 +9232,8 @@ void ST7735_SetAddressWindow(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
  80046de:	b004      	add	sp, #16
  80046e0:	bdb0      	pop	{r4, r5, r7, pc}
  80046e2:	46c0      	nop			@ (mov r8, r8)
- 80046e4:	2000170b 	.word	0x2000170b
- 80046e8:	2000170c 	.word	0x2000170c
+ 80046e4:	20001733 	.word	0x20001733
+ 80046e8:	20001734 	.word	0x20001734
 
 080046ec <ST7735_Init>:
 
@@ -9292,8 +9292,8 @@ void ST7735_Init(uint8_t rotation)
  800473c:	080123f8 	.word	0x080123f8
  8004740:	08012430 	.word	0x08012430
  8004744:	08012440 	.word	0x08012440
- 8004748:	20001709 	.word	0x20001709
- 800474c:	2000170a 	.word	0x2000170a
+ 8004748:	20001731 	.word	0x20001731
+ 800474c:	20001732 	.word	0x20001732
 
 08004750 <ST7735_SetRotation>:
 
@@ -9476,13 +9476,13 @@ void ST7735_SetRotation(uint8_t m)
  8004842:	b004      	add	sp, #16
  8004844:	bd80      	pop	{r7, pc}
  8004846:	46c0      	nop			@ (mov r8, r8)
- 8004848:	20001708 	.word	0x20001708
- 800484c:	20001706 	.word	0x20001706
- 8004850:	20001704 	.word	0x20001704
- 8004854:	20001709 	.word	0x20001709
- 8004858:	2000170b 	.word	0x2000170b
- 800485c:	2000170a 	.word	0x2000170a
- 8004860:	2000170c 	.word	0x2000170c
+ 8004848:	20001730 	.word	0x20001730
+ 800484c:	2000172e 	.word	0x2000172e
+ 8004850:	2000172c 	.word	0x2000172c
+ 8004854:	20001731 	.word	0x20001731
+ 8004858:	20001733 	.word	0x20001733
+ 800485c:	20001732 	.word	0x20001732
+ 8004860:	20001734 	.word	0x20001734
 
 08004864 <ST7735_DrawPixel>:
 
@@ -9569,8 +9569,8 @@ void ST7735_DrawPixel(uint16_t x, uint16_t y, uint16_t color) {
  80048f2:	46bd      	mov	sp, r7
  80048f4:	b005      	add	sp, #20
  80048f6:	bd90      	pop	{r4, r7, pc}
- 80048f8:	20001704 	.word	0x20001704
- 80048fc:	20001706 	.word	0x20001706
+ 80048f8:	2000172c 	.word	0x2000172c
+ 80048fc:	2000172e 	.word	0x2000172e
 
 08004900 <ST7735_DrawImage>:
     }
@@ -9693,8 +9693,8 @@ void ST7735_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint
  80049ce:	46bd      	mov	sp, r7
  80049d0:	b002      	add	sp, #8
  80049d2:	bdb0      	pop	{r4, r5, r7, pc}
- 80049d4:	20001704 	.word	0x20001704
- 80049d8:	20001706 	.word	0x20001706
+ 80049d4:	2000172c 	.word	0x2000172c
+ 80049d8:	2000172e 	.word	0x2000172e
 
 080049dc <minmea_tocoord>:
 /**
@@ -10205,13 +10205,13 @@ int main(void)
  8004cee:	e00a      	b.n	8004d06 <main+0x232>
 				case 2:
 					//Animate as the adult
-					Animate(animAdultSitting, 0, 20, 20, 80, 80);
+					Animate(animAdultSitting, 0, 20, 30, 80, 80);
  8004cf0:	484b      	ldr	r0, [pc, #300]	@ (8004e20 <main+0x34c>)
  8004cf2:	2350      	movs	r3, #80	@ 0x50
  8004cf4:	9301      	str	r3, [sp, #4]
  8004cf6:	2350      	movs	r3, #80	@ 0x50
  8004cf8:	9300      	str	r3, [sp, #0]
- 8004cfa:	2314      	movs	r3, #20
+ 8004cfa:	231e      	movs	r3, #30
  8004cfc:	2214      	movs	r2, #20
  8004cfe:	2100      	movs	r1, #0
  8004d00:	f001 fba4 	bl	800644c <Animate>
@@ -10368,24 +10368,24 @@ int main(void)
  8004df8:	701a      	strb	r2, [r3, #0]
 			break;
  8004dfa:	e2f7      	b.n	80053ec <main+0x918>
- 8004dfc:	20002740 	.word	0x20002740
- 8004e00:	2000176c 	.word	0x2000176c
- 8004e04:	20001488 	.word	0x20001488
- 8004e08:	20001784 	.word	0x20001784
- 8004e0c:	20001714 	.word	0x20001714
- 8004e10:	2000148a 	.word	0x2000148a
- 8004e14:	20001910 	.word	0x20001910
- 8004e18:	20001720 	.word	0x20001720
- 8004e1c:	20001740 	.word	0x20001740
- 8004e20:	20001758 	.word	0x20001758
+ 8004dfc:	20002768 	.word	0x20002768
+ 8004e00:	20001794 	.word	0x20001794
+ 8004e04:	200014b0 	.word	0x200014b0
+ 8004e08:	200017ac 	.word	0x200017ac
+ 8004e0c:	2000173c 	.word	0x2000173c
+ 8004e10:	200014b2 	.word	0x200014b2
+ 8004e14:	20001938 	.word	0x20001938
+ 8004e18:	20001748 	.word	0x20001748
+ 8004e1c:	20001768 	.word	0x20001768
+ 8004e20:	20001780 	.word	0x20001780
  8004e24:	08011b58 	.word	0x08011b58
  8004e28:	08011b6c 	.word	0x08011b6c
- 8004e2c:	200026dc 	.word	0x200026dc
+ 8004e2c:	20002704 	.word	0x20002704
  8004e30:	ffff96cd 	.word	0xffff96cd
  8004e34:	50000800 	.word	0x50000800
- 8004e38:	20001710 	.word	0x20001710
+ 8004e38:	20001738 	.word	0x20001738
  8004e3c:	50000400 	.word	0x50000400
- 8004e40:	2000148b 	.word	0x2000148b
+ 8004e40:	200014b3 	.word	0x200014b3
 		case StatsDisplay:
 
 			if (updateScreen >= 5) {
@@ -10902,11 +10902,11 @@ int main(void)
  80051fe:	005b      	lsls	r3, r3, #1
  8005200:	50d1      	str	r1, [r2, r3]
  8005202:	e045      	b.n	8005290 <main+0x7bc>
- 8005204:	20001714 	.word	0x20001714
+ 8005204:	2000173c 	.word	0x2000173c
  8005208:	08011b78 	.word	0x08011b78
- 800520c:	2000176c 	.word	0x2000176c
+ 800520c:	20001794 	.word	0x20001794
  8005210:	08011b80 	.word	0x08011b80
- 8005214:	200026dc 	.word	0x200026dc
+ 8005214:	20002704 	.word	0x20002704
  8005218:	08011b8c 	.word	0x08011b8c
  800521c:	08011b9c 	.word	0x08011b9c
  8005220:	08011bac 	.word	0x08011bac
@@ -10919,13 +10919,13 @@ int main(void)
  800523c:	08011be8 	.word	0x08011be8
  8005240:	08011bf4 	.word	0x08011bf4
  8005244:	50000400 	.word	0x50000400
- 8005248:	20001710 	.word	0x20001710
- 800524c:	2000148a 	.word	0x2000148a
- 8005250:	2000148b 	.word	0x2000148b
+ 8005248:	20001738 	.word	0x20001738
+ 800524c:	200014b2 	.word	0x200014b2
+ 8005250:	200014b3 	.word	0x200014b3
  8005254:	08011c00 	.word	0x08011c00
  8005258:	08011c0c 	.word	0x08011c0c
  800525c:	08011c18 	.word	0x08011c18
- 8005260:	20002748 	.word	0x20002748
+ 8005260:	20002770 	.word	0x20002770
  8005264:	0000ffff 	.word	0x0000ffff
 					}
 					//Left decrements the goal
@@ -11178,22 +11178,22 @@ int main(void)
  80053f6:	801a      	strh	r2, [r3, #0]
 		_ADXL343_ReadReg8(0x15, &steps, 2);
  80053f8:	f7ff fb88 	bl	8004b0c <main+0x38>
- 80053fc:	2000176c 	.word	0x2000176c
+ 80053fc:	20001794 	.word	0x20001794
  8005400:	fffffc18 	.word	0xfffffc18
  8005404:	000f3e57 	.word	0x000f3e57
  8005408:	000f3e58 	.word	0x000f3e58
  800540c:	08011c24 	.word	0x08011c24
- 8005410:	200026dc 	.word	0x200026dc
- 8005414:	2000274c 	.word	0x2000274c
- 8005418:	20002744 	.word	0x20002744
+ 8005410:	20002704 	.word	0x20002704
+ 8005414:	20002774 	.word	0x20002774
+ 8005418:	2000276c 	.word	0x2000276c
  800541c:	0000ffff 	.word	0x0000ffff
  8005420:	50000400 	.word	0x50000400
  8005424:	50000800 	.word	0x50000800
- 8005428:	20002748 	.word	0x20002748
- 800542c:	20001710 	.word	0x20001710
- 8005430:	2000148a 	.word	0x2000148a
- 8005434:	2000148b 	.word	0x2000148b
- 8005438:	20001910 	.word	0x20001910
+ 8005428:	20002770 	.word	0x20002770
+ 800542c:	20001738 	.word	0x20001738
+ 8005430:	200014b2 	.word	0x200014b2
+ 8005434:	200014b3 	.word	0x200014b3
+ 8005438:	20001938 	.word	0x20001938
 
 0800543c <SystemClock_Config>:
 /**
@@ -11430,7 +11430,7 @@ static void MX_I2C1_Init(void)
  800556e:	46c0      	nop			@ (mov r8, r8)
  8005570:	46bd      	mov	sp, r7
  8005572:	bd80      	pop	{r7, pc}
- 8005574:	20002750 	.word	0x20002750
+ 8005574:	20002778 	.word	0x20002778
  8005578:	40005400 	.word	0x40005400
  800557c:	10b17db5 	.word	0x10b17db5
 
@@ -11678,7 +11678,7 @@ static void MX_RTC_Init(void)
  80056ce:	b010      	add	sp, #64	@ 0x40
  80056d0:	bd80      	pop	{r7, pc}
  80056d2:	46c0      	nop			@ (mov r8, r8)
- 80056d4:	200027a4 	.word	0x200027a4
+ 80056d4:	200027cc 	.word	0x200027cc
  80056d8:	40002800 	.word	0x40002800
  80056dc:	0000500b 	.word	0x0000500b
 
@@ -11775,7 +11775,7 @@ static void MX_SPI1_Init(void)
  8005752:	46bd      	mov	sp, r7
  8005754:	bd80      	pop	{r7, pc}
  8005756:	46c0      	nop			@ (mov r8, r8)
- 8005758:	200027d0 	.word	0x200027d0
+ 8005758:	200027f8 	.word	0x200027f8
  800575c:	40013000 	.word	0x40013000
 
 08005760 <MX_TIM17_Init>:
@@ -11959,7 +11959,7 @@ static void MX_TIM17_Init(void)
  800585e:	46bd      	mov	sp, r7
  8005860:	b014      	add	sp, #80	@ 0x50
  8005862:	bd80      	pop	{r7, pc}
- 8005864:	20002834 	.word	0x20002834
+ 8005864:	2000285c 	.word	0x2000285c
  8005868:	40014800 	.word	0x40014800
  800586c:	0000ffff 	.word	0x0000ffff
 
@@ -12073,7 +12073,7 @@ static void MX_USART1_UART_Init(void)
  80058fe:	46bd      	mov	sp, r7
  8005900:	bd80      	pop	{r7, pc}
  8005902:	46c0      	nop			@ (mov r8, r8)
- 8005904:	20002880 	.word	0x20002880
+ 8005904:	200028a8 	.word	0x200028a8
  8005908:	40013800 	.word	0x40013800
 
 0800590c <MX_USART2_UART_Init>:
@@ -12186,7 +12186,7 @@ static void MX_USART2_UART_Init(void)
  800599a:	46bd      	mov	sp, r7
  800599c:	bd80      	pop	{r7, pc}
  800599e:	46c0      	nop			@ (mov r8, r8)
- 80059a0:	20002914 	.word	0x20002914
+ 80059a0:	2000293c 	.word	0x2000293c
  80059a4:	40004400 	.word	0x40004400
 
 080059a8 <MX_GPIO_Init>:
@@ -12844,9 +12844,9 @@ void PlayEffect(enum SoundEffects effect) {
  8005dce:	b002      	add	sp, #8
  8005dd0:	bd80      	pop	{r7, pc}
  8005dd2:	46c0      	nop			@ (mov r8, r8)
- 8005dd4:	20002834 	.word	0x20002834
+ 8005dd4:	2000285c 	.word	0x2000285c
  8005dd8:	0801246c 	.word	0x0801246c
- 8005ddc:	2000170e 	.word	0x2000170e
+ 8005ddc:	20001736 	.word	0x20001736
  8005de0:	0000020b 	.word	0x0000020b
  8005de4:	00000ae8 	.word	0x00000ae8
  8005de8:	000005ca 	.word	0x000005ca
@@ -12950,7 +12950,7 @@ void PeripheralInit(void) {
  8005e7a:	46bd      	mov	sp, r7
  8005e7c:	bd80      	pop	{r7, pc}
  8005e7e:	46c0      	nop			@ (mov r8, r8)
- 8005e80:	20001914 	.word	0x20001914
+ 8005e80:	2000193c 	.word	0x2000193c
  8005e84:	40014800 	.word	0x40014800
 
 08005e88 <StructInit>:
@@ -13018,9 +13018,9 @@ void StructInit(void) {
  8005eda:	4b31      	ldr	r3, [pc, #196]	@ (8005fa0 <StructInit+0x118>)
  8005edc:	4a31      	ldr	r2, [pc, #196]	@ (8005fa4 <StructInit+0x11c>)
  8005ede:	601a      	str	r2, [r3, #0]
-	adultSitting0.Size = 471;
+	adultSitting0.Size = 481;
  8005ee0:	4b2f      	ldr	r3, [pc, #188]	@ (8005fa0 <StructInit+0x118>)
- 8005ee2:	22d8      	movs	r2, #216	@ 0xd8
+ 8005ee2:	22e2      	movs	r2, #226	@ 0xe2
  8005ee4:	32ff      	adds	r2, #255	@ 0xff
  8005ee6:	605a      	str	r2, [r3, #4]
 	animAdultSitting[0] = adultSitting0;
@@ -13118,21 +13118,21 @@ void StructInit(void) {
  8005f72:	46bd      	mov	sp, r7
  8005f74:	b002      	add	sp, #8
  8005f76:	bd80      	pop	{r7, pc}
- 8005f78:	20002740 	.word	0x20002740
+ 8005f78:	20002768 	.word	0x20002768
  8005f7c:	0803f800 	.word	0x0803f800
- 8005f80:	20001718 	.word	0x20001718
+ 8005f80:	20001740 	.word	0x20001740
  8005f84:	20000014 	.word	0x20000014
- 8005f88:	20001720 	.word	0x20001720
- 8005f8c:	20001730 	.word	0x20001730
+ 8005f88:	20001748 	.word	0x20001748
+ 8005f8c:	20001758 	.word	0x20001758
  8005f90:	2000039c 	.word	0x2000039c
- 8005f94:	20001738 	.word	0x20001738
+ 8005f94:	20001760 	.word	0x20001760
  8005f98:	20000868 	.word	0x20000868
- 8005f9c:	20001740 	.word	0x20001740
- 8005fa0:	20001750 	.word	0x20001750
+ 8005f9c:	20001768 	.word	0x20001768
+ 8005fa0:	20001778 	.word	0x20001778
  8005fa4:	20000d2c 	.word	0x20000d2c
- 8005fa8:	20001758 	.word	0x20001758
- 8005fac:	2000176c 	.word	0x2000176c
- 8005fb0:	200018b8 	.word	0x200018b8
+ 8005fa8:	20001780 	.word	0x20001780
+ 8005fac:	20001794 	.word	0x20001794
+ 8005fb0:	200018e0 	.word	0x200018e0
  8005fb4:	414587dd 	.word	0x414587dd
  8005fb8:	c2b233c5 	.word	0xc2b233c5
 
@@ -13166,7 +13166,7 @@ void Evolve() {
  8005fe2:	46c0      	nop			@ (mov r8, r8)
  8005fe4:	46bd      	mov	sp, r7
  8005fe6:	bd80      	pop	{r7, pc}
- 8005fe8:	2000176c 	.word	0x2000176c
+ 8005fe8:	20001794 	.word	0x20001794
  8005fec:	0000ffff 	.word	0x0000ffff
 
 08005ff0 <FlashWrite>:
@@ -13646,7 +13646,7 @@ void FlashWrite() {
  8006348:	00001194 	.word	0x00001194
  800634c:	ffffee60 	.word	0xffffee60
  8006350:	12345678 	.word	0x12345678
- 8006354:	2000176c 	.word	0x2000176c
+ 8006354:	20001794 	.word	0x20001794
  8006358:	00001190 	.word	0x00001190
  800635c:	0000118c 	.word	0x0000118c
 		HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address,
@@ -13760,7 +13760,7 @@ void FlashWrite() {
  800642a:	4b07      	ldr	r3, [pc, #28]	@ (8006448 <FlashWrite+0x458>)
  800642c:	449d      	add	sp, r3
  800642e:	bdf0      	pop	{r4, r5, r6, r7, pc}
- 8006430:	2000176c 	.word	0x2000176c
+ 8006430:	20001794 	.word	0x20001794
  8006434:	0000118c 	.word	0x0000118c
  8006438:	47c35000 	.word	0x47c35000
  800643c:	000011a4 	.word	0x000011a4
@@ -13835,7 +13835,7 @@ void Animate(struct Img *animation, unsigned int frameCount, unsigned int xPos,
  80064b6:	b005      	add	sp, #20
  80064b8:	bdf0      	pop	{r4, r5, r6, r7, pc}
  80064ba:	46c0      	nop			@ (mov r8, r8)
- 80064bc:	20001768 	.word	0x20001768
+ 80064bc:	20001790 	.word	0x20001790
  80064c0:	20000000 	.word	0x20000000
 
 080064c4 <_ADXL343_ReadReg8>:
@@ -13898,7 +13898,7 @@ int _ADXL343_ReadReg8(unsigned char TargetRegister, unsigned char *TargetValue,
  800651e:	b002      	add	sp, #8
  8006520:	bd80      	pop	{r7, pc}
  8006522:	46c0      	nop			@ (mov r8, r8)
- 8006524:	20002750 	.word	0x20002750
+ 8006524:	20002778 	.word	0x20002778
 
 08006528 <_ADXL343_WriteReg8>:
 
@@ -13949,7 +13949,7 @@ int _ADXL343_WriteReg8(unsigned char TargetRegister, unsigned char TargetValue) 
  800656e:	b004      	add	sp, #16
  8006570:	bd80      	pop	{r7, pc}
  8006572:	46c0      	nop			@ (mov r8, r8)
- 8006574:	20002750 	.word	0x20002750
+ 8006574:	20002778 	.word	0x20002778
 
 08006578 <SendData>:
 void SendData() {
@@ -14155,11 +14155,11 @@ void SendData() {
  80066e2:	46b8      	mov	r8, r7
  80066e4:	bdf0      	pop	{r4, r5, r6, r7, pc}
  80066e6:	46c0      	nop			@ (mov r8, r8)
- 80066e8:	2000176c 	.word	0x2000176c
+ 80066e8:	20001794 	.word	0x20001794
  80066ec:	08011c64 	.word	0x08011c64
- 80066f0:	20001994 	.word	0x20001994
- 80066f4:	20001898 	.word	0x20001898
- 80066f8:	20002914 	.word	0x20002914
+ 80066f0:	200019bc 	.word	0x200019bc
+ 80066f4:	200018c0 	.word	0x200018c0
+ 80066f8:	2000293c 	.word	0x2000293c
  80066fc:	3ff00000 	.word	0x3ff00000
  8006700:	40c38800 	.word	0x40c38800
  8006704:	08011ce4 	.word	0x08011ce4
@@ -14640,13 +14640,13 @@ void ReceiveData() {
  8006a72:	46c0      	nop			@ (mov r8, r8)
  8006a74:	ffffebf0 	.word	0xffffebf0
  8006a78:	0000140c 	.word	0x0000140c
- 8006a7c:	20001b24 	.word	0x20001b24
+ 8006a7c:	20001b4c 	.word	0x20001b4c
  8006a80:	000013fc 	.word	0x000013fc
  8006a84:	00001408 	.word	0x00001408
  8006a88:	08011d00 	.word	0x08011d00
  8006a8c:	000013f8 	.word	0x000013f8
  8006a90:	00001404 	.word	0x00001404
- 8006a94:	2000176c 	.word	0x2000176c
+ 8006a94:	20001794 	.word	0x20001794
  8006a98:	08011d04 	.word	0x08011d04
  8006a9c:	08011d10 	.word	0x08011d10
  8006aa0:	08011d1c 	.word	0x08011d1c
@@ -14662,8 +14662,8 @@ void ReceiveData() {
  8006ac8:	3ee4f8b5 	.word	0x3ee4f8b5
  8006acc:	08011d60 	.word	0x08011d60
  8006ad0:	08011d64 	.word	0x08011d64
- 8006ad4:	200018c0 	.word	0x200018c0
- 8006ad8:	20002914 	.word	0x20002914
+ 8006ad4:	200018e8 	.word	0x200018e8
+ 8006ad8:	2000293c 	.word	0x2000293c
  8006adc:	00001410 	.word	0x00001410
 
 08006ae0 <CheckExp>:
@@ -14738,7 +14738,7 @@ int CheckExp(int threshold, int comparer) {
  8006b5e:	46bd      	mov	sp, r7
  8006b60:	b005      	add	sp, #20
  8006b62:	bd90      	pop	{r4, r7, pc}
- 8006b64:	2000176c 	.word	0x2000176c
+ 8006b64:	20001794 	.word	0x20001794
 
 08006b68 <GetLatLon>:
 void GetLatLon() {
@@ -15114,17 +15114,17 @@ void GetLatLon() {
  8006de2:	46bd      	mov	sp, r7
  8006de4:	b00a      	add	sp, #40	@ 0x28
  8006de6:	bdb0      	pop	{r4, r5, r7, pc}
- 8006de8:	200018c0 	.word	0x200018c0
- 8006dec:	20001914 	.word	0x20001914
- 8006df0:	200018c4 	.word	0x200018c4
- 8006df4:	200018d4 	.word	0x200018d4
- 8006df8:	200018dc 	.word	0x200018dc
- 8006dfc:	2000176c 	.word	0x2000176c
- 8006e00:	20001912 	.word	0x20001912
+ 8006de8:	200018e8 	.word	0x200018e8
+ 8006dec:	2000193c 	.word	0x2000193c
+ 8006df0:	200018ec 	.word	0x200018ec
+ 8006df4:	200018fc 	.word	0x200018fc
+ 8006df8:	20001904 	.word	0x20001904
+ 8006dfc:	20001794 	.word	0x20001794
+ 8006e00:	2000193a 	.word	0x2000193a
  8006e04:	358637bd 	.word	0x358637bd
  8006e08:	b58637bd 	.word	0xb58637bd
  8006e0c:	38d1b717 	.word	0x38d1b717
- 8006e10:	20002880 	.word	0x20002880
+ 8006e10:	200028a8 	.word	0x200028a8
 
 08006e14 <Emote>:
 void Emote() {
@@ -15351,8 +15351,8 @@ void Emote() {
  8006f72:	46bd      	mov	sp, r7
  8006f74:	bd80      	pop	{r7, pc}
  8006f76:	46c0      	nop			@ (mov r8, r8)
- 8006f78:	2000176c 	.word	0x2000176c
- 8006f7c:	20001710 	.word	0x20001710
+ 8006f78:	20001794 	.word	0x20001794
+ 8006f7c:	20001738 	.word	0x20001738
  8006f80:	08011d68 	.word	0x08011d68
  8006f84:	08011d7c 	.word	0x08011d7c
  8006f88:	08011d90 	.word	0x08011d90
@@ -15513,12 +15513,12 @@ struct latLon GetJustLatLon() {
  8007072:	46bd      	mov	sp, r7
  8007074:	b009      	add	sp, #36	@ 0x24
  8007076:	bd90      	pop	{r4, r7, pc}
- 8007078:	200018c0 	.word	0x200018c0
- 800707c:	20001914 	.word	0x20001914
- 8007080:	200018c4 	.word	0x200018c4
- 8007084:	200018d4 	.word	0x200018d4
- 8007088:	200018dc 	.word	0x200018dc
- 800708c:	20002880 	.word	0x20002880
+ 8007078:	200018e8 	.word	0x200018e8
+ 800707c:	2000193c 	.word	0x2000193c
+ 8007080:	200018ec 	.word	0x200018ec
+ 8007084:	200018fc 	.word	0x200018fc
+ 8007088:	20001904 	.word	0x20001904
+ 800708c:	200028a8 	.word	0x200028a8
 
 08007090 <HAL_RTC_AlarmAEventCallback>:
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc) {
@@ -17861,7 +17861,7 @@ void RTC_TAMP_IRQHandler(void)
  8007e46:	46bd      	mov	sp, r7
  8007e48:	bd80      	pop	{r7, pc}
  8007e4a:	46c0      	nop			@ (mov r8, r8)
- 8007e4c:	200027a4 	.word	0x200027a4
+ 8007e4c:	200027cc 	.word	0x200027cc
 
 08007e50 <EXTI0_1_IRQHandler>:
 
@@ -18242,8 +18242,8 @@ void *_sbrk(ptrdiff_t incr)
  8007fee:	bd80      	pop	{r7, pc}
  8007ff0:	20024000 	.word	0x20024000
  8007ff4:	00000400 	.word	0x00000400
- 8007ff8:	200029a8 	.word	0x200029a8
- 8007ffc:	20002b18 	.word	0x20002b18
+ 8007ff8:	200029d0 	.word	0x200029d0
+ 8007ffc:	20002b40 	.word	0x20002b40
 
 08008000 <SystemInit>:
   * @brief  Setup the microcontroller system.
@@ -20120,13 +20120,13 @@ LoopForever:
   ldr r0, =_sdata
  8008adc:	20000000 	.word	0x20000000
   ldr r1, =_edata
- 8008ae0:	200016e8 	.word	0x200016e8
+ 8008ae0:	20001710 	.word	0x20001710
   ldr r2, =_sidata
  8008ae4:	08012ad0 	.word	0x08012ad0
   ldr r2, =_sbss
- 8008ae8:	200016e8 	.word	0x200016e8
+ 8008ae8:	20001710 	.word	0x20001710
   ldr r4, =_ebss
- 8008aec:	20002b18 	.word	0x20002b18
+ 8008aec:	20002b40 	.word	0x20002b40
 
 08008af0 <ADC1_COMP_IRQHandler>:
  * @retval None
@@ -20301,9 +20301,9 @@ __weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
  8008bb6:	b005      	add	sp, #20
  8008bb8:	bd90      	pop	{r4, r7, pc}
  8008bba:	46c0      	nop			@ (mov r8, r8)
- 8008bbc:	20001494 	.word	0x20001494
- 8008bc0:	2000148c 	.word	0x2000148c
- 8008bc4:	20001490 	.word	0x20001490
+ 8008bbc:	200014bc 	.word	0x200014bc
+ 8008bc0:	200014b4 	.word	0x200014b4
+ 8008bc4:	200014b8 	.word	0x200014b8
 
 08008bc8 <HAL_IncTick>:
   * @note This function is declared as __weak to be overwritten in case of other
@@ -20328,8 +20328,8 @@ __weak void HAL_IncTick(void)
  8008bde:	46bd      	mov	sp, r7
  8008be0:	bd80      	pop	{r7, pc}
  8008be2:	46c0      	nop			@ (mov r8, r8)
- 8008be4:	20001494 	.word	0x20001494
- 8008be8:	200029ac 	.word	0x200029ac
+ 8008be4:	200014bc 	.word	0x200014bc
+ 8008be8:	200029d4 	.word	0x200029d4
 
 08008bec <HAL_GetTick>:
   * @note This function is declared as __weak to be overwritten in case of other
@@ -20348,7 +20348,7 @@ __weak uint32_t HAL_GetTick(void)
  8008bf6:	46bd      	mov	sp, r7
  8008bf8:	bd80      	pop	{r7, pc}
  8008bfa:	46c0      	nop			@ (mov r8, r8)
- 8008bfc:	200029ac 	.word	0x200029ac
+ 8008bfc:	200029d4 	.word	0x200029d4
 
 08008c00 <HAL_Delay>:
   *       implementations in user file.
@@ -20402,7 +20402,7 @@ __weak void HAL_Delay(uint32_t Delay)
  8008c3e:	b004      	add	sp, #16
  8008c40:	bd80      	pop	{r7, pc}
  8008c42:	46c0      	nop			@ (mov r8, r8)
- 8008c44:	20001494 	.word	0x20001494
+ 8008c44:	200014bc 	.word	0x200014bc
 
 08008c48 <HAL_SYSCFG_StrobeDBattpinsConfig>:
   *         @arg @ref SYSCFG_UCPD1_STROBE
@@ -20869,7 +20869,7 @@ HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint
  8008ebe:	46bd      	mov	sp, r7
  8008ec0:	b006      	add	sp, #24
  8008ec2:	bdb0      	pop	{r4, r5, r7, pc}
- 8008ec4:	200029b0 	.word	0x200029b0
+ 8008ec4:	200029d8 	.word	0x200029d8
  8008ec8:	40022000 	.word	0x40022000
 
 08008ecc <HAL_FLASH_Unlock>:
@@ -21115,7 +21115,7 @@ HAL_StatusTypeDef FLASH_WaitForLastOperation(uint32_t Timeout)
  8008fe4:	40022000 	.word	0x40022000
  8008fe8:	0000c3fa 	.word	0x0000c3fa
  8008fec:	0008c3fb 	.word	0x0008c3fb
- 8008ff0:	200029b0 	.word	0x200029b0
+ 8008ff0:	200029d8 	.word	0x200029d8
 
 08008ff4 <FLASH_Program_DoubleWord>:
   * @param  Address Specifies the address to be programmed.
@@ -21344,7 +21344,7 @@ HAL_StatusTypeDef HAL_FLASHEx_Erase(FLASH_EraseInitTypeDef *pEraseInit, uint32_t
  8009106:	46bd      	mov	sp, r7
  8009108:	b004      	add	sp, #16
  800910a:	bdb0      	pop	{r4, r5, r7, pc}
- 800910c:	200029b0 	.word	0x200029b0
+ 800910c:	200029d8 	.word	0x200029d8
  8009110:	40022000 	.word	0x40022000
 
 08009114 <FLASH_MassErase>:
@@ -24556,7 +24556,7 @@ HAL_StatusTypeDef HAL_PWREx_ControlVoltageScaling(uint32_t VoltageScaling)
  800a23e:	46c0      	nop			@ (mov r8, r8)
  800a240:	40007000 	.word	0x40007000
  800a244:	fffff9ff 	.word	0xfffff9ff
- 800a248:	2000148c 	.word	0x2000148c
+ 800a248:	200014b4 	.word	0x200014b4
  800a24c:	000f4240 	.word	0x000f4240
 
 0800a250 <LL_RCC_GetAPB1Prescaler>:
@@ -25207,8 +25207,8 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
  800a5a4:	ffff80ff 	.word	0xffff80ff
  800a5a8:	ffffc7ff 	.word	0xffffc7ff
  800a5ac:	00f42400 	.word	0x00f42400
- 800a5b0:	2000148c 	.word	0x2000148c
- 800a5b4:	20001490 	.word	0x20001490
+ 800a5b0:	200014b4 	.word	0x200014b4
+ 800a5b4:	200014b8 	.word	0x200014b8
  800a5b8:	fffffeff 	.word	0xfffffeff
     }
     else
@@ -26239,8 +26239,8 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
  800ab24:	fffff0ff 	.word	0xfffff0ff
  800ab28:	ffff8fff 	.word	0xffff8fff
  800ab2c:	0801254c 	.word	0x0801254c
- 800ab30:	2000148c 	.word	0x2000148c
- 800ab34:	20001490 	.word	0x20001490
+ 800ab30:	200014b4 	.word	0x200014b4
+ 800ab34:	200014b8 	.word	0x200014b8
 
 0800ab38 <HAL_RCC_GetSysClockFreq>:
   *
@@ -26446,7 +26446,7 @@ uint32_t HAL_RCC_GetHCLKFreq(void)
  800ac46:	46bd      	mov	sp, r7
  800ac48:	bd80      	pop	{r7, pc}
  800ac4a:	46c0      	nop			@ (mov r8, r8)
- 800ac4c:	2000148c 	.word	0x2000148c
+ 800ac4c:	200014b4 	.word	0x200014b4
 
 0800ac50 <HAL_RCC_GetPCLK1Freq>:
   * @note   Each time PCLK1 changes, this function must be called to update the
@@ -30584,7 +30584,7 @@ static HAL_StatusTypeDef SPI_WaitFlagStateUntilTimeout(SPI_HandleTypeDef *hspi, 
  800c1e6:	b008      	add	sp, #32
  800c1e8:	bd80      	pop	{r7, pc}
  800c1ea:	46c0      	nop			@ (mov r8, r8)
- 800c1ec:	2000148c 	.word	0x2000148c
+ 800c1ec:	200014b4 	.word	0x200014b4
  800c1f0:	ffffdfff 	.word	0xffffdfff
 
 0800c1f4 <SPI_WaitFifoStateUntilTimeout>:
@@ -30817,7 +30817,7 @@ static HAL_StatusTypeDef SPI_WaitFifoStateUntilTimeout(SPI_HandleTypeDef *hspi, 
  800c32a:	b00a      	add	sp, #40	@ 0x28
  800c32c:	bd80      	pop	{r7, pc}
  800c32e:	46c0      	nop			@ (mov r8, r8)
- 800c330:	2000148c 	.word	0x2000148c
+ 800c330:	200014b4 	.word	0x200014b4
  800c334:	ffffdfff 	.word	0xffffdfff
 
 0800c338 <SPI_EndRxTxTransaction>:
@@ -37886,8 +37886,8 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800efa4:	f7ff f9fa 	bl	800e39c <_strtod_l>
  800efa8:	bd10      	pop	{r4, pc}
  800efaa:	46c0      	nop			@ (mov r8, r8)
- 800efac:	20001610 	.word	0x20001610
- 800efb0:	200014a4 	.word	0x200014a4
+ 800efac:	20001638 	.word	0x20001638
+ 800efb0:	200014cc 	.word	0x200014cc
 
 0800efb4 <_strtol_l.isra.0>:
  800efb4:	b5f0      	push	{r4, r5, r6, r7, lr}
@@ -38035,7 +38035,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f0d4:	f7ff ff6e 	bl	800efb4 <_strtol_l.isra.0>
  800f0d8:	bd10      	pop	{r4, pc}
  800f0da:	46c0      	nop			@ (mov r8, r8)
- 800f0dc:	20001610 	.word	0x20001610
+ 800f0dc:	20001638 	.word	0x20001638
 
 0800f0e0 <_strtoll_l.isra.0>:
  800f0e0:	b5f0      	push	{r4, r5, r6, r7, lr}
@@ -38209,7 +38209,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f234:	f7ff ff54 	bl	800f0e0 <_strtoll_l.isra.0>
  800f238:	bd10      	pop	{r4, pc}
  800f23a:	46c0      	nop			@ (mov r8, r8)
- 800f23c:	20001610 	.word	0x20001610
+ 800f23c:	20001638 	.word	0x20001638
 
 0800f240 <std>:
  800f240:	2300      	movs	r3, #0
@@ -38254,9 +38254,9 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f294:	0800f435 	.word	0x0800f435
  800f298:	0800f46d 	.word	0x0800f46d
  800f29c:	0800f499 	.word	0x0800f499
- 800f2a0:	200029cc 	.word	0x200029cc
- 800f2a4:	20002a34 	.word	0x20002a34
- 800f2a8:	20002a9c 	.word	0x20002a9c
+ 800f2a0:	200029f4 	.word	0x200029f4
+ 800f2a4:	20002a5c 	.word	0x20002a5c
+ 800f2a8:	20002ac4 	.word	0x20002ac4
 
 0800f2ac <stdio_exit_handler>:
  800f2ac:	b510      	push	{r4, lr}
@@ -38266,9 +38266,9 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f2b4:	f000 f86c 	bl	800f390 <_fwalk_sglue>
  800f2b8:	bd10      	pop	{r4, pc}
  800f2ba:	46c0      	nop			@ (mov r8, r8)
- 800f2bc:	20001498 	.word	0x20001498
+ 800f2bc:	200014c0 	.word	0x200014c0
  800f2c0:	080111a5 	.word	0x080111a5
- 800f2c4:	20001614 	.word	0x20001614
+ 800f2c4:	2000163c 	.word	0x2000163c
 
 0800f2c8 <cleanup_stdio>:
  800f2c8:	6841      	ldr	r1, [r0, #4]
@@ -38292,9 +38292,9 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f2f0:	f001 ff58 	bl	80111a4 <_fflush_r>
  800f2f4:	bd10      	pop	{r4, pc}
  800f2f6:	46c0      	nop			@ (mov r8, r8)
- 800f2f8:	200029cc 	.word	0x200029cc
- 800f2fc:	20002a34 	.word	0x20002a34
- 800f300:	20002a9c 	.word	0x20002a9c
+ 800f2f8:	200029f4 	.word	0x200029f4
+ 800f2fc:	20002a5c 	.word	0x20002a5c
+ 800f300:	20002ac4 	.word	0x20002ac4
 
 0800f304 <global_stdio_init.part.0>:
  800f304:	b510      	push	{r4, lr}
@@ -38314,11 +38314,11 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f324:	4805      	ldr	r0, [pc, #20]	@ (800f33c <global_stdio_init.part.0+0x38>)
  800f326:	f7ff ff8b 	bl	800f240 <std>
  800f32a:	bd10      	pop	{r4, pc}
- 800f32c:	20002b04 	.word	0x20002b04
+ 800f32c:	20002b2c 	.word	0x20002b2c
  800f330:	0800f2ad 	.word	0x0800f2ad
- 800f334:	200029cc 	.word	0x200029cc
- 800f338:	20002a34 	.word	0x20002a34
- 800f33c:	20002a9c 	.word	0x20002a9c
+ 800f334:	200029f4 	.word	0x200029f4
+ 800f338:	20002a5c 	.word	0x20002a5c
+ 800f33c:	20002ac4 	.word	0x20002ac4
 
 0800f340 <__sfp_lock_acquire>:
  800f340:	b510      	push	{r4, lr}
@@ -38326,7 +38326,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f344:	f000 f941 	bl	800f5ca <__retarget_lock_acquire_recursive>
  800f348:	bd10      	pop	{r4, pc}
  800f34a:	46c0      	nop			@ (mov r8, r8)
- 800f34c:	20002b0d 	.word	0x20002b0d
+ 800f34c:	20002b35 	.word	0x20002b35
 
 0800f350 <__sfp_lock_release>:
  800f350:	b510      	push	{r4, lr}
@@ -38334,7 +38334,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f354:	f000 f93a 	bl	800f5cc <__retarget_lock_release_recursive>
  800f358:	bd10      	pop	{r4, pc}
  800f35a:	46c0      	nop			@ (mov r8, r8)
- 800f35c:	20002b0d 	.word	0x20002b0d
+ 800f35c:	20002b35 	.word	0x20002b35
 
 0800f360 <__sinit>:
  800f360:	b510      	push	{r4, lr}
@@ -38355,7 +38355,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f384:	e7f3      	b.n	800f36e <__sinit+0xe>
  800f386:	46c0      	nop			@ (mov r8, r8)
  800f388:	0800f2c9 	.word	0x0800f2c9
- 800f38c:	20002b04 	.word	0x20002b04
+ 800f38c:	20002b2c 	.word	0x20002b2c
 
 0800f390 <_fwalk_sglue>:
  800f390:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
@@ -38416,7 +38416,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f3fc:	4718      	bx	r3
  800f3fe:	46c0      	nop			@ (mov r8, r8)
  800f400:	7fffffff 	.word	0x7fffffff
- 800f404:	20001610 	.word	0x20001610
+ 800f404:	20001638 	.word	0x20001638
  800f408:	ffff0208 	.word	0xffff0208
 
 0800f40c <__sread>:
@@ -38541,7 +38541,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f4f2:	6023      	str	r3, [r4, #0]
  800f4f4:	bd70      	pop	{r4, r5, r6, pc}
  800f4f6:	46c0      	nop			@ (mov r8, r8)
- 800f4f8:	20002b08 	.word	0x20002b08
+ 800f4f8:	20002b30 	.word	0x20002b30
 
 0800f4fc <_lseek_r>:
  800f4fc:	b570      	push	{r4, r5, r6, lr}
@@ -38561,7 +38561,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f51a:	6023      	str	r3, [r4, #0]
  800f51c:	bd70      	pop	{r4, r5, r6, pc}
  800f51e:	46c0      	nop			@ (mov r8, r8)
- 800f520:	20002b08 	.word	0x20002b08
+ 800f520:	20002b30 	.word	0x20002b30
 
 0800f524 <_read_r>:
  800f524:	b570      	push	{r4, r5, r6, lr}
@@ -38581,7 +38581,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f542:	6023      	str	r3, [r4, #0]
  800f544:	bd70      	pop	{r4, r5, r6, pc}
  800f546:	46c0      	nop			@ (mov r8, r8)
- 800f548:	20002b08 	.word	0x20002b08
+ 800f548:	20002b30 	.word	0x20002b30
 
 0800f54c <_write_r>:
  800f54c:	b570      	push	{r4, r5, r6, lr}
@@ -38601,14 +38601,14 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f56a:	6023      	str	r3, [r4, #0]
  800f56c:	bd70      	pop	{r4, r5, r6, pc}
  800f56e:	46c0      	nop			@ (mov r8, r8)
- 800f570:	20002b08 	.word	0x20002b08
+ 800f570:	20002b30 	.word	0x20002b30
 
 0800f574 <__errno>:
  800f574:	4b01      	ldr	r3, [pc, #4]	@ (800f57c <__errno+0x8>)
  800f576:	6818      	ldr	r0, [r3, #0]
  800f578:	4770      	bx	lr
  800f57a:	46c0      	nop			@ (mov r8, r8)
- 800f57c:	20001610 	.word	0x20001610
+ 800f57c:	20001638 	.word	0x20001638
 
 0800f580 <__libc_init_array>:
  800f580:	b570      	push	{r4, r5, r6, lr}
@@ -38741,7 +38741,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800f676:	6054      	str	r4, [r2, #4]
  800f678:	e7ca      	b.n	800f610 <_free_r+0x24>
  800f67a:	46c0      	nop			@ (mov r8, r8)
- 800f67c:	20002b14 	.word	0x20002b14
+ 800f67c:	20002b3c 	.word	0x20002b3c
 
 0800f680 <rshift>:
  800f680:	0002      	movs	r2, r0
@@ -39607,7 +39607,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800fd6e:	3001      	adds	r0, #1
  800fd70:	d1f2      	bne.n	800fd58 <sbrk_aligned+0x24>
  800fd72:	e7ef      	b.n	800fd54 <sbrk_aligned+0x20>
- 800fd74:	20002b10 	.word	0x20002b10
+ 800fd74:	20002b38 	.word	0x20002b38
 
 0800fd78 <_malloc_r>:
  800fd78:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
@@ -39730,7 +39730,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800fe6e:	6007      	str	r7, [r0, #0]
  800fe70:	e7da      	b.n	800fe28 <_malloc_r+0xb0>
  800fe72:	46c0      	nop			@ (mov r8, r8)
- 800fe74:	20002b14 	.word	0x20002b14
+ 800fe74:	20002b3c 	.word	0x20002b3c
 
 0800fe78 <__ascii_mbtowc>:
  800fe78:	b082      	sub	sp, #8
@@ -39758,7 +39758,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800fea0:	f7ff fb93 	bl	800f5ca <__retarget_lock_acquire_recursive>
  800fea4:	bd10      	pop	{r4, pc}
  800fea6:	46c0      	nop			@ (mov r8, r8)
- 800fea8:	20002b0c 	.word	0x20002b0c
+ 800fea8:	20002b34 	.word	0x20002b34
 
 0800feac <__malloc_unlock>:
  800feac:	b510      	push	{r4, lr}
@@ -39766,7 +39766,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  800feb0:	f7ff fb8c 	bl	800f5cc <__retarget_lock_release_recursive>
  800feb4:	bd10      	pop	{r4, pc}
  800feb6:	46c0      	nop			@ (mov r8, r8)
- 800feb8:	20002b0c 	.word	0x20002b0c
+ 800feb8:	20002b34 	.word	0x20002b34
 
 0800febc <_Balloc>:
  800febc:	b570      	push	{r4, r5, r6, lr}
@@ -42313,7 +42313,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8011332:	60a2      	str	r2, [r4, #8]
  8011334:	e7f3      	b.n	801131e <__swsetup_r+0x9e>
  8011336:	46c0      	nop			@ (mov r8, r8)
- 8011338:	20001610 	.word	0x20001610
+ 8011338:	20001638 	.word	0x20001638
 
 0801133c <memmove>:
  801133c:	b510      	push	{r4, lr}
@@ -42351,7 +42351,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  801137a:	6023      	str	r3, [r4, #0]
  801137c:	bd70      	pop	{r4, r5, r6, pc}
  801137e:	46c0      	nop			@ (mov r8, r8)
- 8011380:	20002b08 	.word	0x20002b08
+ 8011380:	20002b30 	.word	0x20002b30
 
 08011384 <memchr>:
  8011384:	b2c9      	uxtb	r1, r1
@@ -42388,7 +42388,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80113be:	9600      	str	r6, [sp, #0]
  80113c0:	f000 f872 	bl	80114a8 <fiprintf>
  80113c4:	f000 f910 	bl	80115e8 <abort>
- 80113c8:	20001610 	.word	0x20001610
+ 80113c8:	20001638 	.word	0x20001638
  80113cc:	08012812 	.word	0x08012812
  80113d0:	0801284d 	.word	0x0801284d
  80113d4:	0801281f 	.word	0x0801281f
@@ -42447,7 +42447,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  801143c:	f7fe fc9c 	bl	800fd78 <_malloc_r>
  8011440:	bd10      	pop	{r4, pc}
  8011442:	46c0      	nop			@ (mov r8, r8)
- 8011444:	20001610 	.word	0x20001610
+ 8011444:	20001638 	.word	0x20001638
 
 08011448 <_realloc_r>:
  8011448:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
@@ -42507,7 +42507,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80114be:	bc08      	pop	{r3}
  80114c0:	b003      	add	sp, #12
  80114c2:	4718      	bx	r3
- 80114c4:	20001610 	.word	0x20001610
+ 80114c4:	20001638 	.word	0x20001638
 
 080114c8 <__swhatbuf_r>:
  80114c8:	b570      	push	{r4, r5, r6, lr}
@@ -42632,7 +42632,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80115ba:	d000      	beq.n	80115be <_fstat_r+0x1e>
  80115bc:	6023      	str	r3, [r4, #0]
  80115be:	bd70      	pop	{r4, r5, r6, pc}
- 80115c0:	20002b08 	.word	0x20002b08
+ 80115c0:	20002b30 	.word	0x20002b30
 
 080115c4 <_isatty_r>:
  80115c4:	2300      	movs	r3, #0
@@ -42650,7 +42650,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80115de:	6023      	str	r3, [r4, #0]
  80115e0:	bd70      	pop	{r4, r5, r6, pc}
  80115e2:	46c0      	nop			@ (mov r8, r8)
- 80115e4:	20002b08 	.word	0x20002b08
+ 80115e4:	20002b30 	.word	0x20002b30
 
 080115e8 <abort>:
  80115e8:	2006      	movs	r0, #6
@@ -42718,7 +42718,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8011660:	f7ff ffd1 	bl	8011606 <_raise_r>
  8011664:	bd10      	pop	{r4, pc}
  8011666:	46c0      	nop			@ (mov r8, r8)
- 8011668:	20001610 	.word	0x20001610
+ 8011668:	20001638 	.word	0x20001638
 
 0801166c <_kill_r>:
  801166c:	2300      	movs	r3, #0
@@ -42736,7 +42736,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8011686:	d000      	beq.n	801168a <_kill_r+0x1e>
  8011688:	6023      	str	r3, [r4, #0]
  801168a:	bd70      	pop	{r4, r5, r6, pc}
- 801168c:	20002b08 	.word	0x20002b08
+ 801168c:	20002b30 	.word	0x20002b30
 
 08011690 <_getpid_r>:
  8011690:	b510      	push	{r4, lr}
@@ -43327,7 +43327,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8011b4e:	bc01      	pop	{r0}
  8011b50:	4760      	bx	ip
  8011b52:	bf00      	nop
- 8011b54:	20001661 	.word	0x20001661
+ 8011b54:	20001689 	.word	0x20001689
 
 Disassembly of section .data:
 
@@ -43557,280 +43557,283 @@ Disassembly of section .data:
 20000d3c:	00030001 00010008 004b0009 00010008     ..........K.....
 20000d4c:	00030001 00010008 004b0009 00010008     ..........K.....
 20000d5c:	00030001 00010008 004b0009 00010008     ..........K.....
-20000d6c:	00030001 00070008 00040009 000a0008     ................
-20000d7c:	00370009 00010008 00020003 00080001     ..7.............
-20000d8c:	00040008 000a0000 00020008 00350009     ..............5.
-20000d9c:	00010008 000d0001 00010003 000c0000     ................
-20000dac:	00030008 00320009 00010008 000e0001     ......2.........
-20000dbc:	00010003 000e0000 00030008 002f0009     ............../.
-20000dcc:	00010008 000f0001 00010003 00100000     ................
-20000ddc:	00010008 00170009 00080008 000f0009     ................
-20000dec:	00010008 00030003 000d0001 00010003     ................
-20000dfc:	00100000 00010008 000a0009 000c0008     ................
-20000e0c:	00080000 00030008 000c0009 00010008     ................
-20000e1c:	00030001 00010003 000d0001 00070003     ................
-20000e2c:	000a0000 00010008 00070009 00020008     ................
-20000e3c:	000c0001 00010003 000a0000 00010008     ................
-20000e4c:	000b0009 00010008 00030001 00010003     ................
-20000e5c:	00140001 00060003 00040000 00010008     ................
-20000e6c:	00060009 00010008 000f0001 00020003     ................
-20000e7c:	00090000 00010008 000a0009 00010008     ................
-20000e8c:	00030001 00010003 001a0001 00010003     ................
-20000e9c:	00030008 00060009 00010008 00030001     ................
-20000eac:	00030005 00020008 00020002 00080001     ................
-20000ebc:	00010003 00080000 00010008 000a0009     ................
-20000ecc:	00010008 00020003 00010001 00090003     ................
-20000edc:	00130001 00010003 00070009 00010008     ................
-20000eec:	00030001 00060005 00010008 00020002     ................
-20000efc:	00080001 00010003 00030000 00050008     ................
-20000f0c:	000a0009 00010008 00200001 00060008     .......... .....
-20000f1c:	00010003 00040001 00020005 00050008     ................
-20000f2c:	00020002 00090001 00010003 00010000     ................
-20000f3c:	00010008 000f0009 00010008 00250001     ..............%.
-20000f4c:	00010003 00050001 00010005 00060008     ................
-20000f5c:	00020002 000a0001 00010008 00100009     ................
-20000f6c:	00010008 00240001 00010003 00060001     ......$.........
-20000f7c:	00010005 00030008 00010005 00020008     ................
-20000f8c:	00020002 000a0001 00010008 00100009     ................
-20000f9c:	00010008 00220001 00010002 00010003     ......".........
-20000fac:	00080001 00050008 00020002 000b0001     ................
-20000fbc:	00010008 00100009 00010008 00200001     .............. .
-20000fcc:	00030002 00010003 00040001 00010002     ................
-20000fdc:	00150001 00010008 00100009 00010008     ................
-20000fec:	001f0001 00030002 00010003 00020001     ................
-20000ffc:	00010008 00020001 00020002 00140001     ................
-2000100c:	00010008 00100009 00010008 001f0001     ................
-2000101c:	00030002 00010003 00050001 00020002     ................
-2000102c:	00140001 00010008 00100009 00010008     ................
-2000103c:	000c0003 00130001 00030002 00010003     ................
-2000104c:	00050001 00020002 00140001 00010008     ................
-2000105c:	00100009 00010008 001f0001 00030002     ................
-2000106c:	00010003 00050001 00020002 00140001     ................
-2000107c:	00010008 00100009 00010008 001f0001     ................
-2000108c:	00030002 00010003 00020001 00010008     ................
-2000109c:	00020001 00020002 00140001 00010008     ................
-200010ac:	00100009 00010008 00200001 00030002     .......... .....
-200010bc:	00010003 00040001 00010002 00150001     ................
-200010cc:	00010008 00100009 00010008 00220001     ..............".
-200010dc:	00010002 00010003 00080001 00050008     ................
-200010ec:	00020002 000b0001 00010008 00100009     ................
-200010fc:	00010008 00240001 00010003 00060001     ......$.........
-2000110c:	00010005 00030008 00010005 00020008     ................
-2000111c:	00020002 000a0001 00010008 00100009     ................
-2000112c:	00010008 00250001 00010003 00050001     ......%.........
-2000113c:	00010005 00060008 00020002 000a0001     ................
-2000114c:	00010008 00100009 00010008 00200001     .............. .
-2000115c:	00060008 00010003 00040001 00020005     ................
-2000116c:	00050008 00020002 00090001 00010003     ................
-2000117c:	00010000 00010008 000f0009 00010008     ................
-2000118c:	00020003 00010001 00090003 00130001     ................
-2000119c:	00010003 00070009 00010008 00030001     ................
-200011ac:	00060005 00010008 00020002 00080001     ................
-200011bc:	00010003 00030000 00050008 000a0009     ................
-200011cc:	00010008 00030001 00010003 001a0001     ................
-200011dc:	00010003 00030008 00060009 00010008     ................
-200011ec:	00030001 00030005 00020008 00020002     ................
-200011fc:	00080001 00010003 00080000 00010008     ................
-2000120c:	000a0009 00010008 00030001 00010003     ................
-2000121c:	00140001 00060003 00040000 00010008     ................
-2000122c:	00060009 00010008 000f0001 00020003     ................
-2000123c:	00090000 00010008 000a0009 00010008     ................
-2000124c:	00030001 00010003 000d0001 00070003     ................
-2000125c:	000a0000 00010008 00070009 00020008     ................
-2000126c:	000c0001 00010003 000a0000 00010008     ................
-2000127c:	000b0009 00010008 00030003 000d0001     ................
-2000128c:	00010003 00100000 00010008 000a0009     ................
-2000129c:	000c0008 00080000 00030008 000c0009     ................
-200012ac:	00010008 000f0001 00010003 00100000     ................
-200012bc:	00010008 00170009 00080008 000f0009     ................
-200012cc:	00010008 000e0001 00010003 000e0000     ................
-200012dc:	00030008 002f0009 00010008 000d0001     ....../.........
-200012ec:	00010003 000c0000 00030008 00320009     ..............2.
-200012fc:	00010008 00020003 00080001 00040008     ................
-2000130c:	000a0000 00020008 00350009 00010008     ..........5.....
-2000131c:	00030001 00070008 00040009 000a0008     ................
-2000132c:	00370009 00010008 00030001 00010008     ..7.............
-2000133c:	004b0009 00010008 00030001 00010008     ..K.............
-2000134c:	004b0009 00010008 00030001 00010008     ..K.............
-2000135c:	004b0009 00010008 00030003 00010008     ..K.............
-2000136c:	004b0009 00010008 00030001 00010008     ..K.............
-2000137c:	004b0009 00010008 00030001 00010008     ..K.............
-2000138c:	004b0009 00010008 00030001 00010008     ..K.............
-2000139c:	004b0009 00010008 00030001 00010008     ..K.............
-200013ac:	004b0009 00010008 00030001 00010008     ..K.............
-200013bc:	004b0009 00010008 00030001 00010008     ..K.............
-200013cc:	004b0009 00010008 00030001 00010008     ..K.............
-200013dc:	004b0009 00010008 00020001 00010008     ..K.............
-200013ec:	00010000 00010008 004a0009 00010008     ..........J.....
-200013fc:	00010001 00010008 00020000 00010008     ................
-2000140c:	004a0009 00020008 00040000 00010008     ..J.............
-2000141c:	00490009 00010008 00050000 00010008     ..I.............
-2000142c:	00490009 00010008 00050000 00010008     ..I.............
-2000143c:	00490009 00010008 00050000 00010008     ..I.............
-2000144c:	00490009 00010008 00050000 00010008     ..I.............
-2000145c:	00490009 00010008 00040000 00010008     ..I.............
-2000146c:	004a0009 00010008 00030000 00010008     ..J.............
-2000147c:	004b0009 00030008 01dd0009              ..K.........
+20000d6c:	00030001 00060008 00050009 000a0008     ................
+20000d7c:	00370009 00010008 00020003 00070001     ..7.............
+20000d8c:	00040008 00010003 000a0000 00020008     ................
+20000d9c:	00350009 00010008 000d0001 00020003     ..5.............
+20000dac:	000b0000 00030008 00320009 00010008     ..........2.....
+20000dbc:	000f0001 00010003 000d0000 00030008     ................
+20000dcc:	002f0009 00010008 00100001 00010003     ../.............
+20000ddc:	000f0000 00010008 00150009 00080008     ................
+20000dec:	00110009 00010008 00030003 000d0001     ................
+20000dfc:	00010003 00100000 00010008 00090009     ................
+20000e0c:	000b0008 00080000 00030008 000e0009     ................
+20000e1c:	00010008 00030001 00010003 000d0001     ................
+20000e2c:	00060003 000b0000 00010008 00060009     ................
+20000e3c:	00020008 000b0001 00010003 000a0000     ................
+20000e4c:	00010008 000d0009 00010008 00030001     ................
+20000e5c:	00010003 00130001 00060003 00050000     ................
+20000e6c:	00010008 00050009 00010008 000e0001     ................
+20000e7c:	00020003 00090000 00010008 000c0009     ................
+20000e8c:	00010008 00030001 00010003 00190001     ................
+20000e9c:	00010003 00020000 00020008 00050009     ................
+20000eac:	00010008 00030001 00030005 00020008     ................
+20000ebc:	00020002 00070001 00010003 00080000     ................
+20000ecc:	00010008 000c0009 00010008 00020003     ................
+20000edc:	00010001 00080003 00130001 00010003     ................
+20000eec:	00010008 00060009 00010008 00030001     ................
+20000efc:	00060005 00010008 00020002 00070001     ................
+20000f0c:	00010003 00030000 00050008 000c0009     ................
+20000f1c:	00010008 001f0001 00060008 00010003     ................
+20000f2c:	00040001 00020005 00050008 00020002     ................
+20000f3c:	00080001 00010003 00010000 00010008     ................
+20000f4c:	00110009 00010008 00240001 00010003     ..........$.....
+20000f5c:	00050001 00010005 00060008 00020002     ................
+20000f6c:	00090001 00010008 00120009 00010008     ................
+20000f7c:	00230001 00010003 00060001 00010005     ..#.............
+20000f8c:	00030008 00010005 00020008 00020002     ................
+20000f9c:	00090001 00010008 00120009 00010008     ................
+20000fac:	00210001 00010002 00010003 00080001     ..!.............
+20000fbc:	00050008 00020002 000a0001 00010008     ................
+20000fcc:	00120009 00010008 001f0001 00030002     ................
+20000fdc:	00010003 00040001 00010002 00140001     ................
+20000fec:	00010008 00120009 00010008 001e0001     ................
+20000ffc:	00030002 00010003 00020001 00010003     ................
+2000100c:	00020001 00020002 00130001 00010008     ................
+2000101c:	00120009 00010008 001e0001 00030002     ................
+2000102c:	00010003 00050001 00020002 00130001     ................
+2000103c:	00010008 00120009 00010008 000b0003     ................
+2000104c:	00130001 00030002 00010003 00050001     ................
+2000105c:	00020002 00130001 00010008 00120009     ................
+2000106c:	00010008 001e0001 00030002 00010003     ................
+2000107c:	00050001 00020002 00130001 00010008     ................
+2000108c:	00120009 00010008 001e0001 00030002     ................
+2000109c:	00010003 00020001 00010003 00020001     ................
+200010ac:	00020002 00130001 00010008 00120009     ................
+200010bc:	00010008 001f0001 00030002 00010003     ................
+200010cc:	00040001 00010002 00140001 00010008     ................
+200010dc:	00120009 00010008 00210001 00010002     ..........!.....
+200010ec:	00010003 00080001 00050008 00020002     ................
+200010fc:	000a0001 00010008 00120009 00010008     ................
+2000110c:	00230001 00010003 00060001 00010005     ..#.............
+2000111c:	00030008 00010005 00020008 00020002     ................
+2000112c:	00090001 00010008 00120009 00010008     ................
+2000113c:	00240001 00010003 00050001 00010005     ..$.............
+2000114c:	00060008 00020002 00090001 00010008     ................
+2000115c:	00120009 00010008 001f0001 00060008     ................
+2000116c:	00010003 00040001 00020005 00050008     ................
+2000117c:	00020002 00080001 00010003 00010000     ................
+2000118c:	00010008 00110009 00010008 00020003     ................
+2000119c:	00010001 00080003 00130001 00010003     ................
+200011ac:	00010008 00060009 00010008 00030001     ................
+200011bc:	00060005 00010008 00020002 00070001     ................
+200011cc:	00010003 00030000 00050008 000c0009     ................
+200011dc:	00010008 00030001 00010003 00190001     ................
+200011ec:	00010003 00020000 00020008 00050009     ................
+200011fc:	00010008 00030001 00030005 00020008     ................
+2000120c:	00020002 00070001 00010003 00080000     ................
+2000121c:	00010008 000c0009 00010008 00030001     ................
+2000122c:	00010003 00130001 00060003 00050000     ................
+2000123c:	00010008 00050009 00010008 000e0001     ................
+2000124c:	00020003 00090000 00010008 000c0009     ................
+2000125c:	00010008 00030001 00010003 000d0001     ................
+2000126c:	00060003 000b0000 00010008 00060009     ................
+2000127c:	00020008 000b0001 00010003 000a0000     ................
+2000128c:	00010008 000d0009 00010008 00030003     ................
+2000129c:	000d0001 00010003 00100000 00010008     ................
+200012ac:	00090009 000b0008 00080000 00030008     ................
+200012bc:	000e0009 00010008 00100001 00010003     ................
+200012cc:	000f0000 00010008 00150009 00080008     ................
+200012dc:	00110009 00010008 000f0001 00010003     ................
+200012ec:	000d0000 00030008 002f0009 00010008     ........../.....
+200012fc:	000d0001 00020003 000b0000 00030008     ................
+2000130c:	00320009 00010008 00020003 00070001     ..2.............
+2000131c:	00040008 00010003 000a0000 00020008     ................
+2000132c:	00350009 00010008 00030001 00060008     ..5.............
+2000133c:	00050009 000a0008 00370009 00010008     ..........7.....
+2000134c:	00030001 00010008 004b0009 00010008     ..........K.....
+2000135c:	00030001 00010008 004b0009 00010008     ..........K.....
+2000136c:	00030001 00010008 004b0009 00010008     ..........K.....
+2000137c:	00030003 00010008 004b0009 00010008     ..........K.....
+2000138c:	00030001 00010008 004b0009 00010008     ..........K.....
+2000139c:	00030001 00010008 004b0009 00010008     ..........K.....
+200013ac:	00030001 00010008 004b0009 00010008     ..........K.....
+200013bc:	00030001 00010008 004b0009 00010008     ..........K.....
+200013cc:	00030001 00010008 004b0009 00010008     ..........K.....
+200013dc:	00030001 00010008 004b0009 00010008     ..........K.....
+200013ec:	00030001 00010008 004b0009 00010008     ..........K.....
+200013fc:	00020001 00010008 00010000 00010008     ................
+2000140c:	004a0009 00010008 00010001 00010008     ..J.............
+2000141c:	00020000 00010008 004a0009 00020008     ..........J.....
+2000142c:	00040000 00010008 00490009 00010008     ..........I.....
+2000143c:	00050000 00010008 00490009 00010008     ..........I.....
+2000144c:	00050000 00010008 00490009 00010008     ..........I.....
+2000145c:	00050000 00010008 00490009 00010008     ..........I.....
+2000146c:	00050000 00010008 00490009 00010008     ..........I.....
+2000147c:	00040000 00010008 004a0009 00010008     ..........J.....
+2000148c:	00030000 00010008 004b0009 00010008     ..........K.....
+2000149c:	00020000 00010008 004c0009 00030008     ..........L.....
+200014ac:	018d0009                                ....
 
-20001488 <checkTime>:
-20001488:	                                         ..
+200014b0 <checkTime>:
+200014b0:	                                         ..
 
-2000148a <currentMenu>:
-2000148a:	                                         .
+200014b2 <currentMenu>:
+200014b2:	                                         .
 
-2000148b <canChange>:
-2000148b:	                                         .
+200014b3 <canChange>:
+200014b3:	                                         .
 
-2000148c <SystemCoreClock>:
-2000148c:	00f42400                                .$..
+200014b4 <SystemCoreClock>:
+200014b4:	00f42400                                .$..
 
-20001490 <uwTickPrio>:
-20001490:	00000004                                ....
+200014b8 <uwTickPrio>:
+200014b8:	00000004                                ....
 
-20001494 <uwTickFreq>:
-20001494:	00000001                                ....
+200014bc <uwTickFreq>:
+200014bc:	00000001                                ....
 
-20001498 <__sglue>:
-20001498:	00000000 00000003 200029cc              .........). 
+200014c0 <__sglue>:
+200014c0:	00000000 00000003 200029f4              .........). 
 
-200014a4 <__global_locale>:
-200014a4:	00000043 00000000 00000000 00000000     C...............
+200014cc <__global_locale>:
+200014cc:	00000043 00000000 00000000 00000000     C...............
 	...
-200014c4:	00000043 00000000 00000000 00000000     C...............
+200014ec:	00000043 00000000 00000000 00000000     C...............
 	...
-200014e4:	00000043 00000000 00000000 00000000     C...............
+2000150c:	00000043 00000000 00000000 00000000     C...............
 	...
-20001504:	00000043 00000000 00000000 00000000     C...............
+2000152c:	00000043 00000000 00000000 00000000     C...............
 	...
-20001524:	00000043 00000000 00000000 00000000     C...............
+2000154c:	00000043 00000000 00000000 00000000     C...............
 	...
-20001544:	00000043 00000000 00000000 00000000     C...............
+2000156c:	00000043 00000000 00000000 00000000     C...............
 	...
-20001564:	00000043 00000000 00000000 00000000     C...............
+2000158c:	00000043 00000000 00000000 00000000     C...............
 	...
-20001584:	08010841 0800fe79 00000000 080128a0     A...y........(..
-20001594:	080126e8 0801284d 0801284d 0801284d     .&..M(..M(..M(..
-200015a4:	0801284d 0801284d 0801284d 0801284d     M(..M(..M(..M(..
-200015b4:	0801284d 0801284d ffffffff ffffffff     M(..M(..........
-200015c4:	ffffffff 0000ffff 53410001 00494943     ..........ASCII.
+200015ac:	08010841 0800fe79 00000000 080128a0     A...y........(..
+200015bc:	080126e8 0801284d 0801284d 0801284d     .&..M(..M(..M(..
+200015cc:	0801284d 0801284d 0801284d 0801284d     M(..M(..M(..M(..
+200015dc:	0801284d 0801284d ffffffff ffffffff     M(..M(..........
+200015ec:	ffffffff 0000ffff 53410001 00494943     ..........ASCII.
 	...
-200015ec:	53410000 00494943 00000000 00000000     ..ASCII.........
-	...
-
-20001610 <_impure_ptr>:
-20001610:	20001614                                ... 
-
-20001614 <_impure_data>:
-20001614:	00000000 200029cc 20002a34 20002a9c     .....). 4*. .*. 
+20001614:	53410000 00494943 00000000 00000000     ..ASCII.........
 	...
 
-20001660 <FLASH_Program_Fast>:
+20001638 <_impure_ptr>:
+20001638:	2000163c                                <.. 
+
+2000163c <_impure_data>:
+2000163c:	00000000 200029f4 20002a5c 20002ac4     .....). \*. .*. 
+	...
+
+20001688 <FLASH_Program_Fast>:
   * @param  Address Specifies the address to be programmed.
   * @param  DataAddress Specifies the address where the data are stored.
   * @retval None
   */
 static __RAM_FUNC void FLASH_Program_Fast(uint32_t Address, uint32_t DataAddress)
 {
-20001660:	b580      	push	{r7, lr}
-20001662:	b088      	sub	sp, #32
-20001664:	af00      	add	r7, sp, #0
-20001666:	6078      	str	r0, [r7, #4]
-20001668:	6039      	str	r1, [r7, #0]
+20001688:	b580      	push	{r7, lr}
+2000168a:	b088      	sub	sp, #32
+2000168c:	af00      	add	r7, sp, #0
+2000168e:	6078      	str	r0, [r7, #4]
+20001690:	6039      	str	r1, [r7, #0]
   uint8_t index = 0;
-2000166a:	231f      	movs	r3, #31
-2000166c:	18fb      	adds	r3, r7, r3
-2000166e:	2200      	movs	r2, #0
-20001670:	701a      	strb	r2, [r3, #0]
+20001692:	231f      	movs	r3, #31
+20001694:	18fb      	adds	r3, r7, r3
+20001696:	2200      	movs	r2, #0
+20001698:	701a      	strb	r2, [r3, #0]
   uint32_t dest = Address;
-20001672:	687b      	ldr	r3, [r7, #4]
-20001674:	61bb      	str	r3, [r7, #24]
+2000169a:	687b      	ldr	r3, [r7, #4]
+2000169c:	61bb      	str	r3, [r7, #24]
   uint32_t src = DataAddress;
-20001676:	683b      	ldr	r3, [r7, #0]
-20001678:	617b      	str	r3, [r7, #20]
+2000169e:	683b      	ldr	r3, [r7, #0]
+200016a0:	617b      	str	r3, [r7, #20]
   uint32_t primask_bit;
 
   /* Set FSTPG bit */
   SET_BIT(FLASH->CR, FLASH_CR_FSTPG);
-2000167a:	4b1a      	ldr	r3, [pc, #104]	@ (200016e4 <FLASH_Program_Fast+0x84>)
-2000167c:	695a      	ldr	r2, [r3, #20]
-2000167e:	4b19      	ldr	r3, [pc, #100]	@ (200016e4 <FLASH_Program_Fast+0x84>)
-20001680:	2180      	movs	r1, #128	@ 0x80
-20001682:	02c9      	lsls	r1, r1, #11
-20001684:	430a      	orrs	r2, r1
-20001686:	615a      	str	r2, [r3, #20]
+200016a2:	4b1a      	ldr	r3, [pc, #104]	@ (2000170c <FLASH_Program_Fast+0x84>)
+200016a4:	695a      	ldr	r2, [r3, #20]
+200016a6:	4b19      	ldr	r3, [pc, #100]	@ (2000170c <FLASH_Program_Fast+0x84>)
+200016a8:	2180      	movs	r1, #128	@ 0x80
+200016aa:	02c9      	lsls	r1, r1, #11
+200016ac:	430a      	orrs	r2, r1
+200016ae:	615a      	str	r2, [r3, #20]
   __ASM volatile ("MRS %0, primask" : "=r" (result) :: "memory");
-20001688:	f3ef 8310 	mrs	r3, PRIMASK
-2000168c:	60fb      	str	r3, [r7, #12]
+200016b0:	f3ef 8310 	mrs	r3, PRIMASK
+200016b4:	60fb      	str	r3, [r7, #12]
   return(result);
-2000168e:	68fb      	ldr	r3, [r7, #12]
+200016b6:	68fb      	ldr	r3, [r7, #12]
 
   /* Enter critical section: row programming should not be longer than 7 ms */
   primask_bit = __get_PRIMASK();
-20001690:	613b      	str	r3, [r7, #16]
+200016b8:	613b      	str	r3, [r7, #16]
   __ASM volatile ("cpsid i" : : : "memory");
-20001692:	b672      	cpsid	i
+200016ba:	b672      	cpsid	i
 }
-20001694:	46c0      	nop			@ (mov r8, r8)
+200016bc:	46c0      	nop			@ (mov r8, r8)
   __disable_irq();
 
   /* Fast Program : 64 words */
   while (index < 64U)
-20001696:	e00f      	b.n	200016b8 <FLASH_Program_Fast+0x58>
+200016be:	e00f      	b.n	200016e0 <FLASH_Program_Fast+0x58>
   {
     *(uint32_t *)dest = *(uint32_t *)src;
-20001698:	697a      	ldr	r2, [r7, #20]
-2000169a:	69bb      	ldr	r3, [r7, #24]
-2000169c:	6812      	ldr	r2, [r2, #0]
-2000169e:	601a      	str	r2, [r3, #0]
+200016c0:	697a      	ldr	r2, [r7, #20]
+200016c2:	69bb      	ldr	r3, [r7, #24]
+200016c4:	6812      	ldr	r2, [r2, #0]
+200016c6:	601a      	str	r2, [r3, #0]
     src += 4U;
-200016a0:	697b      	ldr	r3, [r7, #20]
-200016a2:	3304      	adds	r3, #4
-200016a4:	617b      	str	r3, [r7, #20]
+200016c8:	697b      	ldr	r3, [r7, #20]
+200016ca:	3304      	adds	r3, #4
+200016cc:	617b      	str	r3, [r7, #20]
     dest += 4U;
-200016a6:	69bb      	ldr	r3, [r7, #24]
-200016a8:	3304      	adds	r3, #4
-200016aa:	61bb      	str	r3, [r7, #24]
+200016ce:	69bb      	ldr	r3, [r7, #24]
+200016d0:	3304      	adds	r3, #4
+200016d2:	61bb      	str	r3, [r7, #24]
     index++;
-200016ac:	211f      	movs	r1, #31
-200016ae:	187b      	adds	r3, r7, r1
-200016b0:	781a      	ldrb	r2, [r3, #0]
-200016b2:	187b      	adds	r3, r7, r1
-200016b4:	3201      	adds	r2, #1
-200016b6:	701a      	strb	r2, [r3, #0]
+200016d4:	211f      	movs	r1, #31
+200016d6:	187b      	adds	r3, r7, r1
+200016d8:	781a      	ldrb	r2, [r3, #0]
+200016da:	187b      	adds	r3, r7, r1
+200016dc:	3201      	adds	r2, #1
+200016de:	701a      	strb	r2, [r3, #0]
   while (index < 64U)
-200016b8:	231f      	movs	r3, #31
-200016ba:	18fb      	adds	r3, r7, r3
-200016bc:	781b      	ldrb	r3, [r3, #0]
-200016be:	2b3f      	cmp	r3, #63	@ 0x3f
-200016c0:	d9ea      	bls.n	20001698 <FLASH_Program_Fast+0x38>
+200016e0:	231f      	movs	r3, #31
+200016e2:	18fb      	adds	r3, r7, r3
+200016e4:	781b      	ldrb	r3, [r3, #0]
+200016e6:	2b3f      	cmp	r3, #63	@ 0x3f
+200016e8:	d9ea      	bls.n	200016c0 <FLASH_Program_Fast+0x38>
   /* wait for BSY1 in order to be sure that flash operation is ended befoire
      allowing prefetch in flash. Timeout does not return status, as it will
      be anyway done later */
 
 #if defined(FLASH_DBANK_SUPPORT)
   while ((FLASH->SR & (FLASH_SR_BSY1 | FLASH_SR_BSY2)) != 0x00U)
-200016c2:	46c0      	nop			@ (mov r8, r8)
-200016c4:	4b07      	ldr	r3, [pc, #28]	@ (200016e4 <FLASH_Program_Fast+0x84>)
-200016c6:	691a      	ldr	r2, [r3, #16]
-200016c8:	23c0      	movs	r3, #192	@ 0xc0
-200016ca:	029b      	lsls	r3, r3, #10
-200016cc:	4013      	ands	r3, r2
-200016ce:	d1f9      	bne.n	200016c4 <FLASH_Program_Fast+0x64>
-200016d0:	693b      	ldr	r3, [r7, #16]
-200016d2:	60bb      	str	r3, [r7, #8]
+200016ea:	46c0      	nop			@ (mov r8, r8)
+200016ec:	4b07      	ldr	r3, [pc, #28]	@ (2000170c <FLASH_Program_Fast+0x84>)
+200016ee:	691a      	ldr	r2, [r3, #16]
+200016f0:	23c0      	movs	r3, #192	@ 0xc0
+200016f2:	029b      	lsls	r3, r3, #10
+200016f4:	4013      	ands	r3, r2
+200016f6:	d1f9      	bne.n	200016ec <FLASH_Program_Fast+0x64>
+200016f8:	693b      	ldr	r3, [r7, #16]
+200016fa:	60bb      	str	r3, [r7, #8]
   __ASM volatile ("MSR primask, %0" : : "r" (priMask) : "memory");
-200016d4:	68bb      	ldr	r3, [r7, #8]
-200016d6:	f383 8810 	msr	PRIMASK, r3
+200016fc:	68bb      	ldr	r3, [r7, #8]
+200016fe:	f383 8810 	msr	PRIMASK, r3
 }
-200016da:	46c0      	nop			@ (mov r8, r8)
+20001702:	46c0      	nop			@ (mov r8, r8)
   {
   }
 
   /* Exit critical section: restore previous priority mask */
   __set_PRIMASK(primask_bit);
 }
-200016dc:	46c0      	nop			@ (mov r8, r8)
-200016de:	46bd      	mov	sp, r7
-200016e0:	b008      	add	sp, #32
-200016e2:	bd80      	pop	{r7, pc}
-200016e4:	40022000 	.word	0x40022000
+20001704:	46c0      	nop			@ (mov r8, r8)
+20001706:	46bd      	mov	sp, r7
+20001708:	b008      	add	sp, #32
+2000170a:	bd80      	pop	{r7, pc}
+2000170c:	40022000 	.word	0x40022000
