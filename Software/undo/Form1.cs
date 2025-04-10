@@ -89,7 +89,7 @@ namespace undo
                 //    textBox1.AppendText(pixels);
                 //}
 
-                OutputToImage(textBox1.Text);
+                //OutputToImage(textBox1.Text);
             }
         }
 

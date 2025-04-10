@@ -423,7 +423,7 @@ for(i=0; i<c; i++)
 
 	for(j=0; j<count; j++)
 	{
-		pixelBuffer[++totalInd] = ((palette[ind] & 0xFF)<<8) | (palette[ind] >> 8);
+		pixelBuffer[totalInd++] = ((palette[ind] & 0xFF)<<8) | (palette[ind] >> 8);
 	}
 }
 ST7735_DrawImage(y, x, w, h, pixelBuffer);
