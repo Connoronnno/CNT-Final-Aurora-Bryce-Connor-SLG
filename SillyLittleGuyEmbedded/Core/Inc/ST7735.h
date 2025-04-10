@@ -340,14 +340,20 @@ static const uint8_t Font[] = {
 #define ST7735_GMCTRN1 0xE1
 
 // Color definitions
-#define	BLACK   0x0000
-#define	BLUE    0x1F00
-#define	RED     0x00F8
-#define	GREEN   0xE007
-#define CYAN    0xFF07
-#define MAGENTA 0x1FF8
-#define YELLOW  0xE0FF
-#define WHITE   0xFFFF
+#define	BLACK     0x0000
+#define WHITE     0xFFFF
+#define YELLOW    0xd6e9
+#define	GREEN     0x96cd
+#define BLUEGREEN 0x248c
+#define DARKBLUEGREEN 0x1ac9
+#define GREYGREEN 0x53ec
+#define GREY      0x9d56
+#define GREYPINK  0x7b91
+#define OUTLINE   0x41a9
+#define CYAN      0xFF07
+#define MAGENTA   0x1FF8
+#define	RED       0x00F8
+#define	BLUE      0x1F00
 #define color565(r, g, b) (((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3))
 
 // call before initializing any SPI devices

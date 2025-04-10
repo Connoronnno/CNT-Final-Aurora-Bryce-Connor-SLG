@@ -414,18 +414,19 @@ void drawImage(uint16_t image[][2], uint16_t palette[], uint16_t x, uint16_t y, 
 	uint16_t totalInd =0;
 	uint16_t ind;
 	uint16_t count;
-	uint16_t bufffer[w*h];
+	uint16_t pixelBuffer[w*h];
+
 for(i=0; i<c; i++)
 {
 	ind = image[i][0];
 	count = image[i][1];
+
 	for(j=0; j<count; j++)
 	{
-
-		bufffer[totalInd++] = palette[ind] >> 8;
+		pixelBuffer[++totalInd] = ((palette[ind] & 0xFF)<<8) | (palette[ind] >> 8);
 	}
 }
-ST7735_DrawImage(y, x, w, h, bufffer);
+ST7735_DrawImage(y, x, w, h, pixelBuffer);
 }
 
 
