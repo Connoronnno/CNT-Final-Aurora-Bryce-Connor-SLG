@@ -133,8 +133,8 @@ unsigned int currentFrame = 0;
 
 //changeable expressions
 const float expDivisor = 4.0f;
-const uint16_t dayLength = 24;
-const uint16_t weekLength = 168;
+const uint16_t dayLength = 1; //24
+const uint16_t weekLength = 2; //168
 const float gpsThreshold = .0001;
 const int moodIncrementUp = 1;
 const int moodIncrementDown = 1;
@@ -287,6 +287,7 @@ int main(void)
 	//Before entering the while, fill the screen to clear it once
 	fillScreen(BLACK);
 	while (1) {
+		game.weeklyGoal = game.dailyGoal*(game.evo+1);
 		_ADXL343_ReadReg8(0x15, &steps, 2);
 
 		//SendData();
@@ -296,7 +297,13 @@ int main(void)
 			game.mood += moodIncrementUp;
 			game.stepsToday = 0;
 		}
+		if(CheckExp(game.weeklyGoal, game.weeklySteps)==1) {
+			Evolve();
+			game.weeklySteps=0;
+		}
+
 		if (checkTime) {
+			FlashWrite();
 			if (((game.time.minutes % dayLength) == 0)
 					&& game.time.seconds > 0) {
 				if (CheckExp(game.dailyGoal, game.stepsToday) == -1)
@@ -313,8 +320,6 @@ int main(void)
 				checkTime = 0;
 			}
 		}
-		if ((game.time.minutes % dayLength) == 1)
-			checkTime = 1;
 		if (steps != 0) {
 			game.stepsToday += steps;
 			game.weeklySteps += steps;
@@ -327,11 +332,14 @@ int main(void)
 		//HAL_UART_Transmit(&huart2, "hello", 5, 100);
 		switch (currentMenu) {
 		case Main:
-			if ((totalFrames) % 600 == 0)
+			if ((totalFrames) % 600 == 0){
 				GetLatLon();
+				checkTime=1;
+			}
 
 			if (updateScreen >= 3) {
 				updateScreen = 0;
+				if(checkTime==1)
 				AnimateCharacterSitting(imgPalette);
 				//Update steps
 				drawString(0, 150, "-SILLY LITTLE GUY-", WHITE, BLACK, 1, 1);
@@ -342,14 +350,14 @@ int main(void)
 
 			//Interact with the SLG
 			if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_SET) {
-				effect = Evolution;
-				PlayEffect(effect);
+
 				//if(game.weeklySteps == game.weeklyGoal)
 				//{
 					//Evolve();
 				//}
-				Evolve();
-				FlashWrite();
+				//Evolve();
+				FlashErase();
+				//FlashWrite();
 				//StructInit();
 			}
 
@@ -400,6 +408,7 @@ int main(void)
 										* 10000)) % 10000));
 				drawString(0, 80, buffer2, WHITE, BLACK, 1, 1);
 				if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) == GPIO_PIN_SET) {
+					if(GetJustLatLon().lat<2000.0f){
 					sprintf(buffer2, "Lat: %d.%d", (int) (GetJustLatLon().lat),
 							abs(
 									((int) ((GetJustLatLon().lat) * 10000))
@@ -410,6 +419,7 @@ int main(void)
 									(int) (((GetJustLatLon().lon) * 10000))
 											% 10000));
 					drawString(0, 60, buffer2, WHITE, BLACK, 1, 1);
+				}
 				}
 				updateScreen = 0;
 			}
@@ -464,6 +474,8 @@ int main(void)
 					sprintf(buffer2, "DIFFICULTY: %d ", game.dailyGoal);
 
 				} else if (userUpload) {
+					FlashWrite();
+
 					userUpload = 0;
 					SendData();
 					ReceiveData();
@@ -1177,7 +1189,7 @@ void StructInit(void) {
 	adultSitting0.Size = 481;
 	animAdultSitting[0] = adultSitting0;
 
-	/*if ((*(__IO uint64_t*) (Address)) == (uint64_t) 0x12345678) {
+	if ((*(__IO uint64_t*) (Address)) == (uint64_t) 0x12345678) {
 		Address += 8;
 		game.allSteps = (unsigned int) (*(__IO uint64_t*) (Address));
 		Address += 8;
@@ -1187,7 +1199,7 @@ void StructInit(void) {
 		Address += 8;
 		game.dailyGoal = (unsigned int) (*(__IO uint64_t*) (Address));
 		Address += 8;
-		game.weeklyGoal = (unsigned int) (*(__IO uint64_t*) (Address));
+		game.weeklyGoal = game.dailyGoal*(game.evo+1);
 		Address += 8;
 		game.evo = (unsigned char) (*(__IO uint64_t*) (Address));
 		Address += 8;
@@ -1207,7 +1219,7 @@ void StructInit(void) {
 					((float) ((int) (*(__IO uint64_t*) (Address)))) / 100000;
 		}
 		//FlashErase();
-	} else {*/
+	} else {
 		game.evo = 0;
 		game.uid[0] = 'h';
 		game.uid[1] = 'i';
@@ -1216,26 +1228,22 @@ void StructInit(void) {
 		game.numLocations = 3;
 		game.stepsToday = 0;
 		game.weeklySteps = 0;
-		game.dailyGoal = 2000;
+		game.dailyGoal = 50;
+		game.weeklyGoal = game.dailyGoal*(game.evo+1);
 		dummy.lat = 12.34567;
 		dummy.lon = -89.10111;
 		game.positions[0] = dummy;
 		game.positions[1] = dummy;
 		game.positions[2] = dummy;
 		game.time.hours = 0;
-	//}
+	}
 }
 //Method for displaying the evolution animation
 void Evolve() {
 	if (game.evo < 2)
 	{
-		//uint16_t whitePalette[] = {WHITE, WHITE, WHITE, WHITE};
-		//uint16_t outlinePalette[] = {OUTLINE, OUTLINE};
-		//for(int temp; temp < 5; temp++)
-		//{
-		//AnimateCharacterSitting(whitePalette);
-		//AnimateCharacterSitting(outlinePalette);
-		//}
+		effect = Evolution;
+		PlayEffect(effect);
 		game.evo += 1;
 	}
 }
@@ -1327,7 +1335,22 @@ void AnimateCharacterSitting(uint16_t palette[])
 		Animate(animAdultSitting,palette,0,30,30,80,80);
 		break;
 		}
-}
+}/*
+void AnimateCharacterWalking(uint16_t palette[])
+{
+	switch(game.evo)
+		{
+	case 0:
+		Animate(animEggWalking,palette,4,30,30,64,64);
+		break;
+	case 1:
+		Animate(animWalking,palette,1,30,30,64,64);
+		break;
+	case 2:
+		Animate(animAdultWalking,palette,0,30,30,80,80);
+		break;
+		}
+}*/
 void Animate(struct Img *animation, uint16_t palette[], unsigned int frameCount, unsigned int xPos,
 		unsigned int yPos, unsigned int xSize, unsigned int ySize) {
 	++currentFrame;
