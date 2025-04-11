@@ -185,8 +185,8 @@ unsigned int currentFrame = 0;
 
 //changeable expressions
 const float expDivisor = 4.0f;
-const uint16_t dayLength = 3; //24
-const uint16_t weekLength = 6; //168
+const uint16_t dayLength = 24;
+const uint16_t weekLength = 168;
 const float gpsThreshold = .0001;
 const int moodIncrementUp = 1;
 const int moodIncrementDown = 1;
@@ -1266,9 +1266,9 @@ void StructInit(void) {
 	adultSitting0.Body = *imgAdultSitting0;
 	adultSitting0.Size = 481;
 	animAdultSitting[0] = adultSitting0;
-	//adultSitting1.Body = *imgAdultSitting1;
-	//adultSitting1.Size = 479;
-	//animAdultSitting[1] = adultSitting1;
+	adultSitting1.Body = *imgAdultSitting1;
+	adultSitting1.Size = 480;
+	animAdultSitting[1] = adultSitting1;
 
 	//walking
 	///adultWalking0.Body = *imgAdultWalking0;
