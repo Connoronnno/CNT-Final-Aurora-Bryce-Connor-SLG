@@ -52,10 +52,10 @@ uint8_t _ystart;
 		2,                        //  2 commands in list:
 		ST7735_CASET  , 4      ,  //  1: Column addr set, 4 args, no delay:
 		  0x00, 0x00,             //     XSTART = 0
-		  0x00, 0xB3,             //     XEND = 179
+		  0x00, 0x7F,             //     XEND = 127
 		ST7735_RASET  , 4      ,  //  2: Row addr set, 4 args, no delay:
 		  0x00, 0x00,             //     XSTART = 0
-		  0x00, 0x7F },           //     XEND = 127
+		  0x00, 0x9F },           //     XEND = 159
 
 #endif
 //#if (defined(ST7735_IS_128X128) || defined(ST7735_IS_160X128))

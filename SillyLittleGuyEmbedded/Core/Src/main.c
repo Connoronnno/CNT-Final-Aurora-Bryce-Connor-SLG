@@ -692,10 +692,6 @@ static void MX_RTC_Init(void)
 
   /* USER CODE END RTC_Init 0 */
 
-  RTC_TimeTypeDef sTime = {0};
-  RTC_DateTypeDef sDate = {0};
-  RTC_AlarmTypeDef sAlarm = {0};
-
   /* USER CODE BEGIN RTC_Init 1 */
 
   /* USER CODE END RTC_Init 1 */
@@ -712,57 +708,6 @@ static void MX_RTC_Init(void)
   hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
   hrtc.Init.OutPutPullUp = RTC_OUTPUT_PULLUP_NONE;
   if (HAL_RTC_Init(&hrtc) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /* USER CODE BEGIN Check_RTC_BKUP */
-
-  /* USER CODE END Check_RTC_BKUP */
-
-  /** Initialize RTC and set the Time and Date
-  */
-  sTime.Hours = 0x0;
-  sTime.Minutes = 0x0;
-  sTime.Seconds = 0x0;
-  sTime.SubSeconds = 0x0;
-  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
-  sTime.StoreOperation = RTC_STOREOPERATION_RESET;
-  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sDate.WeekDay = RTC_WEEKDAY_MONDAY;
-  sDate.Month = RTC_MONTH_JANUARY;
-  sDate.Date = 0x1;
-  sDate.Year = 0x0;
-
-  if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Enable the Alarm A
-  */
-  sAlarm.AlarmTime.Hours = 0x0;
-  sAlarm.AlarmTime.Minutes = 0x0;
-  sAlarm.AlarmTime.Seconds = 0x1;
-  sAlarm.AlarmTime.SubSeconds = 0x0;
-  sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
-  sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
-  sAlarm.AlarmMask = RTC_ALARMMASK_NONE;
-  sAlarm.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_ALL;
-  sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
-  sAlarm.AlarmDateWeekDay = 0x1;
-  sAlarm.Alarm = RTC_ALARM_A;
-  if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BCD) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Enable the WakeUp
-  */
-  if (HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 0x500B, RTC_WAKEUPCLOCK_RTCCLK_DIV16) != HAL_OK)
   {
     Error_Handler();
   }
@@ -1241,33 +1186,33 @@ void StructInit(void) {
 	animSitting[1] = sitting1;
 
 	//Walking
-	youngWalking0.Body = *imgYoungWalking0;
-	youngWalking0.Size = 312;
-	youngWalking1.Body = *imgYoungWalking1;
-	youngWalking1.Size = 314;
-	youngWalking2.Body = *imgYoungWalking2;
-	youngWalking2.Size = 322;
-	youngWalking3.Body = *imgYoungWalking3;
-	youngWalking3.Size = 323;
-	youngWalking4.Body = *imgYoungWalking4;
-	youngWalking4.Size = 322;
-	youngWalking5.Body = *imgYoungWalking5;
-	youngWalking5.Size = 321;
-	youngWalking6.Body = *imgYoungWalking6;
-	youngWalking6.Size = 313;
-	animYoungWalking[0] = youngWalking0;
-	animYoungWalking[1] = youngWalking1;
-	animYoungWalking[2] = youngWalking2;
-	animYoungWalking[3] = youngWalking3;
-	animYoungWalking[4] = youngWalking4;
-	animYoungWalking[5] = youngWalking5;
-	animYoungWalking[6] = youngWalking6;
+	//youngWalking0.Body = *imgYoungWalking0;
+	//youngWalking0.Size = 312;
+	//youngWalking1.Body = *imgYoungWalking1;
+	//youngWalking1.Size = 314;
+	//youngWalking2.Body = *imgYoungWalking2;
+	//youngWalking2.Size = 322;
+	//youngWalking3.Body = *imgYoungWalking3;
+	//youngWalking3.Size = 323;
+	//youngWalking4.Body = *imgYoungWalking4;
+	//youngWalking4.Size = 322;
+	//youngWalking5.Body = *imgYoungWalking5;
+	//youngWalking5.Size = 321;
+	//youngWalking6.Body = *imgYoungWalking6;
+	//youngWalking6.Size = 313;
+	//animYoungWalking[0] = youngWalking0;
+	//animYoungWalking[1] = youngWalking1;
+	//animYoungWalking[2] = youngWalking2;
+	//animYoungWalking[3] = youngWalking3;
+	//animYoungWalking[4] = youngWalking4;
+	//animYoungWalking[5] = youngWalking5;
+	//animYoungWalking[6] = youngWalking6;
 	//ANIMATIONS FOR ADULT DRAGON
 	adultSitting0.Body = *imgAdultSitting0;
 	adultSitting0.Size = 481;
 	animAdultSitting[0] = adultSitting0;
 	adultSitting1.Body = *imgAdultSitting1;
-	adultSitting1.Size = 480;
+	adultSitting1.Size = 479;
 	animAdultSitting[1] = adultSitting1;
 
 	//walking
@@ -1417,13 +1362,14 @@ void AnimateCharacterSitting(uint16_t palette[])
 		Animate(animEggSitting,palette,4,30,30,64,64);
 		break;
 	case 1:
-		if(walkingYes)
-		{Animate(animYoungWalking, palette, 1, 30, 30, 64, 64);}
-		else
+		//if(walkingYes)
+		//{Animate(animYoungWalking, palette, 1, 30, 30, 64, 64);}
+			;
+		//else
 		Animate(animSitting,palette,1,30,30,64,64);
 		break;
 	case 2:
-		Animate(animAdultSitting,palette,0,30,30,80,80);
+		Animate(animAdultSitting,palette,1,30,30,80,80);
 		break;
 		}
 }/*
@@ -1739,17 +1685,6 @@ struct latLon GetJustLatLon() {
 
 	}
 
-}
-void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc) {
-	RTC_AlarmTypeDef sAlarm;
-	HAL_RTC_GetAlarm(hrtc, &sAlarm, RTC_ALARM_A, FORMAT_BIN);
-	if (sAlarm.AlarmTime.Seconds > 58) {
-		sAlarm.AlarmTime.Seconds = 0;
-	} else {
-		sAlarm.AlarmTime.Seconds = sAlarm.AlarmTime.Seconds + 1;
-	}
-	//while(HAL_RTC_SetAlarm_IT(hrtc, &sAlarm, FORMAT_BIN)!=HAL_OK){}
-	// drawString(30, 30, "testTime", BLACK, GREEN, 1, 1);
 }
 
 /* USER CODE END 4 */
