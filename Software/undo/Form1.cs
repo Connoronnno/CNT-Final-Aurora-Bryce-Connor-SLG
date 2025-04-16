@@ -35,13 +35,12 @@ namespace undo
                 {
                     palette.Add(pic.GetPixel(x, y));
                 }
-
             }
-            Console.WriteLine(String.Join("\n", palette));
             return palette.ToList();
         }
         private void _process_Click(object sender, EventArgs e)
         {
+            var badColors = new HashSet<Color>();
             a = new List<string>();
             b = new List<string>();
             int count = 0;
@@ -59,10 +58,9 @@ namespace undo
                     {
                         //get pallete index
                         paletteIndex = 0;
-                        if (Palette.Contains(bm.GetPixel(x, y)))
-                        { 
-                            paletteIndex = Palette.IndexOf(bm.GetPixel(x, y));
-                        }
+                        paletteIndex = Palette.IndexOf(bm.GetPixel(x, y));
+                        if (paletteIndex < 0)
+                            paletteIndex = 9;
 
                         //b.Add($"{(int)i}, ");
 
@@ -70,6 +68,7 @@ namespace undo
                         if (found != paletteIndex)
                         {
                             if (a.Count == 0) a.Add($"{{{found}, {count}}}");
+                            
                             else a.Add($"{{{found}, {count+1}}}");
                             
                             found = paletteIndex;
@@ -81,13 +80,10 @@ namespace undo
                         }
                     }
                 }
+                Console.WriteLine(String.Join("\n", badColors));
                 a.Add($"{{{found}, {count+1}}}");
                 textBox1.AppendText($"{a.Count()}\r\n");
                 textBox1.AppendText(String.Join(", ", a) + "\r\n");
-                //foreach (Color pixels in Pallette)
-                //{
-                //    textBox1.AppendText(pixels);
-                //}
 
                 //OutputToImage(textBox1.Text);
             }
