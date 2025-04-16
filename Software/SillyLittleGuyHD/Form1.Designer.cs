@@ -99,11 +99,12 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(7, 7);
-            this.tabControl1.MinimumSize = new System.Drawing.Size(788, 438);
+            this.tabControl1.Location = new System.Drawing.Point(9, 9);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.MinimumSize = new System.Drawing.Size(1051, 539);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(788, 438);
+            this.tabControl1.Size = new System.Drawing.Size(1051, 539);
             this.tabControl1.TabIndex = 5;
             // 
             // tabPage1
@@ -118,10 +119,11 @@
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.UI_PetPicture_pbx);
             this.tabPage1.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(780, 412);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Size = new System.Drawing.Size(1043, 510);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Pet Menu";
             // 
@@ -130,18 +132,21 @@
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox7.Controls.Add(this.UI_nameLabel);
             this.groupBox7.Controls.Add(this.label12);
-            this.groupBox7.Location = new System.Drawing.Point(503, 6);
+            this.groupBox7.Location = new System.Drawing.Point(671, 7);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(271, 54);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox7.Size = new System.Drawing.Size(361, 66);
             this.groupBox7.TabIndex = 10;
             this.groupBox7.TabStop = false;
             // 
             // UI_nameLabel
             // 
             this.UI_nameLabel.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_nameLabel.Location = new System.Drawing.Point(137, 15);
+            this.UI_nameLabel.Location = new System.Drawing.Point(183, 18);
+            this.UI_nameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UI_nameLabel.Name = "UI_nameLabel";
-            this.UI_nameLabel.Size = new System.Drawing.Size(128, 18);
+            this.UI_nameLabel.Size = new System.Drawing.Size(171, 22);
             this.UI_nameLabel.TabIndex = 7;
             this.UI_nameLabel.Text = "N/A";
             this.UI_nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -150,9 +155,10 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(17, 15);
+            this.label12.Location = new System.Drawing.Point(23, 18);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(86, 20);
+            this.label12.Size = new System.Drawing.Size(110, 25);
             this.label12.TabIndex = 6;
             this.label12.Text = "User Name:";
             // 
@@ -161,18 +167,21 @@
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.Controls.Add(this.UI_LifeSteps_lbl);
             this.groupBox6.Controls.Add(this.label9);
-            this.groupBox6.Location = new System.Drawing.Point(503, 55);
+            this.groupBox6.Location = new System.Drawing.Point(671, 68);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(271, 54);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox6.Size = new System.Drawing.Size(361, 66);
             this.groupBox6.TabIndex = 9;
             this.groupBox6.TabStop = false;
             // 
             // UI_LifeSteps_lbl
             // 
             this.UI_LifeSteps_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_LifeSteps_lbl.Location = new System.Drawing.Point(137, 15);
+            this.UI_LifeSteps_lbl.Location = new System.Drawing.Point(183, 18);
+            this.UI_LifeSteps_lbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UI_LifeSteps_lbl.Name = "UI_LifeSteps_lbl";
-            this.UI_LifeSteps_lbl.Size = new System.Drawing.Size(128, 18);
+            this.UI_LifeSteps_lbl.Size = new System.Drawing.Size(171, 22);
             this.UI_LifeSteps_lbl.TabIndex = 7;
             this.UI_LifeSteps_lbl.Text = "N/A";
             this.UI_LifeSteps_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -181,9 +190,10 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(17, 15);
+            this.label9.Location = new System.Drawing.Point(23, 18);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(112, 20);
+            this.label9.Size = new System.Drawing.Size(142, 25);
             this.label9.TabIndex = 6;
             this.label9.Text = "Lifetime Steps:";
             // 
@@ -192,18 +202,21 @@
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.UI_Evolution_lbl);
             this.groupBox5.Controls.Add(this.label10);
-            this.groupBox5.Location = new System.Drawing.Point(503, 268);
+            this.groupBox5.Location = new System.Drawing.Point(671, 330);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(271, 45);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Size = new System.Drawing.Size(361, 55);
             this.groupBox5.TabIndex = 11;
             this.groupBox5.TabStop = false;
             // 
             // UI_Evolution_lbl
             // 
             this.UI_Evolution_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_Evolution_lbl.Location = new System.Drawing.Point(137, 15);
+            this.UI_Evolution_lbl.Location = new System.Drawing.Point(183, 18);
+            this.UI_Evolution_lbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UI_Evolution_lbl.Name = "UI_Evolution_lbl";
-            this.UI_Evolution_lbl.Size = new System.Drawing.Size(128, 18);
+            this.UI_Evolution_lbl.Size = new System.Drawing.Size(171, 22);
             this.UI_Evolution_lbl.TabIndex = 7;
             this.UI_Evolution_lbl.Text = "N/A";
             this.UI_Evolution_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -212,9 +225,10 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(17, 15);
+            this.label10.Location = new System.Drawing.Point(23, 18);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(73, 20);
+            this.label10.Size = new System.Drawing.Size(94, 25);
             this.label10.TabIndex = 6;
             this.label10.Text = "Evolution:";
             // 
@@ -223,18 +237,21 @@
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.UI_Emotion_lbl);
             this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Location = new System.Drawing.Point(503, 217);
+            this.groupBox4.Location = new System.Drawing.Point(671, 267);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(271, 45);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Size = new System.Drawing.Size(361, 55);
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
             // 
             // UI_Emotion_lbl
             // 
             this.UI_Emotion_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_Emotion_lbl.Location = new System.Drawing.Point(137, 15);
+            this.UI_Emotion_lbl.Location = new System.Drawing.Point(183, 18);
+            this.UI_Emotion_lbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UI_Emotion_lbl.Name = "UI_Emotion_lbl";
-            this.UI_Emotion_lbl.Size = new System.Drawing.Size(128, 18);
+            this.UI_Emotion_lbl.Size = new System.Drawing.Size(171, 22);
             this.UI_Emotion_lbl.TabIndex = 7;
             this.UI_Emotion_lbl.Text = "N/A";
             this.UI_Emotion_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -243,9 +260,10 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(17, 15);
+            this.label8.Location = new System.Drawing.Point(23, 18);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(115, 20);
+            this.label8.Size = new System.Drawing.Size(147, 25);
             this.label8.TabIndex = 6;
             this.label8.Text = "Recent Emotion:";
             // 
@@ -254,18 +272,21 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.UI_DailySteps_lbl);
             this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Location = new System.Drawing.Point(504, 166);
+            this.groupBox3.Location = new System.Drawing.Point(672, 204);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(271, 45);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Size = new System.Drawing.Size(361, 55);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             // 
             // UI_DailySteps_lbl
             // 
             this.UI_DailySteps_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_DailySteps_lbl.Location = new System.Drawing.Point(137, 15);
+            this.UI_DailySteps_lbl.Location = new System.Drawing.Point(183, 18);
+            this.UI_DailySteps_lbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UI_DailySteps_lbl.Name = "UI_DailySteps_lbl";
-            this.UI_DailySteps_lbl.Size = new System.Drawing.Size(128, 18);
+            this.UI_DailySteps_lbl.Size = new System.Drawing.Size(171, 22);
             this.UI_DailySteps_lbl.TabIndex = 7;
             this.UI_DailySteps_lbl.Text = "???";
             this.UI_DailySteps_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -274,9 +295,10 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(17, 15);
+            this.label6.Location = new System.Drawing.Point(23, 18);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(107, 20);
+            this.label6.Size = new System.Drawing.Size(137, 25);
             this.label6.TabIndex = 6;
             this.label6.Text = "Today\'s Steps:";
             // 
@@ -285,18 +307,21 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.UI_WeeklySteps_lbl);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(503, 115);
+            this.groupBox2.Location = new System.Drawing.Point(671, 142);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(271, 49);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(361, 60);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             // 
             // UI_WeeklySteps_lbl
             // 
             this.UI_WeeklySteps_lbl.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_WeeklySteps_lbl.Location = new System.Drawing.Point(137, 15);
+            this.UI_WeeklySteps_lbl.Location = new System.Drawing.Point(183, 18);
+            this.UI_WeeklySteps_lbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UI_WeeklySteps_lbl.Name = "UI_WeeklySteps_lbl";
-            this.UI_WeeklySteps_lbl.Size = new System.Drawing.Size(128, 18);
+            this.UI_WeeklySteps_lbl.Size = new System.Drawing.Size(171, 22);
             this.UI_WeeklySteps_lbl.TabIndex = 7;
             this.UI_WeeklySteps_lbl.Text = "N/A";
             this.UI_WeeklySteps_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -305,9 +330,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Ink Free", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(17, 15);
+            this.label4.Location = new System.Drawing.Point(23, 18);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(99, 20);
+            this.label4.Size = new System.Drawing.Size(126, 25);
             this.label4.TabIndex = 6;
             this.label4.Text = "Weekly Steps:";
             // 
@@ -317,18 +343,21 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.UI_NextCycle_btn);
             this.groupBox1.Controls.Add(this.UI_PrevCycle_btn);
-            this.groupBox1.Location = new System.Drawing.Point(504, 306);
+            this.groupBox1.Location = new System.Drawing.Point(672, 377);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(270, 99);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(360, 122);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(61, 23);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(81, 28);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(170, 23);
+            this.label1.Size = new System.Drawing.Size(227, 28);
             this.label1.TabIndex = 4;
             this.label1.Text = "Image Selection";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -336,9 +365,10 @@
             // UI_NextCycle_btn
             // 
             this.UI_NextCycle_btn.Font = new System.Drawing.Font("Ink Free", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_NextCycle_btn.Location = new System.Drawing.Point(156, 60);
+            this.UI_NextCycle_btn.Location = new System.Drawing.Point(208, 74);
+            this.UI_NextCycle_btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UI_NextCycle_btn.Name = "UI_NextCycle_btn";
-            this.UI_NextCycle_btn.Size = new System.Drawing.Size(75, 23);
+            this.UI_NextCycle_btn.Size = new System.Drawing.Size(100, 28);
             this.UI_NextCycle_btn.TabIndex = 3;
             this.UI_NextCycle_btn.Text = "Next";
             this.UI_NextCycle_btn.UseVisualStyleBackColor = true;
@@ -347,9 +377,10 @@
             // UI_PrevCycle_btn
             // 
             this.UI_PrevCycle_btn.Font = new System.Drawing.Font("Ink Free", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UI_PrevCycle_btn.Location = new System.Drawing.Point(61, 60);
+            this.UI_PrevCycle_btn.Location = new System.Drawing.Point(81, 74);
+            this.UI_PrevCycle_btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UI_PrevCycle_btn.Name = "UI_PrevCycle_btn";
-            this.UI_PrevCycle_btn.Size = new System.Drawing.Size(75, 23);
+            this.UI_PrevCycle_btn.Size = new System.Drawing.Size(100, 28);
             this.UI_PrevCycle_btn.TabIndex = 2;
             this.UI_PrevCycle_btn.Text = "Previous";
             this.UI_PrevCycle_btn.UseVisualStyleBackColor = true;
@@ -360,9 +391,10 @@
             this.UI_PetPicture_pbx.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.UI_PetPicture_pbx.Location = new System.Drawing.Point(8, 6);
+            this.UI_PetPicture_pbx.Location = new System.Drawing.Point(11, 7);
+            this.UI_PetPicture_pbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UI_PetPicture_pbx.Name = "UI_PetPicture_pbx";
-            this.UI_PetPicture_pbx.Size = new System.Drawing.Size(489, 400);
+            this.UI_PetPicture_pbx.Size = new System.Drawing.Size(652, 492);
             this.UI_PetPicture_pbx.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.UI_PetPicture_pbx.TabIndex = 0;
             this.UI_PetPicture_pbx.TabStop = false;
@@ -373,29 +405,33 @@
             this.tabPage2.Controls.Add(this.splitContainer1);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.UI_Locations_lbx);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(780, 412);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Size = new System.Drawing.Size(1043, 510);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "GPS Menu";
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Location = new System.Drawing.Point(261, 6);
+            this.splitContainer1.Location = new System.Drawing.Point(348, 7);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Panel1Collapsed = true;
-            this.splitContainer1.Size = new System.Drawing.Size(513, 400);
+            this.splitContainer1.Size = new System.Drawing.Size(684, 492);
             this.splitContainer1.SplitterDistance = 97;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 10;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(93, 58);
+            this.label3.Location = new System.Drawing.Point(124, 71);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 20);
+            this.label3.Size = new System.Drawing.Size(102, 25);
             this.label3.TabIndex = 8;
             this.label3.Text = "Locations:";
             // 
@@ -404,6 +440,7 @@
             this.UI_Locations_lbx.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.UI_Locations_lbx.FormattingEnabled = true;
+            this.UI_Locations_lbx.ItemHeight = 16;
             this.UI_Locations_lbx.Items.AddRange(new object[] {
             "A",
             "B",
@@ -412,9 +449,10 @@
             "E",
             "G",
             "etc."});
-            this.UI_Locations_lbx.Location = new System.Drawing.Point(19, 81);
+            this.UI_Locations_lbx.Location = new System.Drawing.Point(25, 100);
+            this.UI_Locations_lbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UI_Locations_lbx.Name = "UI_Locations_lbx";
-            this.UI_Locations_lbx.Size = new System.Drawing.Size(236, 251);
+            this.UI_Locations_lbx.Size = new System.Drawing.Size(313, 308);
             this.UI_Locations_lbx.TabIndex = 7;
             // 
             // tabPage3
@@ -430,17 +468,19 @@
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.UI_GrabData_btn);
             this.tabPage3.Controls.Add(this.UI_SendData_btn);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(780, 412);
+            this.tabPage3.Size = new System.Drawing.Size(1043, 510);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Save Menu";
             // 
             // _userbutton
             // 
-            this._userbutton.Location = new System.Drawing.Point(337, 127);
+            this._userbutton.Location = new System.Drawing.Point(449, 156);
+            this._userbutton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this._userbutton.Name = "_userbutton";
-            this._userbutton.Size = new System.Drawing.Size(112, 20);
+            this._userbutton.Size = new System.Drawing.Size(149, 25);
             this._userbutton.TabIndex = 12;
             this._userbutton.Text = "Update Username";
             this._userbutton.UseVisualStyleBackColor = true;
@@ -448,9 +488,10 @@
             // 
             // UI_ComConnect_btn
             // 
-            this.UI_ComConnect_btn.Location = new System.Drawing.Point(380, 288);
+            this.UI_ComConnect_btn.Location = new System.Drawing.Point(507, 354);
+            this.UI_ComConnect_btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UI_ComConnect_btn.Name = "UI_ComConnect_btn";
-            this.UI_ComConnect_btn.Size = new System.Drawing.Size(86, 23);
+            this.UI_ComConnect_btn.Size = new System.Drawing.Size(115, 28);
             this.UI_ComConnect_btn.TabIndex = 11;
             this.UI_ComConnect_btn.Text = "Connect";
             this.UI_ComConnect_btn.UseVisualStyleBackColor = true;
@@ -459,42 +500,47 @@
             // UI_ComStatus_lbl
             // 
             this.UI_ComStatus_lbl.AutoSize = true;
-            this.UI_ComStatus_lbl.Location = new System.Drawing.Point(340, 313);
+            this.UI_ComStatus_lbl.Location = new System.Drawing.Point(453, 385);
+            this.UI_ComStatus_lbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UI_ComStatus_lbl.Name = "UI_ComStatus_lbl";
-            this.UI_ComStatus_lbl.Size = new System.Drawing.Size(109, 13);
+            this.UI_ComStatus_lbl.Size = new System.Drawing.Size(133, 16);
             this.UI_ComStatus_lbl.TabIndex = 10;
             this.UI_ComStatus_lbl.Text = "Status: Disconnected";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(346, 273);
+            this.label5.Location = new System.Drawing.Point(461, 336);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 13);
+            this.label5.Size = new System.Drawing.Size(121, 16);
             this.label5.TabIndex = 9;
             this.label5.Text = "Com Port Selection";
             // 
             // UI_ComPort_cbx
             // 
             this.UI_ComPort_cbx.FormattingEnabled = true;
-            this.UI_ComPort_cbx.Location = new System.Drawing.Point(319, 289);
+            this.UI_ComPort_cbx.Location = new System.Drawing.Point(425, 356);
+            this.UI_ComPort_cbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UI_ComPort_cbx.Name = "UI_ComPort_cbx";
-            this.UI_ComPort_cbx.Size = new System.Drawing.Size(61, 21);
+            this.UI_ComPort_cbx.Size = new System.Drawing.Size(80, 24);
             this.UI_ComPort_cbx.TabIndex = 8;
             this.UI_ComPort_cbx.DropDown += new System.EventHandler(this.UI_ComPort_cbx_DropDown);
             // 
             // _usernameBox
             // 
-            this._usernameBox.Location = new System.Drawing.Point(344, 101);
+            this._usernameBox.Location = new System.Drawing.Point(459, 124);
+            this._usernameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this._usernameBox.Name = "_usernameBox";
-            this._usernameBox.Size = new System.Drawing.Size(100, 20);
+            this._usernameBox.Size = new System.Drawing.Size(132, 22);
             this._usernameBox.TabIndex = 5;
             // 
             // UI_SLG_btn
             // 
-            this.UI_SLG_btn.Location = new System.Drawing.Point(344, 185);
+            this.UI_SLG_btn.Location = new System.Drawing.Point(459, 228);
+            this.UI_SLG_btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UI_SLG_btn.Name = "UI_SLG_btn";
-            this.UI_SLG_btn.Size = new System.Drawing.Size(93, 42);
+            this.UI_SLG_btn.Size = new System.Drawing.Size(124, 52);
             this.UI_SLG_btn.TabIndex = 3;
             this.UI_SLG_btn.Text = "Update SLG";
             this.UI_SLG_btn.UseVisualStyleBackColor = true;
@@ -504,18 +550,20 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(261, 18);
+            this.label11.Location = new System.Drawing.Point(348, 22);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(259, 20);
+            this.label11.Size = new System.Drawing.Size(320, 25);
             this.label11.TabIndex = 2;
             this.label11.Text = "Send and Recieve database values";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // UI_GrabData_btn
             // 
-            this.UI_GrabData_btn.Location = new System.Drawing.Point(398, 53);
+            this.UI_GrabData_btn.Location = new System.Drawing.Point(531, 65);
+            this.UI_GrabData_btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UI_GrabData_btn.Name = "UI_GrabData_btn";
-            this.UI_GrabData_btn.Size = new System.Drawing.Size(93, 42);
+            this.UI_GrabData_btn.Size = new System.Drawing.Size(124, 52);
             this.UI_GrabData_btn.TabIndex = 1;
             this.UI_GrabData_btn.Text = "Receive Data";
             this.UI_GrabData_btn.UseVisualStyleBackColor = true;
@@ -523,21 +571,23 @@
             // 
             // UI_SendData_btn
             // 
-            this.UI_SendData_btn.Location = new System.Drawing.Point(299, 53);
+            this.UI_SendData_btn.Location = new System.Drawing.Point(399, 65);
+            this.UI_SendData_btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UI_SendData_btn.Name = "UI_SendData_btn";
-            this.UI_SendData_btn.Size = new System.Drawing.Size(93, 42);
+            this.UI_SendData_btn.Size = new System.Drawing.Size(124, 52);
             this.UI_SendData_btn.TabIndex = 0;
             this.UI_SendData_btn.Text = "Send Save";
             this.UI_SendData_btn.UseVisualStyleBackColor = true;
             // 
             // PetMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.tabControl1);
-            this.MinimumSize = new System.Drawing.Size(816, 489);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MinimumSize = new System.Drawing.Size(1082, 591);
             this.Name = "PetMenu";
             this.Text = "Pet Display";
             this.tabControl1.ResumeLayout(false);
