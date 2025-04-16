@@ -330,7 +330,7 @@ int main(void)
 			if (((game.time.minutes % dayLength) == 0)
 					&& game.time.seconds > 0) {
 				if (CheckExp(game.dailyGoal, game.stepsToday) == -1)
-					game.mood -= moodIncrementDown;
+					game.mood -= (game.mood>moodIncrementDown)?moodIncrementDown:0;
 				game.stepsToday = 0;
 				memset(&game.positions, 0, sizeof(game.positions));
 				game.numLocations = 0;
@@ -1159,16 +1159,16 @@ void StructInit(void) {
 		game.uid[1] = 'i';
 		game.allSteps = 0;
 		game.mood = 1;
-		game.numLocations = 3;
+		game.numLocations = 0;
 		game.stepsToday = 0;
 		game.weeklySteps = 0;
 		game.dailyGoal = 50;
 		game.weeklyGoal = game.dailyGoal*(game.evo+1);
 		dummy.lat = 12.34567;
 		dummy.lon = -89.10111;
-		game.positions[0] = dummy;
-		game.positions[1] = dummy;
-		game.positions[2] = dummy;
+		//game.positions[0] = dummy;
+		//game.positions[1] = dummy;
+		//game.positions[2] = dummy;
 		game.time.hours = 0;
 	}
 }
@@ -1575,6 +1575,7 @@ void GetLatLon() {
 				game.time = ggaStruct.time;
 				frameGot = 1;
 				posCheckI = 0;
+				if(isnan(pos.lat)||isnan(pos.lon)||pos.lon>400.0f||pos.lon<-400.0f||pos.lat>400.0f||pos.lon<-400.0f) return;
 				for (posCheckI = 0; posCheckI < game.numLocations;
 						posCheckI++) {
 					tempPos = game.positions[posCheckI];

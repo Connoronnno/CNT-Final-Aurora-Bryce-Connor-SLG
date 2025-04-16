@@ -28,6 +28,6 @@
 ../Core/Src/main.c:1461:6:ReceiveData	5152	static
 ../Core/Src/main.c:1524:5:CheckExp	32	static
 ../Core/Src/main.c:1534:6:GetLatLon	64	static
-../Core/Src/main.c:1604:6:Emote	24	static
-../Core/Src/main.c:1648:15:GetJustLatLon	48	static
-../Core/Src/main.c:1707:6:Error_Handler	8	static,ignoring_inline_asm
+../Core/Src/main.c:1605:6:Emote	24	static
+../Core/Src/main.c:1649:15:GetJustLatLon	48	static
+../Core/Src/main.c:1708:6:Error_Handler	8	static,ignoring_inline_asm
