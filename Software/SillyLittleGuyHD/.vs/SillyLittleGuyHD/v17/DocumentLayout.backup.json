@@ -1,21 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\",
+  "WorkspaceRootPath": "C:\\Users\\June\\Desktop\\school\\2965\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|c:\\users\\cmarsh7\\documents\\github\\group-1---aurora-bryce-connor\\software\\sillylittleguyhd\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|c:\\users\\june\\desktop\\school\\2965\\group-1---aurora-bryce-connor\\software\\sillylittleguyhd\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\sillylittledata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|C:\\Users\\June\\Desktop\\school\\2965\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|C:\\Users\\June\\Desktop\\school\\2965\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\sillylittledata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|solutionrelative:sillylittledata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|C:\\Users\\June\\Desktop\\school\\2965\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EEDF8B86-1A1C-4DEE-9B20-E6CE5971BF58}|SillyLittleGuyHD.csproj|solutionrelative:Form1.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -26,32 +26,36 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\June\\Desktop\\school\\2965\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs",
+              "ToolTip": "C:\\Users\\June\\Desktop\\school\\2965\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAAoBAAAAAAAAAAAAwDIBAAANAAAAAAAAAA==",
+              "ViewState": "AgIAABgBAAAAAAAAAAAqwDIBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-26T19:31:23.553Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\June\\Desktop\\school\\2965\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs [Design]",
+              "ToolTip": "C:\\Users\\June\\Desktop\\school\\2965\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.cs [Design]",
               "RelativeToolTip": "Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-26T19:31:15.401Z",
@@ -61,27 +65,35 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "SillyLittleData.cs",
-              "DocumentMoniker": "C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\SillyLittleData.cs",
+              "DocumentMoniker": "C:\\Users\\June\\Desktop\\school\\2965\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\SillyLittleData.cs",
               "RelativeDocumentMoniker": "SillyLittleData.cs",
-              "ToolTip": "C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\SillyLittleData.cs",
+              "ToolTip": "C:\\Users\\June\\Desktop\\school\\2965\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\SillyLittleData.cs",
               "RelativeToolTip": "SillyLittleData.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAI0AAAAaAQAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T21:36:47.383Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T21:36:47.383Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Form1.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\June\\Desktop\\school\\2965\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "Form1.Designer.cs",
-              "ToolTip": "C:\\Users\\cmarsh7\\Documents\\GitHub\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\June\\Desktop\\school\\2965\\Group-1---Aurora-Bryce-Connor\\Software\\SillyLittleGuyHD\\Form1.Designer.cs",
               "RelativeToolTip": "Form1.Designer.cs",
               "ViewState": "AgIAABQCAAAAAAAAAAAIwBQCAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-28T19:27:52.336Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T19:27:52.336Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1280,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             }
           ]
         }
