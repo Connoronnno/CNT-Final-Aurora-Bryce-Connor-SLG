@@ -1575,7 +1575,7 @@ void GetLatLon() {
 				game.time = ggaStruct.time;
 				frameGot = 1;
 				posCheckI = 0;
-				if(isnan(pos.lat)||isnan(pos.lon)||pos.lon>400.0f||pos.lon<-400.0f||pos.lat>400.0f||pos.lon<-400.0f) return;
+				if(isnan(pos.lat)||isnan(pos.lon)||pos.lon>400.0f||pos.lon<-400.0f||pos.lat>400.0f||pos.lat<-400.0f) return;
 				for (posCheckI = 0; posCheckI < game.numLocations;
 						posCheckI++) {
 					tempPos = game.positions[posCheckI];
