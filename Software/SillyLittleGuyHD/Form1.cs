@@ -109,9 +109,32 @@ namespace SillyLittleGuyHD
 
             //DisplaySLGData();
         }
+        private void Disco()
+        {
+            port?.Close();
+            port?.Dispose();
+            port = null;
+        }
+        private void Reco()
+        {
+            string portNum = (string)UI_ComPort_cbx.SelectedValue;
+            port = new SerialPort(portNum);
 
+            //set up serial port to match segger's settings
+            port.BaudRate = 115200;
+            port.Parity = Parity.None;
+            port.StopBits = StopBits.One;
+            port.DataBits = 8;
+            port.Handshake = Handshake.None;
+
+            //port11.ReadTimeout = 499;
+            //port11.WriteTimeout = 499;
+            port.DataReceived += Port11_DataReceived;
+            port.Open();
+        }
         async private void UI_SendData_btn_Click(object sender, EventArgs e)
         {
+
             /*microsoft copilot's dummy data
              * var postData = new Dictionary<string, string>
         {
@@ -136,6 +159,7 @@ namespace SillyLittleGuyHD
                 {"evolution", SLGData.evolution.ToString()}
             };
             HttpClient client = new HttpClient();
+            Disco();
             var response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/insertmainSave.php", new FormUrlEncodedContent(postData));
             string data = await response.Content.ReadAsStringAsync();
             response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/clearPositions.php", new FormUrlEncodedContent(postData));
@@ -146,6 +170,7 @@ namespace SillyLittleGuyHD
                 response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/insertpositions.php", new FormUrlEncodedContent(postData));
                 data = await response.Content.ReadAsStringAsync();
             }
+            Reco();
         }
 
         private void Port11_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -429,12 +454,18 @@ namespace SillyLittleGuyHD
             HttpClient client = new HttpClient();
             try
             {
+                Disco();
                 var response = await client.PostAsync("https://thor.cnt.sast.ca/~sillylittleguy/service/select.php", new FormUrlEncodedContent(dataPost));
                 string data = await response.Content.ReadAsStringAsync();
+                Reco();
                 toSend = data;
                 // data.Prepend('{');
                 //data.Append('}');
                 SLGData = JsonConvert.DeserializeObject<SillyLittleData>(data);
+                if (port != null && port.IsOpen && data!=null)
+                {
+                    port.Write(data + '\r');
+                }
             }
             catch
             {

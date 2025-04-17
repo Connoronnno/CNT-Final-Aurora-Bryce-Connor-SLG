@@ -309,7 +309,7 @@ int main(void)
 						GetLatLon();
 						checkTime=1;
 					}
-		game.weeklyGoal = game.dailyGoal*(game.evo+1);
+		game.weeklyGoal = game.dailyGoal*(2*game.evo+1);
 		_ADXL343_ReadReg8(0x15, &steps, 2);
 
 		//SendData();
@@ -317,18 +317,17 @@ int main(void)
 		//_ADXL343_ReadReg8(0x00, &steps, 1);
 		if (CheckExp(game.dailyGoal, game.stepsToday) == 1) {
 			game.mood += moodIncrementUp;
-			game.stepsToday = 0;
+			//game.stepsToday = 0;
 		}
 		if(CheckExp(game.weeklyGoal, game.weeklySteps)==1) {
 			Evolve();
-			game.weeklySteps=0;
 		}
 
 		if (checkTime) {
 			checkTime=0;
                   			FlashWrite();
 			if (((game.time.minutes % dayLength) == 0)
-					&& game.time.seconds > 0) {
+					&& game.time.minutes > 0) {
 				if (CheckExp(game.dailyGoal, game.stepsToday) == -1)
 					game.mood -= (game.mood>moodIncrementDown)?moodIncrementDown:0;
 				game.stepsToday = 0;
@@ -338,7 +337,7 @@ int main(void)
 			}
 
 			if (((game.time.minutes % weekLength) == 0)
-					&& game.time.seconds > 0) {
+					&& game.time.minutes > 0) {
 				game.weeklySteps = 0;
 				checkTime = 0;
 			}
@@ -365,6 +364,8 @@ int main(void)
 				drawString(0, 150, "-SILLY LITTLE GUY-", WHITE, BLACK, 1, 1);
 				sprintf(buffer2, "Steps: %d ", game.stepsToday);
 				drawString(0, 0, buffer2, WHITE, BLACK, 1, 1);
+				sprintf(buffer2, "Exp: %d", (int) ((float) game.weeklySteps* (1.0f + ((float) game.numLocations) / expDivisor)));
+				drawString(0, 130, buffer2, WHITE, BLACK, 1, 1);
 				Emote();
 			}
 
@@ -497,8 +498,10 @@ int main(void)
 					FlashWrite();
 
 					userUpload = 0;
-					SendData();
 					ReceiveData();
+					drawString(0, 90, game.uid, WHITE, BLACK, 1, 1);
+					SendData();
+
 				} else {
 					//Difficulty
 					if (currentSetting == 0) {
@@ -1162,7 +1165,7 @@ void StructInit(void) {
 		game.numLocations = 0;
 		game.stepsToday = 0;
 		game.weeklySteps = 0;
-		game.dailyGoal = 50;
+		game.dailyGoal = 150;
 		game.weeklyGoal = game.dailyGoal*(game.evo+1);
 		dummy.lat = 12.34567;
 		dummy.lon = -89.10111;
@@ -1473,6 +1476,7 @@ void ReceiveData() {
 				struct latLon tempLoc;
 				char const *uidRxStr = json_getPropertyValue(parent, "uid");
 				//HAL_UART_Transmit(&huart2, json_getPropertyValue(parent, "uid"), strlen(json_getPropertyValue(parent, "uid")), 1000);
+				memset(&game.uid, 0, sizeof(game.uid));
 				for (int strI = 0; strI < strlen(uidRxStr); strI++)
 					game.uid[strI] = uidRxStr[strI];
 				game.allSteps = (unsigned int) json_getInteger(
