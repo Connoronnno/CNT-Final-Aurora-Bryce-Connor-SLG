@@ -332,8 +332,8 @@ int main(void)
 				if (CheckExp(game.dailyGoal, game.stepsToday) == -1)
 					game.mood -= (game.mood>moodIncrementDown)?moodIncrementDown:0;
 				game.stepsToday = 0;
-				memset(&game.positions, 0, sizeof(game.positions));
-				game.numLocations = 0;
+				//memset(&game.positions, 0, sizeof(game.positions));
+				//game.numLocations = 0;
 				checkTime = 0;
 			}
 
@@ -1311,7 +1311,7 @@ void AnimateCharacter(uint16_t palette[])
 					}
 					break;
 		}
-
+		break;
 	case 1:
 		if(walkingYes>0)
 		{
@@ -1355,6 +1355,7 @@ void AnimateCharacter(uint16_t palette[])
 			}
 			break;
 		}
+		break;
 	case 2:
 		if(walkingYes>0)
 		{
@@ -1538,7 +1539,7 @@ void GetLatLon() {
 	double checkW;
 	double checkH;
 	int posCheckI = 0;
-	double gpsThreshold = 0.00383;
+	double gpsThreshold = 0.0004;
 	//HAL_UART_Recieve();
 	while (HAL_UART_Receive(&huart1, &(buffer[gpsI]), 1, 1000) == HAL_OK || 1) {
 		if (buffer[gpsI] == '$') {
