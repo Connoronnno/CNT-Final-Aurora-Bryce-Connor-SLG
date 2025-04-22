@@ -73,7 +73,7 @@ enum ButtonState {
 struct gameInfo {
 	struct minmea_time time;
 	unsigned char evo; //0=Egg, 1=Baby, 2=Adult
-	unsigned char mood; //Implement mood states here
+	char mood; //Implement mood states here
 	unsigned int numLocations; //number of locations
 	struct latLon positions[32];
 	unsigned int allSteps;
@@ -282,7 +282,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-	StructInit();
+  StructInit();
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -329,7 +329,11 @@ int main(void)
 			if (((game.time.minutes % dayLength) == 0)
 					&& game.time.minutes > 0) {
 				if (CheckExp(game.dailyGoal, game.stepsToday) == -1)
-					game.mood -= (game.mood>moodIncrementDown)?moodIncrementDown:0;
+					{
+					game.mood -= moodIncrementDown;
+					if(game.mood < 0)
+						game.mood = 0;
+					}
 				game.stepsToday = 0;
 				//memset(&game.positions, 0, sizeof(game.positions));
 				//game.numLocations = 0;
